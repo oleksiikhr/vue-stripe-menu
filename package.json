@@ -1,0 +1,39 @@
+{
+  "name": "vue-stripe-menu",
+  "version": "0.1.0",
+  "description": "Creating menus with animations like on Stripe",
+  "main": "./dist/vue-stripe-menu.common.js",
+  "scripts": {
+    "dev": "vue-cli-service serve ./src/dev.js",
+    "build": "vue-cli-service build --dest docs ./src/dev.js",
+    "build:lib": "vue-cli-service build --target lib --name vue-stripe-menu ./src/prod.js",
+    "lint": "vue-cli-service lint",
+    "lint:fix": "npm run lint -- --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alexeykhr/vue-stripe-menu.git"
+  },
+  "author": "Alexey Khrushch, alexeykhr@outlook.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Alexeykhr/vue-stripe-menu/issues"
+  },
+  "homepage": "https://github.com/Alexeykhr/vue-stripe-menu#readme",
+  "dependencies": {
+    "core-js": "^2.6.9",
+    "vue": "^2.6.10"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.11.0",
+    "@vue/cli-plugin-eslint": "^3.11.0",
+    "@vue/cli-service": "^3.11.0",
+    "@vue/eslint-config-standard": "^4.0.0",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.5.1",
+    "eslint-plugin-vue": "^5.2.3",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^8.0.0",
+    "vue-template-compiler": "^2.6.10"
+  }
+}
