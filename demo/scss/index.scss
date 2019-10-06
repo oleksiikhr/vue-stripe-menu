@@ -1,0 +1,35 @@
+body {
+  background-color: #f5f7f9;
+}
+
+.background {
+  background-color: #f2f2f2;
+  transition: background-color .15s;
+}
+
+.background--secondary {
+  background-color: #e3e5ec;
+  transition: background-color .15s;
+}
+
+.background-hover {
+  cursor: pointer;
+  &:hover {
+    &.background,
+    .background {
+      background-color: #d4d4d4;
+    }
+    &.background--secondary,
+    .background--secondary {
+      background-color: #c9cee4;
+    }
+  }
+}
+
+.mb-5 {
+  margin-bottom: 5px;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}

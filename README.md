@@ -1,5 +1,7 @@
 # Vue Stripe Menu
 
+[Website](https://alexeykhr.github.io/vue-stripe-menu/)
+
 ## Project setup
 ```
 npm install

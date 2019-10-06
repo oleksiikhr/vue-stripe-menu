@@ -4,9 +4,9 @@
   "description": "Creating menus with animations like on Stripe",
   "main": "./dist/vue-stripe-menu.common.js",
   "scripts": {
-    "dev": "vue-cli-service serve ./src/dev.js",
-    "build": "vue-cli-service build --dest docs ./src/dev.js",
-    "build:lib": "vue-cli-service build --target lib --name vue-stripe-menu ./src/prod.js",
+    "dev": "vue-cli-service serve ./demo/main.js",
+    "build": "vue-cli-service build --dest docs ./demo/main.js",
+    "build:lib": "vue-cli-service build --target lib --name vue-stripe-menu ./src/main.js",
     "lint": "vue-cli-service lint",
     "lint:fix": "npm run lint -- --fix"
   },

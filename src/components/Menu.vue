@@ -6,7 +6,7 @@
         class="vsm-root"
       >
         <slot name="before-nav" />
-        <li class="vsm-section">
+        <li class="vsm-section vsm-section_menu">
           <component
             ref="links"
             v-for="(item, index) in menu"
@@ -227,18 +227,12 @@ export default {
         this.$el.classList.remove('vsm-no-transition')
       }, 50)
 
-      this.$refs.background.style.transform = `translateX(${pos}px) scaleX(${ratioWidth}) scaleY(${ratioHeight})`
       this.$refs.dropdownContainer.style.transform = `translateX(${pos}px)`
       this.$refs.dropdownContainer.style.width = `${offsetWidth}px`
       this.$refs.dropdownContainer.style.height = `${offsetHeight}px`
 
       this.$refs.arrow.style.transform = `translateX(${Math.round(rect.left + rect.width / 2)}px) rotate(45deg)`
-
-      // My FIXME Only top before-nav
-      this.$refs.arrow.style.top = `${this.$refs.root.offsetHeight - 50 - 6}px`
-      this.$refs.dropdownContainer.style.top = `${this.$refs.root.offsetHeight - 50}px`
-      this.$refs.background.style.top = `${this.$refs.root.offsetHeight - 50}px`
-
+      this.$refs.background.style.transform = `translateX(${pos}px) scaleX(${ratioWidth}) scaleY(${ratioHeight})`
       this.$refs.backgroundAlt.style.transform = `translateY(${content.children[0].offsetHeight / ratioHeight}px)`
     },
     closeDropdown () {

@@ -32,12 +32,7 @@
   font-weight: 500;
   margin: 0;
   padding: 0 10px;
-  color: #6772e5;
-  -webkit-transition: color .1s ease;
   transition: color .1s ease;
-  &.vsm-active, &:hover {
-    color: #32325d;
-  }
   > * {
     position: relative;
     display: block;
@@ -133,7 +128,6 @@
   will-change: transform, opacity;
   transition-property: transform, opacity, -webkit-transform;
   transition-duration: .25s;
-  background: red;
   &.vsm-active {
     opacity: 1;
     transform: translateX(0);

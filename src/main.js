@@ -3,7 +3,7 @@
 // Import Vue components
 import vsmMenu from './components/Menu'
 
-// Import styles
+// Import scss
 import './scss/index.scss'
 
 // Declare install function executed by Vue.use()
