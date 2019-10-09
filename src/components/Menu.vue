@@ -1,12 +1,15 @@
 <template>
-  <header class="vsm-menu vsm-no-transition">
+  <component
+    :is="element"
+    class="vsm-menu vsm-no-transition"
+  >
     <nav>
       <ul
         ref="root"
         class="vsm-root"
       >
         <slot name="before-nav" />
-        <li class="vsm-section">
+        <li class="vsm-section vsm-section_menu">
           <component
             ref="links"
             v-for="(item, index) in menu"
@@ -61,7 +64,7 @@
         </div>
       </div>
     </div>
-  </header>
+  </component>
 </template>
 
 <script>
@@ -79,6 +82,10 @@ const pointerEvent = window.PointerEvent ? {
 export default {
   name: 'vsmMenu',
   props: {
+    element: {
+      type: String,
+      default: 'header'
+    },
     menu: {
       type: Array,
       required: true
@@ -186,6 +193,8 @@ export default {
         return
       }
 
+      this.$emit('open-dropdown', el)
+
       this.$el.classList.add('vsm-overlay-active')
       this.$el.classList.add('vsm-dropdown-active')
       this._activeDropdown = el
@@ -227,24 +236,20 @@ export default {
         this.$el.classList.remove('vsm-no-transition')
       }, 50)
 
-      this.$refs.background.style.transform = `translateX(${pos}px) scaleX(${ratioWidth}) scaleY(${ratioHeight})`
       this.$refs.dropdownContainer.style.transform = `translateX(${pos}px)`
       this.$refs.dropdownContainer.style.width = `${offsetWidth}px`
       this.$refs.dropdownContainer.style.height = `${offsetHeight}px`
 
       this.$refs.arrow.style.transform = `translateX(${Math.round(rect.left + rect.width / 2)}px) rotate(45deg)`
-
-      // My FIXME Only top before-nav
-      this.$refs.arrow.style.top = `${this.$refs.root.offsetHeight - 50 - 6}px`
-      this.$refs.dropdownContainer.style.top = `${this.$refs.root.offsetHeight - 50}px`
-      this.$refs.background.style.top = `${this.$refs.root.offsetHeight - 50}px`
-
+      this.$refs.background.style.transform = `translateX(${pos}px) scaleX(${ratioWidth}) scaleY(${ratioHeight})`
       this.$refs.backgroundAlt.style.transform = `translateY(${content.children[0].offsetHeight / ratioHeight}px)`
     },
     closeDropdown () {
       if (!this._activeDropdown) {
         return
       }
+
+      this.$emit('close-dropdown', this._activeDropdown)
 
       this._linksHasDropdown.forEach((el) => {
         el.classList.remove('vsm-active')
