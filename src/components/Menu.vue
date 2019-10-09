@@ -1,5 +1,8 @@
 <template>
-  <header class="vsm-menu vsm-no-transition">
+  <component
+    :is="element"
+    class="vsm-menu vsm-no-transition"
+  >
     <nav>
       <ul
         ref="root"
@@ -61,7 +64,7 @@
         </div>
       </div>
     </div>
-  </header>
+  </component>
 </template>
 
 <script>
@@ -79,6 +82,10 @@ const pointerEvent = window.PointerEvent ? {
 export default {
   name: 'vsmMenu',
   props: {
+    element: {
+      type: String,
+      default: 'header'
+    },
     menu: {
       type: Array,
       required: true
@@ -186,6 +193,8 @@ export default {
         return
       }
 
+      this.$emit('open-dropdown', el)
+
       this.$el.classList.add('vsm-overlay-active')
       this.$el.classList.add('vsm-dropdown-active')
       this._activeDropdown = el
@@ -239,6 +248,8 @@ export default {
       if (!this._activeDropdown) {
         return
       }
+
+      this.$emit('close-dropdown', this._activeDropdown)
 
       this._linksHasDropdown.forEach((el) => {
         el.classList.remove('vsm-active')

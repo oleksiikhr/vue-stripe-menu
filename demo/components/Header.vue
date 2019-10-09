@@ -1,5 +1,9 @@
 <template>
-  <vsm-menu :menu="menu">
+  <vsm-menu
+    :menu="menu"
+    @open-dropdown="onOpenDropdown"
+    @close-dropdown="onCloseDropdown"
+  >
     <li
       slot="before-nav"
       class="vsm-section"
@@ -14,8 +18,8 @@
         class="content"
       />
       <component
-        :is="data.item.primary"
-        class="content"
+        :is="data.item.secondary"
+        class="content--secondary"
       />
     </template>
     <li
@@ -42,15 +46,21 @@ export default {
     return {
       menu: [
         { title: 'Products', dropdown: 'products', content: VerticalContent, element: 'span' },
-        { title: 'Developers', dropdown: 'developers', content: HorizontalPrimaryContent, primary: HorizontalSecondaryContent },
+        { title: 'Developers', dropdown: 'developers', content: HorizontalPrimaryContent, secondary: HorizontalSecondaryContent },
         { title: 'Company', dropdown: 'company', content: DefaultContent, listeners: { mouseover: this.onMouseOver } },
         { title: 'Source', attributes: { href: 'https://github.com/Alexeykhr/vue-stripe-menu/tree/master/demo', target: '_blank' } }
       ]
     }
   },
   methods: {
-    onMouseOver () {
-      console.log('onMouseOver')
+    onMouseOver (evt) {
+      console.log('mouse over', evt)
+    },
+    onOpenDropdown (el) {
+      console.log('open dropdown', el)
+    },
+    onCloseDropdown (el) {
+      console.log('close dropdown', el)
     }
   }
 }
@@ -103,7 +113,7 @@ export default {
   padding: 30px;
 }
 
-.content--primary {
+.content--secondary {
   padding: 30px;
 }
 </style>
