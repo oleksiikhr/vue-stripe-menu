@@ -1,12 +1,6 @@
 <template>
   <div>
-    <a
-      href="#slots"
-      id="slots"
-      class="section"
-    >
-      # Slots
-    </a>
+    <base-title title="Slots" />
     <base-table
       :columns="columns"
       :rows="rows"
@@ -16,10 +10,11 @@
 
 <script>
 import BaseTable from '../base/Table'
+import BaseTitle from '../BaseTitle'
 
 export default {
   components: {
-    BaseTable
+    BaseTable, BaseTitle
   },
   data () {
     return {

@@ -48,7 +48,7 @@ export default {
         { title: 'Products', dropdown: 'products', content: VerticalContent, element: 'span' },
         { title: 'Developers', dropdown: 'developers', content: HorizontalPrimaryContent, secondary: HorizontalSecondaryContent },
         { title: 'Company', dropdown: 'company', content: DefaultContent, listeners: { mouseover: this.onMouseOver } },
-        { title: 'Source', attributes: { href: 'https://github.com/Alexeykhr/vue-stripe-menu/tree/master/demo', target: '_blank' } }
+        { title: 'Source', attributes: { href: 'https://github.com/Alexeykhr/vue-stripe-menu/blob/master/demo/components/Header.vue', target: '_blank' } }
       ]
     }
   },

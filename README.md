@@ -1,28 +1,80 @@
 # Vue Stripe Menu
 
-[Website](https://alexeykhr.github.io/vue-stripe-menu/)
+> Create a dropdown like on Stripe
 
-## Project setup
-```
-npm install
+[Demo Project](https://alexeykhr.github.io/vue-stripe-menu/)
+
+## How to install
+
+```shell script
+$ npm i vue-stripe-menu
+// or
+$ yarn add vue-stripe-menu
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
+```vue
+import Vue from 'Vue'
+import VueStripeMenu from 'vue-stripe-menu'
+
+Vue.use(VueStripeMenu)
 ```
 
-### Compiles and minifies for production
+## Basic Demo
+
+```vue
+<template>
+  <vsm-menu :menu="menu">
+    <template #default="data">
+      {{ data }}
+    </template>
+  </vsm-menu>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      menu: [
+        { title: 'First item', dropdown: 'first' },
+        { title: 'Second item', dropdown: 'second' },
+        { title: 'No dropdown' }
+      ]
+    }
+  }
+}
+</script>
+```
+
+## Advanced Demo
+
+How on the site: [Link](https://github.com/Alexeykhr/vue-stripe-menu/blob/master/demo)
+
+## Contributing
+
+### Launch of a demo project (development of lib)
+```
+npm run dev
+```
+
+### Build a demo project
 ```
 npm run build
 ```
 
-### Run your tests
+### Build library
 ```
-npm run test
+npm run build:lib
 ```
 
-### Lints and fixes files
+### Check code on eslint
 ```
 npm run lint
 ```
+
+## Changelog
+
+Detailed changes for each release are documented in the [CHANGELOG.md](https://github.com/alexeykhr/vuejs-stripe-menu/blob/master/CHANGELOG.md).
+
+## License
+
+[MIT](https://opensource.org/licenses/MIT)

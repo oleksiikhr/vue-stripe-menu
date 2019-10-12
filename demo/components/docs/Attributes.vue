@@ -1,12 +1,6 @@
 <template>
   <div>
-    <a
-      href="#props"
-      id="props"
-      class="section"
-    >
-      # Props
-    </a>
+    <base-title title="Props" />
     <base-table
       :columns="columns"
       :rows="rows"
@@ -16,10 +10,11 @@
 
 <script>
 import BaseTable from '../base/Table'
+import BaseTitle from '../BaseTitle'
 
 export default {
   components: {
-    BaseTable
+    BaseTable, BaseTitle
   },
   data () {
     return {
