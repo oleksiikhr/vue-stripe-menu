@@ -1,13 +1,13 @@
 <template>
   <div>
-    <base-title title="Demo" />
-    <pre><code class="javascript">{{ DemoHeaderRaw }}</code></pre>
+    <base-title title="Example" />
+    <pre><code class="javascript">{{ ExampleRaw }}</code></pre>
   </div>
 </template>
 
 <script>
 // eslint-disable-next-line
-import DemoHeaderRaw from '!!raw-loader!../BaseHeader'
+import ExampleRaw from '!!raw-loader!./ExampleRaw'
 import BaseTitle from '../BaseTitle'
 import highlight from 'highlight.js'
 
@@ -17,7 +17,7 @@ export default {
   },
   data () {
     return {
-      DemoHeaderRaw
+      ExampleRaw
     }
   },
   mounted () {

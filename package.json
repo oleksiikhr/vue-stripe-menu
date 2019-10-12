@@ -8,7 +8,9 @@
     "build": "vue-cli-service build --dest docs ./demo/main.js",
     "build:lib": "vue-cli-service build --target lib --name vue-stripe-menu ./src/main.js",
     "lint": "vue-cli-service lint",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "release": "standard-version",
+    "npm:publish": "npm publish --access public"
   },
   "repository": {
     "type": "git",

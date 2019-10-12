@@ -2,7 +2,10 @@
   <div>
     <base-header />
     <main>
+      <example-docs />
+      <install-docs />
       <attributes-docs />
+      <menu-object-docs />
       <slots-docs />
       <events-docs />
       <demo-docs />
@@ -13,15 +16,26 @@
 
 <script>
 import AttributesDocs from './components/docs/Attributes'
+import MenuObjectDocs from './components/docs/MenuObject'
+import ExampleDocs from './components/docs/Example'
+import InstallDocs from './components/docs/Install'
 import EventsDocs from './components/docs/Events'
+import BaseHeader from './components/BaseHeader'
+import BaseFooter from './components/BaseFooter'
 import SlotsDocs from './components/docs/Slots'
 import DemoDocs from './components/docs/Demo'
-import BaseHeader from './components/Header'
-import BaseFooter from './components/Footer'
 
 export default {
   components: {
-    BaseHeader, AttributesDocs, EventsDocs, SlotsDocs, DemoDocs, BaseFooter
+    AttributesDocs,
+    MenuObjectDocs,
+    ExampleDocs,
+    InstallDocs,
+    BaseHeader,
+    EventsDocs,
+    BaseFooter,
+    SlotsDocs,
+    DemoDocs
   }
 }
 </script>
