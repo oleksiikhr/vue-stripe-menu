@@ -34,4 +34,4 @@ if (GlobalVue) {
 }
 
 // To allow use as module (npm/webpack/etc.) export component
-export default vsmMenu
+export default plugin
