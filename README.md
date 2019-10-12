@@ -17,6 +17,9 @@ import Vue from 'Vue'
 import VueStripeMenu from 'vue-stripe-menu'
 
 Vue.use(VueStripeMenu)
+
+// Import styles
+import 'vue-stripe-menu/dist/vue-stripe-menu.css'
 ```
 
 ## Basic Demo

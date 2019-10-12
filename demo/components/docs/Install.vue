@@ -21,7 +21,9 @@ export default {
         '$ yarn add vue-stripe-menu',
       vue: 'import Vue from \'Vue\'\n' +
         'import VueStripeMenu from \'vue-stripe-menu\'\n\n' +
-        'Vue.use(VueStripeMenu)'
+        'Vue.use(VueStripeMenu)\n\n' +
+        '// Import styles\n' +
+        'import \'vue-stripe-menu/dist/vue-stripe-menu.css\''
     }
   },
   mounted () {
