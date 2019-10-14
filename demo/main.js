@@ -6,13 +6,13 @@ import Vue from 'vue'
 import './scss/index.scss'
 import vsmMenu from '../src/main'
 
-// -> Import library
-// import 'vue-stripe-menu/dist/vue-stripe-menu.css'
+// -> Import library js and styles
 // import vsmMenu from 'vue-stripe-menu'
+// import 'vue-stripe-menu/dist/vue-stripe-menu.css'
 
 import App from './App'
 
-Vue.component('vsmMenu', vsmMenu)
+Vue.use(vsmMenu)
 
 Vue.config.productionTip = false
 
