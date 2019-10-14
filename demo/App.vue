@@ -2,8 +2,8 @@
   <div>
     <base-header />
     <main>
-      <example-docs />
       <install-docs />
+      <example-docs />
       <attributes-docs />
       <menu-object-docs />
       <slots-docs />
@@ -49,10 +49,11 @@ main {
     margin-bottom: 50px;
   }
   /deep/ .section {
-    display: block;
+    display: inline-block;
     font-size: 1.2rem;
     font-weight: bold;
-    padding: 10px 10px 20px;
+    padding: 10px;
+    margin-bottom: 10px;
     color: #333;
     text-decoration: none !important;
     outline: none;

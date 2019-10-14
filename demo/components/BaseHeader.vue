@@ -70,7 +70,7 @@ export default {
 @import "../scss/variables";
 
 /*
- * Some configuration library style for own website
+ * Override some styles for library
  */
 
 .vsm-menu {
@@ -106,7 +106,7 @@ export default {
 }
 
 /*
- * Now configuration
+ * Now add some styles for own classes
  */
 
 .content {

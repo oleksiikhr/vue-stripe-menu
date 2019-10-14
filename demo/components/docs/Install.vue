@@ -1,7 +1,9 @@
 <template>
   <div>
     <base-title title="Install" />
+    <p>Import library from npm:</p>
     <pre><code class="shell">{{ shell }}</code></pre>
+    <p>Use plugins by calling the <code>Vue.use()</code> global method</p>
     <pre><code class="javascript">{{ vue }}</code></pre>
   </div>
 </template>
