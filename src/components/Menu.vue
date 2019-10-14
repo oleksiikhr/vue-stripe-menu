@@ -106,26 +106,11 @@ export default {
       return this.menu.filter(item => item.dropdown)
     }
   },
-  created () {
-    this._touchMoveHandler = () => {
-      this._isDragging = true
-    }
-
-    this._touchStartHandler = () => {
-      this._isDragging = false
-    }
-
-    this._pointerEventEndHandler = () => {
-      if (!this._isDragging) {
-        this.closeDropdown()
-      }
-    }
-
-    document.addEventListener('touchmove', this._touchMoveHandler)
-    document.addEventListener('touchstart', this._touchStartHandler)
-    document.body.addEventListener(pointerEvent.end, this._pointerEventEndHandler)
-  },
   mounted () {
+    document.addEventListener('touchmove', this.touchMoveHandler)
+    document.addEventListener('touchstart', this.touchStartHandler)
+    document.body.addEventListener(pointerEvent.end, this.pointerEventEndHandler)
+
     this._linksHasDropdown = this.$refs.links.filter((el) => {
       return el.classList.contains('vsm-has-dropdown')
     })
@@ -176,9 +161,9 @@ export default {
     })
   },
   beforeDestroy () {
-    document.removeEventListener('touchmove', this._touchMoveHandler)
-    document.removeEventListener('touchstart', this._touchStartHandler)
-    document.body.removeEventListener(pointerEvent.end, this._pointerEventEndHandler)
+    document.removeEventListener('touchmove', this.touchMoveHandler)
+    document.removeEventListener('touchstart', this.touchStartHandler)
+    document.body.removeEventListener(pointerEvent.end, this.pointerEventEndHandler)
   },
   methods: {
     toggleDropdown (el) {
@@ -279,6 +264,17 @@ export default {
     },
     stopCloseTimeout () {
       clearTimeout(this._closeDropdownTimeout)
+    },
+    touchMoveHandler () {
+      this._isDragging = true
+    },
+    touchStartHandler () {
+      this._isDragging = false
+    },
+    pointerEventEndHandler () {
+      if (!this._isDragging) {
+        this.closeDropdown()
+      }
     }
   }
 }
