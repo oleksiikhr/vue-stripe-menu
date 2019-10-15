@@ -24,7 +24,11 @@
             v-bind="item.attributes"
             v-on="item.listeners"
           >
-            <slot name="title" :item="item" :index="index">
+            <slot
+              name="title"
+              :item="item"
+              :index="index"
+            >
               <span>{{ item.title }}</span>
             </slot>
           </component>
@@ -59,7 +63,10 @@
           aria-hidden="false"
         >
           <div class="vsm-dropdown-content">
-            <slot :item="item" :index="index" />
+            <slot
+              :item="item"
+              :index="index"
+            />
           </div>
         </div>
       </div>
@@ -219,7 +226,7 @@ export default {
       const bodyOffset = document.body.offsetWidth
 
       // Crop the width of the content if it goes beyond the width of the screen
-      if (offsetWidth > bodyOffset) {
+      if (offsetWidth > bodyOffset - (+this.screenOffset * 2)) {
         offsetWidth = bodyOffset - (+this.screenOffset * 2)
       }
 
