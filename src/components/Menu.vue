@@ -99,6 +99,11 @@ export default {
       type: [Number, String],
       default: 400,
       validator: (val) => +val > 0
+    },
+    screenOffset: {
+      type: [Number, String],
+      default: 10,
+      validator: (val) => +val > 0
     }
   },
   computed: {
@@ -211,10 +216,23 @@ export default {
         }
       })
 
+      const bodyOffset = document.body.offsetWidth
+
+      // Crop the width of the content if it goes beyond the width of the screen
+      if (offsetWidth > bodyOffset) {
+        offsetWidth = bodyOffset - (+this.screenOffset * 2)
+      }
+
       const ratioWidth = offsetWidth / +this.baseWidth
       const ratioHeight = offsetHeight / +this.baseHeight
       const rect = el.getBoundingClientRect()
-      const pos = Math.round(Math.max(rect.left + rect.width / 2 - offsetWidth / 2, 10))
+      let pos = Math.round(Math.max(rect.left + rect.width / 2 - offsetWidth / 2, 10))
+
+      const rightSide = rect.left + rect.width / 2 + offsetWidth / 2
+      if (rightSide > bodyOffset) {
+        pos = pos - (rightSide - bodyOffset) - +this.screenOffset
+      }
+
       clearTimeout(this._disableTransitionTimeout)
 
       this._enableTransitionTimeout = setTimeout(() => {

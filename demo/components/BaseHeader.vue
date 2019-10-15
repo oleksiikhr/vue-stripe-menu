@@ -45,22 +45,22 @@ export default {
   data () {
     return {
       menu: [
-        { title: 'Products', dropdown: 'products', content: VerticalContent, element: 'span' },
-        { title: 'Developers', dropdown: 'developers', content: HorizontalPrimaryContent, secondary: HorizontalSecondaryContent },
         { title: 'Company', dropdown: 'company', content: DefaultContent, listeners: { mouseover: this.onMouseOver } },
+        { title: 'Developers', dropdown: 'developers', content: HorizontalPrimaryContent, secondary: HorizontalSecondaryContent },
+        { title: 'Products', dropdown: 'products', content: VerticalContent, element: 'span' },
         { title: 'Source', attributes: { href: 'https://github.com/Alexeykhr/vue-stripe-menu/blob/master/demo/components/BaseHeader.vue', target: '_blank' } }
       ]
     }
   },
   methods: {
     onMouseOver (evt) {
-      console.log('mouse over', evt)
+      // console.log('mouse over', evt)
     },
     onOpenDropdown (el) {
-      console.log('open dropdown', el)
+      // console.log('open dropdown', el)
     },
     onCloseDropdown (el) {
-      console.log('close dropdown', el)
+      // console.log('close dropdown', el)
     }
   }
 }
@@ -75,6 +75,9 @@ export default {
 
 .vsm-menu {
   position: relative;
+  nav {
+    margin: 0 10px;
+  }
   ul {
     max-width: $laptop;
     margin: 0 auto;

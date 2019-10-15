@@ -49,7 +49,13 @@ export default {
           property: 'base-height',
           description: 'The relationship between the height of the content and this value',
           type: 'string, number',
-          default: 380
+          default: 400
+        },
+        {
+          property: 'screen-offset',
+          description: 'Offset from the window screen',
+          type: 'string, number',
+          default: 10
         }
       ]
     }
