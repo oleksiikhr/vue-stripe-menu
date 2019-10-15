@@ -24,7 +24,11 @@
             v-bind="item.attributes"
             v-on="item.listeners"
           >
-            <slot name="title" :item="item" :index="index">
+            <slot
+              name="title"
+              :item="item"
+              :index="index"
+            >
               <span>{{ item.title }}</span>
             </slot>
           </component>
@@ -59,7 +63,10 @@
           aria-hidden="false"
         >
           <div class="vsm-dropdown-content">
-            <slot :item="item" :index="index" />
+            <slot
+              :item="item"
+              :index="index"
+            />
           </div>
         </div>
       </div>
@@ -99,6 +106,11 @@ export default {
       type: [Number, String],
       default: 400,
       validator: (val) => +val > 0
+    },
+    screenOffset: {
+      type: [Number, String],
+      default: 10,
+      validator: (val) => +val > 0
     }
   },
   computed: {
@@ -106,26 +118,11 @@ export default {
       return this.menu.filter(item => item.dropdown)
     }
   },
-  created () {
-    this._touchMoveHandler = () => {
-      this._isDragging = true
-    }
-
-    this._touchStartHandler = () => {
-      this._isDragging = false
-    }
-
-    this._pointerEventEndHandler = () => {
-      if (!this._isDragging) {
-        this.closeDropdown()
-      }
-    }
-
-    document.addEventListener('touchmove', this._touchMoveHandler)
-    document.addEventListener('touchstart', this._touchStartHandler)
-    document.body.addEventListener(pointerEvent.end, this._pointerEventEndHandler)
-  },
   mounted () {
+    document.addEventListener('touchmove', this.touchMoveHandler)
+    document.addEventListener('touchstart', this.touchStartHandler)
+    document.body.addEventListener(pointerEvent.end, this.pointerEventEndHandler)
+
     this._linksHasDropdown = this.$refs.links.filter((el) => {
       return el.classList.contains('vsm-has-dropdown')
     })
@@ -176,9 +173,9 @@ export default {
     })
   },
   beforeDestroy () {
-    document.removeEventListener('touchmove', this._touchMoveHandler)
-    document.removeEventListener('touchstart', this._touchStartHandler)
-    document.body.removeEventListener(pointerEvent.end, this._pointerEventEndHandler)
+    document.removeEventListener('touchmove', this.touchMoveHandler)
+    document.removeEventListener('touchstart', this.touchStartHandler)
+    document.body.removeEventListener(pointerEvent.end, this.pointerEventEndHandler)
   },
   methods: {
     toggleDropdown (el) {
@@ -226,10 +223,23 @@ export default {
         }
       })
 
+      const bodyOffset = document.body.offsetWidth
+
+      // Crop the width of the content if it goes beyond the width of the screen
+      if (offsetWidth > bodyOffset - (+this.screenOffset * 2)) {
+        offsetWidth = bodyOffset - (+this.screenOffset * 2)
+      }
+
       const ratioWidth = offsetWidth / +this.baseWidth
       const ratioHeight = offsetHeight / +this.baseHeight
       const rect = el.getBoundingClientRect()
-      const pos = Math.round(Math.max(rect.left + rect.width / 2 - offsetWidth / 2, 10))
+      let pos = Math.round(Math.max(rect.left + rect.width / 2 - offsetWidth / 2, 10))
+
+      const rightSide = rect.left + rect.width / 2 + offsetWidth / 2
+      if (rightSide > bodyOffset) {
+        pos = pos - (rightSide - bodyOffset) - +this.screenOffset
+      }
+
       clearTimeout(this._disableTransitionTimeout)
 
       this._enableTransitionTimeout = setTimeout(() => {
@@ -279,6 +289,17 @@ export default {
     },
     stopCloseTimeout () {
       clearTimeout(this._closeDropdownTimeout)
+    },
+    touchMoveHandler () {
+      this._isDragging = true
+    },
+    touchStartHandler () {
+      this._isDragging = false
+    },
+    pointerEventEndHandler () {
+      if (!this._isDragging) {
+        this.closeDropdown()
+      }
     }
   }
 }

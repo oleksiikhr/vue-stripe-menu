@@ -2,6 +2,56 @@
 
 body {
   background-color: #f5f7f9;
+  margin: 0;
+}
+
+code {
+  border: 1px dashed #b9b9b9;
+  padding: 1px 5px;
+  background: rgba(0, 0, 0, .03);
+}
+
+main {
+  max-width: 1024px;
+  margin: 80px auto 0;
+  font-family: monospace;
+  > * {
+    margin-left: 10px;
+    margin-right: 10px;
+    &:not(:last-child) {
+      margin-bottom: 50px;
+    }
+  }
+  .section {
+    display: inline-block;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: #333;
+    text-decoration: none !important;
+    outline: none;
+    user-select: none;
+  }
+}
+
+footer {
+  max-width: 1024px;
+  margin: 50px auto 30px;
+  text-align: center;
+  /deep/ a {
+    display: inline-block;
+    width: 25px;
+    &:hover {
+      svg {
+        fill: #000;
+      }
+    }
+    svg {
+      fill: #777;
+      transition: .25s;
+    }
+  }
 }
 
 .background {
