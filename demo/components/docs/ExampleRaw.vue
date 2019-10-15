@@ -1,7 +1,7 @@
 <template>
   <vsm-menu :menu="menu">
     <template #default="data">
-      {{ data }}
+      <div>{{ data }}</div>
     </template>
   </vsm-menu>
 </template>
