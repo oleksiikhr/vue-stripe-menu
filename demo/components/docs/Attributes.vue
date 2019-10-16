@@ -30,7 +30,7 @@ export default {
           property: 'menu',
           type: 'Array',
           parameters: 'MenuObject',
-          description: '',
+          description: 'Description of the menu items, see below',
           required: true
         },
         {
