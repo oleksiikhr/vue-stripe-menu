@@ -8,6 +8,10 @@
   <a href="https://www.npmjs.com/package/vue-stripe-menu" rel="nofollow"><img src="https://img.shields.io/npm/l/vue-stripe-menu.svg" alt="License"></a>
 </p>
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Alexeykhr/vue-stripe-menu/master/public/img.png?raw=true" alt="Vue Stripe Menu" height="500px">
+</p>
+
 > Create a dropdown like on Stripe
 
 [Demo Project](https://alexeykhr.github.io/vue-stripe-menu/)
