@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       menu: [
         { title: 'First item', dropdown: 'first' },
