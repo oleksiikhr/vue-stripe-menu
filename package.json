@@ -9,6 +9,7 @@
     "build:lib": "vue-cli-service build --target lib --name vue-stripe-menu ./src/main.js",
     "lint": "vue-cli-service lint",
     "lint:fix": "npm run lint -- --fix",
+    "test": "jest",
     "release": "standard-version",
     "npm:publish": "npm publish --access public"
   },
@@ -27,18 +28,26 @@
     "vue": "^2.6.10"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.6.3",
+    "@vue/babel-preset-app": "^4.0.4",
     "@vue/cli-plugin-babel": "^4.0.0",
-    "@vue/cli-plugin-eslint": "^4.0.1",
-    "@vue/cli-service": "^4.0.0",
+    "@vue/cli-plugin-eslint": "^4.0.4",
+    "@vue/cli-service": "^4.0.4",
     "@vue/eslint-config-standard": "^4.0.0",
+    "@vue/test-utils": "^1.0.0-beta.29",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.3",
+    "babel-jest": "^24.9.0",
     "dotenv": "^8.2.0",
     "eslint": "^6.5.1",
     "eslint-plugin-vue": "^5.2.3",
     "highlight.js": "^9.15.10",
+    "jest": "^24.9.0",
     "node-sass": "^4.12.0",
     "raw-loader": "^3.1.0",
     "sass-loader": "^8.0.0",
+    "sinon": "^7.5.0",
+    "vue-jest": "^3.0.5",
     "vue-template-compiler": "^2.6.10"
   }
 }

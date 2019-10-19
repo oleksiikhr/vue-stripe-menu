@@ -146,7 +146,7 @@ export default {
     registerGlobalEvents () {
       document.addEventListener('touchmove', this.touchMoveHandler)
       document.addEventListener('touchstart', this.touchStartHandler)
-      document.body.addEventListener(pointerEvent.end, this.pointerEventEndHandler)
+      document.body.addEventListener(pointerEvent.end, this.eventEndHandler)
     },
     registerDropdownElsEvents () {
       this.hasDropdownEls.forEach((el) => {
@@ -209,7 +209,7 @@ export default {
     unregisterGlobalEvents () {
       document.removeEventListener('touchmove', this.touchMoveHandler)
       document.removeEventListener('touchstart', this.touchStartHandler)
-      document.body.removeEventListener(pointerEvent.end, this.pointerEventEndHandler)
+      document.body.removeEventListener(pointerEvent.end, this.eventEndHandler)
     },
     toggleDropdown (el) {
       if (this._activeDropdown === el) {
@@ -329,7 +329,7 @@ export default {
     touchStartHandler () {
       this._isDragging = false
     },
-    pointerEventEndHandler () {
+    eventEndHandler () {
       if (!this._isDragging) {
         this.closeDropdown()
       }
