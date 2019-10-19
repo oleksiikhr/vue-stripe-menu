@@ -104,23 +104,28 @@ Code for creating a menu as on a demo: [Link](https://github.com/Alexeykhr/vue-s
 ## Contributing
 
 ### Launch of a demo project (development of lib)
-```
-npm run dev
+```shell script
+$ npm run dev
 ```
 
 ### Build a demo project
-```
-npm run build
+```shell script
+$ npm run build
 ```
 
 ### Build library
-```
-npm run build:lib
+```shell script
+$ npm run build:lib
 ```
 
-### Check code on eslint
+### Run tests
+```shell script
+$ npm run test
 ```
-npm run lint
+
+### Check code on Eslint
+```shell script
+$ npm run lint
 ```
 
 ## Changelog
