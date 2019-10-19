@@ -26,7 +26,7 @@ module.exports = {
   // collectCoverageFrom: null,
 
   // The directory where Jest should output its coverage files
-  coverageDirectory: "coverage",
+  coverageDirectory: 'coverage',
 
   // An array of regexp pattern strings used to skip coverage collection
   // coveragePathIgnorePatterns: [
@@ -72,9 +72,9 @@ module.exports = {
 
   // An array of file extensions your modules use
   moduleFileExtensions: [
-    "js",
-    "json",
-    "vue"
+    'js',
+    'json',
+    'vue'
   ],
 
   // A map from regular expressions to module names that allow to stub out resources with a single module
@@ -167,9 +167,9 @@ module.exports = {
 
   // A map from regular expressions to paths to transformers
   transform: {
-    ".*\\.(vue)$": "vue-jest",
-    "^.+\\.js$": "babel-jest"
-  },
+    '.*\\.(vue)$': 'vue-jest',
+    '^.+\\.js$': 'babel-jest'
+  }
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
   // transformIgnorePatterns: [
@@ -187,4 +187,4 @@ module.exports = {
 
   // Whether to use watchman for file crawling
   // watchman: true,
-};
+}

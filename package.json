@@ -1,6 +1,6 @@
 {
   "name": "vue-stripe-menu",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "Creating menus with animations like on Stripe",
   "main": "./dist/vue-stripe-menu.common.js",
   "scripts": {
