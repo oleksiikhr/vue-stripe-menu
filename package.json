@@ -10,7 +10,7 @@
     "lint": "vue-cli-service lint",
     "lint:fix": "npm run lint -- --fix",
     "test": "jest",
-    "release": "standard-version",
+    "rel": "npm run lint:fix && npm run test && npm run build && npm run build:lib && git add -A && standard-version -a",
     "npm:publish": "npm publish --access public"
   },
   "repository": {
