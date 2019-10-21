@@ -1,0 +1,13 @@
+.vsm-no-transition {
+  .vsm-dropdown-container,
+  .vsm-background-alt,
+  .vsm-background,
+  .vsm-arrow,
+  .vsm-dropdown-section {
+    transition: none;
+  }
+}
+
+.vsm-has-dropdown {
+  cursor: default;
+}

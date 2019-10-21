@@ -22,12 +22,10 @@
         class="content--secondary"
       />
     </template>
-    <li
-      slot="after-nav"
-      class="vsm-section"
-    >
-      Sign In
-    </li>
+    <template slot="after-nav">
+      <li class="vsm-section">Sign In</li>
+      <vsm-mob />
+    </template>
   </vsm-menu>
 </template>
 

@@ -1,0 +1,10 @@
+.vsm-section_mob {
+  .vsm-link {
+    display: flex;
+    align-items: center;
+    > div {
+      width: 25px;
+      height: 25px;
+    }
+  }
+}
