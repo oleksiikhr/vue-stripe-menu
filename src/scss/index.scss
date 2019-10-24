@@ -2,6 +2,9 @@
 
 .vsm-menu {
   perspective: 2000px;
+  &, * {
+    box-sizing: border-box;
+  }
   ul {
     padding: 0;
     margin: 0;
