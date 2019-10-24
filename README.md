@@ -18,13 +18,13 @@
 
 ## How to install
 
-```shell script
+```sh
 $ npm i vue-stripe-menu
 // or
 $ yarn add vue-stripe-menu
 ```
 
-```vue
+```js
 import Vue from 'Vue'
 import VueStripeMenu from 'vue-stripe-menu'
 
@@ -104,27 +104,27 @@ Code for creating a menu as on a demo: [Link](https://github.com/Alexeykhr/vue-s
 ## Contributing
 
 ### Launch of a demo project (development of lib)
-```shell script
+```sh
 $ npm run dev
 ```
 
 ### Build a demo project
-```shell script
+```sh
 $ npm run build
 ```
 
 ### Build library
-```shell script
+```sh
 $ npm run build:lib
 ```
 
 ### Run tests
-```shell script
+```sh
 $ npm run test
 ```
 
 ### Check code on Eslint
-```shell script
+```sh
 $ npm run lint
 ```
 
