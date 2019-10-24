@@ -54,13 +54,13 @@ export default {
   },
   methods: {
     onMouseOver (evt) {
-      // console.log('mouse over', evt)
+      console.log('mouse over', evt)
     },
     onOpenDropdown (el) {
-      // console.log('open dropdown', el)
+      console.log('open dropdown', el)
     },
     onCloseDropdown (el) {
-      // console.log('close dropdown', el)
+      console.log('close dropdown', el)
     }
   }
 }
