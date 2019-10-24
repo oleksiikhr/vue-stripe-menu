@@ -38,6 +38,8 @@ import VerticalContent from '../components/content/Vertical'
 import DefaultContent from '../components/content/Default'
 import StripeLogo from '../components/svg/StripeLogo'
 
+/* eslint-disable no-console */
+
 export default {
   components: {
     StripeLogo
@@ -54,13 +56,13 @@ export default {
   },
   methods: {
     onMouseOver (evt) {
-      // console.log('mouse over', evt)
+      console.log('mouse over', evt)
     },
     onOpenDropdown (el) {
-      // console.log('open dropdown', el)
+      console.log('open dropdown', el)
     },
     onCloseDropdown (el) {
-      // console.log('close dropdown', el)
+      console.log('close dropdown', el)
     }
   }
 }

@@ -51,6 +51,11 @@ export default {
   padding: 0;
   > div {
     padding: 30px;
+    // Making background is for both blocks to prevent
+    // wrong display roundings
+    &.primary {
+      background-color: #fff;
+    }
     &.secondary {
       background-color: #f6f9fc;
     }
