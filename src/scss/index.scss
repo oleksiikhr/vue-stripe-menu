@@ -56,7 +56,7 @@
     transform-origin: 50% -50px;
     opacity: 0;
     will-change: transform, opacity;
-    transition-property: transform, opacity, -webkit-transform;
+    transition-property: transform, opacity;
     transition-duration: .25s;
   }
   &.vsm-dropdown-active {
@@ -88,7 +88,7 @@
   top: 0;
   left: 0;
   will-change: transform;
-  transition-property: transform, -webkit-transform;
+  transition-property: transform;
   transition-duration: .25s;
 }
 
@@ -108,7 +108,7 @@
   background: #fff;
   box-shadow: -3px -3px 5px rgba(82, 95, 127, .04);
   will-change: transform;
-  transition-property: transform, -webkit-transform;
+  transition-property: transform;
 }
 
 .vsm-arrow,
@@ -126,14 +126,14 @@
   will-change: transform, width, height;
   // Content is cut (overflow hidden), so border-radius can not show
   border-radius: $borderRadius + 2px;
-  transition-property: transform, width, height, -webkit-transform;
+  transition-property: transform, width, height;
 }
 
 .vsm-dropdown-section {
   opacity: 0;
   pointer-events: none;
   will-change: transform, opacity;
-  transition-property: transform, opacity, -webkit-transform;
+  transition-property: transform, opacity;
   transition-duration: .25s;
   &.vsm-active {
     opacity: 1;
