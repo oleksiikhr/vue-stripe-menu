@@ -38,6 +38,8 @@ import VerticalContent from '../components/content/Vertical'
 import DefaultContent from '../components/content/Default'
 import StripeLogo from '../components/svg/StripeLogo'
 
+/* eslint-disable no-console */
+
 export default {
   components: {
     StripeLogo
