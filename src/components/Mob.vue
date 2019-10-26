@@ -1,7 +1,9 @@
 <template>
-  <li :class="['vsm-section', 'vsm-section_mob', {
-    'vsm-open': active
-  }]">
+  <li
+    :class="['vsm-section', 'vsm-section_mob', {
+      'vsm-open': active
+    }]"
+  >
     <div
       class="vsm-mob"
       @click="onClickHamburger"
@@ -36,7 +38,7 @@ const touchSupport = 'ontouchstart' in window || navigator.maxTouchPoints
 const touchEvent = touchSupport ? 'touchend' : 'click'
 
 export default {
-  name: 'vsmMob',
+  name: 'VsmMob',
   props: {
     value: {
       type: Boolean,

@@ -28,12 +28,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: $mobSize;
-  height: $mobSize;
+  width: $vsm-mob-size;
+  height: $vsm-mob-size;
   cursor: pointer;
   &:hover {
     .vsm-mob-line {
-      background: $colorHover;
+      background: $vsm-color-hover;
     }
   }
 }
@@ -41,8 +41,8 @@
 .vsm-mob-line {
   width: 24px;
   height: 3px;
-  background: $color;
-  transition: background $transitionLinks;
+  background: $vsm-color;
+  transition: background $vsm-transition-link;
   &:nth-child(2) {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -55,7 +55,6 @@
  */
 
 .vsm-mob-content {
-  //display: none;z
   position: absolute;
   left: 10px;
   top: 10px;
@@ -66,7 +65,7 @@
 
 .vsm-mob-content__wrap {
   background: #fff;
-  box-shadow: $mobShadow;
+  box-shadow: $vsm-shadow;
   border-radius: 4px;
   overflow: hidden;
   position: relative;
@@ -84,27 +83,27 @@
   position: absolute;
   right: 0;
   top: 0;
-  width: 50px;
-  height: 50px;
+  width: $vsm-mob-close-size;
+  height: $vsm-mob-close-size;
   cursor: pointer;
   &:hover {
     &:before,
     &:after {
-      background: $colorHover;
+      background: $vsm-color-hover;
     }
   }
   &:before,
   &:after {
     content: "";
     position: absolute;
-    background: $color;
+    background: $vsm-color;
     border-radius: 1px;
     left: 14px;
     right: 14px;
     top: 24px;
     height: 3px;
     transform: rotate(45deg);
-    transition: background $transitionLinks;
+    transition: background $vsm-transition-link;
   }
   &:after {
     transform: rotate(-45deg);
@@ -117,7 +116,7 @@
  */
 
 .vsm-mob-anim {
-  transition: $transition;
+  transition: $vsm-transition;
   &-enter-active {
     opacity: 0;
     transform: scale(.95);

@@ -15,14 +15,14 @@
     z-index: 1000;
     left: 0;
     right: 0;
-    top: 50px;
+    top: $vsm-menu-link-height;
     pointer-events: none;
     transform: rotateX(-15deg);
-    transform-origin: 50% -50px;
+    transform-origin: 50% -#{$vsm-menu-link-height};
     opacity: 0;
     will-change: transform, opacity;
     transition-property: transform, opacity;
-    transition-duration: $transition;
+    transition-duration: $vsm-transition;
   }
   // Display dropdown content
   &.vsm-dropdown-active {
@@ -68,19 +68,19 @@
 // Single element on navbar menu
 .vsm-link {
   display: inline-block;
-  height: 50px;
+  height: $vsm-menu-link-height;
   white-space: nowrap;
   user-select: none;
   font-size: 17px;
-  line-height: 50px;
+  line-height: $vsm-menu-link-height;
   font-weight: 500;
   margin: 0;
   padding: 0 10px;
-  color: $color;
-  transition: color $transitionLinks;
+  color: $vsm-color;
+  transition: color $vsm-transition-link;
   &:hover,
   &.vsm-active {
-    color: $colorHover;
+    color: $vsm-color-hover;
   }
   > * {
     position: relative;
@@ -102,14 +102,14 @@
   // Optimize animation
   will-change: transform;
   transition-property: transform;
-  transition-duration: $transition;
+  transition-duration: $vsm-transition;
 }
 
 .vsm-background {
   background: #fff;
-  border-radius: $borderRadius;
+  border-radius: $vsm-menu-border-radius;
   overflow: hidden;
-  box-shadow: 0 50px 100px -20px rgba(50, 50, 93, .25), 0 30px 60px -30px rgba(0, 0, 0, .3), 0 -18px 60px -10px rgba(0, 0, 0, .025);
+  box-shadow: $vsm-shadow;
   width: 380px;
   height: 400px;
   transform: translateX(0);
@@ -127,7 +127,7 @@
 .vsm-dropdown-container {
   position: absolute;
   left: 0;
-  transition-duration: $transition;
+  transition-duration: $vsm-transition;
 }
 
 .vsm-arrow {
@@ -138,7 +138,7 @@
   transform: rotate(45deg);
   border-radius: 4px 0 0 0;
   background: #fff;
-  box-shadow: -3px -3px 5px rgba(82, 95, 127, .04);
+  box-shadow: $vsm-menu-arrow-shadow;
   will-change: transform;
   transition-property: transform;
   pointer-events: none;
@@ -152,7 +152,7 @@
   will-change: transform, width, height;
   // Content is cut (overflow hidden), so border-radius can not show
   // add a few pixels to display correctly
-  border-radius: $borderRadius + 2px;
+  border-radius: $vsm-menu-border-radius + 2px;
   transition-property: transform, width, height;
 }
 
@@ -162,16 +162,16 @@
   pointer-events: none;
   will-change: transform, opacity;
   transition-property: transform, opacity;
-  transition-duration: $transition;
+  transition-duration: $vsm-transition;
   &.vsm-active {
     opacity: 1;
     transform: translateX(0);
   }
   &.vsm-left {
-    transform: translateX(-150px);
+    transform: translateX(-#{$vsm-menu-transform-content});
   }
   &.vsm-right {
-    transform: translateX(150px);
+    transform: translateX($vsm-menu-transform-content);
   }
 }
 

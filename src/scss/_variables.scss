@@ -4,17 +4,22 @@
  */
 
 // Radius for dropdown content
-$borderRadius: 4px;
+$vsm-menu-border-radius: 4px !default;
+
+// Animating content in dropdown menu when changing active menu
+$vsm-menu-transform-content: 150px !default;
+
+$vsm-menu-link-height: 50px !default;
+$vsm-menu-arrow-shadow: -3px -3px 5px rgba(82, 95, 127, .04) !default;
 
 /* -----------------------------------------------------------------------------
  * - Mobile Component -
  * -----------------------------------------------------------------------------
  */
 
-// Width and height for hamburger
-$mobSize: 50px;
-
-$mobShadow: 0 50px 100px -20px rgba(50, 50, 93, .25), 0 30px 60px -30px rgba(0, 0, 0, .3), 0 -18px 60px -10px rgba(0, 0, 0, .025);
+// Width and height for hamburger/close button
+$vsm-mob-size: 50px !default;
+$vsm-mob-close-size: 50px !default;
 
 /* -----------------------------------------------------------------------------
  * - Customize -
@@ -22,19 +27,18 @@ $mobShadow: 0 50px 100px -20px rgba(50, 50, 93, .25), 0 30px 60px -30px rgba(0, 
  */
 
 // Primary color for links, background
-$color: #6772e5;
-$colorHover: #32325d;
+$vsm-color: #6772e5 !default;
+$vsm-color-hover: #32325d !default;
 
 // Speed to change dropdown content
-$transition: .25s;
+// and hover on links, hamburger
+$vsm-transition: .25s !default;
+$vsm-transition-link: .1s ease !default;
 
-// Hover on links, hamburger
-$transitionLinks: .1s ease;
-
-/* -----------------------------------------------------------------------------
- * - Other -
- * -----------------------------------------------------------------------------
- */
+// Dropdown content (menu + mob)
+$vsm-shadow: 0 50px 100px -20px rgba(50, 50, 93, .25),
+            0 30px 60px -30px rgba(0, 0, 0, .3),
+            0 -18px 60px -10px rgba(0, 0, 0, .025) !default;
 
 // Change the interface under the mob. devices
-$media: 670px;
+$vsm-media: 768px !default;
