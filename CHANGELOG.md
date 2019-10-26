@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/Alexeykhr/vue-stripe-menu/compare/v1.0.0...v1.1.0) (2019-10-26)
+
+
+### Bug Fixes
+
+* correct display border-radius on cut div ([fd0415f](https://github.com/Alexeykhr/vue-stripe-menu/commit/fd0415f))
+* hide dropdown content on hover arrow ([ffa5aa1](https://github.com/Alexeykhr/vue-stripe-menu/commit/ffa5aa1))
+
+
+### Features
+
+* add scss variables, hamburger ([aea0989](https://github.com/Alexeykhr/vue-stripe-menu/commit/aea0989))
+* add vsm-mob component ([1d55028](https://github.com/Alexeykhr/vue-stripe-menu/commit/1d55028))
+
+
+
 ## [1.0.0](https://github.com/Alexeykhr/vue-stripe-menu/compare/v0.1.0...v1.0.0) (2019-10-19)
 
 
