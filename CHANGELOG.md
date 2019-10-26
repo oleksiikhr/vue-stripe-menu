@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/Alexeykhr/vue-stripe-menu/compare/v1.1.0...v1.2.0) (2019-10-26)
+
+
+### Features
+
+* support override scss styles and add more variables ([dc84d4b](https://github.com/Alexeykhr/vue-stripe-menu/commit/dc84d4b))
+
+
+
 ## [1.1.0](https://github.com/Alexeykhr/vue-stripe-menu/compare/v1.0.0...v1.1.0) (2019-10-26)
 
 
