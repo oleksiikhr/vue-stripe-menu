@@ -2,23 +2,25 @@
 
 // Import Vue components
 import vsmMenu from './components/Menu'
+import vsmMob from './components/Mob'
 
 // Import scss
 import './scss/index.scss'
 
-// Declare install function executed by Vue.use()
-export function install (Vue) {
-  if (install.installed) {
-    return
-  }
-
-  install.installed = true
-  Vue.component('vsmMenu', vsmMenu)
-}
-
 // Create module definition for Vue.use()
 const plugin = {
-  install
+  // Declare install function executed by Vue.use()
+  install: (Vue) => {
+    if (plugin.installed) {
+      return
+    }
+
+    plugin.installed = true
+
+    // Components
+    Vue.component('vsmMenu', vsmMenu)
+    Vue.component('vsmMob', vsmMob)
+  }
 }
 
 // Auto-install when vue is found (eg. in browser via <script> tag)

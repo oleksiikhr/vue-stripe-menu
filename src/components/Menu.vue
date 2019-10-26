@@ -9,7 +9,7 @@
         class="vsm-root"
       >
         <slot name="before-nav" />
-        <li class="vsm-section vsm-section_menu">
+        <li class="vsm-section vsm-section_menu vsm-mob-hide">
           <component
             ref="links"
             v-for="(item, index) in menu"
@@ -36,7 +36,7 @@
         <slot name="after-nav" />
       </ul>
     </nav>
-    <div class="vsm-dropdown">
+    <div class="vsm-dropdown vsm-mob-hide">
       <div
         ref="background"
         class="vsm-background"
@@ -75,8 +75,10 @@
 </template>
 
 <script>
-// The PointerEvent interface represents the state of a DOM event
-const pointerEvent = window.PointerEvent ? {
+/**
+ * PointerEvent interface represents the state of a DOM event
+ */
+export const pointerEvent = window.PointerEvent ? {
   end: 'pointerup',
   enter: 'pointerenter',
   leave: 'pointerleave'

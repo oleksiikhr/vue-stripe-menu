@@ -1,6 +1,6 @@
 <template>
   <div>
-    <base-title title="MenuObject" />
+    <base-title title="[Menu] MenuObject" />
     <base-table
       :columns="columns"
       :rows="rows"
@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import BaseTable from '../base/Table'
-import BaseTitle from '../BaseTitle'
+import BaseTable from '../../base/Table'
+import BaseTitle from '../../BaseTitle'
 
 export default {
   components: {

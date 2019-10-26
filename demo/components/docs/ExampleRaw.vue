@@ -3,6 +3,9 @@
     <template #default="data">
       <div>{{ data }}</div>
     </template>
+    <template slot="after-nav">
+      <vsm-mob>Mobile Content</vsm-mob>
+    </template>
   </vsm-menu>
 </template>
 

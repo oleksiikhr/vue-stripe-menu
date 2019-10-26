@@ -6,7 +6,7 @@
   >
     <li
       slot="before-nav"
-      class="vsm-section"
+      class="vsm-section vsm-mob-full"
     >
       <stripe-logo />
     </li>
@@ -22,12 +22,13 @@
         class="content--secondary"
       />
     </template>
-    <li
-      slot="after-nav"
-      class="vsm-section"
-    >
-      Sign In
-    </li>
+    <template slot="after-nav">
+      <li class="vsm-section vsm-mob-hide">Sign In</li>
+      <!--Display mobile menu-->
+      <vsm-mob>
+        <mobile-content />
+      </vsm-mob>
+    </template>
   </vsm-menu>
 </template>
 
@@ -37,12 +38,13 @@ import HorizontalPrimaryContent from '../components/content/HorizontalPrimary'
 import VerticalContent from '../components/content/Vertical'
 import DefaultContent from '../components/content/Default'
 import StripeLogo from '../components/svg/StripeLogo'
+import MobileContent from './content/MobileContent'
 
 /* eslint-disable no-console */
 
 export default {
   components: {
-    StripeLogo
+    StripeLogo, MobileContent
   },
   data () {
     return {
@@ -93,7 +95,7 @@ export default {
 }
 
 .vsm-section_menu {
-  flex: 1;
+  flex: 1 1 auto;
   justify-content: center;
   > * {
     padding: 0 25px;
