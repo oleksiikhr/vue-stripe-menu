@@ -24,7 +24,10 @@
     </template>
     <template slot="after-nav">
       <li class="vsm-section vsm-mob-hide">Sign In</li>
-      <vsm-mob />
+      <!--Display mobile menu-->
+      <vsm-mob>
+        <mobile-content />
+      </vsm-mob>
     </template>
   </vsm-menu>
 </template>
@@ -35,12 +38,13 @@ import HorizontalPrimaryContent from '../components/content/HorizontalPrimary'
 import VerticalContent from '../components/content/Vertical'
 import DefaultContent from '../components/content/Default'
 import StripeLogo from '../components/svg/StripeLogo'
+import MobileContent from './content/MobileContent'
 
 /* eslint-disable no-console */
 
 export default {
   components: {
-    StripeLogo
+    StripeLogo, MobileContent
   },
   data () {
     return {
