@@ -11,10 +11,10 @@
         <slot name="before-nav" />
         <li class="vsm-section vsm-section_menu vsm-mob-hide">
           <component
-            ref="links"
-            v-for="(item, index) in menu"
-            :key="index"
             :is="item.element || (item.dropdown ? 'button' : 'a')"
+            v-for="(item, index) in menu"
+            ref="links"
+            :key="index"
             :class="['vsm-link', {
               'vsm-has-dropdown': item.dropdown
             }]"
@@ -55,8 +55,8 @@
         class="vsm-dropdown-container"
       >
         <div
-          ref="sections"
           v-for="(item, index) in menuHasDropdown"
+          ref="sections"
           :key="index"
           class="vsm-dropdown-section"
           :data-dropdown="item.dropdown"
@@ -89,7 +89,7 @@ export const pointerEvent = window.PointerEvent ? {
 }
 
 export default {
-  name: 'vsmMenu',
+  name: 'VsmMenu',
   props: {
     menu: {
       type: Array,
