@@ -8,16 +8,12 @@ import { shallowMount } from '@vue/test-utils'
 import Mob from '../../src/components/Mob'
 import sinon from 'sinon'
 
-const eventEndStub = sinon.stub()
 let wrapper
 
 beforeEach(() => {
   wrapper = shallowMount(Mob, {
     slots: {
       default: '<div>Content</div>'
-    },
-    methods: {
-      eventEndHandler: eventEndStub,
     }
   })
 })
@@ -49,22 +45,11 @@ describe('vsmMob Component', () => {
   })
 
   test('Close dropdown on click outside', () => {
+    const spy = sinon.spy(wrapper.vm, 'eventEndHandler')
+
     wrapper.find('.vsm-mob').trigger('click')
     document.body.dispatchEvent(new MouseEvent('click'))
-    expect(eventEndStub.called).toBeTruthy()
+    expect(spy.called).toBeTruthy()
     expect(wrapper.emitted().input).toBeTruthy()
-  })
-
-  test('Close dropdown on touchend outside', () => {
-    wrapper.find('.vsm-mob').trigger('click')
-    document.body.dispatchEvent(new TouchEvent('touchend'))
-    expect(eventEndStub.called).toBeTruthy()
-    expect(wrapper.emitted().input).toBeTruthy()
-  })
-
-  test('Don\'t close a dropdown on inner click', () => {
-    wrapper.find('.vsm-section').trigger('click')
-    expect(eventEndStub.called).toBeTruthy()
-    expect(wrapper.emitted().input).toBeFalsy()
   })
 })

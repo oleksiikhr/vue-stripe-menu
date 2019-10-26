@@ -14,7 +14,7 @@
         </div>
       </slot>
     </div>
-      <div class="vsm-mob-content">
+    <div class="vsm-mob-content">
       <transition name="vsm-mob-anim">
         <div
           v-show="active"
