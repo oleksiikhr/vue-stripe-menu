@@ -141,6 +141,7 @@
   box-shadow: -3px -3px 5px rgba(82, 95, 127, .04);
   will-change: transform;
   transition-property: transform;
+  pointer-events: none;
 }
 
 .vsm-dropdown-container {
