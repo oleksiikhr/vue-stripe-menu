@@ -1,0 +1,13 @@
+@import "variables";
+
+@media screen and (max-width: $media) {
+  .vsm-section_mob {
+    display: block;
+  }
+  .vsm-mob-hide {
+    display: none;
+  }
+  .vsm-mob-full {
+    flex-grow: 1;
+  }
+}

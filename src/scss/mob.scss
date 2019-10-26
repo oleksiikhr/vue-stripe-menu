@@ -1,10 +1,32 @@
+@import "variables";
+
 .vsm-section_mob {
-  .vsm-link {
-    display: flex;
-    align-items: center;
-    > div {
-      width: 25px;
-      height: 25px;
+  display: none;
+  margin-left: 10px;
+}
+
+.vsm-mob__hamburger {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: $mobSize;
+  height: $mobSize;
+  cursor: pointer;
+  &:hover {
+    .vsm-mob-line {
+      background: $colorHover;
     }
+  }
+}
+
+.vsm-mob-line {
+  width: 24px;
+  height: 3px;
+  background: $color;
+  transition: background $transitionLinks;
+  &:nth-child(2) {
+    margin-top: 5px;
+    margin-bottom: 5px;
   }
 }

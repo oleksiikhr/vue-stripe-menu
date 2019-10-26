@@ -6,7 +6,7 @@
   >
     <li
       slot="before-nav"
-      class="vsm-section"
+      class="vsm-section vsm-mob-full"
     >
       <stripe-logo />
     </li>
@@ -23,7 +23,7 @@
       />
     </template>
     <template slot="after-nav">
-      <li class="vsm-section">Sign In</li>
+      <li class="vsm-section vsm-mob-hide">Sign In</li>
       <vsm-mob />
     </template>
   </vsm-menu>
@@ -91,7 +91,7 @@ export default {
 }
 
 .vsm-section_menu {
-  flex: 1;
+  flex: 1 1 auto;
   justify-content: center;
   > * {
     padding: 0 25px;
