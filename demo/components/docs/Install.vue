@@ -43,7 +43,7 @@ export default {
         '// Colors:\n' +
         '$vsm-color: #000;\n' +
         '$vsm-color-hover: rgba(0, 0, 0, .9);\n\n' +
-        '// And also you can see the animation in slow motion:' +
+        '// And also you can see the animation in slow motion:\n' +
         '$vsm-transition: 1s;\n\n' +
         '@import "~vue-stripe-menu/src/scss/index";'
     }
