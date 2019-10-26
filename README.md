@@ -18,20 +18,46 @@
 
 ## How to install
 
+Install the library in your project
+
 ```sh
 $ npm i vue-stripe-menu
 // or
 $ yarn add vue-stripe-menu
 ```
 
+Then add components to Vue and compiled css styles.
+
 ```js
+// .js file
+
 import Vue from 'Vue'
 import VueStripeMenu from 'vue-stripe-menu'
 
 Vue.use(VueStripeMenu)
 
-// Import styles
+// Import build styles
 import 'vue-stripe-menu/dist/vue-stripe-menu.css'
+```
+
+Or you can change them at compile time (scss). See all available variables:
+
+[List of variables](https://github.com/Alexeykhr/vue-stripe-menu/blob/master/src/scss/_variables.scss)
+
+```scss
+// .scss file
+
+// You can resize for "@media only screen":
+$vsm-media: 500px;
+
+// Colors:
+$vsm-color: #000;
+$vsm-color-hover: rgba(0, 0, 0, .9);
+
+// And also you can see the animation in slow motion:
+$vsm-transition: 1s;
+
+@import "~vue-stripe-menu/src/scss/index";
 ```
 
 ## Basic Demo
@@ -153,7 +179,7 @@ $ npm run lint
 
 ## Changelog
 
-Detailed changes for each release are documented in the [CHANGELOG.md](https://github.com/alexeykhr/vuejs-stripe-menu/blob/master/CHANGELOG.md).
+Detailed changes for each release are documented in the [CHANGELOG.md](https://github.com/Alexeykhr/vue-stripe-menu/blob/master/CHANGELOG.md).
 
 ## License
 
