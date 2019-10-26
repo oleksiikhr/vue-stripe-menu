@@ -1,6 +1,6 @@
 <template>
   <div>
-    <base-title title="Slots" />
+    <base-title title="Classes" />
     <base-table
       :columns="columns"
       :rows="rows"
@@ -20,22 +20,16 @@ export default {
     return {
       columns: [
         { attr: 'name', name: 'Name' },
-        { attr: 'parameters', name: 'Parameters' },
         { attr: 'description', name: 'Description' }
       ],
       rows: [
         {
-          name: 'default',
-          parameters: 'MenuItem, index',
-          description: 'The main content for the drop-down list'
+          name: 'vsm-mob-hide',
+          description: 'Hide HTML elements in mobile design'
         },
         {
-          name: 'before-nav',
-          description: 'Content to the left of the list'
-        },
-        {
-          name: 'after-nav',
-          description: 'Content to the right of the list'
+          name: 'vsm-mob-full',
+          description: 'Add flex-grow: 1, see Demo example'
         }
       ]
     }

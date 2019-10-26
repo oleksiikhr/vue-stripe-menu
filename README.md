@@ -42,6 +42,9 @@ import 'vue-stripe-menu/dist/vue-stripe-menu.css'
     <template #default="data">
       <div>{{ data }}</div>
     </template>
+    <template slot="after-nav">
+      <vsm-mob>Mobile Content</vsm-mob>
+    </template>
   </vsm-menu>
 </template>
 
@@ -66,32 +69,32 @@ Code for creating a menu as on a demo: [Link](https://github.com/Alexeykhr/vue-s
 
 ## API
 
-### Attributes
+### [Menu] Props
 
 | Property             | Parameters | Description                                                       | Type           | Default | Required |
-| -------------------- |----------- | ----------------------------------------------------------------- | ---------------| ------- | -------- |
+| -------------------- | ---------- | ----------------------------------------------------------------- | -------------- | ------- | -------- |
 | menu                 | MenuObject | Description of the menu items, see below                          | Array          |         | true     |
 | element              |            | HTML element for root element                                     | String         | header  | false    |
 | base-width           |            | The relationship between the width of the content and this value  | string, number | header  | false    |
 | base-height          |            | The relationship between the height of the content and this value | string, number | header  | false    |
 | screen-offset        |            | Offset from the window screen                                     | string, number | header  | false    |
 
-### Events
+### [Menu] Events
 
 | Name           | Description                                            | Return  |
 | -------------- | ------------------------------------------------------ | ------- |
 | open-dropdown  | Open the dropdown menu, return the active DOM Element  | Element |
 | close-dropdown | Close the dropdown menu, return the active DOM Element | Element |
 
-### Slots
+### [Menu] Slots
 
-| Name       | Parameters      | Description                                          |
-| ---------- | --------------- | ---------------------------------------------------- |
-| default    | MenuItem, index | The main content for the drop-down list (slot-scope) |
-| before-nav | before-nav      | Content to the left of the list                      |
-| after-nav  | after-nav       | Content to the right of the list                     |
+| Name       | Parameters      | Description                                         |
+| ---------- | --------------- | --------------------------------------------------- |
+| default    | MenuItem, index | The main content for the dropdown list (slot-scope) |
+| before-nav | before-nav      | Content to the left of the list                     |
+| after-nav  | after-nav       | Content to the right of the list                    |
 
-### MenuObject (menu props)
+### [Menu] MenuObject (menu props)
 
 | Property   | Type   | Description                                                                          |
 | ---------- | ------ | ------------------------------------------------------------------------------------ |
@@ -100,6 +103,26 @@ Code for creating a menu as on a demo: [Link](https://github.com/Alexeykhr/vue-s
 | element    | String | HTML element in the header element, if not specified, it will be <button /> or <a /> |
 | attributes | Object | All attributes to be assigned in the header element (v-bind)                         |
 | listeners  | Object | All events to be assigned in the header element (v-on)                               |
+
+### [Mob] Props
+
+| Property | Parameters | Description                          | Type    | Default | Required |
+| -------- | ---------- | ------------------------------------ | ------- | ------- | -------- |
+| v-model  |            | The state of the open/close the menu | Boolean | false   | false    |
+
+### [Mob] Slots
+
+| Name       | Parameters | Description                            |
+| ---------- | ---------- | -------------------------------------- |
+| default    |            | The main content for the dropdown list |
+| hamburger  |            | Replace button to open dropdown        |
+
+### Classes
+
+| Name         | Description                         |
+| ------------ | ----------------------------------- |
+| vsm-mob-hide | Hide HTML elements in mobile design |
+| vsm-mob-full | Add flex-grow: 1, see Demo example  |
 
 ## Contributing
 

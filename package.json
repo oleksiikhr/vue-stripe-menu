@@ -1,6 +1,6 @@
 {
   "name": "vue-stripe-menu",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Creating menus with animations like on Stripe",
   "main": "./dist/vue-stripe-menu.common.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "lint:fix": "npm run lint -- --fix",
     "test": "jest",
     "rel": "npm run lint:fix && npm run test && npm run build && npm run build:lib && git add -A && standard-version -a",
-    "npm:publish": "npm publish --access public"
+    "pub": "git push --follow-tags origin dev && npm publish"
   },
   "repository": {
     "type": "git",

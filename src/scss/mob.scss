@@ -1,0 +1,137 @@
+@import "variables";
+
+/* -----------------------------------------------------------------------------
+ * - Root element -
+ * -----------------------------------------------------------------------------
+ */
+
+.vsm-section_mob {
+  display: none;
+  margin-left: 10px;
+  &.vsm-open {
+    .vsm-mob {
+      pointer-events: none;
+    }
+    .vsm-mob-content {
+      display: flex;
+    }
+  }
+}
+
+/* -----------------------------------------------------------------------------
+ * - Button Open Mobile Dropdown -
+ * -----------------------------------------------------------------------------
+ */
+
+.vsm-mob__hamburger {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: $mobSize;
+  height: $mobSize;
+  cursor: pointer;
+  &:hover {
+    .vsm-mob-line {
+      background: $colorHover;
+    }
+  }
+}
+
+.vsm-mob-line {
+  width: 24px;
+  height: 3px;
+  background: $color;
+  transition: background $transitionLinks;
+  &:nth-child(2) {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+ * - Mobile Dropdown Content -
+ * -----------------------------------------------------------------------------
+ */
+
+.vsm-mob-content {
+  //display: none;z
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  right: 10px;
+  justify-content: flex-end;
+  perspective: 2000px;
+}
+
+.vsm-mob-content__wrap {
+  background: #fff;
+  box-shadow: $mobShadow;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  font-size: 17px;
+  line-height: 40px;
+  white-space: nowrap;
+  flex-grow: 1;
+  transform-origin: 100% 0;
+  will-change: transform, opacity;
+  transition-property: transform, opacity;
+  transition-duration: .25s;
+}
+
+.vsm-mob-close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  &:hover {
+    &:before,
+    &:after {
+      background: $colorHover;
+    }
+  }
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    background: $color;
+    border-radius: 1px;
+    left: 14px;
+    right: 14px;
+    top: 24px;
+    height: 3px;
+    transform: rotate(45deg);
+    transition: background $transitionLinks;
+  }
+  &:after {
+    transform: rotate(-45deg);
+  }
+}
+
+/* -----------------------------------------------------------------------------
+ * - Animation -
+ * -----------------------------------------------------------------------------
+ */
+
+.vsm-mob-anim {
+  transition: $transition;
+  &-enter-active {
+    opacity: 0;
+    transform: scale(.95);
+  }
+  &-enter-to {
+    opacity: 1;
+    transform: scale(1);
+  }
+  &-leave-active,
+  &-leave-enter {
+    transform: scale(1);
+  }
+  &-leave-to {
+    transform: scale(.95);
+    opacity: 0;
+  }
+}

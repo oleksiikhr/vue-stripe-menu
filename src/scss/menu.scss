@@ -1,0 +1,182 @@
+@import "variables";
+
+/* -----------------------------------------------------------------------------
+ * - Root element -
+ * -----------------------------------------------------------------------------
+ */
+
+.vsm-menu {
+  perspective: 2000px;
+  &, * {
+    box-sizing: border-box;
+  }
+  .vsm-dropdown {
+    position: absolute;
+    z-index: 1000;
+    left: 0;
+    right: 0;
+    top: 50px;
+    pointer-events: none;
+    transform: rotateX(-15deg);
+    transform-origin: 50% -50px;
+    opacity: 0;
+    will-change: transform, opacity;
+    transition-property: transform, opacity;
+    transition-duration: $transition;
+  }
+  // Display dropdown content
+  &.vsm-dropdown-active {
+    .vsm-dropdown {
+      opacity: 1;
+      pointer-events: auto;
+      transform: none;
+    }
+    .vsm-dropdown-section.vsm-active {
+      pointer-events: auto;
+    }
+  }
+}
+
+/* -----------------------------------------------------------------------------
+ * - Navbar -
+ * -----------------------------------------------------------------------------
+ */
+
+.vsm-root {
+  padding: 0;
+  margin: 0;
+}
+
+.vsm-section {
+  display: flex;
+  list-style: none;
+}
+
+.vsm-section_menu {
+  a {
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  // Make button similar a simple link
+  button {
+    background: none;
+    border: none;
+    outline: none;
+  }
+}
+
+// Single element on navbar menu
+.vsm-link {
+  display: inline-block;
+  height: 50px;
+  white-space: nowrap;
+  user-select: none;
+  font-size: 17px;
+  line-height: 50px;
+  font-weight: 500;
+  margin: 0;
+  padding: 0 10px;
+  color: $color;
+  transition: color $transitionLinks;
+  &:hover,
+  &.vsm-active {
+    color: $colorHover;
+  }
+  > * {
+    position: relative;
+    display: block;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+ * - Separate parts -
+ * -----------------------------------------------------------------------------
+ */
+
+// 2 separate background blocks that move
+.vsm-background,
+.vsm-background-alt {
+  position: absolute;
+  top: 0;
+  left: 0;
+  // Optimize animation
+  will-change: transform;
+  transition-property: transform;
+  transition-duration: $transition;
+}
+
+.vsm-background {
+  background: #fff;
+  border-radius: $borderRadius;
+  overflow: hidden;
+  box-shadow: 0 50px 100px -20px rgba(50, 50, 93, .25), 0 30px 60px -30px rgba(0, 0, 0, .3), 0 -18px 60px -10px rgba(0, 0, 0, .025);
+  width: 380px;
+  height: 400px;
+  transform: translateX(0);
+  transform-origin: 0 0;
+}
+
+// Bottom content (second component)
+.vsm-background-alt {
+  right: 0;
+  height: 1000px;
+  background: #f6f9fc;
+}
+
+.vsm-arrow,
+.vsm-dropdown-container {
+  position: absolute;
+  left: 0;
+  transition-duration: $transition;
+}
+
+.vsm-arrow {
+  top: -6px;
+  margin: 0 0 0 -6px;
+  width: 12px;
+  height: 12px;
+  transform: rotate(45deg);
+  border-radius: 4px 0 0 0;
+  background: #fff;
+  box-shadow: -3px -3px 5px rgba(82, 95, 127, .04);
+  will-change: transform;
+  transition-property: transform;
+  pointer-events: none;
+}
+
+.vsm-dropdown-container {
+  overflow: hidden;
+  width: 500px;
+  top: 0;
+  transform: translateX(0);
+  will-change: transform, width, height;
+  // Content is cut (overflow hidden), so border-radius can not show
+  // add a few pixels to display correctly
+  border-radius: $borderRadius + 2px;
+  transition-property: transform, width, height;
+}
+
+// Single dropdown content
+.vsm-dropdown-section {
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+  transition-property: transform, opacity;
+  transition-duration: $transition;
+  &.vsm-active {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  &.vsm-left {
+    transform: translateX(-150px);
+  }
+  &.vsm-right {
+    transform: translateX(150px);
+  }
+}
+
+.vsm-dropdown-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
