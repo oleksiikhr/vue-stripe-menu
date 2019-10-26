@@ -110,7 +110,7 @@ Code for creating a menu as on a demo: [Link](https://github.com/Alexeykhr/vue-s
 | -------- | ---------- | ------------------------------------ | ------- | ------- | -------- |
 | v-model  |            | The state of the open/close the menu | Boolean | false   | false    |
 
-### [Menu] Slots
+### [Mob] Slots
 
 | Name       | Parameters | Description                            |
 | ---------- | ---------- | -------------------------------------- |
