@@ -32,7 +32,8 @@
 </template>
 
 <script>
-import { pointerEvent } from '../scripts/fn'
+const touchSupport = 'ontouchstart' in window || navigator.maxTouchPoints
+const touchEvent = touchSupport ? 'touchend' : 'click'
 
 export default {
   name: 'vsmMob',
@@ -58,14 +59,14 @@ export default {
     // Lock the permanent event on click, hang event only when the menu is opened
     active (val) {
       if (val) {
-        document.body.addEventListener(pointerEvent.end, this.eventEndHandler)
+        document.body.addEventListener(touchEvent, this.eventEndHandler)
       } else {
-        document.body.removeEventListener(pointerEvent.end, this.eventEndHandler)
+        document.body.removeEventListener(touchEvent, this.eventEndHandler)
       }
     }
   },
   beforeDestroy () {
-    document.body.removeEventListener(pointerEvent.end, this.eventEndHandler)
+    document.body.removeEventListener(touchEvent, this.eventEndHandler)
   },
   methods: {
     onClickHamburger () {
