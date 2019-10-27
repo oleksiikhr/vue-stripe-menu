@@ -1,7 +1,7 @@
 <template>
   <a
-    :href="`#${generatedId}`"
     :id="generatedId"
+    :href="`#${generatedId}`"
     class="section"
   >
     # <slot>{{ title }}</slot>

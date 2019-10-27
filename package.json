@@ -7,8 +7,8 @@
     "dev": "vue-cli-service serve ./demo/main.js",
     "build": "vue-cli-service build --dest docs ./demo/main.js",
     "build:lib": "vue-cli-service build --target lib --name vue-stripe-menu ./src/main.js",
-    "lint": "vue-cli-service lint",
-    "lint:fix": "npm run lint -- --fix",
+    "lint": "vue-cli-service lint src demo --no-fix",
+    "lint:fix": "vue-cli-service lint src demo",
     "test": "jest",
     "rel": "npm run lint:fix && npm run test && npm run build && npm run build:lib && git add -A && standard-version -a",
     "pub": "git push --follow-tags origin dev && npm publish"
