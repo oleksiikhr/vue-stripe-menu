@@ -18,6 +18,7 @@ main {
   > * {
     margin-left: 10px;
     margin-right: 10px;
+    overflow-x: auto;
     &:not(:last-child) {
       margin-bottom: 50px;
     }
