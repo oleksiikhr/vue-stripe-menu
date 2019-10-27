@@ -124,10 +124,6 @@ export default {
     }
   },
   mounted () {
-    this.registerGlobalEvents()
-    this.registerDropdownElsEvents()
-    this.registerDropdownContainerEvents()
-
     // PointerEvent interface represents the state of a DOM event
     this._pointerEvent = window.PointerEvent ? {
       end: 'pointerup',
@@ -138,6 +134,10 @@ export default {
       enter: 'mouseenter',
       leave: 'mouseleave'
     }
+
+    this.registerGlobalEvents()
+    this.registerDropdownElsEvents()
+    this.registerDropdownContainerEvents()
   },
   beforeDestroy () {
     this.unregisterGlobalEvents()
