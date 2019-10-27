@@ -1,14 +1,14 @@
 <template>
   <table>
     <thead>
-    <tr>
-      <th
-        v-for="(column, i) in columns"
-        :key="i"
-      >
-        {{ column.name }}
-      </th>
-    </tr>
+      <tr>
+        <th
+          v-for="(column, i) in columns"
+          :key="i"
+        >
+          {{ column.name }}
+        </th>
+      </tr>
     </thead>
     <tbody>
       <tr

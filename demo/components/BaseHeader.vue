@@ -23,7 +23,9 @@
       />
     </template>
     <template slot="after-nav">
-      <li class="vsm-section vsm-mob-hide">Sign In</li>
+      <li class="vsm-section vsm-mob-hide">
+        Sign In
+      </li>
       <!--Display mobile menu-->
       <vsm-mob>
         <mobile-content />

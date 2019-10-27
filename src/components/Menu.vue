@@ -75,19 +75,6 @@
 </template>
 
 <script>
-/**
- * PointerEvent interface represents the state of a DOM event
- */
-export const pointerEvent = window.PointerEvent ? {
-  end: 'pointerup',
-  enter: 'pointerenter',
-  leave: 'pointerleave'
-} : {
-  end: 'touchend',
-  enter: 'mouseenter',
-  leave: 'mouseleave'
-}
-
 export default {
   name: 'VsmMenu',
   props: {
@@ -112,7 +99,7 @@ export default {
     screenOffset: {
       type: [Number, String],
       default: 10,
-      validator: (val) => +val > 0
+      validator: (val) => +val >= 0
     }
   },
   computed: {
@@ -137,6 +124,17 @@ export default {
     }
   },
   mounted () {
+    // PointerEvent interface represents the state of a DOM event
+    this._pointerEvent = window.PointerEvent ? {
+      end: 'pointerup',
+      enter: 'pointerenter',
+      leave: 'pointerleave'
+    } : {
+      end: 'touchend',
+      enter: 'mouseenter',
+      leave: 'mouseleave'
+    }
+
     this.registerGlobalEvents()
     this.registerDropdownElsEvents()
     this.registerDropdownContainerEvents()
@@ -146,9 +144,10 @@ export default {
   },
   methods: {
     registerGlobalEvents () {
+      window.addEventListener('resize', this.onWindowResize)
       document.addEventListener('touchmove', this.touchMoveHandler)
       document.addEventListener('touchstart', this.touchStartHandler)
-      document.body.addEventListener(pointerEvent.end, this.eventEndHandler)
+      document.body.addEventListener(this._pointerEvent.end, this.eventEndHandler)
     },
     registerDropdownElsEvents () {
       this.hasDropdownEls.forEach((el) => {
@@ -162,20 +161,20 @@ export default {
           this.openDropdown(el)
         })
 
-        el.addEventListener(pointerEvent.enter, (evt) => {
+        el.addEventListener(this._pointerEvent.enter, (evt) => {
           if (evt.pointerType !== 'touch') {
             this.stopCloseTimeout()
             this.openDropdown(el)
           }
         })
 
-        el.addEventListener(pointerEvent.end, (evt) => {
+        el.addEventListener(this._pointerEvent.end, (evt) => {
           evt.preventDefault()
           evt.stopPropagation()
           this.toggleDropdown(el)
         })
 
-        el.addEventListener(pointerEvent.leave, (evt) => {
+        el.addEventListener(this._pointerEvent.leave, (evt) => {
           if (evt.pointerType !== 'touch') {
             this.startCloseTimeout()
           }
@@ -190,17 +189,17 @@ export default {
         return
       }
 
-      this.$refs.dropdownContainer.addEventListener(pointerEvent.end, (evt) => {
+      this.$refs.dropdownContainer.addEventListener(this._pointerEvent.end, (evt) => {
         evt.stopPropagation()
       })
 
-      this.$refs.dropdownContainer.addEventListener(pointerEvent.enter, (evt) => {
+      this.$refs.dropdownContainer.addEventListener(this._pointerEvent.enter, (evt) => {
         if (evt.pointerType !== 'touch') {
           this.stopCloseTimeout()
         }
       })
 
-      this.$refs.dropdownContainer.addEventListener(pointerEvent.leave, (evt) => {
+      this.$refs.dropdownContainer.addEventListener(this._pointerEvent.leave, (evt) => {
         if (evt.pointerType !== 'touch') {
           this.startCloseTimeout()
         }
@@ -209,9 +208,10 @@ export default {
       this.$refs.dropdownContainer._vsm_menu = true
     },
     unregisterGlobalEvents () {
+      window.removeEventListener('resize', this.onWindowResize)
       document.removeEventListener('touchmove', this.touchMoveHandler)
       document.removeEventListener('touchstart', this.touchStartHandler)
-      document.body.removeEventListener(pointerEvent.end, this.eventEndHandler)
+      document.body.removeEventListener(this._pointerEvent.end, this.eventEndHandler)
     },
     toggleDropdown (el) {
       if (this._activeDropdown === el) {
@@ -335,6 +335,17 @@ export default {
       if (!this._isDragging) {
         this.closeDropdown()
       }
+    },
+    /*
+     * Remove styles from the dropdown menu so that there is no horizontal scroll
+     */
+    onWindowResize () {
+      this.$refs.dropdownContainer.style = null
+      this.$refs.arrow.style = null
+      this.$refs.background.style = null
+      this.$refs.backgroundAlt.style = null
+
+      this.closeDropdown()
     }
   }
 }
