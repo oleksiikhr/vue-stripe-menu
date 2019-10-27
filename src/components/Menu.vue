@@ -99,7 +99,7 @@ export default {
     screenOffset: {
       type: [Number, String],
       default: 10,
-      validator: (val) => +val > 0
+      validator: (val) => +val >= 0
     }
   },
   computed: {
