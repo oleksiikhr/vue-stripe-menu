@@ -84,6 +84,7 @@ describe('vsmMenu Component', () => {
       const eventEndStub = sinon.stub()
       const touchStartStub = sinon.stub()
       const touchMoveStub = sinon.stub()
+      const resizeStub = sinon.stub()
 
       beforeEach(() => {
         // Override methods before document register this
@@ -92,7 +93,8 @@ describe('vsmMenu Component', () => {
           methods: {
             eventEndHandler: eventEndStub,
             touchStartHandler: touchStartStub,
-            touchMoveHandler: touchMoveStub
+            touchMoveHandler: touchMoveStub,
+            windowResizeHandler: resizeStub
           }
         })
       })
@@ -101,6 +103,7 @@ describe('vsmMenu Component', () => {
         eventEndStub.reset()
         touchStartStub.reset()
         touchMoveStub.reset()
+        resizeStub.reset()
       })
 
       it('register touchmove', () => {
@@ -137,6 +140,18 @@ describe('vsmMenu Component', () => {
 
         document.body.dispatchEvent(new TouchEvent(pointerEvent.end))
         expect(eventEndStub.called).toBeFalsy()
+      })
+
+      it('register resize', () => {
+        window.dispatchEvent(new Event('resize'))
+        expect(resizeStub.called).toBeTruthy()
+      })
+
+      it('resize remove on destroy', () => {
+        wrapper.destroy()
+
+        window.dispatchEvent(new Event('resize'))
+        expect(resizeStub.called).toBeFalsy()
       })
     })
 

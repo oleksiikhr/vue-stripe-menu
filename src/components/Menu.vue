@@ -144,7 +144,7 @@ export default {
   },
   methods: {
     registerGlobalEvents () {
-      window.addEventListener('resize', this.onWindowResize)
+      window.addEventListener('resize', this.windowResizeHandler)
       document.addEventListener('touchmove', this.touchMoveHandler)
       document.addEventListener('touchstart', this.touchStartHandler)
       document.body.addEventListener(this._pointerEvent.end, this.eventEndHandler)
@@ -208,7 +208,7 @@ export default {
       this.$refs.dropdownContainer._vsm_menu = true
     },
     unregisterGlobalEvents () {
-      window.removeEventListener('resize', this.onWindowResize)
+      window.removeEventListener('resize', this.windowResizeHandler)
       document.removeEventListener('touchmove', this.touchMoveHandler)
       document.removeEventListener('touchstart', this.touchStartHandler)
       document.body.removeEventListener(this._pointerEvent.end, this.eventEndHandler)
@@ -339,7 +339,7 @@ export default {
     /*
      * Remove styles from the dropdown menu so that there is no horizontal scroll
      */
-    onWindowResize () {
+    windowResizeHandler () {
       this.$refs.dropdownContainer.style = null
       this.$refs.arrow.style = null
       this.$refs.background.style = null
