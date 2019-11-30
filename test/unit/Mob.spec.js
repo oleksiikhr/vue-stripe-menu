@@ -1,9 +1,5 @@
 'use strict'
 
-/**
- * @jest-environment jsdom
- */
-
 import { shallowMount } from '@vue/test-utils'
 import Mob from '../../src/components/Mob'
 import sinon from 'sinon'
@@ -24,11 +20,11 @@ afterEach(() => {
 
 describe('vsmMob Component', () => {
   test('Working component without v-model', () => {
-    expect(wrapper.find('.vsm-mob-content__wrap').isVisible()).toBeFalsy()
+    expect(wrapper.vm.active).toBeFalsy()
     wrapper.find('.vsm-mob').trigger('click')
-    expect(wrapper.find('.vsm-mob-content__wrap').isVisible()).toBeTruthy()
+    expect(wrapper.vm.active).toBeTruthy()
     wrapper.find('.vsm-mob').trigger('click')
-    expect(wrapper.find('.vsm-mob-content__wrap').isVisible()).toBeFalsy()
+    expect(wrapper.vm.active).toBeFalsy()
   })
 
   test('Change v-model after open dropdown', () => {
@@ -45,11 +41,13 @@ describe('vsmMob Component', () => {
   })
 
   test('Close dropdown on click outside', () => {
-    const spy = sinon.spy(wrapper.vm, 'eventEndHandler')
+    const spy = sinon.spy(wrapper.vm, 'unregisterEvent')
 
-    wrapper.find('.vsm-mob').trigger('click')
-    document.body.dispatchEvent(new MouseEvent('click'))
-    expect(spy.called).toBeTruthy()
+    expect(wrapper.emitted().input).toBeFalsy()
+    wrapper.vm.eventEndHandler(new MouseEvent('click'))
     expect(wrapper.emitted().input).toBeTruthy()
+
+    wrapper.destroy()
+    expect(spy.called).toBeTruthy()
   })
 })

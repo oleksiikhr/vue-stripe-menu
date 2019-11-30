@@ -15,7 +15,7 @@
             v-for="(item, index) in menu"
             ref="links"
             :key="index"
-            :class="['vsm-link', {
+            :class="['vsm-link', item.attributes ? item.attributes.class : null, {
               'vsm-has-dropdown': item.dropdown
             }]"
             :data-dropdown="item.dropdown"
@@ -144,7 +144,7 @@ export default {
   },
   methods: {
     registerGlobalEvents () {
-      window.addEventListener('resize', this.onWindowResize)
+      window.addEventListener('resize', this.windowResizeHandler)
       document.addEventListener('touchmove', this.touchMoveHandler)
       document.addEventListener('touchstart', this.touchStartHandler)
       document.body.addEventListener(this._pointerEvent.end, this.eventEndHandler)
@@ -208,7 +208,7 @@ export default {
       this.$refs.dropdownContainer._vsm_menu = true
     },
     unregisterGlobalEvents () {
-      window.removeEventListener('resize', this.onWindowResize)
+      window.removeEventListener('resize', this.windowResizeHandler)
       document.removeEventListener('touchmove', this.touchMoveHandler)
       document.removeEventListener('touchstart', this.touchStartHandler)
       document.body.removeEventListener(this._pointerEvent.end, this.eventEndHandler)
@@ -258,7 +258,8 @@ export default {
         }
       })
 
-      const bodyOffset = document.body.offsetWidth
+      const headerOffsetLeft = this.$el.offsetLeft
+      const bodyOffset = document.documentElement.offsetWidth
 
       // Crop the width of the content if it goes beyond the width of the screen
       if (offsetWidth > bodyOffset - (+this.screenOffset * 2)) {
@@ -268,11 +269,11 @@ export default {
       const ratioWidth = offsetWidth / +this.baseWidth
       const ratioHeight = offsetHeight / +this.baseHeight
       const rect = el.getBoundingClientRect()
-      let pos = Math.round(Math.max(rect.left + rect.width / 2 - offsetWidth / 2, 10))
+      let pos = Math.round(Math.max((rect.left + rect.width / 2 - offsetWidth / 2) - headerOffsetLeft, +this.screenOffset - headerOffsetLeft))
 
       const rightSide = rect.left + rect.width / 2 + offsetWidth / 2
-      if (rightSide > bodyOffset) {
-        pos = pos - (rightSide - bodyOffset) - +this.screenOffset
+      if (rightSide + headerOffsetLeft > bodyOffset) {
+        pos = Math.round(pos - (rightSide - bodyOffset) - +this.screenOffset)
       }
 
       clearTimeout(this._disableTransitionTimeout)
@@ -281,12 +282,12 @@ export default {
         this.$el.classList.remove('vsm-no-transition')
       }, 50)
 
-      this.$refs.dropdownContainer.style.transform = `translateX(${pos}px)`
+      this.$refs.dropdownContainer.style.transform = `translate(${pos}px, ${el.offsetTop}px)`
       this.$refs.dropdownContainer.style.width = `${offsetWidth}px`
       this.$refs.dropdownContainer.style.height = `${offsetHeight}px`
 
-      this.$refs.arrow.style.transform = `translateX(${Math.round(rect.left + rect.width / 2)}px) rotate(45deg)`
-      this.$refs.background.style.transform = `translateX(${pos}px) scaleX(${ratioWidth}) scaleY(${ratioHeight})`
+      this.$refs.arrow.style.transform = `translate(${Math.round((rect.left + rect.width / 2) - headerOffsetLeft)}px, ${el.offsetTop}px) rotate(45deg)`
+      this.$refs.background.style.transform = `translate(${pos}px, ${el.offsetTop}px) scaleX(${ratioWidth}) scaleY(${ratioHeight})`
       this.$refs.backgroundAlt.style.transform = `translateY(${content.children[0].offsetHeight / ratioHeight}px)`
     },
     closeDropdown () {
@@ -339,7 +340,7 @@ export default {
     /*
      * Remove styles from the dropdown menu so that there is no horizontal scroll
      */
-    onWindowResize () {
+    windowResizeHandler () {
       this.$refs.dropdownContainer.style = null
       this.$refs.arrow.style = null
       this.$refs.background.style = null

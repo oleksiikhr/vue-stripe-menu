@@ -1,6 +1,7 @@
 <template>
   <vsm-menu
     :menu="menu"
+    :screen-offset="15"
     @open-dropdown="onOpenDropdown"
     @close-dropdown="onCloseDropdown"
   >
@@ -54,7 +55,7 @@ export default {
         { title: 'Company', dropdown: 'company', content: DefaultContent, listeners: { mouseover: this.onMouseOver } },
         { title: 'Developers', dropdown: 'developers', content: HorizontalPrimaryContent, secondary: HorizontalSecondaryContent },
         { title: 'Products', dropdown: 'products', content: VerticalContent, element: 'span' },
-        { title: 'Source', attributes: { href: 'https://github.com/Alexeykhr/vue-stripe-menu/blob/master/demo/components/BaseHeader.vue', target: '_blank' } }
+        { title: 'Source', attributes: { href: 'https://github.com/Alexeykhr/vue-stripe-menu/blob/master/demo/', class: ['some-class1', { 'some-class2': true }], target: '_blank' } }
       ]
     }
   },

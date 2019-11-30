@@ -58,9 +58,9 @@ export default {
     // Lock the permanent event on click, hang event only when the menu is opened
     active (val) {
       if (val) {
-        document.body.addEventListener(this._touchEvent, this.eventEndHandler)
+        this.registerEvent()
       } else {
-        document.body.removeEventListener(this._touchEvent, this.eventEndHandler)
+        this.unregisterEvent()
       }
     }
   },
@@ -69,11 +69,17 @@ export default {
     this._touchEvent = touchSupport ? 'touchend' : 'click'
   },
   beforeDestroy () {
-    document.body.removeEventListener(this._touchEvent, this.eventEndHandler)
+    this.unregisterEvent()
   },
   methods: {
     onClickHamburger () {
       this.emitValue(!this.active)
+    },
+    registerEvent () {
+      document.body.addEventListener(this._touchEvent, this.eventEndHandler)
+    },
+    unregisterEvent () {
+      document.body.removeEventListener(this._touchEvent, this.eventEndHandler)
     },
     emitValue (toggle) {
       this.active = toggle

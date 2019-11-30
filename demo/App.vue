@@ -4,6 +4,7 @@
     <main>
       <install-docs />
       <example-docs />
+      <example-codepen-docs />
       <props-menu-docs />
       <menu-object-menu-docs />
       <slots-menu-docs />
@@ -19,6 +20,7 @@
 
 <script>
 import MenuObjectMenuDocs from './components/docs/menu/MenuObject'
+import ExampleCodepenDocs from './components/docs/ExampleCodepen'
 import EventsMenuDocs from './components/docs/menu/Events'
 import PropsMenuDocs from './components/docs/menu/Props'
 import SlotsMenuDocs from './components/docs/menu/Slots'
@@ -34,6 +36,7 @@ import DemoDocs from './components/docs/Demo'
 export default {
   components: {
     MenuObjectMenuDocs,
+    ExampleCodepenDocs,
     EventsMenuDocs,
     PropsMenuDocs,
     SlotsMenuDocs,
