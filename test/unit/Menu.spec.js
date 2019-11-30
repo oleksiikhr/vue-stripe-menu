@@ -1,9 +1,5 @@
 'use strict'
 
-/**
- * @jest-environment jsdom
- */
-
 import { shallowMount } from '@vue/test-utils'
 import Menu from '../../src/components/Menu'
 import sinon from 'sinon'
