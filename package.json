@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/Alexeykhr/vue-stripe-menu#readme",
   "dependencies": {
-    "core-js": "^3.3.2",
+    "core-js": "^3.4.5",
     "vue": "^2.6.10"
   },
   "devDependencies": {
