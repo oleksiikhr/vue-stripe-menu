@@ -15,7 +15,7 @@
             v-for="(item, index) in menu"
             ref="links"
             :key="index"
-            :class="['vsm-link', {
+            :class="['vsm-link', item.attributes ? item.attributes.class : null, {
               'vsm-has-dropdown': item.dropdown
             }]"
             :data-dropdown="item.dropdown"
