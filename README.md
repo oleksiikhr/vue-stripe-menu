@@ -89,6 +89,10 @@ export default {
 </script>
 ```
 
+## Codepen Demo
+
+[Vue Stripe Menu - Real Demo](https://codepen.io/Alexeykhr/pen/YzPKxpX)
+
 ## Advanced Demo
 
 Code for creating a menu as on a demo: [Link](https://github.com/Alexeykhr/vue-stripe-menu/blob/master/demo)
