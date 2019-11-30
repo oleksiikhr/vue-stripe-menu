@@ -1,6 +1,7 @@
 <template>
   <vsm-menu
     :menu="menu"
+    :screen-offset="15"
     @open-dropdown="onOpenDropdown"
     @close-dropdown="onCloseDropdown"
   >

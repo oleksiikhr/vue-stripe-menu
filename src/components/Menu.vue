@@ -258,21 +258,22 @@ export default {
         }
       })
 
+      const headerOffsetLeft = this.$el.offsetLeft
       const bodyOffset = document.body.offsetWidth
 
       // Crop the width of the content if it goes beyond the width of the screen
       if (offsetWidth > bodyOffset - (+this.screenOffset * 2)) {
-        offsetWidth = bodyOffset - (+this.screenOffset * 2)
+        offsetWidth = bodyOffset - (+this.screenOffset * 2) + headerOffsetLeft
       }
 
       const ratioWidth = offsetWidth / +this.baseWidth
       const ratioHeight = offsetHeight / +this.baseHeight
       const rect = el.getBoundingClientRect()
-      let pos = Math.round(Math.max(rect.left + rect.width / 2 - offsetWidth / 2, 10))
+      let pos = Math.round(Math.max((rect.left + rect.width / 2 - offsetWidth / 2) - headerOffsetLeft, +this.screenOffset - headerOffsetLeft))
 
       const rightSide = rect.left + rect.width / 2 + offsetWidth / 2
       if (rightSide > bodyOffset) {
-        pos = pos - (rightSide - bodyOffset) - +this.screenOffset
+        pos = Math.round(pos - (rightSide - bodyOffset) - +this.screenOffset + headerOffsetLeft)
       }
 
       clearTimeout(this._disableTransitionTimeout)
@@ -281,12 +282,12 @@ export default {
         this.$el.classList.remove('vsm-no-transition')
       }, 50)
 
-      this.$refs.dropdownContainer.style.transform = `translateX(${pos}px)`
+      this.$refs.dropdownContainer.style.transform = `translate(${pos}px, ${el.offsetTop}px)`
       this.$refs.dropdownContainer.style.width = `${offsetWidth}px`
       this.$refs.dropdownContainer.style.height = `${offsetHeight}px`
 
-      this.$refs.arrow.style.transform = `translateX(${Math.round(rect.left + rect.width / 2)}px) rotate(45deg)`
-      this.$refs.background.style.transform = `translateX(${pos}px) scaleX(${ratioWidth}) scaleY(${ratioHeight})`
+      this.$refs.arrow.style.transform = `translate(${Math.round((rect.left + rect.width / 2) - headerOffsetLeft)}px, ${el.offsetTop}px) rotate(45deg)`
+      this.$refs.background.style.transform = `translate(${pos}px, ${el.offsetTop}px) scaleX(${ratioWidth}) scaleY(${ratioHeight})`
       this.$refs.backgroundAlt.style.transform = `translateY(${content.children[0].offsetHeight / ratioHeight}px)`
     },
     closeDropdown () {
