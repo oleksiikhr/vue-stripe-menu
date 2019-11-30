@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.2](https://github.com/Alexeykhr/vue-stripe-menu/compare/v1.2.1...v1.2.2) (2019-11-30)
+
+
+### Bug Fixes
+
+* accept classes for vsm-link ([78f3d70](https://github.com/Alexeykhr/vue-stripe-menu/commit/78f3d704886c7117a1a01f6a428f5a6f797a6baf))
+* correct calculate width ([5f0c17a](https://github.com/Alexeykhr/vue-stripe-menu/commit/5f0c17a00d669191ad6dde5132dac0e661ce956b))
+* dropdown height and width calculation ([9e0de75](https://github.com/Alexeykhr/vue-stripe-menu/commit/9e0de755b091a7cbc486aa3f0c67b72447b6abd7))
+
 ### [1.2.1](https://github.com/Alexeykhr/vue-stripe-menu/compare/v1.2.0...v1.2.1) (2019-10-27)
 
 
