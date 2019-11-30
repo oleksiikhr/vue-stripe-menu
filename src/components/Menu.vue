@@ -259,11 +259,11 @@ export default {
       })
 
       const headerOffsetLeft = this.$el.offsetLeft
-      const bodyOffset = document.body.offsetWidth
+      const bodyOffset = document.documentElement.offsetWidth
 
       // Crop the width of the content if it goes beyond the width of the screen
       if (offsetWidth > bodyOffset - (+this.screenOffset * 2)) {
-        offsetWidth = bodyOffset - (+this.screenOffset * 2) + headerOffsetLeft
+        offsetWidth = bodyOffset - (+this.screenOffset * 2)
       }
 
       const ratioWidth = offsetWidth / +this.baseWidth
@@ -272,8 +272,8 @@ export default {
       let pos = Math.round(Math.max((rect.left + rect.width / 2 - offsetWidth / 2) - headerOffsetLeft, +this.screenOffset - headerOffsetLeft))
 
       const rightSide = rect.left + rect.width / 2 + offsetWidth / 2
-      if (rightSide > bodyOffset) {
-        pos = Math.round(pos - (rightSide - bodyOffset) - +this.screenOffset + headerOffsetLeft)
+      if (rightSide + headerOffsetLeft > bodyOffset) {
+        pos = Math.round(pos - (rightSide - bodyOffset) - +this.screenOffset)
       }
 
       clearTimeout(this._disableTransitionTimeout)
