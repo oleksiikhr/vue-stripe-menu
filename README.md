@@ -68,7 +68,7 @@ $vsm-transition: 1s;
     <template #default="data">
       <div>{{ data }}</div>
     </template>
-    <template slot="after-nav">
+    <template #after-nav>
       <vsm-mob>Mobile Content</vsm-mob>
     </template>
   </vsm-menu>
@@ -111,7 +111,7 @@ Code for creating a menu as on a demo: [Link](https://github.com/Alexeykhr/vue-s
     <!--Dropdown Content-->
     <div>{{ data }}</div>
   </template>
-  <template slot="before-nav">
+  <template #before-nav>
     <!--Image or svg of website logo-->
     <img src="/path/to/file" title="My Logo">
   </template>
@@ -119,7 +119,7 @@ Code for creating a menu as on a demo: [Link](https://github.com/Alexeykhr/vue-s
     <!--Display menu items through slots-->
     {{ data.item.title }}
   </template>
-  <template slot="after-nav">
+  <template #after-nav>
     <!--Mobile Burger, buttons, etc-->
     <li class="vsm-section vsm-mob-hide">
       <button>My Button</button>
@@ -153,10 +153,10 @@ Code for creating a menu as on a demo: [Link](https://github.com/Alexeykhr/vue-s
 
 | Name       | Parameters      | Description                                         |
 | ---------- | --------------- | --------------------------------------------------- |
-| default    | MenuItem, index | The main content for the dropdown list (slot-scope) |
+| default    | MenuItem, index | The main content for the dropdown list              |
 | before-nav | before-nav      | Content to the left of the list                     |
 | after-nav  | after-nav       | Content to the right of the list                    |
-| title      | MenuItem, index | Replace the output of menu\[i].title with your own   |
+| title      | MenuItem, index | Replace the output of menu\[i].title with your own  |
 
 ### [Menu] MenuObject (menu props)
 

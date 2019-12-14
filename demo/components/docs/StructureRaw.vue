@@ -10,7 +10,7 @@
       <!--Dropdown Content-->
       <div>{{ data }}</div>
     </template>
-    <template slot="before-nav">
+    <template #before-nav>
       <!--Image or svg of website logo-->
       <img src="/path/to/file" title="My Logo">
     </template>
@@ -18,7 +18,7 @@
       <!--Display menu items through slots-->
       {{ data.item.title }}
     </template>
-    <template slot="after-nav">
+    <template #after-nav>
       <!--Mobile Burger, buttons, etc-->
       <li class="vsm-section vsm-mob-hide">
         <button>My Button</button>

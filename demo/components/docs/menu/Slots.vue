@@ -27,7 +27,7 @@ export default {
         {
           name: 'default',
           parameters: 'MenuItem, index',
-          description: 'The main content for the dropdown list (slot-scope)'
+          description: 'The main content for the dropdown list'
         },
         {
           name: 'before-nav',
