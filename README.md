@@ -123,6 +123,7 @@ Code for creating a menu as on a demo: [Link](https://github.com/Alexeykhr/vue-s
 | default    | MenuItem, index | The main content for the dropdown list (slot-scope) |
 | before-nav | before-nav      | Content to the left of the list                     |
 | after-nav  | after-nav       | Content to the right of the list                    |
+| title      | MenuItem, index | Replace the output of menu\[i].title with your own   |
 
 ### [Menu] MenuObject (menu props)
 

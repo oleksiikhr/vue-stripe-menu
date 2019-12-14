@@ -36,6 +36,11 @@ export default {
         {
           name: 'after-nav',
           description: 'Content to the right of the list'
+        },
+        {
+          name: 'title',
+          parameters: 'MenuItem, index',
+          description: 'Replace the output of menu[i].title with your own'
         }
       ]
     }
