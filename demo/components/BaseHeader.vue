@@ -5,12 +5,11 @@
     @open-dropdown="onOpenDropdown"
     @close-dropdown="onCloseDropdown"
   >
-    <li
-      slot="before-nav"
-      class="vsm-section vsm-mob-full"
-    >
-      <stripe-logo />
-    </li>
+    <template #before-nav>
+      <li class="vsm-section vsm-mob-full">
+        <stripe-logo />
+      </li>
+    </template>
     <!--Add a title using the slot:-->
     <!--<template #title="data">{{ data.item.title }}</template>-->
     <template #default="data">
@@ -23,7 +22,7 @@
         class="content--secondary"
       />
     </template>
-    <template slot="after-nav">
+    <template #after-nav>
       <li class="vsm-section vsm-mob-hide">
         Sign In
       </li>
