@@ -5,6 +5,7 @@
       <install-docs />
       <example-docs />
       <example-codepen-docs />
+      <structure-docs />
       <props-menu-docs />
       <menu-object-menu-docs />
       <slots-menu-docs />
@@ -24,6 +25,7 @@ import ExampleCodepenDocs from './components/docs/ExampleCodepen'
 import EventsMenuDocs from './components/docs/menu/Events'
 import PropsMenuDocs from './components/docs/menu/Props'
 import SlotsMenuDocs from './components/docs/menu/Slots'
+import StructureDocs from './components/docs/Structure'
 import PropsMobDocs from './components/docs/mob/Props'
 import SlotsMobDocs from './components/docs/mob/Slots'
 import ClassesDocs from './components/docs/Classes'
@@ -40,6 +42,7 @@ export default {
     EventsMenuDocs,
     PropsMenuDocs,
     SlotsMenuDocs,
+    StructureDocs,
     PropsMobDocs,
     SlotsMobDocs,
     ClassesDocs,
