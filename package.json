@@ -51,7 +51,7 @@
     "node-sass": "^4.13.0",
     "raw-loader": "^4.0.0",
     "sass-loader": "^8.0.0",
-    "sinon": "^7.5.0",
+    "sinon": "^8.0.2",
     "vue-jest": "^3.0.5",
     "vue-template-compiler": "^2.6.11"
   }
