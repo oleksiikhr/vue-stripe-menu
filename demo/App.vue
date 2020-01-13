@@ -9,6 +9,8 @@
       <menu-object-menu-docs />
       <slots-menu-docs />
       <events-menu-docs />
+      <methods-menu-docs />
+      <properties-menu-docs />
       <props-mob-docs />
       <slots-mob-docs />
       <classes-docs />
@@ -20,7 +22,9 @@
 
 <script>
 import MenuObjectMenuDocs from './components/docs/menu/MenuObject'
+import PropertiesMenuDocs from './components/docs/menu/Properties'
 import ExampleCodepenDocs from './components/docs/ExampleCodepen'
+import MethodsMenuDocs from './components/docs/menu/Methods'
 import EventsMenuDocs from './components/docs/menu/Events'
 import PropsMenuDocs from './components/docs/menu/Props'
 import SlotsMenuDocs from './components/docs/menu/Slots'
@@ -36,7 +40,9 @@ import DemoDocs from './components/docs/Demo'
 export default {
   components: {
     MenuObjectMenuDocs,
+    PropertiesMenuDocs,
     ExampleCodepenDocs,
+    MethodsMenuDocs,
     EventsMenuDocs,
     PropsMenuDocs,
     SlotsMenuDocs,

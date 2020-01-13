@@ -202,6 +202,25 @@ Code for creating a menu as on a demo: [Link](https://github.com/Alexeykhr/vue-s
 | after-nav  | after-nav       | Content to the right of the list                    |
 | title      | MenuItem, index | Replace the output of menu\[i].title with your own  |
 
+### [Menu] Methods
+
+`this.$refs[myVsmRef].closeDropdown()`
+
+| Name           | Parameters  | Description                          | Return |
+| -------------- | ----------- | ------------------------------------ | ------ |
+| toggleDropdown | HTMLElement | Open dropdown menu, if open - close  |        |
+| openDropdown   | HTMLElement | Open dropdown menu for selected item |        |
+| closeDropdown  |             | Close any open dropdown menu         |        |
+
+### [Menu] Properties
+
+`const elements = this.$refs[myVsmRef].hasDropdownEls`
+
+| Name           | Description                                      | Return              |
+| -------------- | ------------------------------------------------ | ------------------- |
+| hasDropdownEls | List of HTML elements that have dropdown content | Array\<HTMLElement> |
+| $refs.links    | List of HTML elements obtained from menu props   | Array\<HTMLElement> |
+
 ### [Menu] MenuObject (menu props)
 
 | Property   | Type   | Description                                                                          |
