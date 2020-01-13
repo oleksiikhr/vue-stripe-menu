@@ -1,5 +1,6 @@
 <template>
   <vsm-menu
+    ref="header"
     :menu="menu"
     :screen-offset="15"
     @open-dropdown="onOpenDropdown"
@@ -23,8 +24,11 @@
       />
     </template>
     <template #after-nav>
-      <li class="vsm-section vsm-mob-hide">
-        Sign In
+      <li
+        class="vsm-section vsm-mob-hide rnd--open"
+        @click="onClick"
+      >
+        Random
       </li>
       <!--Display mobile menu-->
       <vsm-mob>
@@ -41,6 +45,7 @@ import VerticalContent from '../components/content/Vertical'
 import DefaultContent from '../components/content/Default'
 import StripeLogo from '../components/svg/StripeLogo'
 import MobileContent from './content/MobileContent'
+import rnd from '../sciprts/rnd'
 
 /* eslint-disable no-console */
 
@@ -59,6 +64,12 @@ export default {
     }
   },
   methods: {
+    onClick () {
+      const links = this.$refs.header.hasDropdownEls
+      const link = links[rnd(0, links.length - 1)]
+
+      this.$refs.header.openDropdown(link)
+    },
     onMouseOver (evt) {
       console.log('mouse over', evt)
     },
@@ -124,5 +135,10 @@ export default {
 
 .content--secondary {
   padding: 30px;
+}
+
+.rnd--open {
+  cursor: pointer;
+  user-select: none;
 }
 </style>
