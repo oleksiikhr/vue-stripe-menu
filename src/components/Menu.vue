@@ -75,6 +75,8 @@
 </template>
 
 <script>
+import Vue from 'vue'
+
 export default {
   name: 'VsmMenu',
   props: {
@@ -109,8 +111,12 @@ export default {
     hasDropdownEls () {
       const links = this.$refs.links || []
 
-      return links.filter((el) => {
-        return el.classList.contains('vsm-has-dropdown')
+      return links.filter((link) => {
+        if (link instanceof Vue) {
+          link = link.$el
+        }
+
+        return link.classList.contains('vsm-has-dropdown')
       })
     },
     sectionEls () {
