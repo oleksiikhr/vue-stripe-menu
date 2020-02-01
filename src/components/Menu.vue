@@ -80,14 +80,49 @@ import Vue from 'vue'
 export default {
   name: 'VsmMenu',
   props: {
+    /**
+     * An array of objects that, when initialized,
+     * turn into HTML elements
+     * @example
+     *  [{
+     *   // display menu item
+     *   title: 'News',
+     *   // activate dropdown content, must be unique!
+     *   dropdown: 'news',
+     *   // change the HTML element to ours
+     *   element: 'router-link',
+     *   // v-bind accepts
+     *   attributes: {
+     *     class: ['my-class1', { 'my-class2': true }],
+     *     'data-cool': 'yes'
+     *   },
+     *   // v-on accepts
+     *   listeners: {
+     *     mouseover: (evt) => console.log('news hover', evt)
+     *   },
+     *   // other attributes
+     *   new_item: true,
+     *  }]
+     * },
+     */
     menu: {
       type: Array,
       required: true
     },
+    /**
+     * Change root HTML element
+     * @example
+     *  div
+     */
     element: {
       type: String,
       default: 'header'
     },
+    /**
+     * Problems displaying the menu? Try changing the two lower
+     * properties to the average width and height
+     * of your dropdown content.
+     */
     baseWidth: {
       type: [Number, String],
       default: 380,
@@ -98,6 +133,10 @@ export default {
       default: 400,
       validator: (val) => +val > 0
     },
+    /**
+     * Dropdown content does not go beyond screen size
+     * screen + this value
+     */
     screenOffset: {
       type: [Number, String],
       default: 10,
@@ -105,13 +144,20 @@ export default {
     }
   },
   computed: {
+    /**
+     * Menu items that have dropdown content
+     */
     menuHasDropdown () {
       return this.menu.filter(item => item.dropdown)
     },
+    /**
+     * HTML menu elements that have dropdown content
+     */
     hasDropdownEls () {
       const links = this.$refs.links || []
 
       return links.filter((link) => {
+        // router-link, myComponent
         if (link instanceof Vue) {
           link = link.$el
         }
@@ -119,6 +165,9 @@ export default {
         return link.classList.contains('vsm-has-dropdown')
       })
     },
+    /**
+     * HTML dropdown content
+     */
     sectionEls () {
       const sections = this.$refs.sections || []
 
@@ -344,7 +393,9 @@ export default {
       }
     },
     /*
-     * Remove styles from the dropdown menu so that there is no horizontal scroll
+     * When the screen is reduced, the active drop-down content
+     * does not change its size, because of this,
+     * horizontal scrolling may occur
      */
     windowResizeHandler () {
       this.$refs.dropdownContainer.style = null
