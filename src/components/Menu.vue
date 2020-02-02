@@ -80,14 +80,49 @@ import Vue from 'vue'
 export default {
   name: 'VsmMenu',
   props: {
+    /**
+     * An array of objects that, when initialized,
+     * turn into HTML elements
+     * @example
+     *  [{
+     *   // display menu item
+     *   title: 'News',
+     *   // activate dropdown content, must be unique!
+     *   dropdown: 'news',
+     *   // change the HTML element to ours
+     *   element: 'router-link',
+     *   // v-bind accepts
+     *   attributes: {
+     *     class: ['my-class1', { 'my-class2': true }],
+     *     'data-cool': 'yes'
+     *   },
+     *   // v-on accepts
+     *   listeners: {
+     *     mouseover: (evt) => console.log('news hover', evt)
+     *   },
+     *   // other attributes
+     *   new_item: true,
+     *  }]
+     * },
+     */
     menu: {
       type: Array,
       required: true
     },
+    /**
+     * Change root HTML element
+     * @example
+     *  div
+     */
     element: {
       type: String,
       default: 'header'
     },
+    /**
+     * Problems displaying the menu? Try changing the two lower
+     * properties to the average width and height
+     * of your dropdown content.
+     */
     baseWidth: {
       type: [Number, String],
       default: 380,
@@ -98,6 +133,10 @@ export default {
       default: 400,
       validator: (val) => +val > 0
     },
+    /**
+     * Dropdown content does not go beyond screen size
+     * screen + this value
+     */
     screenOffset: {
       type: [Number, String],
       default: 10,
@@ -105,13 +144,20 @@ export default {
     }
   },
   computed: {
+    /**
+     * Menu items that have dropdown content
+     */
     menuHasDropdown () {
       return this.menu.filter(item => item.dropdown)
     },
+    /**
+     * HTML menu elements that have dropdown content
+     */
     hasDropdownEls () {
       const links = this.$refs.links || []
 
       return links.filter((link) => {
+        // router-link, myComponent
         if (link instanceof Vue) {
           link = link.$el
         }
@@ -119,6 +165,9 @@ export default {
         return link.classList.contains('vsm-has-dropdown')
       })
     },
+    /**
+     * HTML dropdown content
+     */
     sectionEls () {
       const sections = this.$refs.sections || []
 
@@ -264,36 +313,51 @@ export default {
         }
       })
 
-      const headerOffsetLeft = this.$el.offsetLeft
-      const bodyOffset = document.documentElement.offsetWidth
+      const bodyWidth = document.documentElement.offsetWidth
+      const rootRect = this.$el.getBoundingClientRect()
+      const rect = el.getBoundingClientRect()
 
-      // Crop the width of the content if it goes beyond the width of the screen
-      if (offsetWidth > bodyOffset - (+this.screenOffset * 2)) {
-        offsetWidth = bodyOffset - (+this.screenOffset * 2)
+      // Find the beginning of a menu item
+      const leftPosition = rect.left - rootRect.left
+
+      // Step back from the button to the left so that
+      // the middle of the content is found in the
+      // center of the element
+      let centerPosition = leftPosition - (offsetWidth / 2) + (rect.width / 2)
+
+      // Do not let go of the left side of the screen
+      if (centerPosition + rootRect.left < +this.screenOffset) {
+        centerPosition = +this.screenOffset - rootRect.left
+      }
+
+      // Now also check the right side of the screen
+      const rightOffset = centerPosition + rootRect.left + offsetWidth
+      if (rightOffset > bodyWidth - +this.screenOffset) {
+        centerPosition -= (rightOffset - bodyWidth + +this.screenOffset)
+
+        // Recheck the left side of the screen
+        if (centerPosition < +this.screenOffset - rootRect.left) {
+          // Just set the menu to the full width of the screen
+          centerPosition = +this.screenOffset - rootRect.left
+          offsetWidth = bodyWidth - +this.screenOffset * 2
+        }
       }
 
       const ratioWidth = offsetWidth / +this.baseWidth
       const ratioHeight = offsetHeight / +this.baseHeight
-      const rect = el.getBoundingClientRect()
-      let pos = Math.round(Math.max((rect.left + rect.width / 2 - offsetWidth / 2) - headerOffsetLeft, +this.screenOffset - headerOffsetLeft))
 
-      const rightSide = rect.left + rect.width / 2 + offsetWidth / 2
-      if (rightSide + headerOffsetLeft > bodyOffset) {
-        pos = Math.round(pos - (rightSide - bodyOffset) - +this.screenOffset)
-      }
-
+      // Activate transition
       clearTimeout(this._disableTransitionTimeout)
-
       this._enableTransitionTimeout = setTimeout(() => {
         this.$el.classList.remove('vsm-no-transition')
       }, 50)
 
-      this.$refs.dropdownContainer.style.transform = `translate(${pos}px, ${el.offsetTop}px)`
+      this.$refs.dropdownContainer.style.transform = `translate(${centerPosition}px, ${el.offsetTop}px)`
       this.$refs.dropdownContainer.style.width = `${offsetWidth}px`
       this.$refs.dropdownContainer.style.height = `${offsetHeight}px`
 
-      this.$refs.arrow.style.transform = `translate(${Math.round((rect.left + rect.width / 2) - headerOffsetLeft)}px, ${el.offsetTop}px) rotate(45deg)`
-      this.$refs.background.style.transform = `translate(${pos}px, ${el.offsetTop}px) scaleX(${ratioWidth}) scaleY(${ratioHeight})`
+      this.$refs.arrow.style.transform = `translate(${leftPosition + (rect.width / 2)}px, ${el.offsetTop}px) rotate(45deg)`
+      this.$refs.background.style.transform = `translate(${centerPosition}px, ${el.offsetTop}px) scaleX(${ratioWidth}) scaleY(${ratioHeight})`
       this.$refs.backgroundAlt.style.transform = `translateY(${content.children[0].offsetHeight / ratioHeight}px)`
     },
     closeDropdown () {
@@ -344,7 +408,9 @@ export default {
       }
     },
     /*
-     * Remove styles from the dropdown menu so that there is no horizontal scroll
+     * When the screen is reduced, the active drop-down content
+     * does not change its size, because of this,
+     * horizontal scrolling may occur
      */
     windowResizeHandler () {
       this.$refs.dropdownContainer.style = null
