@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.9](https://github.com/Alexeykhr/vue-stripe-menu/compare/v1.2.8...v1.2.9) (2020-04-26)
+
+
+### Bug Fixes
+
+* accept component with dropdown menu ([a0072f4](https://github.com/Alexeykhr/vue-stripe-menu/commit/a0072f4649ea0379b2294e407893a96a24f16ed6))
+
 ### [1.2.8](https://github.com/Alexeykhr/vue-stripe-menu/compare/v1.2.7...v1.2.8) (2020-04-07)
 
 ### [1.2.7](https://github.com/Alexeykhr/vue-stripe-menu/compare/v1.2.6...v1.2.7) (2020-03-14)
