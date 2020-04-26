@@ -209,4 +209,21 @@ describe('vsmMenu Component', () => {
       expect(wrapper.vm._activeDropdown).toBeUndefined()
     })
   })
+
+  describe('render', () => {
+    it('Register component with dropdown', () => {
+      const component = { template: '<div>Content</div>' }
+
+      wrapper = shallowMount(Menu, {
+        propsData: {
+          menu: [
+            { title: 'First item', dropdown: 'first' },
+            { title: 'Second item', dropdown: 'second', element: component }
+          ]
+        }
+      })
+
+      wrapper.vm.registerDropdownElsEvents()
+    })
+  })
 })

@@ -155,15 +155,17 @@ export default {
      */
     hasDropdownEls () {
       const links = this.$refs.links || []
+      const elements = []
 
-      return links.filter((link) => {
-        // router-link, myComponent
-        if (link instanceof Vue) {
-          link = link.$el
+      links.forEach((link) => {
+        const el = link instanceof Vue ? link.$el : link
+
+        if (el.classList.contains('vsm-has-dropdown')) {
+          elements.push(el)
         }
-
-        return link.classList.contains('vsm-has-dropdown')
       })
+
+      return elements
     },
     /**
      * HTML dropdown content
