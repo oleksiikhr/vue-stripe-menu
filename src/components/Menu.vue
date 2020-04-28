@@ -345,6 +345,9 @@ export default {
         }
       }
 
+      // Possible blurring font with decimal values
+      centerPosition = Math.round(centerPosition)
+
       const ratioWidth = offsetWidth / +this.baseWidth
       const ratioHeight = offsetHeight / +this.baseHeight
 
