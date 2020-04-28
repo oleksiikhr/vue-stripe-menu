@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.10](https://github.com/Alexeykhr/vue-stripe-menu/compare/v1.2.9...v1.2.10) (2020-04-28)
+
+
+### Bug Fixes
+
+* font blurring ([384fb78](https://github.com/Alexeykhr/vue-stripe-menu/commit/384fb78e7c78626e0002b86ed18800e35501324b))
+
 ### [1.2.9](https://github.com/Alexeykhr/vue-stripe-menu/compare/v1.2.8...v1.2.9) (2020-04-26)
 
 
