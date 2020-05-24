@@ -13,8 +13,12 @@
       <!--You can replace it with a separate component if each menu item has its own style-->
       <!--Dynamic Component Example: https://codepen.io/Alexeykhr/pen/YzPKxpX-->
       <div class="wrap-content">
-        <div class="wrap-content__block">Header: {{ item.title }}</div>
-        <div class="wrap-content__item">{{ item }}</div>
+        <div class="wrap-content__block">
+          Header: {{ item.title }}
+        </div>
+        <div class="wrap-content__item">
+          {{ item }}
+        </div>
       </div>
     </template>
     <template #before-nav>
