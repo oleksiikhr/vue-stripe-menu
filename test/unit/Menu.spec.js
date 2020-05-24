@@ -35,7 +35,7 @@ describe('vsmMenu Component', () => {
   describe('props', () => {
     it('[element] Default render a header element', () => {
       expect(wrapper.props('element')).toBe('header')
-      expect(wrapper.is('header')).toBeTruthy()
+      expect(wrapper.element.tagName).toBe('HEADER')
     })
 
     it('[element] Can change root HTML element', () => {
@@ -47,7 +47,7 @@ describe('vsmMenu Component', () => {
       })
 
       expect(wrapper.props('element')).toBe('div')
-      expect(wrapper.is('div')).toBeTruthy()
+      expect(wrapper.element.tagName).toBe('DIV')
     })
   })
 
