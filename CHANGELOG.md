@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.11](https://github.com/Alexeykhr/vue-stripe-menu/compare/v1.2.10...v1.2.11) (2020-05-24)
+
+
+### Bug Fixes
+
+* **tests:** isolate component for each test, replace deprecated code ([6628213](https://github.com/Alexeykhr/vue-stripe-menu/commit/6628213506da279eb24d79a9b45134ecc2c375a1))
+
 ### [1.2.10](https://github.com/Alexeykhr/vue-stripe-menu/compare/v1.2.9...v1.2.10) (2020-04-28)
 
 

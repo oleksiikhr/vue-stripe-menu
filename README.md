@@ -73,16 +73,25 @@ $vsm-transition: 1s;
     @open-dropdown="onOpenDropdown"
     @close-dropdown="onCloseDropdown"
   >
-    <template #default="data">
+    <template #default="{ item }">
       <!--Dropdown Content-->
-      <div>{{ data }}</div>
+      <!--You can replace it with a separate component if each menu item has its own style-->
+      <!--Dynamic Component Example: https://codepen.io/Alexeykhr/pen/YzPKxpX-->
+      <div class="wrap-content">
+        <div class="wrap-content__block">
+          Header: {{ item.title }}
+        </div>
+        <div class="wrap-content__item">
+          {{ item }}
+        </div>
+      </div>
     </template>
     <template #before-nav>
       <!--Image or svg of website logo-->
-      <li class="vsm-section">
+      <li class="vsm-section logo-section">
         <img
-          src="/path/to/file"
-          title="My Logo"
+          src="https://vuejs.org/images/logo.png"
+          alt="My Logo"
         >
       </li>
     </template>
@@ -164,6 +173,62 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+// Styles, to quickly start using the component
+// You can delete, change or add your own
+
+// Limit the width to 1024px and center
+.vsm-menu {
+  margin: 10px;
+  ul {
+    max-width: 1024px;
+    margin: 0 auto;
+  }
+}
+
+// Let's simplify the work with menu items (logo, menu, buttons, etc)
+.vsm-root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+// Move all the content to the right and reduce the logo
+.logo-section {
+  flex: 1 1 auto;
+  img {
+    user-select: none;
+    max-width: 40px;
+  }
+}
+
+// All menu items (element props: a, button, span, etc) are
+// made the same in style
+.vsm-section_menu {
+  > * {
+    padding: 0 25px;
+    font-weight: 500;
+    font-family: inherit;
+  }
+}
+
+// Styles for Dropdown Content:
+.wrap-content {
+  padding: 30px;
+  // Set the width manually so that it does not depend
+  // on changing content
+  width: 400px;
+}
+.wrap-content__block {
+  font-weight: bold;
+}
+.wrap-content__item {
+  font-style: italic;
+  font-size: .8rem;
+}
+</style>
 ```
 
 ## Codepen Demo

@@ -16,95 +16,110 @@ const menu = [
   { title: 'Third item' }
 ]
 
-let wrapper
-
-beforeEach(() => {
-  wrapper = shallowMount(Menu, {
-    propsData: { menu },
-    slots: {
-      default: '<div>Content</div>'
-    }
-  })
-})
-
-afterEach(() => {
-  wrapper.destroy()
-})
-
 describe('vsmMenu Component', () => {
   describe('props', () => {
     it('[element] Default render a header element', () => {
+      const wrapper = shallowMount(Menu, {
+        propsData: { menu },
+        slots: { default: '<div>Content</div>' }
+      })
+
       expect(wrapper.props('element')).toBe('header')
-      expect(wrapper.is('header')).toBeTruthy()
+      expect(wrapper.element.tagName).toBe('HEADER')
     })
 
     it('[element] Can change root HTML element', () => {
-      wrapper = shallowMount(Menu, {
-        propsData: {
-          element: 'div',
-          menu
-        }
+      const wrapper = shallowMount(Menu, {
+        propsData: { element: 'div', menu }
       })
 
       expect(wrapper.props('element')).toBe('div')
-      expect(wrapper.is('div')).toBeTruthy()
+      expect(wrapper.element.tagName).toBe('DIV')
     })
   })
 
   describe('DOM', () => {
     it('Number of elements', () => {
+      const wrapper = shallowMount(Menu, {
+        propsData: { element: 'div', menu },
+        slots: { default: '<div>Content</div>' }
+      })
+
       expect(wrapper.findAll('.vsm-link').length).toBe(3)
     })
 
     it('Number of elements who has dropdown', () => {
+      const wrapper = shallowMount(Menu, {
+        propsData: { element: 'div', menu },
+        slots: { default: '<div>Content</div>' }
+      })
+
       expect(wrapper.findAll('.vsm-link.vsm-has-dropdown').length).toBe(2)
     })
   })
 
   describe('computed', () => {
     it('Number of items having dropdown', () => {
+      const wrapper = shallowMount(Menu, {
+        propsData: { element: 'div', menu },
+        slots: { default: '<div>Content</div>' }
+      })
+
       expect(wrapper.vm.menuHasDropdown.length).toBe(2)
     })
 
     it('Number of elements having dropdown', () => {
+      const wrapper = shallowMount(Menu, {
+        propsData: { element: 'div', menu },
+        slots: { default: '<div>Content</div>' }
+      })
+
       expect(wrapper.vm.hasDropdownEls.length).toBe(2)
     })
 
     it('Number of dropdown sections', () => {
+      const wrapper = shallowMount(Menu, {
+        propsData: { element: 'div', menu },
+        slots: { default: '<div>Content</div>' }
+      })
+
       expect(wrapper.vm.sectionEls.length).toBe(2)
     })
   })
 
   describe('events', () => {
+    let eventEndStub
+    let touchStartStub
+    let touchMoveStub
+    let resizeStub
+    let wrapper
+
+    beforeEach(() => {
+      eventEndStub = sinon.spy(Menu.methods, 'eventEndHandler')
+      touchStartStub = sinon.spy(Menu.methods, 'touchStartHandler')
+      touchMoveStub = sinon.spy(Menu.methods, 'touchMoveHandler')
+      resizeStub = sinon.spy(Menu.methods, 'windowResizeHandler')
+
+      wrapper = shallowMount(Menu, {
+        propsData: { menu },
+        slots: {
+          default: '<div>Content</div>'
+        }
+      })
+    })
+
+    afterEach(() => {
+      eventEndStub.restore()
+      touchStartStub.restore()
+      touchMoveStub.restore()
+      resizeStub.restore()
+      wrapper.destroy()
+    })
+
     describe('global', () => {
-      const eventEndStub = sinon.stub()
-      const touchStartStub = sinon.stub()
-      const touchMoveStub = sinon.stub()
-      const resizeStub = sinon.stub()
-
-      beforeEach(() => {
-        // Override methods before document register this
-        wrapper = shallowMount(Menu, {
-          propsData: { menu },
-          methods: {
-            eventEndHandler: eventEndStub,
-            touchStartHandler: touchStartStub,
-            touchMoveHandler: touchMoveStub,
-            windowResizeHandler: resizeStub
-          }
-        })
-      })
-
-      afterEach(() => {
-        eventEndStub.reset()
-        touchStartStub.reset()
-        touchMoveStub.reset()
-        resizeStub.reset()
-      })
-
       it('register touchmove', () => {
         document.dispatchEvent(new TouchEvent('touchmove'))
-        expect(touchMoveStub.called).toBeTruthy()
+        expect(touchMoveStub.calledOnce).toBeTruthy()
       })
 
       it('touchmove remove on destroy', () => {
@@ -116,7 +131,7 @@ describe('vsmMenu Component', () => {
 
       it('register touchstart', () => {
         document.dispatchEvent(new TouchEvent('touchstart'))
-        expect(touchStartStub.called).toBeTruthy()
+        expect(touchStartStub.calledOnce).toBeTruthy()
       })
 
       it('touchstart remove on destroy', () => {
@@ -128,7 +143,7 @@ describe('vsmMenu Component', () => {
 
       it(`register ${pointerEvent.end}`, () => {
         document.body.dispatchEvent(new TouchEvent(pointerEvent.end))
-        expect(eventEndStub.called).toBeTruthy()
+        expect(eventEndStub.calledOnce).toBeTruthy()
       })
 
       it(`${pointerEvent.end} remove on destroy`, () => {
@@ -140,7 +155,7 @@ describe('vsmMenu Component', () => {
 
       it('register resize', () => {
         window.dispatchEvent(new Event('resize'))
-        expect(resizeStub.called).toBeTruthy()
+        expect(resizeStub.calledOnce).toBeTruthy()
       })
 
       it('resize remove on destroy', () => {
@@ -177,6 +192,11 @@ describe('vsmMenu Component', () => {
 
   describe('methods', () => {
     it('Toggle dropdown, no active dropdown', () => {
+      const wrapper = shallowMount(Menu, {
+        propsData: { menu },
+        slots: { default: '<div>Content</div>' }
+      })
+
       sinon.spy(wrapper.vm, 'openDropdown')
 
       const activeEl = wrapper.vm.hasDropdownEls[1]
@@ -187,6 +207,11 @@ describe('vsmMenu Component', () => {
     })
 
     it('Toggle dropdown, has active dropdown', () => {
+      const wrapper = shallowMount(Menu, {
+        propsData: { menu },
+        slots: { default: '<div>Content</div>' }
+      })
+
       sinon.spy(wrapper.vm, 'closeDropdown')
 
       const activeEl = wrapper.vm.hasDropdownEls[1]
@@ -198,12 +223,22 @@ describe('vsmMenu Component', () => {
     })
 
     it('Open Dropdown', () => {
+      const wrapper = shallowMount(Menu, {
+        propsData: { menu },
+        slots: { default: '<div>Content</div>' }
+      })
+
       const activeEl = wrapper.vm.hasDropdownEls[1]
       wrapper.vm.openDropdown(activeEl)
       expect(wrapper.vm._activeDropdown).toBe(activeEl)
     })
 
     it('Close Dropdown', () => {
+      const wrapper = shallowMount(Menu, {
+        propsData: { menu },
+        slots: { default: '<div>Content</div>' }
+      })
+
       wrapper.vm._activeDropdown = wrapper.vm.hasDropdownEls[1]
       wrapper.vm.closeDropdown()
       expect(wrapper.vm._activeDropdown).toBeUndefined()
@@ -214,7 +249,7 @@ describe('vsmMenu Component', () => {
     it('Register component with dropdown', () => {
       const component = { template: '<div>Content</div>' }
 
-      wrapper = shallowMount(Menu, {
+      const wrapper = shallowMount(Menu, {
         propsData: {
           menu: [
             { title: 'First item', dropdown: 'first' },
