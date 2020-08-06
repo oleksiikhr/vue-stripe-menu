@@ -1,6 +1,6 @@
 {
   "name": "vue-stripe-menu",
-  "version": "1.2.11",
+  "version": "1.2.12",
   "description": "Creating menus with animations like on Stripe",
   "main": "./dist/vue-stripe-menu.common.js",
   "scripts": {
@@ -28,8 +28,8 @@
     "vue": "^2.6.11"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.10.4",
-    "@babel/runtime": "^7.10.4",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/runtime": "^7.11.2",
     "@vue/babel-preset-app": "^4.4.6",
     "@vue/cli-plugin-babel": "^4.4.6",
     "@vue/cli-plugin-eslint": "^4.4.6",
@@ -38,21 +38,21 @@
     "@vue/test-utils": "^1.0.3",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.1.0",
-    "babel-jest": "^26.1.0",
+    "babel-jest": "^26.2.2",
     "dotenv": "^8.2.0",
-    "eslint": "^7.3.1",
+    "eslint": "^7.6.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "eslint-plugin-vue": "^6.2.2",
-    "highlight.js": "^10.1.1",
-    "jest": "^26.1.0",
+    "highlight.js": "^10.1.2",
+    "jest": "^26.2.2",
     "node-sass": "^4.14.1",
     "raw-loader": "^4.0.1",
-    "sass-loader": "^9.0.0",
+    "sass-loader": "^9.0.3",
     "sinon": "^9.0.2",
-    "vue-jest": "^3.0.5",
+    "vue-jest": "^3.0.6",
     "vue-template-compiler": "^2.6.11"
   }
 }
