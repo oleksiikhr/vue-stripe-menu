@@ -141,6 +141,15 @@ export default {
       type: [Number, String],
       default: 10,
       validator: (val) => +val >= 0
+    },
+    /**
+     * By default, the dropdown list drops out on hover,
+     * you can change this behavior on click
+     */
+    handler: {
+      type: String,
+      default: 'hover',
+      validator: (val) => ['hover', 'click'].includes(val)
     }
   },
   computed: {
@@ -180,6 +189,13 @@ export default {
       }))
     }
   },
+  watch: {
+    handler (val) {
+      this.handler = val
+      this.registerDropdownElsEvents(true)
+      this.registerDropdownContainerEvents(true)
+    }
+  },
   mounted () {
     // PointerEvent interface represents the state of a DOM event
     this._pointerEvent = window.PointerEvent ? {
@@ -206,63 +222,97 @@ export default {
       document.addEventListener('touchstart', this.touchStartHandler)
       document.body.addEventListener(this._pointerEvent.end, this.eventEndHandler)
     },
-    registerDropdownElsEvents () {
+    registerDropdownElsEvents (force = false) {
       this.hasDropdownEls.forEach((el) => {
         // Events have been registered
-        if (el._vsm_menu) {
+        if (el._vsmMenu && !force) {
           return
         }
 
-        el.addEventListener('focusin', () => {
-          this.stopCloseTimeout()
-          this.openDropdown(el)
-        })
+        if (el._vsmMenuHandlers) {
+          Object.entries(el._vsmMenuHandlers).forEach(([eventName, fn]) => {
+            el.removeEventListener(eventName, fn)
+          })
+        }
 
-        el.addEventListener(this._pointerEvent.enter, (evt) => {
-          if (evt.pointerType !== 'touch') {
-            this.stopCloseTimeout()
-            this.openDropdown(el)
+        if (this.handler === 'hover') {
+          el._vsmMenuHandlers = {
+            focusin: () => {
+              this.stopCloseTimeout()
+              this.openDropdown(el)
+            },
+            [this._pointerEvent.enter]: (evt) => {
+              if (evt.pointerType !== 'touch') {
+                this.stopCloseTimeout()
+                this.openDropdown(el)
+              }
+            },
+            [this._pointerEvent.end]: (evt) => {
+              evt.preventDefault()
+              evt.stopPropagation()
+              this.toggleDropdown(el)
+            },
+            [this._pointerEvent.leave]: (evt) => {
+              if (evt.pointerType !== 'touch') {
+                this.startCloseTimeout()
+              }
+            }
           }
-        })
-
-        el.addEventListener(this._pointerEvent.end, (evt) => {
-          evt.preventDefault()
-          evt.stopPropagation()
-          this.toggleDropdown(el)
-        })
-
-        el.addEventListener(this._pointerEvent.leave, (evt) => {
-          if (evt.pointerType !== 'touch') {
-            this.startCloseTimeout()
+        } else {
+          el._vsmMenuHandlers = {
+            click: () => {
+              this.toggleDropdown(el)
+            }
           }
+        }
+
+        Object.entries(el._vsmMenuHandlers).forEach(([eventName, fn]) => {
+          el.addEventListener(eventName, fn)
         })
 
-        el._vsm_menu = true
+        el._vsmMenu = true
       })
     },
-    registerDropdownContainerEvents () {
+    registerDropdownContainerEvents (force = false) {
+      const el = this.$refs.dropdownContainer
+
       // Events have been registered
-      if (this.$refs.dropdownContainer._vsm_menu) {
+      if (el._vsmMenu && !force) {
         return
       }
 
-      this.$refs.dropdownContainer.addEventListener(this._pointerEvent.end, (evt) => {
+      if (el._vsmMenuHandlers) {
+        Object.entries(el._vsmMenuHandlers).forEach(([eventName, fn]) => {
+          el.removeEventListener(eventName, fn)
+        })
+      }
+
+      if (this.handler === 'hover') {
+        el._vsmMenuHandlers = {
+          [this._pointerEvent.enter]: (evt) => {
+            if (evt.pointerType !== 'touch') {
+              this.stopCloseTimeout()
+            }
+          },
+          [this._pointerEvent.leave]: (evt) => {
+            if (evt.pointerType !== 'touch') {
+              this.startCloseTimeout()
+            }
+          }
+        }
+      } else {
+        el._vsmMenuHandlers = {}
+      }
+
+      el._vsmMenuHandlers[this._pointerEvent.end] = (evt) => {
         evt.stopPropagation()
+      }
+
+      Object.entries(el._vsmMenuHandlers).forEach(([eventName, fn]) => {
+        el.addEventListener(eventName, fn)
       })
 
-      this.$refs.dropdownContainer.addEventListener(this._pointerEvent.enter, (evt) => {
-        if (evt.pointerType !== 'touch') {
-          this.stopCloseTimeout()
-        }
-      })
-
-      this.$refs.dropdownContainer.addEventListener(this._pointerEvent.leave, (evt) => {
-        if (evt.pointerType !== 'touch') {
-          this.startCloseTimeout()
-        }
-      })
-
-      this.$refs.dropdownContainer._vsm_menu = true
+      el._vsmMenu = true
     },
     unregisterGlobalEvents () {
       window.removeEventListener('resize', this.windowResizeHandler)
