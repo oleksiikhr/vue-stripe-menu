@@ -260,6 +260,9 @@ export default {
           }
         } else {
           el._vsmMenuHandlers = {
+            [this._pointerEvent.end]: (evt) => {
+              evt.stopPropagation()
+            },
             click: () => {
               this.toggleDropdown(el)
             }
