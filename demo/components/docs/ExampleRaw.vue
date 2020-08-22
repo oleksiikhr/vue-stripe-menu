@@ -5,6 +5,7 @@
     :base-height="400"
     :screen-offset="10"
     element="header"
+    handler="hover"
     @open-dropdown="onOpenDropdown"
     @close-dropdown="onCloseDropdown"
   >
