@@ -169,12 +169,12 @@ describe('vsmMenu Component', () => {
     describe('local', () => {
       it('Register events for each dropdown element', () => {
         wrapper.vm.hasDropdownEls.forEach((el) => {
-          expect(el._vsm_menu).toBeTruthy()
+          expect(el._vsmMenu).toBeTruthy()
         })
       })
 
       it('Register events for dropdown container', () => {
-        expect(wrapper.vm.$refs.dropdownContainer._vsm_menu).toBeTruthy()
+        expect(wrapper.vm.$refs.dropdownContainer._vsmMenu).toBeTruthy()
       })
 
       it('$emit on openDropdown, no active dropdown', () => {
