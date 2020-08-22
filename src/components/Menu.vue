@@ -261,6 +261,7 @@ export default {
         } else {
           el._vsmMenuHandlers = {
             [this._pointerEvent.end]: (evt) => {
+              evt.preventDefault()
               evt.stopPropagation()
             },
             click: () => {
