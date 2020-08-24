@@ -2,6 +2,7 @@
   <vsm-menu
     ref="header"
     :menu="menu"
+    :handler="handler"
     :screen-offset="15"
     @open-dropdown="onOpenDropdown"
     @close-dropdown="onCloseDropdown"
@@ -28,7 +29,7 @@
         class="vsm-section vsm-mob-hide rnd--open"
         @click="onClick"
       >
-        Random
+        on {{ handler }}
       </li>
       <!--Display mobile menu-->
       <vsm-mob>
@@ -45,7 +46,6 @@ import VerticalContent from '../components/content/Vertical'
 import DefaultContent from '../components/content/Default'
 import StripeLogo from '../components/svg/StripeLogo'
 import MobileContent from './content/MobileContent'
-import rnd from '../sciprts/rnd'
 
 /* eslint-disable no-console */
 
@@ -55,6 +55,7 @@ export default {
   },
   data () {
     return {
+      handler: 'hover',
       menu: [
         { title: 'Company', dropdown: 'company', content: DefaultContent, listeners: { mouseover: this.onMouseOver } },
         { title: 'Developers', dropdown: 'developers', content: HorizontalPrimaryContent, secondary: HorizontalSecondaryContent },
@@ -65,10 +66,8 @@ export default {
   },
   methods: {
     onClick () {
-      const links = this.$refs.header.hasDropdownEls
-      const link = links[rnd(0, links.length - 1)]
-
-      this.$refs.header.openDropdown(link)
+      this.handler = this.handler === 'hover' ? 'click' : 'hover'
+      console.log(`Change Handler to ${this.handler}`)
     },
     onMouseOver (evt) {
       console.log('mouse over', evt)

@@ -70,6 +70,7 @@ $vsm-transition: 1s;
     :base-height="400"
     :screen-offset="10"
     element="header"
+    handler="hover"
     @open-dropdown="onOpenDropdown"
     @close-dropdown="onCloseDropdown"
   >
@@ -243,13 +244,14 @@ Code for creating a menu as on a demo: [Link](https://github.com/Alexeykhr/vue-s
 
 ### [Menu] Props
 
-| Property             | Parameters | Description                                                       | Type           | Default | Required |
-| -------------------- | ---------- | ----------------------------------------------------------------- | -------------- | ------- | -------- |
-| menu                 | MenuObject | Description of the menu items, see below                          | Array          |         | true     |
-| element              |            | HTML element for root element                                     | String         | header  | false    |
-| base-width           |            | The relationship between the width of the content and this value  | string, number | header  | false    |
-| base-height          |            | The relationship between the height of the content and this value | string, number | header  | false    |
-| screen-offset        |            | Offset from the window screen                                     | string, number | header  | false    |
+| Property             | Parameters   | Description                                                       | Type           | Default | Required |
+| -------------------- | ----------   | ----------------------------------------------------------------- | -------------- | ------- | -------- |
+| menu                 | MenuObject   | Description of the menu items, see below                          | Array          |         | true     |
+| element              |              | HTML element for root element                                     | String         | header  | false    |
+| base-width           |              | The relationship between the width of the content and this value  | string, number | header  | false    |
+| base-height          |              | The relationship between the height of the content and this value | string, number | header  | false    |
+| screen-offset        |              | Offset from the window screen                                     | string, number | header  | false    |
+| handler              | hover, click | What event should you open dropdown for                           | string         | hover   | false    |
 
 ### [Menu] Events
 
