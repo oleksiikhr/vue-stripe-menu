@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/Alexeykhr/vue-stripe-menu/compare/v1.2.12...v1.3.0) (2020-08-24)
+
+
+### Features
+
+* new handler props ([a64d090](https://github.com/Alexeykhr/vue-stripe-menu/commit/a64d09003cb8f60affc99e7722af565321cc6ec0))
+
+
+### Bug Fixes
+
+* **tests:** change _vsm_menu to _vsmMenu ([2ccd5e9](https://github.com/Alexeykhr/vue-stripe-menu/commit/2ccd5e938f407caa4d09c935a68d75dc73aaa666))
+
 ### [1.2.12](https://github.com/Alexeykhr/vue-stripe-menu/compare/v1.2.11...v1.2.12) (2020-08-06)
 
 ### [1.2.11](https://github.com/Alexeykhr/vue-stripe-menu/compare/v1.2.10...v1.2.11) (2020-05-24)
