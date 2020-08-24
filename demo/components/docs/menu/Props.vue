@@ -56,6 +56,13 @@ export default {
           description: 'Offset from the window screen',
           type: 'string, number',
           default: 10
+        },
+        {
+          property: 'handler',
+          parameters: 'hover, click',
+          description: 'What event should you open dropdown for',
+          type: 'string',
+          default: 'hover'
         }
       ]
     }

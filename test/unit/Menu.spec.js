@@ -18,23 +18,80 @@ const menu = [
 
 describe('vsmMenu Component', () => {
   describe('props', () => {
-    it('[element] Default render a header element', () => {
-      const wrapper = shallowMount(Menu, {
-        propsData: { menu },
-        slots: { default: '<div>Content</div>' }
+    describe('element', () => {
+      it('Default render a header element', () => {
+        const wrapper = shallowMount(Menu, {
+          propsData: { menu },
+          slots: { default: '<div>Content</div>' }
+        })
+
+        expect(wrapper.props('element')).toBe('header')
+        expect(wrapper.element.tagName).toBe('HEADER')
       })
 
-      expect(wrapper.props('element')).toBe('header')
-      expect(wrapper.element.tagName).toBe('HEADER')
+      it('Can change root HTML element', () => {
+        const wrapper = shallowMount(Menu, {
+          propsData: { element: 'div', menu }
+        })
+
+        expect(wrapper.props('element')).toBe('div')
+        expect(wrapper.element.tagName).toBe('DIV')
+      })
     })
 
-    it('[element] Can change root HTML element', () => {
-      const wrapper = shallowMount(Menu, {
-        propsData: { element: 'div', menu }
+    describe('handler', () => {
+      it('Hover - trigger mouseenter', () => {
+        const wrapper = shallowMount(Menu, {
+          propsData: { handler: 'hover', menu },
+          slots: { default: '<div>Content</div>' }
+        })
+
+        const el = wrapper.find('.vsm-has-dropdown')
+        el.trigger('mouseenter')
+
+        expect(wrapper.vm._activeDropdown).not.toBeUndefined()
       })
 
-      expect(wrapper.props('element')).toBe('div')
-      expect(wrapper.element.tagName).toBe('DIV')
+      it('Click - trigger mouseenter', () => {
+        const wrapper = shallowMount(Menu, {
+          propsData: { handler: 'click', menu },
+          slots: { default: '<div>Content</div>' }
+        })
+
+        const el = wrapper.find('.vsm-has-dropdown')
+        el.trigger('mouseenter')
+
+        expect(wrapper.vm._activeDropdown).toBeUndefined()
+      })
+
+      it('Click - trigger click', () => {
+        const wrapper = shallowMount(Menu, {
+          propsData: { handler: 'click', menu },
+          slots: { default: '<div>Content</div>' }
+        })
+
+        const el = wrapper.find('.vsm-has-dropdown')
+        el.trigger('click')
+
+        expect(wrapper.vm._activeDropdown).not.toBeUndefined()
+      })
+
+      it('Mouseenter trigger after change handler', async () => {
+        const wrapper = shallowMount(Menu, {
+          propsData: { handler: 'hover', menu },
+          slots: { default: '<div>Content</div>' }
+        })
+
+        const el = wrapper.find('.vsm-has-dropdown')
+        el.trigger('mouseenter')
+        expect(wrapper.vm._activeDropdown).not.toBeUndefined()
+
+        wrapper.vm.closeDropdown()
+        await wrapper.setProps({ handler: 'click' })
+
+        el.trigger('mouseenter')
+        expect(wrapper.vm._activeDropdown).toBeUndefined()
+      })
     })
   })
 
@@ -169,12 +226,12 @@ describe('vsmMenu Component', () => {
     describe('local', () => {
       it('Register events for each dropdown element', () => {
         wrapper.vm.hasDropdownEls.forEach((el) => {
-          expect(el._vsm_menu).toBeTruthy()
+          expect(el._vsmMenu).toBeTruthy()
         })
       })
 
       it('Register events for dropdown container', () => {
-        expect(wrapper.vm.$refs.dropdownContainer._vsm_menu).toBeTruthy()
+        expect(wrapper.vm.$refs.dropdownContainer._vsmMenu).toBeTruthy()
       })
 
       it('$emit on openDropdown, no active dropdown', () => {
