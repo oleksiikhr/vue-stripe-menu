@@ -25,34 +25,34 @@
   "homepage": "https://github.com/Alexeykhr/vue-stripe-menu#readme",
   "dependencies": {
     "core-js": "^3.6.5",
-    "vue": "^2.6.11"
+    "vue": "^2.6.12"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.11.0",
     "@babel/runtime": "^7.11.2",
-    "@vue/babel-preset-app": "^4.4.6",
-    "@vue/cli-plugin-babel": "^4.4.6",
-    "@vue/cli-plugin-eslint": "^4.4.6",
-    "@vue/cli-service": "^4.4.6",
+    "@vue/babel-preset-app": "^4.5.4",
+    "@vue/cli-plugin-babel": "^4.5.4",
+    "@vue/cli-plugin-eslint": "^4.5.4",
+    "@vue/cli-service": "^4.5.4",
     "@vue/eslint-config-standard": "^5.1.2",
-    "@vue/test-utils": "^1.0.3",
+    "@vue/test-utils": "^1.0.4",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.1.0",
-    "babel-jest": "^26.2.2",
+    "babel-jest": "^26.3.0",
     "dotenv": "^8.2.0",
-    "eslint": "^7.6.0",
+    "eslint": "^7.7.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "eslint-plugin-vue": "^6.2.2",
     "highlight.js": "^10.1.2",
-    "jest": "^26.2.2",
+    "jest": "^26.4.2",
     "node-sass": "^4.14.1",
     "raw-loader": "^4.0.1",
     "sass-loader": "^9.0.3",
-    "sinon": "^9.0.2",
+    "sinon": "^9.0.3",
     "vue-jest": "^3.0.6",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.12"
   }
 }
