@@ -247,11 +247,6 @@ export default {
                 this.openDropdown(el)
               }
             },
-            [this._pointerEvent.end]: (evt) => {
-              evt.preventDefault()
-              evt.stopPropagation()
-              this.toggleDropdown(el)
-            },
             [this._pointerEvent.leave]: (evt) => {
               if (evt.pointerType !== 'touch') {
                 this.startCloseTimeout()
@@ -259,15 +254,13 @@ export default {
             }
           }
         } else {
-          el._vsmMenuHandlers = {
-            [this._pointerEvent.end]: (evt) => {
-              evt.preventDefault()
-              evt.stopPropagation()
-            },
-            click: () => {
-              this.toggleDropdown(el)
-            }
-          }
+          el._vsmMenuHandlers = {}
+        }
+
+        el._vsmMenuHandlers[this._pointerEvent.end] = (evt) => {
+          evt.preventDefault()
+          evt.stopPropagation()
+          this.toggleDropdown(el)
         }
 
         Object.entries(el._vsmMenuHandlers).forEach(([eventName, fn]) => {

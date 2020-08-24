@@ -64,14 +64,14 @@ describe('vsmMenu Component', () => {
         expect(wrapper.vm._activeDropdown).toBeUndefined()
       })
 
-      it('Click - trigger click', () => {
+      it('Click - trigger %pointerEvent.end%', () => {
         const wrapper = shallowMount(Menu, {
           propsData: { handler: 'click', menu },
           slots: { default: '<div>Content</div>' }
         })
 
         const el = wrapper.find('.vsm-has-dropdown')
-        el.trigger('click')
+        el.trigger(pointerEvent.end)
 
         expect(wrapper.vm._activeDropdown).not.toBeUndefined()
       })
