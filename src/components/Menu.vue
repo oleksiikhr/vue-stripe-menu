@@ -465,6 +465,14 @@ export default {
      * horizontal scrolling may occur
      */
     windowResizeHandler () {
+      // Block dropdown from closing on scroll
+      // (show/hide browser top header)
+      if (this._lastWindowWidth === window.innerWidth) {
+        return
+      }
+
+      this._lastWindowWidth = window.innerWidth
+
       this.$refs.dropdownContainer.style = null
       this.$refs.arrow.style = null
       this.$refs.background.style = null
