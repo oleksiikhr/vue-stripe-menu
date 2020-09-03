@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.1](https://github.com/Alexeykhr/vue-stripe-menu/compare/v1.3.0...v1.3.1) (2020-09-03)
+
+
+### Bug Fixes
+
+* hide dropdown after scroll on mobile browser ([af0467c](https://github.com/Alexeykhr/vue-stripe-menu/commit/af0467c6f7a859d11ba9f94834d4dbcf1e6e3ffc))
+
 ## [1.3.0](https://github.com/Alexeykhr/vue-stripe-menu/compare/v1.2.12...v1.3.0) (2020-08-24)
 
 
