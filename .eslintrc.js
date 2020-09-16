@@ -1,8 +1,4 @@
 module.exports = {
-  root: true,
-  env: {
-    node: true
-  },
   extends: [
     '@vue/standard',
     'plugin:vue/base',
