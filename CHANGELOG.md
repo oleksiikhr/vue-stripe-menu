@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/Alexeykhr/vue-stripe-menu/compare/v1.3.1...v1.4.0) (2020-09-27)
+
+
+### Features
+
+* delete core-js library from deps ([5a99691](https://github.com/Alexeykhr/vue-stripe-menu/commit/5a9969163bdf5d6e9cec00e51f4472c163fb3c8a))
+
 ### [1.3.1](https://github.com/Alexeykhr/vue-stripe-menu/compare/v1.3.0...v1.3.1) (2020-09-03)
 
 

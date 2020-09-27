@@ -60,6 +60,30 @@ $vsm-transition: 1s;
 @import "~vue-stripe-menu/src/scss/index";
 ```
 
+### Nuxt
+
+Create a new plugin:
+
+```js
+// plugins/vue-stripe-menu.js
+import Vue from 'vue'
+import VueStripeMenu from 'vue-stripe-menu'
+import 'vue-stripe-menu/dist/vue-stripe-menu.css'
+
+Vue.use(VueStripeMenu)
+```
+
+Connect it:
+
+```js
+// nuxt.config.js
+export default {
+  plugins: [{
+    src: '~/plugins/menu'
+  }],
+}
+```
+
 ## Basic Demo
 
 ```vue
