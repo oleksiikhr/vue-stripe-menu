@@ -72,6 +72,9 @@ export default {
     this.unregisterEvent()
   },
   methods: {
+    closeDropdown () {
+      this.emitValue(false)
+    },
     onClickHamburger () {
       this.emitValue(!this.active)
     },
