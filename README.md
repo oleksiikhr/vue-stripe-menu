@@ -335,6 +335,14 @@ Code for creating a menu as on a demo: [Link](https://github.com/Alexeykhr/vue-s
 | default    |            | The main content for the dropdown list |
 | hamburger  |            | Replace button to open dropdown        |
 
+### [Mob] Methods
+
+`this.$refs[myVsmMobRef].closeDropdown()`
+
+| Name           | Parameters  | Description         | Return |
+| -------------- | ----------- | ------------------- | ------ |
+| closeDropdown  |             | Close dropdown menu |        |
+
 ### Classes
 
 | Name         | Description                         |

@@ -13,6 +13,7 @@
       <properties-menu-docs />
       <props-mob-docs />
       <slots-mob-docs />
+      <methods-mob-docs />
       <classes-docs />
       <demo-docs />
     </main>
@@ -25,6 +26,7 @@ import MenuObjectMenuDocs from './components/docs/menu/MenuObject'
 import PropertiesMenuDocs from './components/docs/menu/Properties'
 import ExampleCodepenDocs from './components/docs/ExampleCodepen'
 import MethodsMenuDocs from './components/docs/menu/Methods'
+import MethodsMobDocs from './components/docs/mob/Methods'
 import EventsMenuDocs from './components/docs/menu/Events'
 import PropsMenuDocs from './components/docs/menu/Props'
 import SlotsMenuDocs from './components/docs/menu/Slots'
@@ -43,6 +45,7 @@ export default {
     PropertiesMenuDocs,
     ExampleCodepenDocs,
     MethodsMenuDocs,
+    MethodsMobDocs,
     EventsMenuDocs,
     PropsMenuDocs,
     SlotsMenuDocs,
