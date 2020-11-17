@@ -50,4 +50,11 @@ describe('vsmMob Component', () => {
     wrapper.destroy()
     expect(spy.called).toBeTruthy()
   })
+
+  test('Close dropdown on call method', () => {
+    wrapper.find('.vsm-mob').trigger('click')
+    expect(wrapper.vm.active).toBeTruthy()
+    wrapper.vm.closeDropdown()
+    expect(wrapper.vm.active).toBeFalsy()
+  })
 })
