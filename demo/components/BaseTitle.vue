@@ -28,9 +28,10 @@ export default {
 
       let id = this.title
 
-      if (this.$slots.default) {
-        id = this.$slots.default[0].text
-      }
+      // TODO
+      // if (this.$slots.default) {
+      //   id = this.$slots.default[0].text
+      // }
 
       return id.trim().toLowerCase().replace(/[^a-z-]/gi, '-')
     }

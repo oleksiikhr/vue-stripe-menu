@@ -1,6 +1,6 @@
 'use strict'
 
-import Vue from 'vue'
+import { createApp } from 'vue'
 
 // -> For Demo
 import './scss/index.scss'
@@ -12,10 +12,6 @@ import vsmMenu from '../src/main'
 
 import App from './App'
 
-Vue.use(vsmMenu)
-
-Vue.config.productionTip = false
-
-new Vue({
-  render: h => h(App)
-}).$mount('#app')
+createApp(App)
+  .use(vsmMenu)
+  .mount('#app')

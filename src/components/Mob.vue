@@ -68,7 +68,7 @@ export default {
     const touchSupport = 'ontouchstart' in window || navigator.maxTouchPoints
     this._touchEvent = touchSupport ? 'touchend' : 'click'
   },
-  beforeDestroy () {
+  beforeUnmount () {
     this.unregisterEvent()
   },
   methods: {

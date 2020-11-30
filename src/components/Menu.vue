@@ -13,7 +13,7 @@
           <component
             :is="item.element || (item.dropdown ? 'button' : 'a')"
             v-for="(item, index) in menu"
-            ref="links"
+            :ref="setLinkRef"
             :key="index"
             :class="['vsm-link', item.attributes ? item.attributes.class : null, {
               'vsm-has-dropdown': item.dropdown
@@ -56,7 +56,7 @@
       >
         <div
           v-for="(item, index) in menuHasDropdown"
-          ref="sections"
+          :ref="setSectionRef"
           :key="index"
           class="vsm-dropdown-section"
           :data-dropdown="item.dropdown"
@@ -75,8 +75,6 @@
 </template>
 
 <script>
-import Vue from 'vue'
-
 export default {
   name: 'VsmMenu',
   props: {
@@ -152,6 +150,19 @@ export default {
       validator: (val) => ['hover', 'click'].includes(val)
     }
   },
+  data() {
+    return {
+      linkRefs: [],
+      sectionRefs: []
+    }
+  },
+  emits: [
+    'open-dropdown', 'close-dropdown'
+  ],
+  beforeUpdate() {
+    this.linkRefs = []
+    this.sectionRefs = []
+  },
   computed: {
     /**
      * Menu items that have dropdown content
@@ -163,11 +174,10 @@ export default {
      * HTML menu elements that have dropdown content
      */
     hasDropdownEls () {
-      const links = this.$refs.links || []
       const elements = []
 
-      links.forEach((link) => {
-        const el = link instanceof Vue ? link.$el : link
+      this.linkRefs.forEach((link) => {
+        const el = link.$el ? link.$el : link
 
         if (el.classList.contains('vsm-has-dropdown')) {
           elements.push(el)
@@ -180,9 +190,7 @@ export default {
      * HTML dropdown content
      */
     sectionEls () {
-      const sections = this.$refs.sections || []
-
-      return sections.map((el) => ({
+      return this.sectionRefs.map((el) => ({
         el,
         name: el.getAttribute('data-dropdown'),
         content: el.children[0]
@@ -191,7 +199,8 @@ export default {
   },
   watch: {
     handler (val) {
-      this.handler = val
+      /* eslint-disable-next-line */
+      this.handler = val // TODO
       this.registerDropdownElsEvents(true)
       this.registerDropdownContainerEvents(true)
     }
@@ -212,7 +221,7 @@ export default {
     this.registerDropdownElsEvents()
     this.registerDropdownContainerEvents()
   },
-  beforeDestroy () {
+  beforeUnmount () {
     this.unregisterGlobalEvents()
   },
   methods: {
@@ -479,6 +488,12 @@ export default {
       this.$refs.backgroundAlt.style = null
 
       this.closeDropdown()
+    },
+    setLinkRef(ref) {
+      this.linkRefs.push(ref)
+    },
+    setSectionRef(ref) {
+      this.sectionRefs.push(ref)
     }
   }
 }
