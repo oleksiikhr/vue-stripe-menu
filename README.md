@@ -352,29 +352,40 @@ Code for creating a menu as on a demo: [Link](https://github.com/Alexeykhr/vue-s
 
 ## Contributing
 
-### Launch of a demo project (development of lib)
+### Install dependencies
+
 ```sh
-$ npm run dev
+$ yarn
+```
+
+### Launch of a demo project (development of lib)
+
+```sh
+$ yarn dev
 ```
 
 ### Build a demo project
+
 ```sh
-$ npm run build
+$ yarn build
 ```
 
 ### Build library
+
 ```sh
-$ npm run build:lib
+$ yarn build:lib
 ```
 
 ### Run tests
+
 ```sh
-$ npm run test
+$ yarn test
 ```
 
 ### Check code on Eslint
+
 ```sh
-$ npm run lint
+$ yarn lint
 ```
 
 ## Changelog
