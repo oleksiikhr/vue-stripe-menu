@@ -150,18 +150,14 @@ export default {
       validator: (val) => ['hover', 'click'].includes(val)
     }
   },
+  emits: [
+    'open-dropdown', 'close-dropdown'
+  ],
   data() {
     return {
       linkRefs: [],
       sectionRefs: []
     }
-  },
-  emits: [
-    'open-dropdown', 'close-dropdown'
-  ],
-  beforeUpdate() {
-    this.linkRefs = []
-    this.sectionRefs = []
   },
   computed: {
     /**
@@ -204,6 +200,10 @@ export default {
       this.registerDropdownElsEvents(true)
       this.registerDropdownContainerEvents(true)
     }
+  },
+  beforeUpdate() {
+    this.linkRefs = []
+    this.sectionRefs = []
   },
   mounted () {
     // PointerEvent interface represents the state of a DOM event

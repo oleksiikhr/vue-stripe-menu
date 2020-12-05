@@ -18,8 +18,8 @@ const plugin = {
     plugin.installed = true
 
     // Components
-    Vue.component('vsmMenu', vsmMenu)
-    Vue.component('vsmMob', vsmMob)
+    Vue.component('VsmMenu', vsmMenu)
+    Vue.component('VsmMob', vsmMob)
   }
 }
 

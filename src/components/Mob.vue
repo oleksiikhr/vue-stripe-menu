@@ -42,6 +42,9 @@ export default {
       default: false
     }
   },
+  emits: [
+    'input'
+  ],
   data () {
     return {
       // Support change value without accept props
