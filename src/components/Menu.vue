@@ -489,10 +489,10 @@ export default {
 
       this.closeDropdown()
     },
-    setLinkRef(ref) {
+    setLinkRef (ref) {
       this.linkRefs.push(ref)
     },
-    setSectionRef(ref) {
+    setSectionRef (ref) {
       this.sectionRefs.push(ref)
     }
   }

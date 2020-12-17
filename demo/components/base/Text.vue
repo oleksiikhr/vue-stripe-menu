@@ -12,6 +12,7 @@
 
 <script>
 import rnd from '../../sciprts/rnd'
+import { computed } from 'vue'
 
 export default {
   props: {
@@ -38,20 +39,20 @@ export default {
       validator: (val) => ~['primary', 'secondary'].indexOf(val)
     }
   },
-  computed: {
-    width () {
-      return rnd(this.min, this.max)
-    },
-    typeClasses () {
-      if (this.type === 'text') {
+  setup(props) {
+    const width = computed(() => rnd(props.min, props.max))
+
+    const typeClasses = computed(() => {
+      if (props.type === 'text') {
         return 'mb-5'
       }
 
       return ['mb-20', 'background-hover']
-    },
-    background () {
-      return this.color === 'primary' ? 'background' : 'background--secondary'
-    }
+    })
+
+    const background = computed(() => props.color === 'primary' ? 'background' : 'background--secondary')
+
+    return { width, typeClasses, background }
   }
 }
 </script>
