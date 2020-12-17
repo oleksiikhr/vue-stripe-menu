@@ -21,6 +21,7 @@
             :data-dropdown="item.dropdown"
             :aria-haspopup="item.dropdown && 'true'"
             :aria-expanded="item.dropdown && 'false'"
+            tabindex="0"
             v-bind="item.attributes"
             v-on="item.listeners"
           >
