@@ -6,10 +6,10 @@
 </template>
 
 <script>
-// eslint-disable-next-line
+import highlight from 'highlight.js'
+import { onMounted } from 'vue'
 import DemoHeaderRaw from '!!raw-loader!../BaseHeader'
 import BaseTitle from '../BaseTitle'
-import highlight from 'highlight.js'
 
 export default {
   components: {
@@ -20,8 +20,8 @@ export default {
       DemoHeaderRaw
     }
   },
-  mounted () {
-    highlight.initHighlightingOnLoad()
+  setup() {
+    onMounted(() => highlight.initHighlightingOnLoad())
   }
 }
 </script>

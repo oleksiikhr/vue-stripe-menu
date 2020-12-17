@@ -22,7 +22,6 @@
 
 <script>
 import { computed } from 'vue'
-import rnd from '../../sciprts/rnd'
 import BaseText from './Text'
 
 export default {
@@ -45,9 +44,6 @@ export default {
     const background = computed(() => props.color === 'primary' ? 'background' : 'background--secondary')
 
     return { background }
-  },
-  methods: {
-    rnd
   }
 }
 </script>

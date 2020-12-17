@@ -19,8 +19,9 @@
 </template>
 
 <script>
-import BaseTitle from '../BaseTitle'
 import highlight from 'highlight.js'
+import { onMounted } from 'vue'
+import BaseTitle from '../BaseTitle'
 
 export default {
   components: {
@@ -48,8 +49,8 @@ export default {
         '@import "~vue-stripe-menu/src/scss/index";'
     }
   },
-  mounted () {
-    highlight.initHighlightingOnLoad()
+  setup() {
+    onMounted(() => highlight.initHighlightingOnLoad())
   }
 }
 </script>
