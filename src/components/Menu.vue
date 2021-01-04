@@ -23,7 +23,7 @@
             :aria-expanded="item.dropdown && 'false'"
             tabindex="0"
             v-bind="item.attributes"
-            v-on="item.listeners"
+            v-on="item.listeners || {}"
           >
             <slot
               name="title"
@@ -195,9 +195,7 @@ export default {
     }
   },
   watch: {
-    handler (val) {
-      /* eslint-disable-next-line */
-      this.handler = val // TODO
+    handler () {
       this.registerDropdownElsEvents(true)
       this.registerDropdownContainerEvents(true)
     }
