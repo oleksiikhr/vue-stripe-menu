@@ -35,10 +35,10 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - run: npm run lint
-      - run: npm run test -- --coverage
-      - run: npm run build
-      - run: npm run build:lib
+      - run: yarn lint
+      - run: yarn test --coverage
+      - run: yarn build
+      - run: yarn build:lib
 
       - codecov/upload:
           file: coverage/*.json
