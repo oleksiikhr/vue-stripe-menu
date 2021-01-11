@@ -1,6 +1,6 @@
 'use strict'
 
-import { shallowMount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import Menu from '../../src/components/Menu'
 import sinon from 'sinon'
 import 'babel-polyfill'
@@ -21,7 +21,7 @@ describe('vsmMenu Component', () => {
   describe('props', () => {
     describe('element', () => {
       it('Default render a header element', () => {
-        const wrapper = shallowMount(Menu, {
+        const wrapper = mount(Menu, {
           propsData: { menu },
           slots: { default: '<div>Content</div>' }
         })
@@ -31,7 +31,7 @@ describe('vsmMenu Component', () => {
       })
 
       it('Can change root HTML element', () => {
-        const wrapper = shallowMount(Menu, {
+        const wrapper = mount(Menu, {
           propsData: { element: 'div', menu }
         })
 
@@ -42,7 +42,7 @@ describe('vsmMenu Component', () => {
 
     describe('handler', () => {
       it('Hover - trigger mouseenter', () => {
-        const wrapper = shallowMount(Menu, {
+        const wrapper = mount(Menu, {
           propsData: { handler: 'hover', menu },
           slots: { default: '<div>Content</div>' }
         })
@@ -54,7 +54,7 @@ describe('vsmMenu Component', () => {
       })
 
       it('Click - trigger mouseenter', () => {
-        const wrapper = shallowMount(Menu, {
+        const wrapper = mount(Menu, {
           propsData: { handler: 'click', menu },
           slots: { default: '<div>Content</div>' }
         })
@@ -66,7 +66,7 @@ describe('vsmMenu Component', () => {
       })
 
       it('Click - trigger %pointerEvent.end%', () => {
-        const wrapper = shallowMount(Menu, {
+        const wrapper = mount(Menu, {
           propsData: { handler: 'click', menu },
           slots: { default: '<div>Content</div>' }
         })
@@ -78,7 +78,7 @@ describe('vsmMenu Component', () => {
       })
 
       it('Mouseenter trigger after change handler', async () => {
-        const wrapper = shallowMount(Menu, {
+        const wrapper = mount(Menu, {
           propsData: { handler: 'hover', menu },
           slots: { default: '<div>Content</div>' }
         })
@@ -98,7 +98,7 @@ describe('vsmMenu Component', () => {
 
   describe('DOM', () => {
     it('Number of elements', () => {
-      const wrapper = shallowMount(Menu, {
+      const wrapper = mount(Menu, {
         propsData: { element: 'div', menu },
         slots: { default: '<div>Content</div>' }
       })
@@ -107,7 +107,7 @@ describe('vsmMenu Component', () => {
     })
 
     it('Number of elements who has dropdown', () => {
-      const wrapper = shallowMount(Menu, {
+      const wrapper = mount(Menu, {
         propsData: { element: 'div', menu },
         slots: { default: '<div>Content</div>' }
       })
@@ -118,7 +118,7 @@ describe('vsmMenu Component', () => {
 
   describe('computed', () => {
     it('Number of items having dropdown', () => {
-      const wrapper = shallowMount(Menu, {
+      const wrapper = mount(Menu, {
         propsData: { element: 'div', menu },
         slots: { default: '<div>Content</div>' }
       })
@@ -127,7 +127,7 @@ describe('vsmMenu Component', () => {
     })
 
     it('Number of elements having dropdown', () => {
-      const wrapper = shallowMount(Menu, {
+      const wrapper = mount(Menu, {
         propsData: { element: 'div', menu },
         slots: { default: '<div>Content</div>' }
       })
@@ -136,7 +136,7 @@ describe('vsmMenu Component', () => {
     })
 
     it('Number of dropdown sections', () => {
-      const wrapper = shallowMount(Menu, {
+      const wrapper = mount(Menu, {
         propsData: { element: 'div', menu },
         slots: { default: '<div>Content</div>' }
       })
@@ -158,7 +158,7 @@ describe('vsmMenu Component', () => {
       touchMoveStub = sinon.spy(Menu.methods, 'touchMoveHandler')
       resizeStub = sinon.spy(Menu.methods, 'windowResizeHandler')
 
-      wrapper = shallowMount(Menu, {
+      wrapper = mount(Menu, {
         propsData: { menu },
         slots: {
           default: '<div>Content</div>'
@@ -171,7 +171,7 @@ describe('vsmMenu Component', () => {
       touchStartStub.restore()
       touchMoveStub.restore()
       resizeStub.restore()
-      wrapper.destroy()
+      wrapper.unmount()
     })
 
     describe('global', () => {
@@ -181,7 +181,7 @@ describe('vsmMenu Component', () => {
       })
 
       it('touchmove remove on destroy', () => {
-        wrapper.destroy()
+        wrapper.unmount()
 
         document.dispatchEvent(new TouchEvent('touchmove'))
         expect(touchMoveStub.called).toBeFalsy()
@@ -193,7 +193,7 @@ describe('vsmMenu Component', () => {
       })
 
       it('touchstart remove on destroy', () => {
-        wrapper.destroy()
+        wrapper.unmount()
 
         document.dispatchEvent(new TouchEvent('touchstart'))
         expect(touchStartStub.called).toBeFalsy()
@@ -205,7 +205,7 @@ describe('vsmMenu Component', () => {
       })
 
       it(`${pointerEvent.end} remove on destroy`, () => {
-        wrapper.destroy()
+        wrapper.unmount()
 
         document.body.dispatchEvent(new TouchEvent(pointerEvent.end))
         expect(eventEndStub.called).toBeFalsy()
@@ -217,7 +217,7 @@ describe('vsmMenu Component', () => {
       })
 
       it('resize remove on destroy', () => {
-        wrapper.destroy()
+        wrapper.unmount()
 
         window.dispatchEvent(new Event('resize'))
         expect(resizeStub.called).toBeFalsy()
@@ -250,7 +250,7 @@ describe('vsmMenu Component', () => {
 
   describe('methods', () => {
     it('Toggle dropdown, no active dropdown', () => {
-      const wrapper = shallowMount(Menu, {
+      const wrapper = mount(Menu, {
         propsData: { menu },
         slots: { default: '<div>Content</div>' }
       })
@@ -265,7 +265,7 @@ describe('vsmMenu Component', () => {
     })
 
     it('Toggle dropdown, has active dropdown', () => {
-      const wrapper = shallowMount(Menu, {
+      const wrapper = mount(Menu, {
         propsData: { menu },
         slots: { default: '<div>Content</div>' }
       })
@@ -281,7 +281,7 @@ describe('vsmMenu Component', () => {
     })
 
     it('Open Dropdown', () => {
-      const wrapper = shallowMount(Menu, {
+      const wrapper = mount(Menu, {
         propsData: { menu },
         slots: { default: '<div>Content</div>' }
       })
@@ -292,7 +292,7 @@ describe('vsmMenu Component', () => {
     })
 
     it('Close Dropdown', () => {
-      const wrapper = shallowMount(Menu, {
+      const wrapper = mount(Menu, {
         propsData: { menu },
         slots: { default: '<div>Content</div>' }
       })
@@ -305,13 +305,16 @@ describe('vsmMenu Component', () => {
 
   describe('render', () => {
     it('Register component with dropdown', () => {
-      const component = { template: '<div>Content</div>' }
+      const baseComponent = { template: '<div>Content</div>' }
 
-      const wrapper = shallowMount(Menu, {
+      const wrapper = mount(Menu, {
+        components: {
+          baseComponent
+        },
         propsData: {
           menu: [
             { title: 'First item', dropdown: 'first' },
-            { title: 'Second item', dropdown: 'second', element: component }
+            { title: 'Second item', dropdown: 'second', element: 'baseComponent' }
           ]
         }
       })

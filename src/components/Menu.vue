@@ -88,7 +88,7 @@ export default {
      *   title: 'News',
      *   // activate dropdown content, must be unique!
      *   dropdown: 'news',
-     *   // change the HTML element to ours
+     *   // change the default HTML element (element/component)
      *   element: 'router-link',
      *   // v-bind accepts
      *   attributes: {

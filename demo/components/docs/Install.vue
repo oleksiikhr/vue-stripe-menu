@@ -27,6 +27,9 @@ export default {
   components: {
     BaseTitle
   },
+  setup() {
+    onMounted(() => highlight.initHighlightingOnLoad())
+  },
   data () {
     return {
       shell: '$ npm i vue-stripe-menu\n' +
@@ -48,9 +51,6 @@ export default {
         '$vsm-transition: 1s;\n\n' +
         '@import "~vue-stripe-menu/src/scss/index";'
     }
-  },
-  setup() {
-    onMounted(() => highlight.initHighlightingOnLoad())
   }
 }
 </script>

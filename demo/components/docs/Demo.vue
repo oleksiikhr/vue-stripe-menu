@@ -15,13 +15,13 @@ export default {
   components: {
     BaseTitle
   },
+  setup() {
+    onMounted(() => highlight.initHighlightingOnLoad())
+  },
   data () {
     return {
       DemoHeaderRaw
     }
-  },
-  setup() {
-    onMounted(() => highlight.initHighlightingOnLoad())
   }
 }
 </script>
