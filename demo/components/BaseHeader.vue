@@ -14,13 +14,13 @@
     </template>
     <!--Add a title using the slot:-->
     <!--<template #title="data">{{ data.item.title }}</template>-->
-    <template #default="data">
+    <template #default="{ item }">
       <component
-        :is="data.item.content"
+        :is="item.content"
         class="content"
       />
       <component
-        :is="data.item.secondary"
+        :is="item.secondary"
         class="content--secondary"
       />
     </template>
@@ -60,14 +60,13 @@ export default {
         { title: 'Company', dropdown: 'company', content: 'DefaultContent', listeners: { mouseover: this.onMouseOver } },
         { title: 'Developers', dropdown: 'developers', content: 'HorizontalPrimaryContent', secondary: 'HorizontalSecondaryContent' },
         { title: 'Products', dropdown: 'products', content: 'VerticalContent', element: 'span' },
-        { title: 'Source', attributes: { href: 'https://github.com/Alexeykhr/vue-stripe-menu/blob/master/demo/', class: ['some-class1', { 'some-class2': true }], target: '_blank' } }
+        { title: 'Source', attributes: { href: 'https://github.com/Alexeykhr/vue-stripe-menu/blob/master/demo/components/BaseHeader.vue', class: ['some-class1', { 'some-class2': true }], target: '_blank' } }
       ]
     }
   },
   methods: {
     onClick () {
       this.handler = this.handler === 'hover' ? 'click' : 'hover'
-      console.log(`Change Handler to ${this.handler}`)
     },
     onMouseOver (evt) {
       console.log('mouse over', evt)

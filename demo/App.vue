@@ -10,7 +10,6 @@
         :key="property.title"
         v-bind="property"
       />
-      <demo-docs />
     </main>
     <base-footer />
   </div>
@@ -23,7 +22,6 @@ import ExampleDocs from './components/docs/Example'
 import InstallDocs from './components/docs/Install'
 import BaseHeader from './components/BaseHeader'
 import BaseFooter from './components/BaseFooter'
-import DemoDocs from './components/docs/Demo'
 
 import * as menuEvents from './docs/menu/events'
 import * as menuObject from './docs/menu/menuObject'
@@ -43,8 +41,7 @@ export default {
     ExampleDocs,
     InstallDocs,
     BaseHeader,
-    BaseFooter,
-    DemoDocs
+    BaseFooter
   },
   setup() {
     const properties = [

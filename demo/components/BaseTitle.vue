@@ -1,7 +1,7 @@
 <template>
   <a
     :id="generatedId"
-    :href="`#${generatedId}`"
+    :href="generatedHref"
     class="section"
   >
     # <slot>{{ title }}</slot>
@@ -26,7 +26,14 @@ export default {
         return this.id
       }
 
-      return this.title ? this.title.trim().toLowerCase().replace(/[^a-z-]/gi, '-') : ''
+      if (!this.title) {
+        return null
+      }
+
+      return this.title.trim().toLowerCase().replace(/[^a-z-]/gi, '-')
+    },
+    generatedHref () {
+      return this.generatedId && `#${this.generatedId}`
     }
   }
 }

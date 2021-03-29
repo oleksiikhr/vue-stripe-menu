@@ -6,7 +6,7 @@
       ref="codeShell"
       class="shell"
     >{{ shell }}</code></pre>
-    <p>Then add components to Vue and compiled css styles</p>
+    <p>Then add components to Vue and compiled css styles:</p>
     <pre><code
       ref="codeJs"
       class="javascript"
