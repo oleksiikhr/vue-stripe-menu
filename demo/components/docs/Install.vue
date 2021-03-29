@@ -2,9 +2,15 @@
   <div>
     <base-title title="Install" />
     <p>Install the library in your project:</p>
-    <pre><code class="shell">{{ shell }}</code></pre>
+    <pre><code
+      ref="codeShell"
+      class="shell"
+    >{{ shell }}</code></pre>
     <p>Then add components to Vue and compiled css styles</p>
-    <pre><code class="javascript">{{ vue }}</code></pre>
+    <pre><code
+      ref="codeJs"
+      class="javascript"
+    >{{ vue }}</code></pre>
     <p>Or you can change them at compile time (scss). See all available variables:</p>
     <p>
       <a
@@ -14,13 +20,16 @@
         List of variables
       </a>
     </p>
-    <pre><code class="scss">{{ scss }}</code></pre>
+    <pre><code
+      ref="codeScss"
+      class="scss"
+    >{{ scss }}</code></pre>
   </div>
 </template>
 
 <script>
+import { onMounted, ref } from 'vue'
 import highlight from 'highlight.js'
-import { onMounted } from 'vue'
 import BaseTitle from '../BaseTitle'
 
 export default {
@@ -28,7 +37,17 @@ export default {
     BaseTitle
   },
   setup() {
-    onMounted(() => highlight.initHighlightingOnLoad())
+    const codeShell = ref(null)
+    const codeScss = ref(null)
+    const codeJs = ref(null)
+
+    onMounted(() => {
+      highlight.highlightElement(codeShell.value)
+      highlight.highlightElement(codeJs.value)
+      highlight.highlightElement(codeScss.value)
+    })
+
+    return { codeShell, codeJs, codeScss }
   },
   data () {
     return {
