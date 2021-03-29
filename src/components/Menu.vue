@@ -110,8 +110,7 @@ export default {
     },
     /**
      * Change root HTML element
-     * @example
-     *  div
+     * @example div
      */
     element: {
       type: String,

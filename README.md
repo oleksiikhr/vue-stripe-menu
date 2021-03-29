@@ -31,7 +31,7 @@ Then add components to Vue and compiled css styles.
 ```js
 // .js file
 
-import Vue from 'Vue'
+import Vue from 'vue'
 import VueStripeMenu from 'vue-stripe-menu'
 
 Vue.use(VueStripeMenu)
