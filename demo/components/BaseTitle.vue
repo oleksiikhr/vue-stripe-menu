@@ -26,14 +26,7 @@ export default {
         return this.id
       }
 
-      let id = this.title
-
-      // TODO
-      // if (this.$slots.default) {
-      //   id = this.$slots.default[0].text
-      // }
-
-      return id.trim().toLowerCase().replace(/[^a-z-]/gi, '-')
+      return this.title ? this.title.trim().toLowerCase().replace(/[^a-z-]/gi, '-') : ''
     }
   }
 }
