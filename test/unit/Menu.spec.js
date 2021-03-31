@@ -153,9 +153,9 @@ describe('vsmMenu Component', () => {
     let wrapper
 
     beforeEach(() => {
-      eventEndStub = sinon.spy(Menu.methods, 'eventEndHandler')
-      touchStartStub = sinon.spy(Menu.methods, 'touchStartHandler')
-      touchMoveStub = sinon.spy(Menu.methods, 'touchMoveHandler')
+      eventEndStub = sinon.spy(Menu.methods, 'documentEventEndHandler')
+      touchStartStub = sinon.spy(Menu.methods, 'documentTouchStartHandler')
+      touchMoveStub = sinon.spy(Menu.methods, 'documentTouchMoveHandler')
       resizeStub = sinon.spy(Menu.methods, 'windowResizeHandler')
 
       wrapper = mount(Menu, {
