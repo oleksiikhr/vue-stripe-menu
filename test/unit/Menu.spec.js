@@ -41,38 +41,38 @@ describe('vsmMenu Component', () => {
     })
 
     describe('handler', () => {
-      it('Hover - trigger mouseenter', () => {
+      it('Hover - trigger mouseenter', async () => {
         const wrapper = mount(Menu, {
           propsData: { handler: 'hover', menu },
           slots: { default: '<div>Content</div>' }
         })
 
         const el = wrapper.find('.vsm-has-dropdown')
-        el.trigger('mouseenter')
+        await el.trigger('mouseenter')
 
         expect(wrapper.vm._activeDropdown).not.toBeUndefined()
       })
 
-      it('Click - trigger mouseenter', () => {
+      it('Click - trigger mouseenter', async () => {
         const wrapper = mount(Menu, {
           propsData: { handler: 'click', menu },
           slots: { default: '<div>Content</div>' }
         })
 
         const el = wrapper.find('.vsm-has-dropdown')
-        el.trigger('mouseenter')
+        await el.trigger('mouseenter')
 
         expect(wrapper.vm._activeDropdown).toBeUndefined()
       })
 
-      it('Click - trigger %pointerEvent.end%', () => {
+      it('Click - trigger %pointerEvent.end%', async () => {
         const wrapper = mount(Menu, {
           propsData: { handler: 'click', menu },
           slots: { default: '<div>Content</div>' }
         })
 
         const el = wrapper.find('.vsm-has-dropdown')
-        el.trigger(pointerEvent.end)
+        await el.trigger(pointerEvent.end)
 
         expect(wrapper.vm._activeDropdown).not.toBeUndefined()
       })
@@ -84,13 +84,13 @@ describe('vsmMenu Component', () => {
         })
 
         const el = wrapper.find('.vsm-has-dropdown')
-        el.trigger('mouseenter')
+        await el.trigger('mouseenter')
         expect(wrapper.vm._activeDropdown).not.toBeUndefined()
 
         wrapper.vm.closeDropdown()
         await wrapper.setProps({ handler: 'click' })
 
-        el.trigger('mouseenter')
+        await el.trigger('mouseenter')
         expect(wrapper.vm._activeDropdown).toBeUndefined()
       })
     })
@@ -272,9 +272,9 @@ describe('vsmMenu Component', () => {
 
       sinon.spy(wrapper.vm, 'closeDropdown')
 
-      const activeEl = wrapper.vm.hasDropdownEls[1]
-      wrapper.vm._activeDropdown = activeEl
-      wrapper.vm.toggleDropdown(activeEl)
+      const el = wrapper.vm.hasDropdownEls[1]
+      wrapper.vm.openDropdown(el)
+      wrapper.vm.toggleDropdown(el)
 
       expect(wrapper.vm.closeDropdown.called).toBeTruthy()
       expect(wrapper.vm._activeDropdown).toBeUndefined()
@@ -286,9 +286,9 @@ describe('vsmMenu Component', () => {
         slots: { default: '<div>Content</div>' }
       })
 
-      const activeEl = wrapper.vm.hasDropdownEls[1]
-      wrapper.vm.openDropdown(activeEl)
-      expect(wrapper.vm._activeDropdown).toBe(activeEl)
+      const el = wrapper.vm.hasDropdownEls[1]
+      wrapper.vm.openDropdown(el)
+      expect(wrapper.vm._activeDropdown).toBe(el)
     })
 
     it('Close Dropdown', () => {
@@ -297,7 +297,7 @@ describe('vsmMenu Component', () => {
         slots: { default: '<div>Content</div>' }
       })
 
-      wrapper.vm._activeDropdown = wrapper.vm.hasDropdownEls[1]
+      wrapper.vm.openDropdown(wrapper.vm.hasDropdownEls[1])
       wrapper.vm.closeDropdown()
       expect(wrapper.vm._activeDropdown).toBeUndefined()
     })
