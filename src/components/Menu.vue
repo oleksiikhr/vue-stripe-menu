@@ -148,7 +148,6 @@ export default {
       default: 'hover',
       validator: (val) => ['hover', 'click'].includes(val)
     },
-    // TODO logic + docs
     disableWindowResizeHandler: {
       type: Boolean,
       default: false
@@ -201,6 +200,9 @@ export default {
     handler () {
       this.registerDropdownElsEvents(true)
       this.registerDropdownContainerEvents(true)
+    },
+    disableWindowResizeHandler (toggle) {
+      this.windowListenerEvent(toggle)
     }
   },
   beforeUpdate() {
@@ -208,7 +210,6 @@ export default {
     this.sectionRefs = []
   },
   mounted () {
-    // PointerEvent interface represents the state of a DOM event
     this.identifyPointerEvents()
     this.registerGlobalListeners()
     this.registerDropdownElsEvents()
@@ -218,17 +219,151 @@ export default {
     this.removeGlobalListeners()
   },
   methods: {
-    identifyPointerEvents () {
-      this._pointerEvent = window.PointerEvent ? {
-        end: 'pointerup',
-        enter: 'pointerenter',
-        leave: 'pointerleave'
-      } : {
-        end: 'touchend',
-        enter: 'mouseenter',
-        leave: 'mouseleave'
+    /*
+     * | ------------------------------------------------------------------------------------------------
+     * | - Main Functions -
+     * | ------------------------------------------------------------------------------------------------
+     */
+    toggleDropdown (el) {
+      if (this._activeDropdown === el) {
+        this.closeDropdown()
+      } else {
+        this.openDropdown(el)
       }
     },
+    openDropdown (el) {
+      if (this._activeDropdown === el) {
+        return
+      }
+
+      this.$emit('open-dropdown', el)
+
+      this.$el.classList.add('vsm-overlay-active', 'vsm-dropdown-active')
+      this._activeDropdown = el
+      this._activeDropdown.setAttribute('aria-expanded', 'true')
+      this.hasDropdownEls.forEach(el => el.classList.remove('vsm-active'))
+      el.classList.add('vsm-active')
+
+      const activeDataDropdown = el.getAttribute('data-dropdown')
+      let direction = 'vsm-left'
+
+      this.sectionEls.forEach((item) => {
+        item.el.classList.remove('vsm-active', 'vsm-left', 'vsm-right')
+
+        if (item.name === activeDataDropdown) {
+          item.el.setAttribute('aria-hidden', 'false')
+          item.el.classList.add('vsm-active')
+          direction = 'vsm-right'
+          this._activeSectionElement = item
+        } else {
+          item.el.setAttribute('aria-hidden', 'true')
+          item.el.classList.add(direction)
+        }
+      })
+
+      this.resizeDropdown()
+    },
+    closeDropdown () {
+      if (!this._activeDropdown) {
+        return
+      }
+
+      this.$emit('close-dropdown', this._activeDropdown)
+      this.hasDropdownEls.forEach((el) => el.classList.remove('vsm-active'))
+
+      this._activeSectionElement.el.setAttribute('aria-hidden', 'true')
+
+      this.clearEnableTransitionTimeout()
+      this.startDisableTransitionTimeout()
+
+      this.$el.classList.remove('vsm-overlay-active', 'vsm-dropdown-active')
+
+      this._activeDropdown.setAttribute('aria-expanded', 'false')
+      this._activeSectionElement = undefined
+      this._activeDropdown = undefined
+    },
+    resizeDropdown () {
+      if (!this._activeSectionElement) {
+        return
+      }
+
+      const bodyWidth = document.documentElement.offsetWidth
+      const rootRect = this.$el.getBoundingClientRect()
+      const rect = this._activeDropdown.getBoundingClientRect()
+
+      let { offsetHeight, offsetWidth } = this._activeSectionElement.content
+
+      // Find the beginning of a menu item
+      const leftPosition = rect.left - rootRect.left
+
+      // Step back from the button to the left so that the middle of
+      // the content is found in the center of the element
+      let centerPosition = leftPosition - (offsetWidth / 2) + (rect.width / 2)
+
+      // Do not let go of the left side of the screen
+      if (centerPosition + rootRect.left < +this.screenOffset) {
+        centerPosition = +this.screenOffset - rootRect.left
+      }
+
+      // Now also check the right side of the screen
+      const rightOffset = centerPosition + rootRect.left + offsetWidth
+      if (rightOffset > bodyWidth - +this.screenOffset) {
+        centerPosition -= (rightOffset - bodyWidth + +this.screenOffset)
+
+        // Recheck the left side of the screen
+        if (centerPosition < +this.screenOffset - rootRect.left) {
+          // Just set the menu to the full width of the screen
+          centerPosition = +this.screenOffset - rootRect.left
+          offsetWidth = bodyWidth - +this.screenOffset * 2
+        }
+      }
+
+      // Possible blurring font with decimal values
+      centerPosition = Math.round(centerPosition)
+
+      const ratioWidth = offsetWidth / +this.baseWidth
+      const ratioHeight = offsetHeight / +this.baseHeight
+
+      // Activate transition
+      this.clearDisableTransitionTimeout()
+      this.startEnableTransitionTimeout()
+
+      this.$refs.dropdownContainer.style.transform = `translate(${centerPosition}px, ${this._activeDropdown.offsetTop}px)`
+      this.$refs.dropdownContainer.style.width = `${offsetWidth}px`
+      this.$refs.dropdownContainer.style.height = `${offsetHeight}px`
+
+      this.$refs.arrow.style.transform = `translate(${leftPosition + (rect.width / 2)}px, ${this._activeDropdown.offsetTop}px) rotate(45deg)`
+      this.$refs.background.style.transform = `translate(${centerPosition}px, ${this._activeDropdown.offsetTop}px) scaleX(${ratioWidth}) scaleY(${ratioHeight})`
+      this.$refs.backgroundAlt.style.transform = `translateY(${this._activeSectionElement.content.children[0].offsetHeight / ratioHeight}px)`
+    },
+    /*
+     * | ------------------------------------------------------------------------------------------------
+     * | - Timeout -
+     * | ------------------------------------------------------------------------------------------------
+     */
+    startCloseDropdownTimeout () {
+      this._closeDropdownTimeout = setTimeout(() => this.closeDropdown(), 50)
+    },
+    clearCloseDropdownTimeout () {
+      clearTimeout(this._closeDropdownTimeout)
+    },
+    startEnableTransitionTimeout () {
+      this._enableTransitionTimeout = setTimeout(() => this.$el.classList.remove('vsm-no-transition'), 50)
+    },
+    clearEnableTransitionTimeout () {
+      clearTimeout(this._closeDropdownTimeout)
+    },
+    startDisableTransitionTimeout () {
+      this._disableTransitionTimeout = setTimeout(() => this.$el.classList.add('vsm-no-transition'), 50)
+    },
+    clearDisableTransitionTimeout () {
+      clearTimeout(this._disableTransitionTimeout)
+    },
+    /*
+     * | ------------------------------------------------------------------------------------------------
+     * | - Events -
+     * | ------------------------------------------------------------------------------------------------
+     */
     registerDropdownElsEvents (force = false) {
       this.hasDropdownEls.forEach((el) => {
         // Events have been registered
@@ -318,157 +453,29 @@ export default {
 
       el._vsmMenu = true
     },
-    toggleDropdown (el) {
-      if (this._activeDropdown === el) {
-        this.closeDropdown()
-      } else {
-        this.openDropdown(el)
-      }
-    },
-    openDropdown (el) {
-      if (this._activeDropdown === el) {
-        return
-      }
-
-      this.$emit('open-dropdown', el)
-
-      this.$el.classList.add('vsm-overlay-active', 'vsm-dropdown-active')
-      this._activeDropdown = el
-      this._activeDropdown.setAttribute('aria-expanded', 'true')
-      this.hasDropdownEls.forEach(el => el.classList.remove('vsm-active'))
-      el.classList.add('vsm-active')
-
-      const activeDataDropdown = el.getAttribute('data-dropdown')
-      let direction = 'vsm-left'
-
-      this.sectionEls.forEach((item) => {
-        item.el.classList.remove('vsm-active', 'vsm-left', 'vsm-right')
-
-        if (item.name === activeDataDropdown) {
-          item.el.setAttribute('aria-hidden', 'false')
-          item.el.classList.add('vsm-active')
-          direction = 'vsm-right'
-          this._activeSectionElement = item
-        } else {
-          item.el.setAttribute('aria-hidden', 'true')
-          item.el.classList.add(direction)
-        }
-      })
-
-      this.resizeDropdown()
-    },
-    resizeDropdown () {
-      if (!this._activeSectionElement) {
-        return
-      }
-
-      const bodyWidth = document.documentElement.offsetWidth
-      const rootRect = this.$el.getBoundingClientRect()
-      const rect = this._activeDropdown.getBoundingClientRect()
-
-      let { offsetHeight, offsetWidth } = this._activeSectionElement.content
-
-      // Find the beginning of a menu item
-      const leftPosition = rect.left - rootRect.left
-
-      // Step back from the button to the left so that the middle of
-      // the content is found in the center of the element
-      let centerPosition = leftPosition - (offsetWidth / 2) + (rect.width / 2)
-
-      // Do not let go of the left side of the screen
-      if (centerPosition + rootRect.left < +this.screenOffset) {
-        centerPosition = +this.screenOffset - rootRect.left
-      }
-
-      // Now also check the right side of the screen
-      const rightOffset = centerPosition + rootRect.left + offsetWidth
-      if (rightOffset > bodyWidth - +this.screenOffset) {
-        centerPosition -= (rightOffset - bodyWidth + +this.screenOffset)
-
-        // Recheck the left side of the screen
-        if (centerPosition < +this.screenOffset - rootRect.left) {
-          // Just set the menu to the full width of the screen
-          centerPosition = +this.screenOffset - rootRect.left
-          offsetWidth = bodyWidth - +this.screenOffset * 2
-        }
-      }
-
-      // Possible blurring font with decimal values
-      centerPosition = Math.round(centerPosition)
-
-      const ratioWidth = offsetWidth / +this.baseWidth
-      const ratioHeight = offsetHeight / +this.baseHeight
-
-      // Activate transition
-      this.clearDisableTransitionTimeout()
-      this.startEnableTransitionTimeout()
-
-      this.$refs.dropdownContainer.style.transform = `translate(${centerPosition}px, ${this._activeDropdown.offsetTop}px)`
-      this.$refs.dropdownContainer.style.width = `${offsetWidth}px`
-      this.$refs.dropdownContainer.style.height = `${offsetHeight}px`
-
-      this.$refs.arrow.style.transform = `translate(${leftPosition + (rect.width / 2)}px, ${this._activeDropdown.offsetTop}px) rotate(45deg)`
-      this.$refs.background.style.transform = `translate(${centerPosition}px, ${this._activeDropdown.offsetTop}px) scaleX(${ratioWidth}) scaleY(${ratioHeight})`
-      this.$refs.backgroundAlt.style.transform = `translateY(${this._activeSectionElement.content.children[0].offsetHeight / ratioHeight}px)`
-    },
-    closeDropdown () {
-      if (!this._activeDropdown) {
-        return
-      }
-
-      this.$emit('close-dropdown', this._activeDropdown)
-      this.hasDropdownEls.forEach((el) => el.classList.remove('vsm-active'))
-
-      this._activeSectionElement.el.setAttribute('aria-hidden', 'true')
-
-      this.clearEnableTransitionTimeout()
-      this.startDisableTransitionTimeout()
-
-      this.$el.classList.remove('vsm-overlay-active', 'vsm-dropdown-active')
-
-      this._activeDropdown.setAttribute('aria-expanded', 'false')
-      this._activeSectionElement = undefined
-      this._activeDropdown = undefined
-    },
     /*
      * | ------------------------------------------------------------------------------------------------
-     * | - Utils -
-     * | ------------------------------------------------------------------------------------------------
-     */
-    startCloseDropdownTimeout () {
-      this._closeDropdownTimeout = setTimeout(() => this.closeDropdown(), 50)
-    },
-    clearCloseDropdownTimeout () {
-      clearTimeout(this._closeDropdownTimeout)
-    },
-    startEnableTransitionTimeout () {
-      this._enableTransitionTimeout = setTimeout(() => this.$el.classList.remove('vsm-no-transition'), 50)
-    },
-    clearEnableTransitionTimeout () {
-      clearTimeout(this._closeDropdownTimeout)
-    },
-    startDisableTransitionTimeout () {
-      this._disableTransitionTimeout = setTimeout(() => this.$el.classList.add('vsm-no-transition'), 50)
-    },
-    clearDisableTransitionTimeout () {
-      clearTimeout(this._disableTransitionTimeout)
-    },
-    /*
-     * | ------------------------------------------------------------------------------------------------
-     * | - Global Handlers -
+     * | - Global Listener Handlers -
      * | ------------------------------------------------------------------------------------------------
      */
     registerGlobalListeners () {
-      window.addEventListener('resize', this.windowResizeHandler)
+      this.windowListenerEvent(this.disableWindowResizeHandler)
       document.addEventListener('touchmove', this.documentTouchMoveHandler)
       document.addEventListener('touchstart', this.documentTouchStartHandler)
       document.body.addEventListener(this._pointerEvent.end, this.documentEventEndHandler)
     },
     removeGlobalListeners () {
-      window.removeEventListener('resize', this.windowResizeHandler)
+      this.windowListenerEvent(true)
       document.removeEventListener('touchmove', this.documentTouchMoveHandler)
       document.removeEventListener('touchstart', this.documentTouchStartHandler)
       document.body.removeEventListener(this._pointerEvent.end, this.documentEventEndHandler)
+    },
+    windowListenerEvent (isRemove) {
+      if (isRemove) {
+        window.removeEventListener('resize', this.windowResizeHandler)
+      } else {
+        window.addEventListener('resize', this.windowResizeHandler)
+      }
     },
     windowResizeHandler () {
       // Recalculates the dropdown only in cases where the screen width changes
@@ -502,6 +509,22 @@ export default {
     },
     setSectionRef (ref) {
       this.sectionRefs.push(ref)
+    },
+    /*
+     * | ------------------------------------------------------------------------------------------------
+     * | - Utils -
+     * | ------------------------------------------------------------------------------------------------
+     */
+    identifyPointerEvents () {
+      this._pointerEvent = window.PointerEvent ? {
+        end: 'pointerup',
+        enter: 'pointerenter',
+        leave: 'pointerleave'
+      } : {
+        end: 'touchend',
+        enter: 'mouseenter',
+        leave: 'mouseleave'
+      }
     }
   }
 }
