@@ -173,7 +173,7 @@ export default {
       const elements = []
 
       this.linkRefs.forEach((link) => {
-        const el = link.$el ? link.$el : link
+        const el = link.$el || link
 
         if (el.classList.contains('vsm-has-dropdown')) {
           elements.push(el)
@@ -338,8 +338,7 @@ export default {
 
       this.$emit('open-dropdown', el)
 
-      this.$el.classList.add('vsm-overlay-active')
-      this.$el.classList.add('vsm-dropdown-active')
+      this.$el.classList.add('vsm-overlay-active', 'vsm-dropdown-active')
       this._activeDropdown = el
       this._activeDropdown.setAttribute('aria-expanded', 'true')
       this.hasDropdownEls.forEach(el => el.classList.remove('vsm-active'))
@@ -347,38 +346,39 @@ export default {
 
       const activeDataDropdown = el.getAttribute('data-dropdown')
       let direction = 'vsm-left'
-      let offsetWidth
-      let offsetHeight
-      let content
 
       this.sectionEls.forEach((item) => {
-        item.el.classList.remove('vsm-active')
-        item.el.classList.remove('vsm-left')
-        item.el.classList.remove('vsm-right')
+        item.el.classList.remove('vsm-active', 'vsm-left', 'vsm-right')
 
         if (item.name === activeDataDropdown) {
           item.el.setAttribute('aria-hidden', 'false')
           item.el.classList.add('vsm-active')
           direction = 'vsm-right'
-          offsetWidth = item.content.offsetWidth
-          offsetHeight = item.content.offsetHeight
-          content = item.content
+          this._activeSectionElement = item
         } else {
-          item.el.classList.add(direction)
           item.el.setAttribute('aria-hidden', 'true')
+          item.el.classList.add(direction)
         }
       })
 
+      this.resizeDropdown()
+    },
+    resizeDropdown () {
+      if (!this._activeSectionElement) {
+        return
+      }
+
       const bodyWidth = document.documentElement.offsetWidth
       const rootRect = this.$el.getBoundingClientRect()
-      const rect = el.getBoundingClientRect()
+      const rect = this._activeDropdown.getBoundingClientRect()
+
+      let { offsetHeight, offsetWidth } = this._activeSectionElement.content
 
       // Find the beginning of a menu item
       const leftPosition = rect.left - rootRect.left
 
-      // Step back from the button to the left so that
-      // the middle of the content is found in the
-      // center of the element
+      // Step back from the button to the left so that the middle of
+      // the content is found in the center of the element
       let centerPosition = leftPosition - (offsetWidth / 2) + (rect.width / 2)
 
       // Do not let go of the left side of the screen
@@ -411,13 +411,13 @@ export default {
         this.$el.classList.remove('vsm-no-transition')
       }, 50)
 
-      this.$refs.dropdownContainer.style.transform = `translate(${centerPosition}px, ${el.offsetTop}px)`
+      this.$refs.dropdownContainer.style.transform = `translate(${centerPosition}px, ${this._activeDropdown.offsetTop}px)`
       this.$refs.dropdownContainer.style.width = `${offsetWidth}px`
       this.$refs.dropdownContainer.style.height = `${offsetHeight}px`
 
-      this.$refs.arrow.style.transform = `translate(${leftPosition + (rect.width / 2)}px, ${el.offsetTop}px) rotate(45deg)`
-      this.$refs.background.style.transform = `translate(${centerPosition}px, ${el.offsetTop}px) scaleX(${ratioWidth}) scaleY(${ratioHeight})`
-      this.$refs.backgroundAlt.style.transform = `translateY(${content.children[0].offsetHeight / ratioHeight}px)`
+      this.$refs.arrow.style.transform = `translate(${leftPosition + (rect.width / 2)}px, ${this._activeDropdown.offsetTop}px) rotate(45deg)`
+      this.$refs.background.style.transform = `translate(${centerPosition}px, ${this._activeDropdown.offsetTop}px) scaleX(${ratioWidth}) scaleY(${ratioHeight})`
+      this.$refs.backgroundAlt.style.transform = `translateY(${this._activeSectionElement.content.children[0].offsetHeight / ratioHeight}px)`
     },
     closeDropdown () {
       if (!this._activeDropdown) {
@@ -425,26 +425,17 @@ export default {
       }
 
       this.$emit('close-dropdown', this._activeDropdown)
+      this.hasDropdownEls.forEach((el) => el.classList.remove('vsm-active'))
 
-      this.hasDropdownEls.forEach((el) => {
-        el.classList.remove('vsm-active')
-      })
-
-      const activeDropdownSection = this.$refs.dropdownContainer.querySelector('[aria-hidden="false"]')
-      if (activeDropdownSection) {
-        activeDropdownSection.setAttribute('aria-hidden', 'true')
-      }
+      this._activeSectionElement.el.setAttribute('aria-hidden', 'true')
 
       clearTimeout(this._enableTransitionTimeout)
+      this._disableTransitionTimeout = setTimeout(() => this.$el.classList.add('vsm-no-transition'), 50)
 
-      this._disableTransitionTimeout = setTimeout(() => {
-        this.$el.classList.add('vsm-no-transition')
-      }, 50)
-
-      this.$el.classList.remove('vsm-overlay-active')
-      this.$el.classList.remove('vsm-dropdown-active')
+      this.$el.classList.remove('vsm-overlay-active', 'vsm-dropdown-active')
 
       this._activeDropdown.setAttribute('aria-expanded', 'false')
+      this._activeSectionElement = undefined
       this._activeDropdown = undefined
     },
     startCloseTimeout () {
