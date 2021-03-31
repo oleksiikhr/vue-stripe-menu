@@ -339,9 +339,10 @@ Code for creating a menu as on a demo: [Link](https://github.com/Alexeykhr/vue-s
 
 `this.$refs[myVsmMobRef].closeDropdown()`
 
-| Name           | Parameters  | Description         | Return |
-| -------------- | ----------- | ------------------- | ------ |
-| closeDropdown  |             | Close dropdown menu |        |
+| Name           | Parameters  | Description                              | Return |
+| -------------- | ----------- | ---------------------------------------- | ------ |
+| closeDropdown  |             | Close dropdown menu                      |        |
+| resizeDropdown |             | Recalculate dropdown content for display |        |
 
 ### Classes
 
