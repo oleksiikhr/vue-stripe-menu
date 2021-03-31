@@ -1,6 +1,6 @@
 'use strict'
 
-export const title = '[Menu] MenuObject'
+export const title = '[Menu/Parameter] - MenuObject'
 
 export const columns = [
   { attr: 'property', name: 'Property' },

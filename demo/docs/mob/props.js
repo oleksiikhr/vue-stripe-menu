@@ -1,6 +1,6 @@
 'use strict'
 
-export const title = '[Menu] Props'
+export const title = '[Mob] Props'
 
 export const columns = [
   { attr: 'property', name: 'Property' },

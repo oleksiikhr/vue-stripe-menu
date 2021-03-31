@@ -45,7 +45,7 @@ export default {
   },
   setup() {
     const properties = [
-      menuEvents, menuObject, menuMethods, menuProperties, menuProps,
+      menuEvents, menuMethods, menuProperties, menuProps, menuObject,
       menuSlots, mobMethods, mobProps, mobSlots, classes
     ]
 

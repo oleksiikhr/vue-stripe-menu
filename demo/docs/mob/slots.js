@@ -1,6 +1,6 @@
 'use strict'
 
-export const title = '[Menu] Slots'
+export const title = '[Mob] Slots'
 
 export const columns = [
   { attr: 'name', name: 'Name' },
