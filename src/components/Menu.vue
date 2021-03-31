@@ -80,8 +80,7 @@ export default {
   name: 'VsmMenu',
   props: {
     /**
-     * An array of objects that, when initialized,
-     * turn into HTML elements
+     * An array of objects that, when initialized, turn into HTML elements
      * @example
      *  [{
      *   // display menu item
@@ -110,7 +109,7 @@ export default {
     },
     /**
      * Change root HTML element
-     * @example div
+     * @example div, section
      */
     element: {
       type: String,
@@ -148,6 +147,11 @@ export default {
       type: String,
       default: 'hover',
       validator: (val) => ['hover', 'click'].includes(val)
+    },
+    // TODO logic + docs
+    disableWindowResizeHandler: {
+      type: Boolean,
+      default: false
     }
   },
   emits: [
@@ -205,29 +209,25 @@ export default {
   },
   mounted () {
     // PointerEvent interface represents the state of a DOM event
-    this._pointerEvent = window.PointerEvent ? {
-      end: 'pointerup',
-      enter: 'pointerenter',
-      leave: 'pointerleave'
-    } : {
-      end: 'touchend',
-      enter: 'mouseenter',
-      leave: 'mouseleave'
-    }
-
-    this.registerGlobalEvents()
+    this.identifyPointerEvents()
+    this.registerGlobalListeners()
     this.registerDropdownElsEvents()
     this.registerDropdownContainerEvents()
   },
   beforeUnmount () {
-    this.unregisterGlobalEvents()
+    this.removeGlobalListeners()
   },
   methods: {
-    registerGlobalEvents () {
-      window.addEventListener('resize', this.windowResizeHandler)
-      document.addEventListener('touchmove', this.touchMoveHandler)
-      document.addEventListener('touchstart', this.touchStartHandler)
-      document.body.addEventListener(this._pointerEvent.end, this.eventEndHandler)
+    identifyPointerEvents () {
+      this._pointerEvent = window.PointerEvent ? {
+        end: 'pointerup',
+        enter: 'pointerenter',
+        leave: 'pointerleave'
+      } : {
+        end: 'touchend',
+        enter: 'mouseenter',
+        leave: 'mouseleave'
+      }
     },
     registerDropdownElsEvents (force = false) {
       this.hasDropdownEls.forEach((el) => {
@@ -245,18 +245,18 @@ export default {
         if (this.handler === 'hover') {
           el._vsmMenuHandlers = {
             focusin: () => {
-              this.stopCloseTimeout()
+              this.clearCloseDropdownTimeout()
               this.openDropdown(el)
             },
             [this._pointerEvent.enter]: (evt) => {
               if (evt.pointerType !== 'touch') {
-                this.stopCloseTimeout()
+                this.clearCloseDropdownTimeout()
                 this.openDropdown(el)
               }
             },
             [this._pointerEvent.leave]: (evt) => {
               if (evt.pointerType !== 'touch') {
-                this.startCloseTimeout()
+                this.startCloseDropdownTimeout()
               }
             }
           }
@@ -295,12 +295,12 @@ export default {
         el._vsmMenuHandlers = {
           [this._pointerEvent.enter]: (evt) => {
             if (evt.pointerType !== 'touch') {
-              this.stopCloseTimeout()
+              this.clearCloseDropdownTimeout()
             }
           },
           [this._pointerEvent.leave]: (evt) => {
             if (evt.pointerType !== 'touch') {
-              this.startCloseTimeout()
+              this.startCloseDropdownTimeout()
             }
           }
         }
@@ -317,12 +317,6 @@ export default {
       })
 
       el._vsmMenu = true
-    },
-    unregisterGlobalEvents () {
-      window.removeEventListener('resize', this.windowResizeHandler)
-      document.removeEventListener('touchmove', this.touchMoveHandler)
-      document.removeEventListener('touchstart', this.touchStartHandler)
-      document.body.removeEventListener(this._pointerEvent.end, this.eventEndHandler)
     },
     toggleDropdown (el) {
       if (this._activeDropdown === el) {
@@ -406,10 +400,8 @@ export default {
       const ratioHeight = offsetHeight / +this.baseHeight
 
       // Activate transition
-      clearTimeout(this._disableTransitionTimeout)
-      this._enableTransitionTimeout = setTimeout(() => {
-        this.$el.classList.remove('vsm-no-transition')
-      }, 50)
+      this.clearDisableTransitionTimeout()
+      this.startEnableTransitionTimeout()
 
       this.$refs.dropdownContainer.style.transform = `translate(${centerPosition}px, ${this._activeDropdown.offsetTop}px)`
       this.$refs.dropdownContainer.style.width = `${offsetWidth}px`
@@ -429,8 +421,8 @@ export default {
 
       this._activeSectionElement.el.setAttribute('aria-hidden', 'true')
 
-      clearTimeout(this._enableTransitionTimeout)
-      this._disableTransitionTimeout = setTimeout(() => this.$el.classList.add('vsm-no-transition'), 50)
+      this.clearEnableTransitionTimeout()
+      this.startDisableTransitionTimeout()
 
       this.$el.classList.remove('vsm-overlay-active', 'vsm-dropdown-active')
 
@@ -438,46 +430,73 @@ export default {
       this._activeSectionElement = undefined
       this._activeDropdown = undefined
     },
-    startCloseTimeout () {
-      this._closeDropdownTimeout = setTimeout(() => {
-        this.closeDropdown()
-      }, 50)
+    /*
+     * | ------------------------------------------------------------------------------------------------
+     * | - Utils -
+     * | ------------------------------------------------------------------------------------------------
+     */
+    startCloseDropdownTimeout () {
+      this._closeDropdownTimeout = setTimeout(() => this.closeDropdown(), 50)
     },
-    stopCloseTimeout () {
+    clearCloseDropdownTimeout () {
       clearTimeout(this._closeDropdownTimeout)
     },
-    touchMoveHandler () {
-      this._isDragging = true
+    startEnableTransitionTimeout () {
+      this._enableTransitionTimeout = setTimeout(() => this.$el.classList.remove('vsm-no-transition'), 50)
     },
-    touchStartHandler () {
-      this._isDragging = false
+    clearEnableTransitionTimeout () {
+      clearTimeout(this._closeDropdownTimeout)
     },
-    eventEndHandler () {
-      if (!this._isDragging) {
-        this.closeDropdown()
-      }
+    startDisableTransitionTimeout () {
+      this._disableTransitionTimeout = setTimeout(() => this.$el.classList.add('vsm-no-transition'), 50)
+    },
+    clearDisableTransitionTimeout () {
+      clearTimeout(this._disableTransitionTimeout)
     },
     /*
-     * When the screen is reduced, the active drop-down content
-     * does not change its size, because of this,
-     * horizontal scrolling may occur
+     * | ------------------------------------------------------------------------------------------------
+     * | - Global Handlers -
+     * | ------------------------------------------------------------------------------------------------
      */
+    registerGlobalListeners () {
+      window.addEventListener('resize', this.windowResizeHandler)
+      document.addEventListener('touchmove', this.documentTouchMoveHandler)
+      document.addEventListener('touchstart', this.documentTouchStartHandler)
+      document.body.addEventListener(this._pointerEvent.end, this.documentEventEndHandler)
+    },
+    removeGlobalListeners () {
+      window.removeEventListener('resize', this.windowResizeHandler)
+      document.removeEventListener('touchmove', this.documentTouchMoveHandler)
+      document.removeEventListener('touchstart', this.documentTouchStartHandler)
+      document.body.removeEventListener(this._pointerEvent.end, this.documentEventEndHandler)
+    },
     windowResizeHandler () {
-      // Block dropdown from closing on scroll
-      // (show/hide browser top header)
+      // Recalculates the dropdown only in cases where the screen width changes
       if (this._lastWindowWidth === window.innerWidth) {
         return
       }
 
       this._lastWindowWidth = window.innerWidth
+      this.$el.classList.add('vsm-no-transition')
 
-      this.$refs.dropdownContainer.style = null
-      this.$refs.arrow.style = null
-      this.$refs.background.style = null
-      this.$refs.backgroundAlt.style = null
-
-      this.closeDropdown()
+      this.resizeDropdown()
     },
+    documentTouchMoveHandler () {
+      this._isDragging = true
+    },
+    documentTouchStartHandler () {
+      this._isDragging = false
+    },
+    documentEventEndHandler () {
+      if (!this._isDragging) {
+        this.closeDropdown()
+      }
+    },
+    /*
+     * | ------------------------------------------------------------------------------------------------
+     * | - Refs -
+     * | ------------------------------------------------------------------------------------------------
+     */
     setLinkRef (ref) {
       this.linkRefs.push(ref)
     },
