@@ -192,7 +192,7 @@ export default {
       return this.sectionRefs.map((el) => ({
         el,
         name: el.getAttribute('data-dropdown'),
-        content: el.children[0]
+        content: el.firstChild
       }))
     }
   },
@@ -334,7 +334,7 @@ export default {
 
       this.$refs.arrow.style.transform = `translate(${leftPosition + (rect.width / 2)}px, ${this._activeDropdown.offsetTop}px) rotate(45deg)`
       this.$refs.background.style.transform = `translate(${centerPosition}px, ${this._activeDropdown.offsetTop}px) scaleX(${ratioWidth}) scaleY(${ratioHeight})`
-      this.$refs.backgroundAlt.style.transform = `translateY(${this._activeSectionElement.content.children[0].offsetHeight / ratioHeight}px)`
+      this.$refs.backgroundAlt.style.transform = `translateY(${this._activeSectionElement.content.firstChild.offsetHeight / ratioHeight}px)`
     },
     /*
      * | ------------------------------------------------------------------------------------------------
