@@ -56,8 +56,8 @@
         class="vsm-dropdown-container"
       >
         <div
-          v-for="(item, index) in menuHasDropdown"
-          :ref="setSectionRef"
+          v-for="(item, index) in itemsWithDropdown"
+          :ref="setDropdownRef"
           :key="index"
           class="vsm-dropdown-section"
           :data-dropdown="item.dropdown"
@@ -159,20 +159,14 @@ export default {
   data() {
     return {
       linkRefs: [],
-      sectionRefs: []
+      dropdownRefs: []
     }
   },
   computed: {
-    /**
-     * Menu items that have dropdown content
-     */
-    menuHasDropdown () {
+    itemsWithDropdown () {
       return this.menu.filter(item => item.dropdown)
     },
-    /**
-     * HTML menu elements that have dropdown content
-     */
-    hasDropdownEls () {
+    elementsWithDropdown () {
       const elements = []
 
       this.linkRefs.forEach((link) => {
@@ -185,34 +179,31 @@ export default {
 
       return elements
     },
-    /**
-     * HTML dropdown content
-     */
-    sectionEls () {
-      return this.sectionRefs.map((el) => ({
+    dropdownContainerItems () {
+      return this.dropdownRefs.map((el) => ({
         el,
         name: el.getAttribute('data-dropdown'),
-        content: el.firstChild
+        content: el.firstElementChild
       }))
     }
   },
   watch: {
     handler () {
-      this.registerDropdownElsEvents(true)
+      this.registerDropdownElementsEvents(true)
       this.registerDropdownContainerEvents(true)
     },
     disableWindowResizeHandler (toggle) {
       this.windowListenerEvent(toggle)
     }
   },
-  beforeUpdate() {
+  beforeUpdate () {
     this.linkRefs = []
-    this.sectionRefs = []
+    this.dropdownRefs = []
   },
   mounted () {
     this.identifyPointerEvents()
     this.registerGlobalListeners()
-    this.registerDropdownElsEvents()
+    this.registerDropdownElementsEvents()
     this.registerDropdownContainerEvents()
   },
   beforeUnmount () {
@@ -241,13 +232,13 @@ export default {
       this.$el.classList.add('vsm-overlay-active', 'vsm-dropdown-active')
       this._activeDropdown = el
       this._activeDropdown.setAttribute('aria-expanded', 'true')
-      this.hasDropdownEls.forEach(el => el.classList.remove('vsm-active'))
+      this.elementsWithDropdown.forEach(el => el.classList.remove('vsm-active'))
       el.classList.add('vsm-active')
 
       const activeDataDropdown = el.getAttribute('data-dropdown')
       let direction = 'vsm-left'
 
-      this.sectionEls.forEach((item) => {
+      this.dropdownContainerItems.forEach((item) => {
         item.el.classList.remove('vsm-active', 'vsm-left', 'vsm-right')
 
         if (item.name === activeDataDropdown) {
@@ -269,7 +260,7 @@ export default {
       }
 
       this.$emit('close-dropdown', this._activeDropdown)
-      this.hasDropdownEls.forEach((el) => el.classList.remove('vsm-active'))
+      this.elementsWithDropdown.forEach((el) => el.classList.remove('vsm-active'))
 
       this._activeSectionElement.el.setAttribute('aria-hidden', 'true')
 
@@ -334,7 +325,7 @@ export default {
 
       this.$refs.arrow.style.transform = `translate(${leftPosition + (rect.width / 2)}px, ${this._activeDropdown.offsetTop}px) rotate(45deg)`
       this.$refs.background.style.transform = `translate(${centerPosition}px, ${this._activeDropdown.offsetTop}px) scaleX(${ratioWidth}) scaleY(${ratioHeight})`
-      this.$refs.backgroundAlt.style.transform = `translateY(${this._activeSectionElement.content.firstChild.offsetHeight / ratioHeight}px)`
+      this.$refs.backgroundAlt.style.transform = `translateY(${this._activeSectionElement.content.firstElementChild.offsetHeight / ratioHeight}px)`
     },
     /*
      * | ------------------------------------------------------------------------------------------------
@@ -364,8 +355,8 @@ export default {
      * | - Events -
      * | ------------------------------------------------------------------------------------------------
      */
-    registerDropdownElsEvents (force = false) {
-      this.hasDropdownEls.forEach((el) => {
+    registerDropdownElementsEvents (force = false) {
+      this.elementsWithDropdown.forEach((el) => {
         // Events have been registered
         if (el._vsmMenu && !force) {
           return
@@ -507,8 +498,8 @@ export default {
     setLinkRef (ref) {
       this.linkRefs.push(ref)
     },
-    setSectionRef (ref) {
-      this.sectionRefs.push(ref)
+    setDropdownRef (ref) {
+      this.dropdownRefs.push(ref)
     },
     /*
      * | ------------------------------------------------------------------------------------------------

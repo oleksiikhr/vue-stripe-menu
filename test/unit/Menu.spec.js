@@ -123,7 +123,7 @@ describe('vsmMenu Component', () => {
         slots: { default: '<div>Content</div>' }
       })
 
-      expect(wrapper.vm.menuHasDropdown.length).toBe(2)
+      expect(wrapper.vm.itemsWithDropdown.length).toBe(2)
     })
 
     it('Number of elements having dropdown', () => {
@@ -132,7 +132,7 @@ describe('vsmMenu Component', () => {
         slots: { default: '<div>Content</div>' }
       })
 
-      expect(wrapper.vm.hasDropdownEls.length).toBe(2)
+      expect(wrapper.vm.elementsWithDropdown.length).toBe(2)
     })
 
     it('Number of dropdown sections', () => {
@@ -141,7 +141,7 @@ describe('vsmMenu Component', () => {
         slots: { default: '<div>Content</div>' }
       })
 
-      expect(wrapper.vm.sectionEls.length).toBe(2)
+      expect(wrapper.vm.dropdownContainerItems.length).toBe(2)
     })
   })
 
@@ -226,7 +226,7 @@ describe('vsmMenu Component', () => {
 
     describe('local', () => {
       it('Register events for each dropdown element', () => {
-        wrapper.vm.hasDropdownEls.forEach((el) => {
+        wrapper.vm.elementsWithDropdown.forEach((el) => {
           expect(el._vsmMenu).toBeTruthy()
         })
       })
@@ -236,13 +236,13 @@ describe('vsmMenu Component', () => {
       })
 
       it('$emit on openDropdown, no active dropdown', () => {
-        wrapper.vm.openDropdown(wrapper.vm.hasDropdownEls[1])
+        wrapper.vm.openDropdown(wrapper.vm.elementsWithDropdown[1])
         expect(wrapper.emitted('open-dropdown')).toBeTruthy()
       })
 
       it('$emit on openDropdown, same active dropdown', () => {
-        wrapper.vm._activeDropdown = wrapper.vm.hasDropdownEls[0]
-        wrapper.vm.openDropdown(wrapper.vm.hasDropdownEls[0])
+        wrapper.vm._activeDropdown = wrapper.vm.elementsWithDropdown[0]
+        wrapper.vm.openDropdown(wrapper.vm.elementsWithDropdown[0])
         expect(wrapper.emitted('open-dropdown')).toBeFalsy()
       })
     })
@@ -257,7 +257,7 @@ describe('vsmMenu Component', () => {
 
       sinon.spy(wrapper.vm, 'openDropdown')
 
-      const activeEl = wrapper.vm.hasDropdownEls[1]
+      const activeEl = wrapper.vm.elementsWithDropdown[1]
       wrapper.vm.toggleDropdown(activeEl)
 
       expect(wrapper.vm.openDropdown.called).toBeTruthy()
@@ -272,7 +272,7 @@ describe('vsmMenu Component', () => {
 
       sinon.spy(wrapper.vm, 'closeDropdown')
 
-      const el = wrapper.vm.hasDropdownEls[1]
+      const el = wrapper.vm.elementsWithDropdown[1]
       wrapper.vm.openDropdown(el)
       wrapper.vm.toggleDropdown(el)
 
@@ -286,7 +286,7 @@ describe('vsmMenu Component', () => {
         slots: { default: '<div>Content</div>' }
       })
 
-      const el = wrapper.vm.hasDropdownEls[1]
+      const el = wrapper.vm.elementsWithDropdown[1]
       wrapper.vm.openDropdown(el)
       expect(wrapper.vm._activeDropdown).toBe(el)
     })
@@ -297,7 +297,7 @@ describe('vsmMenu Component', () => {
         slots: { default: '<div>Content</div>' }
       })
 
-      wrapper.vm.openDropdown(wrapper.vm.hasDropdownEls[1])
+      wrapper.vm.openDropdown(wrapper.vm.elementsWithDropdown[1])
       wrapper.vm.closeDropdown()
       expect(wrapper.vm._activeDropdown).toBeUndefined()
     })
@@ -319,7 +319,7 @@ describe('vsmMenu Component', () => {
         }
       })
 
-      wrapper.vm.registerDropdownElsEvents()
+      wrapper.vm.registerDropdownElementsEvents()
     })
   })
 })
