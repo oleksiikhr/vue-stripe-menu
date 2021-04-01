@@ -250,7 +250,7 @@ export default {
           item.el.setAttribute('aria-hidden', 'false')
           item.el.classList.add('vsm-active')
           direction = 'vsm-right'
-          this._activeSectionElement = item
+          this._activeContainerItem = item
         } else {
           item.el.setAttribute('aria-hidden', 'true')
           item.el.classList.add(direction)
@@ -267,7 +267,7 @@ export default {
       this.$emit('close-dropdown', this._activeDropdown)
       this.elementsWithDropdown.forEach((el) => el.classList.remove('vsm-active'))
 
-      this._activeSectionElement.el.setAttribute('aria-hidden', 'true')
+      this._activeContainerItem.el.setAttribute('aria-hidden', 'true')
 
       this.clearEnableTransitionTimeout()
       this.startDisableTransitionTimeout()
@@ -279,7 +279,7 @@ export default {
       this._activeDropdown = undefined
     },
     resizeDropdown () {
-      if (!this._activeSectionElement) {
+      if (!this._activeContainerItem) {
         return
       }
 
@@ -287,7 +287,7 @@ export default {
       const rootRect = this.$el.getBoundingClientRect()
       const rect = this._activeDropdown.getBoundingClientRect()
 
-      let { offsetHeight, offsetWidth } = this._activeSectionElement.content
+      let { offsetHeight, offsetWidth } = this._activeContainerItem.content
 
       // Find the beginning of a menu item
       const leftPosition = rect.left - rootRect.left
@@ -325,13 +325,16 @@ export default {
       this.clearDisableTransitionTimeout()
       this.startEnableTransitionTimeout()
 
+      // offsetWidth+1 - required for content with a width of, for example 15.23 (offsetWidth = 15),
+      // due to which the content is displayed incorrectly. Use getBoundingClientRect()
+      // precision is also inappropriate due to instability
       this.$refs.dropdownContainer.style.transform = `translate(${centerPosition}px, ${dropdownOffset}px)`
-      this.$refs.dropdownContainer.style.width = `${offsetWidth}px`
+      this.$refs.dropdownContainer.style.width = `${offsetWidth+1}px`
       this.$refs.dropdownContainer.style.height = `${offsetHeight}px`
 
       this.$refs.arrow.style.transform = `translate(${leftPosition + (rect.width / 2)}px, ${dropdownOffset}px) rotate(45deg)`
       this.$refs.background.style.transform = `translate(${centerPosition}px, ${dropdownOffset}px) scaleX(${ratioWidth}) scaleY(${ratioHeight})`
-      this.$refs.backgroundAlt.style.transform = `translateY(${this._activeSectionElement.content.firstElementChild.offsetHeight / ratioHeight}px)`
+      this.$refs.backgroundAlt.style.transform = `translateY(${this._activeContainerItem.content.firstElementChild.offsetHeight / ratioHeight}px)`
     },
     /*
      * | ------------------------------------------------------------------------------------------------
