@@ -139,6 +139,11 @@ export default {
       default: 10,
       validator: (val) => +val >= 0
     },
+    dropdownOffset: {
+      type: [Number, String],
+      default: 0,
+      validator: (val) => +val >= 0
+    },
     /**
      * By default, the dropdown list drops out on hover,
      * you can change this behavior on click
@@ -312,6 +317,7 @@ export default {
       // Possible blurring font with decimal values
       centerPosition = Math.round(centerPosition)
 
+      const dropdownOffset = +this.dropdownOffset + this._activeDropdown.offsetTop
       const ratioWidth = offsetWidth / +this.baseWidth
       const ratioHeight = offsetHeight / +this.baseHeight
 
@@ -319,12 +325,12 @@ export default {
       this.clearDisableTransitionTimeout()
       this.startEnableTransitionTimeout()
 
-      this.$refs.dropdownContainer.style.transform = `translate(${centerPosition}px, ${this._activeDropdown.offsetTop}px)`
+      this.$refs.dropdownContainer.style.transform = `translate(${centerPosition}px, ${dropdownOffset}px)`
       this.$refs.dropdownContainer.style.width = `${offsetWidth}px`
       this.$refs.dropdownContainer.style.height = `${offsetHeight}px`
 
-      this.$refs.arrow.style.transform = `translate(${leftPosition + (rect.width / 2)}px, ${this._activeDropdown.offsetTop}px) rotate(45deg)`
-      this.$refs.background.style.transform = `translate(${centerPosition}px, ${this._activeDropdown.offsetTop}px) scaleX(${ratioWidth}) scaleY(${ratioHeight})`
+      this.$refs.arrow.style.transform = `translate(${leftPosition + (rect.width / 2)}px, ${dropdownOffset}px) rotate(45deg)`
+      this.$refs.background.style.transform = `translate(${centerPosition}px, ${dropdownOffset}px) scaleX(${ratioWidth}) scaleY(${ratioHeight})`
       this.$refs.backgroundAlt.style.transform = `translateY(${this._activeSectionElement.content.firstElementChild.offsetHeight / ratioHeight}px)`
     },
     /*
