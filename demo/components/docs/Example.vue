@@ -27,7 +27,7 @@ export default {
 
     return { code }
   },
-  data () {
+  data() {
     return {
       ExampleRaw
     }

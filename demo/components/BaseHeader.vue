@@ -53,7 +53,7 @@ export default {
   components: {
     StripeLogo, MobileContent, DefaultContent, HorizontalPrimaryContent, HorizontalSecondaryContent, VerticalContent
   },
-  data () {
+  data() {
     return {
       handler: 'hover',
       menu: [
@@ -65,16 +65,16 @@ export default {
     }
   },
   methods: {
-    onClick () {
+    onClick() {
       this.handler = this.handler === 'hover' ? 'click' : 'hover'
     },
-    onMouseOver (evt) {
+    onMouseOver(evt) {
       console.log('mouse over', evt)
     },
-    onOpenDropdown (el) {
+    onOpenDropdown(el) {
       console.log('open dropdown', el)
     },
-    onCloseDropdown (el) {
+    onCloseDropdown(el) {
       console.log('close dropdown', el)
     }
   }
@@ -127,11 +127,7 @@ export default {
  * Now add some styles for own classes
  */
 
-.content {
-  padding: 30px;
-}
-
-.content--secondary {
+.content, .content--secondary {
   padding: 30px;
 }
 

@@ -49,7 +49,7 @@ export default {
 
     return { codeShell, codeJs, codeScss }
   },
-  data () {
+  data() {
     return {
       shell: '$ npm i vue-stripe-menu\n' +
         '// or\n' +

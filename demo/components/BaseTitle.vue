@@ -21,7 +21,7 @@ export default {
     }
   },
   computed: {
-    generatedId () {
+    generatedId() {
       if (this.id) {
         return this.id
       }
@@ -32,7 +32,7 @@ export default {
 
       return this.title.trim().toLowerCase().replace(/[^a-z-]/gi, '-')
     },
-    generatedHref () {
+    generatedHref() {
       return this.generatedId && `#${this.generatedId}`
     }
   }

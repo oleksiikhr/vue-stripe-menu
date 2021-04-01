@@ -168,10 +168,10 @@ export default {
     }
   },
   computed: {
-    itemsWithDropdown () {
+    itemsWithDropdown() {
       return this.menu.filter(item => item.dropdown)
     },
-    elementsWithDropdown () {
+    elementsWithDropdown() {
       const elements = []
 
       this.linkRefs.forEach((link) => {
@@ -184,7 +184,7 @@ export default {
 
       return elements
     },
-    dropdownContainerItems () {
+    dropdownContainerItems() {
       return this.dropdownRefs.map((el) => ({
         el,
         name: el.getAttribute('data-dropdown'),
@@ -193,25 +193,25 @@ export default {
     }
   },
   watch: {
-    handler () {
+    handler() {
       this.registerDropdownElementsEvents(true)
       this.registerDropdownContainerEvents(true)
     },
-    disableWindowResizeHandler (toggle) {
+    disableWindowResizeHandler(toggle) {
       this.windowListenerEvent(toggle)
     }
   },
-  beforeUpdate () {
+  beforeUpdate() {
     this.linkRefs = []
     this.dropdownRefs = []
   },
-  mounted () {
+  mounted() {
     this.identifyPointerEvents()
     this.registerGlobalListeners()
     this.registerDropdownElementsEvents()
     this.registerDropdownContainerEvents()
   },
-  beforeUnmount () {
+  beforeUnmount() {
     this.removeGlobalListeners()
   },
   methods: {
@@ -220,14 +220,14 @@ export default {
      * | - Main Functions -
      * | ------------------------------------------------------------------------------------------------
      */
-    toggleDropdown (el) {
+    toggleDropdown(el) {
       if (this._activeDropdown === el) {
         this.closeDropdown()
       } else {
         this.openDropdown(el)
       }
     },
-    openDropdown (el) {
+    openDropdown(el) {
       if (this._activeDropdown === el) {
         return
       }
@@ -259,7 +259,7 @@ export default {
 
       this.resizeDropdown()
     },
-    closeDropdown () {
+    closeDropdown() {
       if (!this._activeDropdown) {
         return
       }
@@ -278,7 +278,7 @@ export default {
       this._activeSectionElement = undefined
       this._activeDropdown = undefined
     },
-    resizeDropdown () {
+    resizeDropdown() {
       if (!this._activeContainerItem) {
         return
       }
@@ -341,22 +341,22 @@ export default {
      * | - Timeout -
      * | ------------------------------------------------------------------------------------------------
      */
-    startCloseDropdownTimeout () {
+    startCloseDropdownTimeout() {
       this._closeDropdownTimeout = setTimeout(() => this.closeDropdown(), 50)
     },
-    clearCloseDropdownTimeout () {
+    clearCloseDropdownTimeout() {
       clearTimeout(this._closeDropdownTimeout)
     },
-    startEnableTransitionTimeout () {
+    startEnableTransitionTimeout() {
       this._enableTransitionTimeout = setTimeout(() => this.$el.classList.remove('vsm-no-transition'), 50)
     },
-    clearEnableTransitionTimeout () {
+    clearEnableTransitionTimeout() {
       clearTimeout(this._closeDropdownTimeout)
     },
-    startDisableTransitionTimeout () {
+    startDisableTransitionTimeout() {
       this._disableTransitionTimeout = setTimeout(() => this.$el.classList.add('vsm-no-transition'), 50)
     },
-    clearDisableTransitionTimeout () {
+    clearDisableTransitionTimeout() {
       clearTimeout(this._disableTransitionTimeout)
     },
     /*
@@ -364,7 +364,7 @@ export default {
      * | - Events -
      * | ------------------------------------------------------------------------------------------------
      */
-    registerDropdownElementsEvents (force = false) {
+    registerDropdownElementsEvents(force = false) {
       this.elementsWithDropdown.forEach((el) => {
         // Events have been registered
         if (el._vsmMenu && !force) {
@@ -412,7 +412,7 @@ export default {
         el._vsmMenu = true
       })
     },
-    registerDropdownContainerEvents (force = false) {
+    registerDropdownContainerEvents(force = false) {
       const el = this.$refs.dropdownContainer
 
       // Events have been registered
@@ -458,26 +458,26 @@ export default {
      * | - Global Listener Handlers -
      * | ------------------------------------------------------------------------------------------------
      */
-    registerGlobalListeners () {
+    registerGlobalListeners() {
       this.windowListenerEvent(this.disableWindowResizeHandler)
       document.addEventListener('touchmove', this.documentTouchMoveHandler)
       document.addEventListener('touchstart', this.documentTouchStartHandler)
       document.body.addEventListener(this._pointerEvent.end, this.documentEventEndHandler)
     },
-    removeGlobalListeners () {
+    removeGlobalListeners() {
       this.windowListenerEvent(true)
       document.removeEventListener('touchmove', this.documentTouchMoveHandler)
       document.removeEventListener('touchstart', this.documentTouchStartHandler)
       document.body.removeEventListener(this._pointerEvent.end, this.documentEventEndHandler)
     },
-    windowListenerEvent (isRemove) {
+    windowListenerEvent(isRemove) {
       if (isRemove) {
         window.removeEventListener('resize', this.windowResizeHandler)
       } else {
         window.addEventListener('resize', this.windowResizeHandler)
       }
     },
-    windowResizeHandler () {
+    windowResizeHandler() {
       // Recalculates the dropdown only in cases where the screen width changes
       if (this._lastWindowWidth === window.innerWidth) {
         return
@@ -488,13 +488,13 @@ export default {
 
       this.resizeDropdown()
     },
-    documentTouchMoveHandler () {
+    documentTouchMoveHandler() {
       this._isDragging = true
     },
-    documentTouchStartHandler () {
+    documentTouchStartHandler() {
       this._isDragging = false
     },
-    documentEventEndHandler () {
+    documentEventEndHandler() {
       if (!this._isDragging) {
         this.closeDropdown()
       }
@@ -504,10 +504,10 @@ export default {
      * | - Refs -
      * | ------------------------------------------------------------------------------------------------
      */
-    setLinkRef (ref) {
+    setLinkRef(ref) {
       this.linkRefs.push(ref)
     },
-    setDropdownRef (ref) {
+    setDropdownRef(ref) {
       this.dropdownRefs.push(ref)
     },
     /*
@@ -515,7 +515,7 @@ export default {
      * | - Utils -
      * | ------------------------------------------------------------------------------------------------
      */
-    identifyPointerEvents () {
+    identifyPointerEvents() {
       this._pointerEvent = window.PointerEvent ? {
         end: 'pointerup',
         enter: 'pointerenter',
