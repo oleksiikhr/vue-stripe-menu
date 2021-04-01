@@ -80,14 +80,13 @@ export default {
   name: 'VsmMenu',
   props: {
     /**
-     * An array of objects that, when initialized, turn into HTML elements
      * @example
      *  [{
-     *   // display menu item
+     *   // display menu item, can be overridden with slots
      *   title: 'News',
      *   // activate dropdown content, must be unique!
      *   dropdown: 'news',
-     *   // change the default HTML element (element/component)
+     *   // change the default HTML element (element/global component)
      *   element: 'router-link',
      *   // v-bind accepts
      *   attributes: {
@@ -99,7 +98,7 @@ export default {
      *     mouseover: (evt) => console.log('news hover', evt)
      *   },
      *   // other attributes
-     *   new_item: true,
+     *   customAttribute: true,
      *  }]
      * },
      */
@@ -275,7 +274,7 @@ export default {
       this.$el.classList.remove('vsm-overlay-active', 'vsm-dropdown-active')
 
       this._activeDropdown.setAttribute('aria-expanded', 'false')
-      this._activeSectionElement = undefined
+      this._activeContainerItem = undefined
       this._activeDropdown = undefined
     },
     resizeDropdown() {

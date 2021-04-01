@@ -12,16 +12,17 @@
         <stripe-logo />
       </li>
     </template>
-    <!--Add a title using the slot:-->
-    <!--<template #title="data">{{ data.item.title }}</template>-->
+    <template #title="{ item }">
+      {{ item.title }}
+    </template>
     <template #default="{ item }">
       <component
         :is="item.content"
-        class="content"
+        class="content content--primary"
       />
       <component
         :is="item.secondary"
-        class="content--secondary"
+        class="content content--secondary"
       />
     </template>
     <template #after-nav>
@@ -82,11 +83,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../scss/variables";
-
-/*
- * Override some styles for library
- */
+/* Customizing the library structure like on Stripe */
 
 .vsm-menu {
   position: relative;
@@ -94,7 +91,7 @@ export default {
     margin: 0 10px;
   }
   ul {
-    max-width: $laptop;
+    max-width: 1024px;
     margin: 0 auto;
   }
 }
@@ -123,11 +120,9 @@ export default {
   }
 }
 
-/*
- * Now add some styles for own classes
- */
+/* Other styles */
 
-.content, .content--secondary {
+.content {
   padding: 30px;
 }
 

@@ -56,10 +56,9 @@ export default {
         '$ yarn add vue-stripe-menu',
       vue: '// .js file\n\n' +
         'import Vue from \'Vue\'\n' +
-        'import VueStripeMenu from \'vue-stripe-menu\'\n\n' +
-        'Vue.use(VueStripeMenu)\n\n' +
-        '// Import build styles\n' +
-        'import \'vue-stripe-menu/dist/vue-stripe-menu.css\'',
+        'import VueStripeMenu from \'vue-stripe-menu\'\n' +
+        'import \'vue-stripe-menu/dist/vue-stripe-menu.css\'\n\n' +
+        'Vue.use(VueStripeMenu)',
       scss: '// .scss file\n\n' +
         '// You can resize for "@media only screen":\n' +
         '$vsm-media: 500px;\n\n' +
