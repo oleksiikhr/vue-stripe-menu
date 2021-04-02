@@ -76,6 +76,9 @@
 </template>
 
 <script>
+const BASE_WIDTH = 400;
+const BASE_HEIGHT = 400;
+
 export default {
   name: 'VsmMenu',
   props: {
@@ -113,21 +116,6 @@ export default {
     element: {
       type: String,
       default: 'header'
-    },
-    /**
-     * Problems displaying the menu? Try changing the two lower
-     * properties to the average width and height
-     * of your dropdown content.
-     */
-    baseWidth: {
-      type: [Number, String],
-      default: 380,
-      validator: (val) => +val > 0
-    },
-    baseHeight: {
-      type: [Number, String],
-      default: 400,
-      validator: (val) => +val > 0
     },
     /**
      * Dropdown content does not go beyond screen size
@@ -317,8 +305,8 @@ export default {
       centerPosition = Math.round(centerPosition)
 
       const dropdownOffset = +this.dropdownOffset + this._activeDropdown.offsetTop
-      const ratioWidth = offsetWidth / +this.baseWidth
-      const ratioHeight = offsetHeight / +this.baseHeight
+      const ratioWidth = offsetWidth / BASE_WIDTH
+      const ratioHeight = offsetHeight / BASE_HEIGHT
 
       // Activate transition
       this.clearDisableTransitionTimeout()
