@@ -76,6 +76,7 @@
 </template>
 
 <script>
+// This values depends on .vsm-background styles (width/height)
 const BASE_WIDTH = 400;
 const BASE_HEIGHT = 400;
 

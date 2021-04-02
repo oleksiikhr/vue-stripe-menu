@@ -1,6 +1,6 @@
 <template>
   <li
-    :class="['vsm-section', 'vsm-section_mob', {
+    :class="['vsm-section', 'vsm-section_mob', 'vsm-mob-show', {
       'vsm-open': active
     }]"
   >

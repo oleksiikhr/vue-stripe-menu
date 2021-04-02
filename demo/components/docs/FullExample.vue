@@ -1,6 +1,6 @@
 <template>
   <div>
-    <base-title title="Example" />
+    <base-title title="Full Example" />
     <pre><code
       ref="code"
       class="javascript"

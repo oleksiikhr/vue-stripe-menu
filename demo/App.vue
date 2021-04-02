@@ -3,7 +3,7 @@
     <base-header />
     <main>
       <install-docs />
-      <example-docs />
+      <full-example-docs />
       <example-codepen-docs />
       <properties-docs
         v-for="property in properties"
@@ -17,8 +17,8 @@
 
 <script>
 import ExampleCodepenDocs from './components/docs/ExampleCodepen'
+import FullExampleDocs from './components/docs/FullExample'
 import PropertiesDocs from './components/docs/Properties'
-import ExampleDocs from './components/docs/Example'
 import InstallDocs from './components/docs/Install'
 import BaseHeader from './components/BaseHeader'
 import BaseFooter from './components/BaseFooter'
@@ -37,8 +37,8 @@ import * as classes from './docs/classes'
 export default {
   components: {
     ExampleCodepenDocs,
+    FullExampleDocs,
     PropertiesDocs,
-    ExampleDocs,
     InstallDocs,
     BaseHeader,
     BaseFooter

@@ -1,8 +1,6 @@
 <template>
   <vsm-menu
     :menu="menu"
-    :base-width="380"
-    :base-height="400"
     :screen-offset="10"
     element="header"
     handler="hover"
