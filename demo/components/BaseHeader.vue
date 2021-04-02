@@ -86,13 +86,11 @@ export default {
 /* Customizing the library structure like on Stripe */
 
 .vsm-menu {
-  position: relative;
-  nav {
+  max-width: 1024px;
+  width: 100%;
+  margin: 0 auto;
+  > nav {
     margin: 0 10px;
-  }
-  ul {
-    max-width: 1024px;
-    margin: 0 auto;
   }
 }
 
@@ -107,27 +105,22 @@ export default {
   justify-content: center;
   > * {
     padding: 0 25px;
-    font-weight: 500;
-    font-family: inherit;
   }
 }
-
-.vsm-link {
-  color: #6772e5;
-  &.vsm-active,
-  &:hover {
-    color: #32325d;
-  }
-}
-
-/* Other styles */
 
 .content {
   padding: 30px;
 }
 
-.rnd--open {
-  cursor: pointer;
-  user-select: none;
+@media screen and (max-width: 768px) {
+  .vsm-mob-show {
+    display: block;
+  }
+  .vsm-mob-hide {
+    display: none;
+  }
+  .vsm-mob-full {
+    flex-grow: 1;
+  }
 }
 </style>
