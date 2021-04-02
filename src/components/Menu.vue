@@ -350,7 +350,7 @@ export default {
       this._enableTransitionTimeout = setTimeout(() => this.$el.classList.remove('vsm-no-transition'), 50)
     },
     clearEnableTransitionTimeout() {
-      clearTimeout(this._closeDropdownTimeout)
+      clearTimeout(this._enableTransitionTimeout)
     },
     startDisableTransitionTimeout() {
       this._disableTransitionTimeout = setTimeout(() => this.$el.classList.add('vsm-no-transition'), 50)
