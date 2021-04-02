@@ -12,7 +12,7 @@
   }
   .vsm-dropdown {
     position: absolute;
-    z-index: 1000;
+    z-index: $vsm-menu-index;
     left: 0;
     right: 0;
     top: $vsm-menu-link-height;
