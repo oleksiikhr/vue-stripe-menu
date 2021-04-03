@@ -11,7 +11,7 @@
       ref="codeJs"
       class="javascript"
     >{{ vue }}</code></pre>
-    <p>Customize styles:</p>
+    <p>Add styles:</p>
     <pre><code
       ref="codeCss"
       class="css"
