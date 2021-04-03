@@ -3,7 +3,7 @@
     :is="element"
     class="vsm-menu vsm-no-transition"
   >
-    <nav>
+    <nav class="vsm-nav">
       <ul
         ref="root"
         class="vsm-root"

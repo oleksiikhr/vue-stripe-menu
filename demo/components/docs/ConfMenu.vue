@@ -1,20 +1,29 @@
 <template>
-  <div class="w--wrap">
+  <div>
     <base-title title="Customize" />
     <component :is="'style'">
       {{ styles }}
     </component>
-    <pre>{{ styles }}</pre>
+    <!--<pre>{{ styles }}</pre>-->
   </div>
 </template>
 
 <script>
-import BaseTitle from './base/Title'
+import BaseTitle from '../base/Title'
 
 export default {
   components: {
     BaseTitle
   },
+  props: {
+    css: {
+      type: String,
+      default: ''
+    }
+  },
+  emits: [
+    'update:css'
+  ],
   data() {
     return {
       borderRadius: '4px',
@@ -44,7 +53,8 @@ export default {
   computed: {
     styles() {
       return ''+
-`.vsm-menu {
+`/* https://github.com/Alexeykhr/vue-stripe-menu/blob/master/src/scss/menu.scss#L6 */
+.vsm-menu {
   /* Radius for dropdown content */
   --vsm-border-radius: ${this.borderRadius};
 
@@ -75,12 +85,58 @@ export default {
   --vsm-shadow: ${this.shadow};
 }
 
+/* https://github.com/Alexeykhr/vue-stripe-menu/blob/master/src/scss/mob.scss#L6 */
 .vsm-mob {
   --vsm-mob-hamburger-size: ${this.mobHamburgerSize};
   --vsm-mob-close-size: ${this.mobCloseSize};
   --vsm-mob-background: ${this.mobBackground};
   --vsm-mob-shadow: ${this.mobShadow};
+}
+
+.vsm-menu {
+  max-width: 1024px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.vsm-nav {
+  margin: 0 10px;
+}
+
+.vsm-root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vsm-section_menu {
+  flex: 1 1 auto;
+  justify-content: center;
+}
+
+.vsm-link {
+  padding: 0 25px;
+}
+
+@media screen and (max-width: 768px) {
+  .vsm-mob-show {
+    display: block;
+  }
+  .vsm-mob-hide {
+    display: none;
+  }
+  .vsm-mob-full {
+    flex-grow: 1;
+  }
 }`
+    }
+  },
+  watch: {
+    styles: {
+      handler(val) {
+        this.$emit('update:css', val)
+      },
+      immediate: true
     }
   }
 }

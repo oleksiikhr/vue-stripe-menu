@@ -2,8 +2,8 @@
   <div>
     <base-header />
     <main>
-      <conf-menu />
-      <install-docs />
+      <conf-menu-docs v-model:css="css" />
+      <install-docs :css="css" />
       <full-example-docs />
       <example-codepen-docs />
       <properties-docs
@@ -20,10 +20,10 @@
 import ExampleCodepenDocs from './components/docs/ExampleCodepen'
 import FullExampleDocs from './components/docs/FullExample'
 import PropertiesDocs from './components/docs/Properties'
+import ConfMenuDocs from './components/docs/ConfMenu'
 import InstallDocs from './components/docs/Install'
 import BaseHeader from './components/BaseHeader'
 import BaseFooter from './components/BaseFooter'
-import ConfMenu from './components/ConfMenu'
 
 import * as menuEvents from './docs/menu/events'
 import * as menuObject from './docs/menu/menuObject'
@@ -41,10 +41,10 @@ export default {
     ExampleCodepenDocs,
     FullExampleDocs,
     PropertiesDocs,
+    ConfMenuDocs,
     InstallDocs,
     BaseHeader,
-    BaseFooter,
-    ConfMenu
+    BaseFooter
   },
   setup() {
     const properties = [
@@ -53,6 +53,11 @@ export default {
     ]
 
     return { properties }
+  },
+  data() {
+    return {
+      css: ''
+    }
   }
 }
 </script>
