@@ -42,11 +42,5 @@ export const rows = [
     description: 'On what event to open dropdown menu',
     type: 'String',
     default: 'hover'
-  },
-  {
-    property: 'disable-window-resize-handler',
-    description: 'Remove resize listener from window',
-    type: 'Boolean',
-    default: 'false'
   }
 ]

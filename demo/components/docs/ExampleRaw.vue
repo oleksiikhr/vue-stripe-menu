@@ -4,7 +4,6 @@
     element="header"
     handler="hover"
     :screen-offset="10"
-    :disable-window-resize-handler="false"
     @open-dropdown="onOpenDropdown"
     @close-dropdown="onCloseDropdown"
   >

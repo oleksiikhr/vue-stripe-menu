@@ -2,9 +2,7 @@
   <vsm-menu
     ref="header"
     :menu="menu"
-    :handler="handler"
-    :screen-offset="screenOffset"
-    :disable-window-resize-handler="disableWindowResizeHandler"
+    v-bind="$attrs"
   >
     <template #before-nav>
       <li class="vsm-section vsm-mob-full">
@@ -36,20 +34,7 @@ export default {
   components: {
     StripeLogo, MobileContent, CompanyContent, DevelopersContent, ProductsContent
   },
-  props: {
-    handler: {
-      type: String,
-      default: 'hover'
-    },
-    screenOffset: {
-      type: Number,
-      default: 10
-    },
-    disableWindowResizeHandler: {
-      type: Boolean,
-      default: false
-    }
-  },
+  inheritAttrs: false,
   data() {
     return {
       menu: [

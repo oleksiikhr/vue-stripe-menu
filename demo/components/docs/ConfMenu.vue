@@ -4,15 +4,30 @@
     <component :is="'style'">
       {{ styles }}
     </component>
-    <div>
+    <div class="mb-10">
       <strong>Props</strong>
+      <div
+        v-for="item in vsmProps"
+        :key="item.name"
+        class="property-item"
+      >
+        <label>
+          <span>{{ item.property }}:</span>
+          <input
+            v-model="item.value"
+            :placeholder="item.initial"
+            @input="item.onInput"
+          />
+        </label>
+        <small v-if="item.desc">// {{ item.desc }}</small>
+      </div>
     </div>
     <div>
       <strong>Styles</strong>
       <div
         v-for="(group, index) in allStyles"
         :key="index"
-        class="group-styles"
+        class="mb-10"
       >
         <div
           v-for="item in group"
@@ -41,13 +56,14 @@ export default {
     BaseTitle
   },
   emits: [
-    'on-css', 'on-handler', 'on-screen-offset', 'on-disable-window-resize-handler'
+    'on-css', 'on-handler', 'on-screen-offset'
   ],
   data() {
     return {
-      handler: 'hover',
-      screenOffset: 10,
-      disableWindowResizeHandler: false,
+      vsmProps: [
+        { property: 'handler', value: 'hover', desc: 'hover/click', onInput: (val) => ['hover', 'click'].includes(val.target.value) && this.$emit('on-handler', val.target.value) },
+        { property: 'screenOffset', value: 10, desc: 'Indent dropdown from screen edges', onInput: (val) => this.$emit('on-screen-offset', val.target.value) }
+      ],
 
       // Initial values from *.scss
       vsmMenuStyles: [
@@ -74,11 +90,11 @@ export default {
         { property: '--vsm-mob-shadow', value: null, initial: 'var(--vsm-shadow)' },
       ].map((item) => ({ ...item, value: item.initial })),
       generalStyles: [
-        { property: 'max-width', value: null, initial: '1024px', handler: (val) => val && `.vsm-menu {\n  max-width: ${val};\n  width: 100%;\n  margin: 0 auto;\n}` },
+        { property: 'max-width', value: null, initial: '1024px', desc: 'for vsm-menu', handler: (val) => val && `.vsm-menu {\n  max-width: ${val};\n  width: 100%;\n  margin: 0 auto;\n}` },
         { property: 'margin', value: null, initial: '0 10px', handler: (val) => val && `.vsm-nav {\n  margin: ${val};\n}` },
         { property: 'position', value: null, initial: 'center', desc: 'left/center/right', handler: this.positionStyleHandler },
-        { property: 'link indent', value: null, initial: '0 25px', handler: (val) => val && `.vsm-link {\n  padding: ${val};\n}` },
-        { property: '@media mobile', value: null, initial: '768px', handler: (val) => val && `@media screen and (max-width: ${val}) {\n  .vsm-mob-show {\n    display: block;\n  }\n  .vsm-mob-hide {\n    display: none;\n  }\n}` },
+        { property: 'link indent', value: null, initial: '0 25px', desc: 'padding between links', handler: (val) => val && `.vsm-link {\n  padding: ${val};\n}` },
+        { property: '@media mobile', value: null, initial: '768px', handler: (val) => val && `@media screen and (max-width: ${val}) {\n  .vsm-mob-show {\n    display: block;\n  }\n  .vsm-mob-hide {\n    display: none;\n  }\n  .vsm-mob-full {\n    flex-grow: 1;\n  }\n}` },
       ].map((item) => ({ ...item, value: item.initial }))
     }
   },
@@ -149,7 +165,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.group-styles {
+.mb-10 {
   margin-bottom: 10px;
 }
 

@@ -140,10 +140,6 @@ export default {
       type: String,
       default: 'hover',
       validator: (val) => ['hover', 'click'].includes(val)
-    },
-    disableWindowResizeHandler: {
-      type: Boolean,
-      default: false
     }
   },
   emits: [
@@ -184,9 +180,6 @@ export default {
     handler() {
       this.registerDropdownElementsEvents(true)
       this.registerDropdownContainerEvents(true)
-    },
-    disableWindowResizeHandler(toggle) {
-      this.windowListenerEvent(toggle)
     }
   },
   beforeUpdate() {
@@ -447,23 +440,16 @@ export default {
      * | ------------------------------------------------------------------------------------------------
      */
     registerGlobalListeners() {
-      this.windowListenerEvent(this.disableWindowResizeHandler)
+      window.addEventListener('resize', this.windowResizeHandler)
       document.addEventListener('touchmove', this.documentTouchMoveHandler)
       document.addEventListener('touchstart', this.documentTouchStartHandler)
       document.body.addEventListener(this._pointerEvent.end, this.documentEventEndHandler)
     },
     removeGlobalListeners() {
-      this.windowListenerEvent(true)
+      window.removeEventListener('resize', this.windowResizeHandler)
       document.removeEventListener('touchmove', this.documentTouchMoveHandler)
       document.removeEventListener('touchstart', this.documentTouchStartHandler)
       document.body.removeEventListener(this._pointerEvent.end, this.documentEventEndHandler)
-    },
-    windowListenerEvent(isRemove) {
-      if (isRemove) {
-        window.removeEventListener('resize', this.windowResizeHandler)
-      } else {
-        window.addEventListener('resize', this.windowResizeHandler)
-      }
     },
     windowResizeHandler() {
       // Recalculates the dropdown only in cases where the screen width changes

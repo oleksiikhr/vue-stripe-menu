@@ -3,14 +3,12 @@
     <base-header
       :handler="handler"
       :screen-offset="screenOffset"
-      :disable-window-resize-handler="disableWindowResizeHandler"
     />
     <main>
       <conf-menu-docs
         @on-css="onChangeCss"
         @on-handler="onChangeHandler"
         @on-screen-offset="onChangeScreenOffset"
-        @on-disable-window-resize-handler="onChangeDisableWindowResizeHandler"
       />
       <install-docs :css="css" />
       <full-example-docs />
@@ -67,8 +65,7 @@ export default {
     return {
       css: '',
       handler: 'hover',
-      screenOffset: 10,
-      disableWindowResizeHandler: false
+      screenOffset: 10
     }
   },
   methods: {
@@ -80,9 +77,6 @@ export default {
     },
     onChangeScreenOffset(val) {
       this.screenOffset = val
-    },
-    onChangeDisableWindowResizeHandler(val) {
-      this.disableWindowResizeHandler = val
     }
   }
 }
