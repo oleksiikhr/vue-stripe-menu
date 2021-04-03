@@ -30,7 +30,7 @@
 <script>
 import { onMounted, ref } from 'vue'
 import highlight from 'highlight.js'
-import BaseTitle from '../BaseTitle'
+import BaseTitle from '../base/Title'
 
 export default {
   components: {

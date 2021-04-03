@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import BaseTitle from '../BaseTitle'
+import BaseTitle from '../base/Title'
 
 export default {
   components: {
