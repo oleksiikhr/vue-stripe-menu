@@ -11,10 +11,10 @@ export const columns = [
 export const rows = [
   {
     name: 'default',
-    description: 'The main content for the dropdown list'
+    description: 'Main content'
   },
   {
     name: 'hamburger',
-    description: 'Replace button to open dropdown'
+    description: 'Replace hamburger button'
   }
 ]

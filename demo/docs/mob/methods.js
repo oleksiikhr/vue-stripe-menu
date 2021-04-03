@@ -12,8 +12,6 @@ export const columns = [
 export const rows = [
   {
     name: 'closeDropdown',
-    parameters: '',
-    description: 'Close dropdown menu',
-    return: ''
+    description: 'Close the dropdown menu',
   }
 ]

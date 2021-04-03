@@ -90,7 +90,7 @@ export default {
      *   title: 'News',
      *   // activate dropdown content, must be unique!
      *   dropdown: 'news',
-     *   // change the default HTML element (element/global component)
+     *   // change the default HTMLElement (element/global component)
      *   element: 'router-link',
      *   // v-bind accepts
      *   attributes: {
@@ -111,7 +111,7 @@ export default {
       required: true
     },
     /**
-     * Change root HTML element
+     * Change root HTMLElement
      * @example div, section
      */
     element: {

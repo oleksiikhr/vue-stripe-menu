@@ -9,11 +9,11 @@ export const columns = [
 
 export const rows = [
   {
-    name: 'vsm-mob-hide',
-    description: 'Hide HTML elements in mobile design'
+    name: 'vsm-mob-show',
+    description: 'Show HTMLElements in mobile design'
   },
   {
-    name: 'vsm-mob-full',
-    description: 'Add flex-grow: 1, see Demo example'
+    name: 'vsm-mob-hide',
+    description: 'Hide HTMLElements in mobile design'
   }
 ]
