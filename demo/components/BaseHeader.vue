@@ -5,8 +5,6 @@
     :handler="handler"
     :screen-offset="screenOffset"
     :disable-window-resize-handler="disableWindowResizeHandler"
-    @open-dropdown="onOpenDropdown"
-    @close-dropdown="onCloseDropdown"
   >
     <template #before-nav>
       <li class="vsm-section vsm-mob-full">
@@ -34,8 +32,6 @@ import CompanyContent from './content/CompanyContent'
 import StripeLogo from '../components/svg/StripeLogo'
 import MobileContent from './content/MobileContent'
 
-/* eslint-disable no-console */
-
 export default {
   components: {
     StripeLogo, MobileContent, CompanyContent, DevelopersContent, ProductsContent
@@ -57,22 +53,11 @@ export default {
   data() {
     return {
       menu: [
-        { title: 'Company', dropdown: 'company', component: 'CompanyContent', listeners: { mouseover: this.onMouseOver } },
+        { title: 'Company', dropdown: 'company', component: 'CompanyContent' },
         { title: 'Developers', dropdown: 'developers', component: 'DevelopersContent' },
-        { title: 'Products', dropdown: 'products', component: 'ProductsContent', element: 'span' },
-        { title: 'Source', attributes: { href: 'https://github.com/Alexeykhr/vue-stripe-menu/blob/master/demo/components/BaseHeader.vue', class: ['some-class1', { 'some-class2': true }], target: '_blank' } }
+        { title: 'Products', dropdown: 'products', component: 'ProductsContent' },
+        { title: 'Source', attributes: { href: 'https://github.com/Alexeykhr/vue-stripe-menu/blob/master/demo/components/BaseHeader.vue', target: '_blank' } }
       ]
-    }
-  },
-  methods: {
-    onMouseOver(evt) {
-      console.log('mouseover', evt)
-    },
-    onOpenDropdown(el) {
-      console.log('open dropdown', el)
-    },
-    onCloseDropdown(el) {
-      console.log('close dropdown', el)
     }
   }
 }

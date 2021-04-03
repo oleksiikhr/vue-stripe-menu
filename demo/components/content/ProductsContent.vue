@@ -53,7 +53,6 @@ export default {
 .flex {
   display: flex;
   > div {
-    padding: 30px;
     // Making background is for both blocks to prevent
     // wrong display roundings
     &.primary {

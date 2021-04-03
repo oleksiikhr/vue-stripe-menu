@@ -1,8 +1,17 @@
 <template>
   <div>
-    <base-header />
+    <base-header
+      :handler="handler"
+      :screen-offset="screenOffset"
+      :disable-window-resize-handler="disableWindowResizeHandler"
+    />
     <main>
-      <conf-menu-docs v-model:css="css" />
+      <conf-menu-docs
+        @on-css="onChangeCss"
+        @on-handler="onChangeHandler"
+        @on-screen-offset="onChangeScreenOffset"
+        @on-disable-window-resize-handler="onChangeDisableWindowResizeHandler"
+      />
       <install-docs :css="css" />
       <full-example-docs />
       <example-codepen-docs />
@@ -56,7 +65,24 @@ export default {
   },
   data() {
     return {
-      css: ''
+      css: '',
+      handler: 'hover',
+      screenOffset: 10,
+      disableWindowResizeHandler: false
+    }
+  },
+  methods: {
+    onChangeCss(val) {
+      this.css = val
+    },
+    onChangeHandler(val) {
+      this.handler = val
+    },
+    onChangeScreenOffset(val) {
+      this.screenOffset = val
+    },
+    onChangeDisableWindowResizeHandler(val) {
+      this.disableWindowResizeHandler = val
     }
   }
 }

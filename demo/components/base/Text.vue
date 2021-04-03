@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import rnd from '../../sciprts/rnd'
+import rnd from '../../scripts/rnd'
 import { computed } from 'vue'
 
 export default {

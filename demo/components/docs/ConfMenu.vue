@@ -4,7 +4,31 @@
     <component :is="'style'">
       {{ styles }}
     </component>
-    <!--<pre>{{ styles }}</pre>-->
+    <div>
+      <strong>Props</strong>
+    </div>
+    <div>
+      <strong>Styles</strong>
+      <div
+        v-for="(group, index) in allStyles"
+        :key="index"
+      >
+        <div
+          v-for="item in group"
+          :key="item.property"
+          class="property-item"
+        >
+          <label>
+            <span>{{ item.property }}:</span>
+            <input
+              v-model="item.value"
+              :placeholder="item.initial"
+            />
+            <small v-if="item.desc">// {{ item.desc }}</small>
+          </label>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -15,86 +39,72 @@ export default {
   components: {
     BaseTitle
   },
-  props: {
-    css: {
-      type: String,
-      default: ''
-    }
-  },
   emits: [
-    'update:css'
+    'on-css', 'on-handler', 'on-screen-offset', 'on-disable-window-resize-handler'
   ],
   data() {
     return {
-      borderRadius: '4px',
-      transformContent: '150px',
-      arrowSize: '12px',
-      arrowShadow: '-3px -3px 5px rgba(82, 95, 127, .04)',
-      arrowBorderRadius: '4px 0 0 0',
-      index: '1000',
-      lineHeight: '50px',
-      background: '#fff',
-      backgroundAlt: '#f6f9fc',
-      backgroundArrow: 'var(--vsm-background)',
-      color: '#6772e5',
-      colorHover: '#32325d',
-      transition: '.25s',
-      transitionLink: '.1s ease',
-      shadow: '0 50px 100px -20px rgba(50, 50, 93, .25),' +
-        '\n                0 30px 60px -30px rgba(0, 0, 0, .3),' +
-        '\n                0 -18px 60px -10px rgba(0, 0, 0, .025)',
+      handler: 'hover',
+      screenOffset: 10,
+      disableWindowResizeHandler: false,
 
-      mobHamburgerSize: '50px',
-      mobCloseSize: '50px',
-      mobBackground: 'var(--vsm-background)',
-      mobShadow: 'var(--vsm-shadow)'
+      // Initial values from *.scss
+      vsmMenuStyles: [
+        { property: '--vsm-border-radius', value: null, initial: '4px', desc: 'Some content' },
+        { property: '--vsm-transform-content', value: null, initial: '150px' },
+        { property: '--vsm-arrow-size', value: null, initial: '12px' },
+        { property: '--vsm-arrow-shadow', value: null, initial: '-3px -3px 5px rgba(82, 95, 127, .04)' },
+        { property: '--vsm-arrow-border-radius', value: null, initial: '4px 0 0 0' },
+        { property: '--vsm-index', value: null, initial: '1000' },
+        { property: '--vsm-link-height', value: null, initial: '50px' },
+        { property: '--vsm-background', value: null, initial: '#fff' },
+        { property: '--vsm-background-alt', value: null, initial: '#f6f9fc' },
+        { property: '--vsm-background-arrow', value: null, initial: 'var(--vsm-background)' },
+        { property: '--vsm-color', value: null, initial: '#6772e5' },
+        { property: '--vsm-color-hover', value: null, initial: '#32325d' },
+        { property: '--vsm-transition', value: null, initial: '.25s' },
+        { property: '--vsm-transition-link', value: null, initial: '.1s ease' },
+        { property: '--vsm-shadow', value: null, initial: '0 50px 100px -20px rgba(50, 50, 93, .25), 0 30px 60px -30px rgba(0, 0, 0, .3), 0 -18px 60px -10px rgba(0, 0, 0, .025)' },
+      ],
+      vsmMobStyles: [
+        { property: '--vsm-mob-hamburger-size', value: null, initial: '50px' },
+        { property: '--vsm-mob-close-size', value: null, initial: '50px' },
+        { property: '--vsm-mob-background', value: null, initial: 'var(--vsm-background)' },
+        { property: '--vsm-mob-shadow', value: null, initial: 'var(--vsm-shadow)' },
+      ],
+      generalStyles: [
+        { property: 'max-width', value: '1024px', initial: '1024px' }
+      ]
     }
   },
   computed: {
-    styles() {
+    allStyles() {
+      return [this.vsmMenuStyles, this.vsmMobStyles, this.generalStyles]
+    },
+    vsmMenuStylesString() {
+      let result = ''
+
+      this.vsmMenuStyles.forEach((item) => {
+        if (item.value && item.value !== item.initial) {
+          result += `  ${item.property}: ${item.value};\n`
+        }
+      })
+
+      return result
+    },
+    vsmMobStylesString() {
+      return this.vsmMobStyles.reduce((result, item) => {
+        if (item.value && item.value !== item.initial) {
+          result += `  ${item.property}: ${item.value};\n`
+        }
+
+        return result
+      }, '')
+    },
+    generalStylesString() {
       return ''+
-`/* https://github.com/Alexeykhr/vue-stripe-menu/blob/master/src/scss/menu.scss#L6 */
-.vsm-menu {
-  /* Radius for dropdown content */
-  --vsm-border-radius: ${this.borderRadius};
-
-  /* Animating content in dropdown menu when changing active menu */
-  --vsm-transform-content: ${this.transformContent};
-
-  /* Dropdown arrow */
-  --vsm-arrow-size: ${this.arrowSize};
-  --vsm-arrow-shadow: ${this.arrowShadow};
-  --vsm-arrow-border-radius: ${this.arrowBorderRadius};
-
-  --vsm-index: ${this.index};
-  --vsm-link-height: ${this.lineHeight};
-
-  --vsm-background: ${this.background};
-  --vsm-background-alt: ${this.backgroundAlt};
-  --vsm-background-arrow: ${this.backgroundArrow};
-
-  /* Primary color for links, hamburger/close button */
-  --vsm-color: ${this.color};
-  --vsm-color-hover: ${this.colorHover};
-
-  /* Speed to change dropdown content and hover on links, hamburger */
-  --vsm-transition: ${this.transition};
-  --vsm-transition-link: ${this.transitionLink};
-
-  /* Dropdown content (menu + mob) */
-  --vsm-shadow: ${this.shadow};
-}
-
-/* https://github.com/Alexeykhr/vue-stripe-menu/blob/master/src/scss/mob.scss#L6 */
-.vsm-mob {
-  --vsm-mob-hamburger-size: ${this.mobHamburgerSize};
-  --vsm-mob-close-size: ${this.mobCloseSize};
-  --vsm-mob-background: ${this.mobBackground};
-  --vsm-mob-shadow: ${this.mobShadow};
-}
-
-.vsm-menu {
-  max-width: 1024px;
+`.vsm-menu {
+  max-width: ${this.generalStyles[0].value};
   width: 100%;
   margin: 0 auto;
 }
@@ -129,15 +139,39 @@ export default {
     flex-grow: 1;
   }
 }`
-    }
+    },
+    styles() {
+      let result = ''
+
+      result = this.vsmMenuStylesString && `.vsm-menu {\n${this.vsmMenuStylesString}}\n\n`
+      result += this.vsmMobStylesString && `.vsm-section_mob {\n${this.vsmMobStylesString}}\n\n`
+      result += this.generalStylesString
+
+      return result.trim()
+    },
   },
   watch: {
     styles: {
       handler(val) {
-        this.$emit('update:css', val)
+        this.$emit('on-css', val)
       },
       immediate: true
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.property-item {
+  margin-bottom: 5px;
+  label > * {
+    margin: 0 3px;
+    &:first-child {
+      margin-left: 0;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+</style>

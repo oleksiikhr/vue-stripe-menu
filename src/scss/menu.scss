@@ -182,7 +182,7 @@
   will-change: transform, width, height;
   // Content is cut (overflow hidden), so border-radius can not show
   // add a few pixels to display correctly
-  border-radius: var(--vsm-border-radius) + 2px;
+  border-radius: calc(var(--vsm-border-radius) + 2px);
   transition-property: transform, width, height;
 }
 
