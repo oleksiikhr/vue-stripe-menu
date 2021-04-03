@@ -2,6 +2,7 @@
   <div>
     <base-header />
     <main>
+      <conf-menu />
       <install-docs />
       <full-example-docs />
       <example-codepen-docs />
@@ -22,6 +23,7 @@ import PropertiesDocs from './components/docs/Properties'
 import InstallDocs from './components/docs/Install'
 import BaseHeader from './components/BaseHeader'
 import BaseFooter from './components/BaseFooter'
+import ConfMenu from './components/ConfMenu'
 
 import * as menuEvents from './docs/menu/events'
 import * as menuObject from './docs/menu/menuObject'
@@ -41,7 +43,8 @@ export default {
     PropertiesDocs,
     InstallDocs,
     BaseHeader,
-    BaseFooter
+    BaseFooter,
+    ConfMenu
   },
   setup() {
     const properties = [

@@ -3,7 +3,8 @@
     ref="header"
     :menu="menu"
     :handler="handler"
-    :screen-offset="15"
+    :screen-offset="screenOffset"
+    :disable-window-resize-handler="disableWindowResizeHandler"
     @open-dropdown="onOpenDropdown"
     @close-dropdown="onCloseDropdown"
   >
@@ -12,27 +13,13 @@
         <stripe-logo />
       </li>
     </template>
-    <template #title="{ item }">
-      {{ item.title }}
-    </template>
     <template #default="{ item }">
-      <component
-        :is="item.content"
-        class="content content--primary"
-      />
-      <component
-        :is="item.secondary"
-        class="content content--secondary"
-      />
+      <component :is="item.component" />
     </template>
     <template #after-nav>
-      <li
-        class="vsm-section vsm-mob-hide rnd--open"
-        @click="onClick"
-      >
-        on {{ handler }}
+      <li class="vsm-section vsm-mob-hide">
+        Sign in
       </li>
-      <!--Display mobile menu-->
       <vsm-mob>
         <mobile-content />
       </vsm-mob>
@@ -41,10 +28,9 @@
 </template>
 
 <script>
-import HorizontalSecondaryContent from '../components/content/HorizontalSecondary'
-import HorizontalPrimaryContent from '../components/content/HorizontalPrimary'
-import VerticalContent from '../components/content/Vertical'
-import DefaultContent from '../components/content/Default'
+import DevelopersContent from './content/DevelopersContent'
+import ProductsContent from './content/ProductsContent'
+import CompanyContent from './content/CompanyContent'
 import StripeLogo from '../components/svg/StripeLogo'
 import MobileContent from './content/MobileContent'
 
@@ -52,25 +38,35 @@ import MobileContent from './content/MobileContent'
 
 export default {
   components: {
-    StripeLogo, MobileContent, DefaultContent, HorizontalPrimaryContent, HorizontalSecondaryContent, VerticalContent
+    StripeLogo, MobileContent, CompanyContent, DevelopersContent, ProductsContent
+  },
+  props: {
+    handler: {
+      type: String,
+      default: 'hover'
+    },
+    screenOffset: {
+      type: Number,
+      default: 10
+    },
+    disableWindowResizeHandler: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {
-      handler: 'hover',
       menu: [
-        { title: 'Company', dropdown: 'company', content: 'DefaultContent', listeners: { mouseover: this.onMouseOver } },
-        { title: 'Developers', dropdown: 'developers', content: 'HorizontalPrimaryContent', secondary: 'HorizontalSecondaryContent' },
-        { title: 'Products', dropdown: 'products', content: 'VerticalContent', element: 'span' },
+        { title: 'Company', dropdown: 'company', component: 'CompanyContent', listeners: { mouseover: this.onMouseOver } },
+        { title: 'Developers', dropdown: 'developers', component: 'DevelopersContent' },
+        { title: 'Products', dropdown: 'products', component: 'ProductsContent', element: 'span' },
         { title: 'Source', attributes: { href: 'https://github.com/Alexeykhr/vue-stripe-menu/blob/master/demo/components/BaseHeader.vue', class: ['some-class1', { 'some-class2': true }], target: '_blank' } }
       ]
     }
   },
   methods: {
-    onClick() {
-      this.handler = this.handler === 'hover' ? 'click' : 'hover'
-    },
     onMouseOver(evt) {
-      console.log('mouse over', evt)
+      console.log('mouseover', evt)
     },
     onOpenDropdown(el) {
       console.log('open dropdown', el)
@@ -83,8 +79,6 @@ export default {
 </script>
 
 <style lang="scss">
-/* Customizing the library structure like on Stripe */
-
 .vsm-menu {
   max-width: 1024px;
   width: 100%;
@@ -106,10 +100,6 @@ export default {
   > * {
     padding: 0 25px;
   }
-}
-
-.content {
-  padding: 30px;
 }
 
 @media screen and (max-width: 768px) {

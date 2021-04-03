@@ -19,15 +19,14 @@
   --vsm-link-height: 50px;
 
   --vsm-background: #fff;
-  --vsm-background-arrow: var(--vsm-background);
   --vsm-background-alt: #f6f9fc;
+  --vsm-background-arrow: var(--vsm-background);
 
   // Primary color for links, hamburger/close button
   --vsm-color: #6772e5;
   --vsm-color-hover: #32325d;
 
-  // Speed to change dropdown content
-  // and hover on links, hamburger
+  // Speed to change dropdown content and hover on links, hamburger
   --vsm-transition: .25s;
   --vsm-transition-link: .1s ease;
 
@@ -45,8 +44,10 @@
     z-index: var(--vsm-index);
     left: 0;
     right: 0;
+    top: var(--vsm-link-height);
     pointer-events: none;
     transform: rotateX(-15deg);
+    transform-origin: 50% calc(var(--vsm-link-height) * -1);
     opacity: 0;
     will-change: transform, opacity;
     transition-property: transform, opacity;
@@ -104,6 +105,7 @@
   user-select: none;
   line-height: var(--vsm-link-height);
   margin: 0;
+  padding: 0 10px;
   color: var(--vsm-color);
   transition: color var(--vsm-transition-link);
   &:hover,
