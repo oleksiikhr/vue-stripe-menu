@@ -12,7 +12,6 @@
       />
       <install-docs :css="css" />
       <full-example-docs />
-      <example-codepen-docs />
       <properties-docs
         v-for="property in properties"
         :key="property.title"
@@ -24,7 +23,6 @@
 </template>
 
 <script>
-import ExampleCodepenDocs from './components/docs/ExampleCodepen'
 import FullExampleDocs from './components/docs/FullExample'
 import PropertiesDocs from './components/docs/Properties'
 import ConfMenuDocs from './components/docs/ConfMenu'
@@ -45,7 +43,6 @@ import * as classes from './docs/classes'
 
 export default {
   components: {
-    ExampleCodepenDocs,
     FullExampleDocs,
     PropertiesDocs,
     ConfMenuDocs,
