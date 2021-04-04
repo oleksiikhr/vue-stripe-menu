@@ -19,9 +19,10 @@
             <input
               v-model="item.value"
               :placeholder="item.initial"
-              :style="{ color: !item.value || item.value === item.initial ? '#595959' : 'red' }"
+              :style="{ color: !item.value || item.value === item.initial ? '#595959' : '#de3939' }"
+              spellcheck="false"
               @input="item.onInput"
-            />
+            >
           </label>
           <small v-if="item.desc">{{ item.desc }}</small>
         </div>
@@ -47,7 +48,8 @@
                 v-model="item.value"
                 :placeholder="item.initial"
                 :style="{ color: !item.value || item.value === item.initial ? '#595959' : '#de3939' }"
-              />
+                spellcheck="false"
+              >
             </label>
             <small v-if="item.desc">{{ item.desc }}</small>
           </div>
@@ -65,14 +67,16 @@ export default {
     BaseTitle
   },
   emits: [
-    'on-css', 'on-handler', 'on-screen-offset'
+    'on-css', 'change-props'
   ],
   data() {
     return {
       vsmProps: [
-        { property: 'handler', value: '', initial: 'hover', desc: 'hover/click', onInput: (val) => ['hover', 'click'].includes(val.target.value) && this.$emit('on-handler', val.target.value) },
-        { property: 'screenOffset', value: '', initial: '10', desc: 'Indent dropdown from screen edges', onInput: (val) => this.$emit('on-screen-offset', val.target.value) }
-      ].map((item) => ({ ...item, value: item.initial })),
+        { property: 'element', value: '', initial: 'header', desc: '', validator: (val) => !!val },
+        { property: 'handler', value: '', initial: 'hover', desc: 'hover/click', validator: (val) => ['hover', 'click'].includes(val) },
+        { property: 'screenOffset', value: '', initial: '10', desc: 'Indent dropdown from screen edges', validator: (val) => !isNaN(+val) },
+        { property: 'dropdownOffset', value: '', initial: '0', desc: '', validator: (val) => !isNaN(+val) }
+      ].map((item) => ({ ...item, value: item.initial, onInput: this.onChangeMenuProps })),
 
       // Initial values from *.scss
       vsmMenuStyles: [
@@ -83,8 +87,8 @@ export default {
         { property: '--vsm-arrow-border-radius', value: null, initial: '4px 0 0 0' },
         { property: '--vsm-index', value: null, initial: '1000' },
         { property: '--vsm-link-height', value: null, initial: '50px' },
-        { property: '--vsm-background', value: null, initial: '#fff' },
-        { property: '--vsm-background-alt', value: null, initial: '#f6f9fc' },
+        { property: '--vsm-background', value: null, initial: '#fff', desc: 'background for first element' },
+        { property: '--vsm-background-alt', value: null, initial: '#f6f9fc', desc: 'background from second element' },
         { property: '--vsm-background-arrow', value: null, initial: 'var(--vsm-background)' },
         { property: '--vsm-color', value: null, initial: '#6772e5' },
         { property: '--vsm-color-hover', value: null, initial: '#32325d' },
@@ -168,6 +172,17 @@ export default {
         default:
           return common
       }
+    },
+    onChangeMenuProps() {
+      const obj = this.vsmProps.reduce((result, item) => {
+        if (!item.validator || item.validator(item.value)) {
+          result[item.property] = item.value
+        }
+
+        return result
+      }, {})
+
+      this.$emit('change-props', obj)
     }
   }
 }

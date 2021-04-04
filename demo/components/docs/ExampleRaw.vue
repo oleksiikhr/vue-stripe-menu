@@ -61,9 +61,9 @@ export default {
     return {
       menu: [
         {
-          // display menu item (or override title slot)
+          // display menu item (can be overridden with title slot)
           title: 'News',
-          // now this is not a link, but a menu item where there is a dropdown
+          // this element now has dropdown content
           dropdown: 'news',
           // don't want a button element?
           element: 'span', // router-link

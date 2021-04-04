@@ -1,14 +1,10 @@
 <template>
   <div>
-    <base-header
-      :handler="handler"
-      :screen-offset="screenOffset"
-    />
+    <base-header v-bind="vsmProps" />
     <main>
       <conf-menu-docs
         @on-css="onChangeCss"
-        @on-handler="onChangeHandler"
-        @on-screen-offset="onChangeScreenOffset"
+        @change-props="onChangeProps"
       />
       <install-docs :css="css" />
       <full-example-docs />
@@ -61,19 +57,15 @@ export default {
   data() {
     return {
       css: '',
-      handler: 'hover',
-      screenOffset: 10
+      vsmProps: {}
     }
   },
   methods: {
+    onChangeProps(obj) {
+      this.vsmProps = obj
+    },
     onChangeCss(val) {
       this.css = val
-    },
-    onChangeHandler(val) {
-      this.handler = val
-    },
-    onChangeScreenOffset(val) {
-      this.screenOffset = val
     }
   }
 }
