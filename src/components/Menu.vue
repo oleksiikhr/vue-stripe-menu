@@ -9,11 +9,13 @@
         class="vsm-root"
       >
         <slot name="before-nav" />
-        <li class="vsm-section vsm-section_menu vsm-mob-hide">
+        <li
+          ref="linkContainer"
+          class="vsm-section vsm-section_menu vsm-mob-hide"
+        >
           <component
             :is="item.element || (item.dropdown ? 'button' : 'a')"
             v-for="(item, index) in menu"
-            :ref="setLinkRef"
             :key="index"
             :class="['vsm-link', item.attributes ? item.attributes.class : null, {
               'vsm-has-dropdown': item.dropdown
@@ -57,7 +59,6 @@
       >
         <div
           v-for="(item, index) in itemsWithDropdown"
-          :ref="setDropdownRef"
           :key="index"
           class="vsm-dropdown-section"
           :data-dropdown="item.dropdown"
@@ -116,7 +117,8 @@ export default {
      */
     element: {
       type: String,
-      default: 'header'
+      default: 'header',
+      validator: (val) => !!val
     },
     /**
      * Dropdown content does not go beyond screen size
@@ -147,48 +149,33 @@ export default {
   ],
   data() {
     return {
-      linkRefs: [],
-      dropdownRefs: []
+      elementsWithDropdown: [],
+      dropdownContainerItems: []
     }
   },
   computed: {
     itemsWithDropdown() {
       return this.menu.filter(item => item.dropdown)
-    },
-    elementsWithDropdown() {
-      const elements = []
-
-      this.linkRefs.forEach((link) => {
-        const el = link.$el || link
-
-        if (el.classList.contains('vsm-has-dropdown')) {
-          elements.push(el)
-        }
-      })
-
-      return elements
-    },
-    dropdownContainerItems() {
-      return this.dropdownRefs.map((el) => ({
-        el,
-        name: el.getAttribute('data-dropdown'),
-        content: el.firstElementChild
-      }))
     }
   },
   watch: {
     handler() {
       this.registerDropdownElementsEvents(true)
       this.registerDropdownContainerEvents(true)
+    },
+    menu: {
+      async handler() {
+        await this.$nextTick()
+        this.updateDataElements()
+        this.registerDropdownElementsEvents()
+      },
+      deep: true
     }
-  },
-  beforeUpdate() {
-    this.linkRefs = []
-    this.dropdownRefs = []
   },
   mounted() {
     this.identifyPointerEvents()
     this.registerGlobalListeners()
+    this.updateDataElements()
     this.registerDropdownElementsEvents()
     this.registerDropdownContainerEvents()
   },
@@ -316,6 +303,13 @@ export default {
       this.$refs.arrow.style.transform = `translate(${leftPosition + (rect.width / 2)}px, ${dropdownOffset}px) rotate(45deg)`
       this.$refs.background.style.transform = `translate(${centerPosition}px, ${dropdownOffset}px) scaleX(${ratioWidth}) scaleY(${ratioHeight})`
       this.$refs.backgroundAlt.style.transform = `translateY(${this._activeContainerItem.content.firstElementChild.offsetHeight / ratioHeight}px)`
+    },
+    updateDataElements() {
+      this.elementsWithDropdown = Array.from(this.$refs.linkContainer.children)
+        .filter((el) => el.classList.contains('vsm-has-dropdown'))
+
+      this.dropdownContainerItems = Array.from(this.$refs.dropdownContainer.children)
+        .map((el) => ({ el, name: el.getAttribute('data-dropdown'), content: el.firstElementChild }))
     },
     /*
      * | ------------------------------------------------------------------------------------------------
@@ -472,17 +466,6 @@ export default {
       if (!this._isDragging) {
         this.closeDropdown()
       }
-    },
-    /*
-     * | ------------------------------------------------------------------------------------------------
-     * | - Refs -
-     * | ------------------------------------------------------------------------------------------------
-     */
-    setLinkRef(ref) {
-      this.linkRefs.push(ref)
-    },
-    setDropdownRef(ref) {
-      this.dropdownRefs.push(ref)
     },
     /*
      * | ------------------------------------------------------------------------------------------------
