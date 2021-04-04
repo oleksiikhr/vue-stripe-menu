@@ -10,6 +10,11 @@
     <pre><code
       ref="codeJs"
       class="javascript"
+    >{{ js }}</code></pre>
+    <p>Add component:</p>
+    <pre><code
+      ref="codeVue"
+      class="vue"
     >{{ vue }}</code></pre>
     <p>Add styles:</p>
     <pre><code
@@ -20,7 +25,7 @@
 </template>
 
 <script>
-import { onMounted, ref } from 'vue'
+import { onMounted, nextTick, watch, ref } from 'vue'
 import highlight from 'highlight.js'
 import BaseTitle from '../base/Title'
 
@@ -32,36 +37,94 @@ export default {
     css: {
       type: String,
       required: true
+    },
+    vsmProps: {
+      type: Object,
+      required: true
     }
   },
-  setup() {
+  setup(props) {
     const codeShell = ref(null)
+    const codeVue = ref(null)
     const codeCss = ref(null)
     const codeJs = ref(null)
 
     onMounted(() => {
       highlight.highlightElement(codeShell.value)
-      highlight.highlightElement(codeJs.value)
+      highlight.highlightElement(codeVue.value)
       highlight.highlightElement(codeCss.value)
+      highlight.highlightElement(codeJs.value)
     })
 
-    return { codeShell, codeJs, codeCss }
+    watch(() => props.css, () => nextTick(() => highlight.highlightElement(codeCss.value)))
+    watch(() => props.vsmProps, () => nextTick(() => highlight.highlightElement(codeVue.value)))
+
+    return { codeShell, codeVue, codeCss, codeJs }
   },
   data() {
     return {
-      shell: '$ npm i vue-stripe-menu\n' +
-        '// or\n' +
-        '$ yarn add vue-stripe-menu',
-      vue: '// .js file\n\n' +
-        'import Vue from \'Vue\'\n' +
-        'import VueStripeMenu from \'vue-stripe-menu\'\n' +
-        'import \'vue-stripe-menu/dist/vue-stripe-menu.css\'\n\n' +
-        'Vue.use(VueStripeMenu)'
+      shell: '' +
+`$ npm i vue-stripe-menu
+// or
+$ yarn add vue-stripe-menu
+`,
+      js: '' +
+`// .js file (Nuxt.js > plugins/vue-stripe-menu.js)
+
+import Vue from 'Vue'
+import VueStripeMenu from 'vue-stripe-menu'
+import 'vue-stripe-menu/dist/vue-stripe-menu.css'
+Vue.use(VueStripeMenu)
+
+// Nuxt.js > add plugin to nuxt.config.js
+// export default {
+//   plugins: ['~/plugins/vue-stripe-menu']
+// }
+`
     }
   },
-  watch: {
-    css() {
-      this.$nextTick(() => highlight.highlightElement(this.codeCss))
+  computed: {
+    vsmPropsStr() {
+      const propsStr = Object.entries(this.vsmProps).reduce((result, [key, val]) => {
+        result += `\n    ${typeof val === 'number' ? ':' : ''}${key}="${val}"`
+        return result
+      }, '')
+
+      if (!propsStr) {
+        return `:menu="menu"`
+      }
+
+      return `\n    :menu="menu"${propsStr}\n  `
+    },
+    vue() {
+      return '' +
+`<template>
+  <vsm-menu ${this.vsmPropsStr}>
+    <template #default="{ item }">
+      Dropdown content - {{ item.title }}
+    </template>
+    <template #before-nav>
+      Left side
+    </template>
+    <template #after-nav>
+      <li class="vsm-section vsm-mob-hide">Right side item</li>
+      <vsm-mob>Mobile Content</vsm-mob>
+    </template>
+  </vsm-menu>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      menu: [
+        { title: 'Item with dropdown', dropdown: 'dropdown-1' },
+        { title: 'Just link', attributes: { href: '#clicked' } },
+      ]
+    }
+  }
+}
+<\/script>`
     }
   }
 }

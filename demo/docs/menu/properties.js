@@ -10,16 +10,6 @@ export const columns = [
 
 export const rows = [
   {
-    name: 'linkRefs',
-    description: 'An array of link-generated HTMLElements',
-    return: 'Array<HTMLElement>'
-  },
-  {
-    name: 'dropdownRefs',
-    description: 'An array of dropdown-generated HTMLElements',
-    return: 'Array<HTMLElement>'
-  },
-  {
     name: 'itemsWithDropdown',
     description: 'Filtered menu items with dropdown',
     return: 'Array<MenuObject>'

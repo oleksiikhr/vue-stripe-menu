@@ -6,7 +6,10 @@
         @on-css="onChangeCss"
         @change-props="onChangeProps"
       />
-      <install-docs :css="css" />
+      <install-docs
+        :css="css"
+        :vsm-props="vsmProps"
+      />
       <full-example-docs />
       <properties-docs
         v-for="property in properties"
