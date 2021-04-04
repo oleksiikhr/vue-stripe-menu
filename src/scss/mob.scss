@@ -1,11 +1,14 @@
-@import "variables";
-
 /* -----------------------------------------------------------------------------
  * - Root element -
  * -----------------------------------------------------------------------------
  */
 
 .vsm-section_mob {
+  --vsm-mob-hamburger-size: 50px;
+  --vsm-mob-close-size: 50px;
+  --vsm-mob-background: var(--vsm-background);
+  --vsm-mob-shadow: var(--vsm-shadow);
+
   display: none;
   margin-left: 10px;
   &.vsm-open {
@@ -28,12 +31,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: $vsm-mob-size;
-  height: $vsm-mob-size;
+  width: var(--vsm-mob-hamburger-size);
+  height: var(--vsm-mob-hamburger-size);
   cursor: pointer;
   &:hover {
     .vsm-mob-line {
-      background: $vsm-color-hover;
+      background: var(--vsm-color-hover);
     }
   }
 }
@@ -41,8 +44,8 @@
 .vsm-mob-line {
   width: 24px;
   height: 3px;
-  background: $vsm-color;
-  transition: background $vsm-transition-link;
+  background: var(--vsm-color);
+  transition: background var(--vsm-transition-link);
   &:nth-child(2) {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -64,13 +67,11 @@
 }
 
 .vsm-mob-content__wrap {
-  background: #fff;
-  box-shadow: $vsm-shadow;
+  background: var(--vsm-mob-background);
+  box-shadow: var(--vsm-mob-shadow);
   border-radius: 4px;
   overflow: hidden;
   position: relative;
-  font-size: 17px;
-  line-height: 40px;
   white-space: nowrap;
   flex-grow: 1;
   transform-origin: 100% 0;
@@ -83,27 +84,27 @@
   position: absolute;
   right: 0;
   top: 0;
-  width: $vsm-mob-close-size;
-  height: $vsm-mob-close-size;
+  width: var(--vsm-mob-close-size);
+  height: var(--vsm-mob-close-size);
   cursor: pointer;
   &:hover {
     &:before,
     &:after {
-      background: $vsm-color-hover;
+      background: var(--vsm-color-hover);
     }
   }
   &:before,
   &:after {
     content: "";
     position: absolute;
-    background: $vsm-color;
+    background: var(--vsm-color);
     border-radius: 1px;
     left: 14px;
     right: 14px;
     top: 24px;
     height: 3px;
     transform: rotate(45deg);
-    transition: background $vsm-transition-link;
+    transition: background var(--vsm-transition-link);
   }
   &:after {
     transform: rotate(-45deg);
@@ -116,7 +117,7 @@
  */
 
 .vsm-mob-anim {
-  transition: $vsm-transition;
+  transition: var(--vsm-transition);
   &-enter-active {
     opacity: 0;
     transform: scale(.95);

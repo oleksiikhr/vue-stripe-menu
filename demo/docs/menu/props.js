@@ -20,21 +20,27 @@ export const rows = [
   },
   {
     property: 'element',
-    description: 'HTML element for root element',
+    description: 'HTMLElement for root element',
     type: 'String',
     default: 'header'
   },
   {
     property: 'screen-offset',
     description: 'Offset from the window screen',
-    type: 'string, number',
+    type: 'String, Number',
     default: 10
+  },
+  {
+    property: 'dropdown-offset',
+    description: 'Increase the indent of the opening dropdown menu',
+    type: 'String, Number',
+    default: 0
   },
   {
     property: 'handler',
     parameters: 'hover, click',
-    description: 'What event should you open dropdown for',
-    type: 'string',
+    description: 'On what event to open dropdown menu',
+    type: 'String',
     default: 'hover'
   }
 ]

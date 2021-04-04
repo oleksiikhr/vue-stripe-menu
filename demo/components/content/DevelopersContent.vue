@@ -1,28 +1,23 @@
 <template>
-  <div>
-    <base-text
-      :max="200"
-      type="title"
-    />
-    <base-group
-      v-for="i in 3"
-      :key="`g1-${i}`"
-    />
-    <br>
+  <div class="p--30">
     <base-text
       :max="200"
       type="title"
     />
     <base-group
       v-for="i in 2"
-      :key="`g2-${i}`"
+      :key="`g1-${i}`"
     />
+  </div>
+  <div class="p--30">
+    <base-group color="secondary" />
+    <base-group color="secondary" />
   </div>
 </template>
 
 <script>
-import BaseText from '../base/Text'
 import BaseGroup from '../base/Group'
+import BaseText from '../base/Text'
 
 export default {
   components: {

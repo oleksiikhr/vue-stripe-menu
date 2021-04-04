@@ -1,6 +1,6 @@
 <template>
-  <div class="divide">
-    <div class="primary">
+  <div class="flex">
+    <div class="primary p--30">
       <template
         v-for="i in 2"
         :key="`g1-${i}`"
@@ -16,7 +16,7 @@
         <br>
       </template>
     </div>
-    <div class="secondary">
+    <div class="secondary p--30">
       <template
         v-for="i in 3"
         :key="`g3-${i}`"
@@ -50,18 +50,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.divide {
+.flex {
   display: flex;
-  padding: 0;
   > div {
-    padding: 30px;
     // Making background is for both blocks to prevent
     // wrong display roundings
     &.primary {
-      background-color: #fff;
+      background-color: var(--vsm-background);
     }
     &.secondary {
-      background-color: #f6f9fc;
+      background-color: var(--vsm-background-alt);
     }
   }
 }

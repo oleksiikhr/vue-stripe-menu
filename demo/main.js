@@ -2,13 +2,13 @@
 
 import { createApp } from 'vue'
 
-// -> For Demo
-import './scss/index.scss'
-import vsmMenu from '../src/main'
-
-// -> Import library js and styles
+// -> Production
 // import vsmMenu from 'vue-stripe-menu'
 // import 'vue-stripe-menu/dist/vue-stripe-menu.css'
+
+// -> Demo
+import './scss/index.scss'
+import vsmMenu from '../src/main'
 
 import App from './App'
 

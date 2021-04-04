@@ -12,7 +12,7 @@
 import { onMounted, ref } from 'vue'
 import highlight from 'highlight.js'
 import ExampleRaw from '!!raw-loader!./ExampleRaw'
-import BaseTitle from '../BaseTitle'
+import BaseTitle from '../base/Title'
 
 export default {
   components: {

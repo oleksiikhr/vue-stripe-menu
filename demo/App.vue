@@ -1,10 +1,13 @@
 <template>
   <div>
-    <base-header />
+    <base-header v-bind="vsmProps" />
     <main>
-      <install-docs />
+      <conf-menu-docs
+        @on-css="onChangeCss"
+        @change-props="onChangeProps"
+      />
+      <install-docs :css="css" />
       <full-example-docs />
-      <example-codepen-docs />
       <properties-docs
         v-for="property in properties"
         :key="property.title"
@@ -16,9 +19,9 @@
 </template>
 
 <script>
-import ExampleCodepenDocs from './components/docs/ExampleCodepen'
 import FullExampleDocs from './components/docs/FullExample'
 import PropertiesDocs from './components/docs/Properties'
+import ConfMenuDocs from './components/docs/ConfMenu'
 import InstallDocs from './components/docs/Install'
 import BaseHeader from './components/BaseHeader'
 import BaseFooter from './components/BaseFooter'
@@ -36,9 +39,9 @@ import * as classes from './docs/classes'
 
 export default {
   components: {
-    ExampleCodepenDocs,
     FullExampleDocs,
     PropertiesDocs,
+    ConfMenuDocs,
     InstallDocs,
     BaseHeader,
     BaseFooter
@@ -50,6 +53,20 @@ export default {
     ]
 
     return { properties }
+  },
+  data() {
+    return {
+      css: '',
+      vsmProps: {}
+    }
+  },
+  methods: {
+    onChangeProps(obj) {
+      this.vsmProps = obj
+    },
+    onChangeCss(val) {
+      this.css = val
+    }
   }
 }
 </script>

@@ -22,7 +22,7 @@ export const rows = [
   {
     property: 'element',
     type: 'String',
-    description: 'HTML element in the header element, if not specified, it will be <button /> or <a />'
+    description: 'HTMLElement in the header element, if not specified, it will be <button /> or <a />'
   },
   {
     property: 'attributes',

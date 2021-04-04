@@ -3,17 +3,19 @@
     :is="element"
     class="vsm-menu vsm-no-transition"
   >
-    <nav>
+    <nav class="vsm-nav">
       <ul
         ref="root"
         class="vsm-root"
       >
         <slot name="before-nav" />
-        <li class="vsm-section vsm-section_menu vsm-mob-hide">
+        <li
+          ref="linkContainer"
+          class="vsm-section vsm-section_menu vsm-mob-hide"
+        >
           <component
             :is="item.element || (item.dropdown ? 'button' : 'a')"
             v-for="(item, index) in menu"
-            :ref="setLinkRef"
             :key="index"
             :class="['vsm-link', item.attributes ? item.attributes.class : null, {
               'vsm-has-dropdown': item.dropdown
@@ -57,7 +59,6 @@
       >
         <div
           v-for="(item, index) in itemsWithDropdown"
-          :ref="setDropdownRef"
           :key="index"
           class="vsm-dropdown-section"
           :data-dropdown="item.dropdown"
@@ -90,7 +91,7 @@ export default {
      *   title: 'News',
      *   // activate dropdown content, must be unique!
      *   dropdown: 'news',
-     *   // change the default HTML element (element/global component)
+     *   // change the default HTMLElement (element/global component)
      *   element: 'router-link',
      *   // v-bind accepts
      *   attributes: {
@@ -111,12 +112,13 @@ export default {
       required: true
     },
     /**
-     * Change root HTML element
+     * Change root HTMLElement
      * @example div, section
      */
     element: {
       type: String,
-      default: 'header'
+      default: 'header',
+      validator: (val) => !!val
     },
     /**
      * Dropdown content does not go beyond screen size
@@ -140,10 +142,6 @@ export default {
       type: String,
       default: 'hover',
       validator: (val) => ['hover', 'click'].includes(val)
-    },
-    disableWindowResizeHandler: {
-      type: Boolean,
-      default: false
     }
   },
   emits: [
@@ -151,33 +149,13 @@ export default {
   ],
   data() {
     return {
-      linkRefs: [],
-      dropdownRefs: []
+      elementsWithDropdown: [],
+      dropdownContainerItems: []
     }
   },
   computed: {
     itemsWithDropdown() {
       return this.menu.filter(item => item.dropdown)
-    },
-    elementsWithDropdown() {
-      const elements = []
-
-      this.linkRefs.forEach((link) => {
-        const el = link.$el || link
-
-        if (el.classList.contains('vsm-has-dropdown')) {
-          elements.push(el)
-        }
-      })
-
-      return elements
-    },
-    dropdownContainerItems() {
-      return this.dropdownRefs.map((el) => ({
-        el,
-        name: el.getAttribute('data-dropdown'),
-        content: el.firstElementChild
-      }))
     }
   },
   watch: {
@@ -185,17 +163,19 @@ export default {
       this.registerDropdownElementsEvents(true)
       this.registerDropdownContainerEvents(true)
     },
-    disableWindowResizeHandler(toggle) {
-      this.windowListenerEvent(toggle)
+    menu: {
+      async handler() {
+        await this.$nextTick()
+        this.updateDataElements()
+        this.registerDropdownElementsEvents()
+      },
+      deep: true
     }
-  },
-  beforeUpdate() {
-    this.linkRefs = []
-    this.dropdownRefs = []
   },
   mounted() {
     this.identifyPointerEvents()
     this.registerGlobalListeners()
+    this.updateDataElements()
     this.registerDropdownElementsEvents()
     this.registerDropdownContainerEvents()
   },
@@ -324,6 +304,13 @@ export default {
       this.$refs.background.style.transform = `translate(${centerPosition}px, ${dropdownOffset}px) scaleX(${ratioWidth}) scaleY(${ratioHeight})`
       this.$refs.backgroundAlt.style.transform = `translateY(${this._activeContainerItem.content.firstElementChild.offsetHeight / ratioHeight}px)`
     },
+    updateDataElements() {
+      this.elementsWithDropdown = Array.from(this.$refs.linkContainer.children)
+        .filter((el) => el.classList.contains('vsm-has-dropdown'))
+
+      this.dropdownContainerItems = Array.from(this.$refs.dropdownContainer.children)
+        .map((el) => ({ el, name: el.getAttribute('data-dropdown'), content: el.firstElementChild }))
+    },
     /*
      * | ------------------------------------------------------------------------------------------------
      * | - Timeout -
@@ -447,23 +434,16 @@ export default {
      * | ------------------------------------------------------------------------------------------------
      */
     registerGlobalListeners() {
-      this.windowListenerEvent(this.disableWindowResizeHandler)
+      window.addEventListener('resize', this.windowResizeHandler)
       document.addEventListener('touchmove', this.documentTouchMoveHandler)
       document.addEventListener('touchstart', this.documentTouchStartHandler)
       document.body.addEventListener(this._pointerEvent.end, this.documentEventEndHandler)
     },
     removeGlobalListeners() {
-      this.windowListenerEvent(true)
+      window.removeEventListener('resize', this.windowResizeHandler)
       document.removeEventListener('touchmove', this.documentTouchMoveHandler)
       document.removeEventListener('touchstart', this.documentTouchStartHandler)
       document.body.removeEventListener(this._pointerEvent.end, this.documentEventEndHandler)
-    },
-    windowListenerEvent(isRemove) {
-      if (isRemove) {
-        window.removeEventListener('resize', this.windowResizeHandler)
-      } else {
-        window.addEventListener('resize', this.windowResizeHandler)
-      }
     },
     windowResizeHandler() {
       // Recalculates the dropdown only in cases where the screen width changes
@@ -486,17 +466,6 @@ export default {
       if (!this._isDragging) {
         this.closeDropdown()
       }
-    },
-    /*
-     * | ------------------------------------------------------------------------------------------------
-     * | - Refs -
-     * | ------------------------------------------------------------------------------------------------
-     */
-    setLinkRef(ref) {
-      this.linkRefs.push(ref)
-    },
-    setDropdownRef(ref) {
-      this.dropdownRefs.push(ref)
     },
     /*
      * | ------------------------------------------------------------------------------------------------

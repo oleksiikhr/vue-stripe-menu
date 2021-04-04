@@ -20,7 +20,7 @@ main {
     margin-right: 10px;
     overflow-x: auto;
     &:not(:last-child) {
-      margin-bottom: 50px;
+      margin-bottom: 20px;
     }
   }
   .section {
@@ -85,4 +85,8 @@ footer {
 
 .mb-20 {
   margin-bottom: 20px;
+}
+
+.p--30 {
+  padding: 30px;
 }

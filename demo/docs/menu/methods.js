@@ -13,19 +13,19 @@ export const rows = [
   {
     name: 'toggleDropdown',
     parameters: 'HTMLElement',
-    description: 'Open dropdown menu, if open - close',
-    return: ''
+    description: 'Open dropdown menu, if it is an active HTMLElement - close'
   },
   {
     name: 'openDropdown',
     parameters: 'HTMLElement',
-    description: 'Open dropdown menu for selected item',
-    return: ''
+    description: 'Open dropdown menu for selected HTMLElement'
   },
   {
     name: 'closeDropdown',
-    parameters: '',
-    description: 'Close any open dropdown menu',
-    return: ''
+    description: 'Close active dropdown menu'
+  },
+  {
+    name: 'resizeDropdown',
+    description: 'Recalculate size and location of dropdown menu'
   }
 ]

@@ -10,7 +10,7 @@
 
 <script>
 import BaseTable from '../base/Table'
-import BaseTitle from '../BaseTitle'
+import BaseTitle from '../base/Title'
 
 export default {
   components: {
