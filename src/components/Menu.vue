@@ -304,13 +304,6 @@ export default {
       this.$refs.background.style.transform = `translate(${centerPosition}px, ${dropdownOffset}px) scaleX(${ratioWidth}) scaleY(${ratioHeight})`
       this.$refs.backgroundAlt.style.transform = `translateY(${this._activeContainerItem.content.firstElementChild.offsetHeight / ratioHeight}px)`
     },
-    updateDataElements() {
-      this.elementsWithDropdown = Array.from(this.$refs.linkContainer.children)
-        .filter((el) => el.classList.contains('vsm-has-dropdown'))
-
-      this.dropdownContainerItems = Array.from(this.$refs.dropdownContainer.children)
-        .map((el) => ({ el, name: el.getAttribute('data-dropdown'), content: el.firstElementChild }))
-    },
     /*
      * | ------------------------------------------------------------------------------------------------
      * | - Timeout -
@@ -482,6 +475,13 @@ export default {
         enter: 'mouseenter',
         leave: 'mouseleave'
       }
+    },
+    updateDataElements() {
+      this.elementsWithDropdown = Array.from(this.$refs.linkContainer.children)
+      .filter((el) => el.classList.contains('vsm-has-dropdown'))
+
+      this.dropdownContainerItems = Array.from(this.$refs.dropdownContainer.children)
+      .map((el) => ({ el, name: el.getAttribute('data-dropdown'), content: el.firstElementChild }))
     }
   }
 }
