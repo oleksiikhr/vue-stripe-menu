@@ -162,7 +162,10 @@ Add styles:
     </template>
     <template #before-nav>
       <!--Image or svg of website logo-->
-      <li class="vsm-section logo-section" style="width: 50px; height: 50px">
+      <li
+        class="vsm-section logo-section"
+        style="width: 50px; height: 50px"
+      >
         <img
           src="https://vuejs.org/images/logo.png"
           alt="My Logo"

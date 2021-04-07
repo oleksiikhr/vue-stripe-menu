@@ -1,6 +1,6 @@
 {
   "name": "vue-stripe-menu",
-  "version": "1.5.0",
+  "version": "2.0.0-beta.1",
   "description": "Creating a navigation menu with animations like on Stripe",
   "author": "Alexey Khrushch <alexeykhr@outlook.com>",
   "scripts": {
