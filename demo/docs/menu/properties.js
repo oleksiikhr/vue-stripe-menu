@@ -11,7 +11,7 @@ export const columns = [
 export const rows = [
   {
     name: 'itemsWithDropdown',
-    description: 'Filtered menu items with dropdown',
+    description: 'Filtered menu items with "dropdown" property',
     return: 'Array<MenuObject>'
   },
   {
@@ -22,6 +22,6 @@ export const rows = [
   {
     name: 'dropdownContainerItems',
     description: 'List of dropdown HTMLElements',
-    return: 'Array<{el: HTMLElement, name: string, content: HTMLElement}'
+    return: 'Array<{el: HTMLElement, name: string, content: HTMLElement}>'
   }
 ]

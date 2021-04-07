@@ -15,12 +15,12 @@ export const rows = [
     property: 'menu',
     type: 'Array',
     parameters: 'MenuObject',
-    description: 'Description of the menu items, see below',
+    description: 'Description of the menu items',
     required: true
   },
   {
     property: 'element',
-    description: 'HTMLElement for root element',
+    description: 'HTMLElement for the root element',
     type: 'String',
     default: 'header'
   },
@@ -32,7 +32,7 @@ export const rows = [
   },
   {
     property: 'dropdown-offset',
-    description: 'Increase the indent of the opening dropdown menu',
+    description: 'Offset from the dropdown menu',
     type: 'String, Number',
     default: 0
   },
