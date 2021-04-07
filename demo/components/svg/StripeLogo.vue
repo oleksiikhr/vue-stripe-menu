@@ -31,6 +31,7 @@ export default {
   line-height: 0;
   span {
     position: absolute;
+    width: 100%;
     top: 0;
     left: calc(100% + 2px);
     font-size: .7rem;
