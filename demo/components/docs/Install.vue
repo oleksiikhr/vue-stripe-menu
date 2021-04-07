@@ -69,7 +69,7 @@ export default {
 $ yarn add vue-stripe-menu
 `,
       js: '' +
-`// .js file (Nuxt.js > plugins/vue-stripe-menu.js)
+`// >>> Install globally - .js file <<<
 
 import { createApp } from 'vue'
 import VueStripeMenu from 'vue-stripe-menu'
@@ -77,11 +77,16 @@ import 'vue-stripe-menu/dist/vue-stripe-menu.css'
 
 createApp({}).use(VueStripeMenu)
 
-// Nuxt.js > add plugin to nuxt.config.js
-// export default {
-//   plugins: ['~/plugins/vue-stripe-menu']
-// }
-`
+// >>> Install locally - .vue file <<<
+
+import { VsmMenu, VsmMob } from 'vue-stripe-menu'
+import 'vue-stripe-menu/dist/vue-stripe-menu.css'
+
+export default {
+  components: {
+    VsmMenu, VsmMob
+  }
+}`
     }
   },
   computed: {
