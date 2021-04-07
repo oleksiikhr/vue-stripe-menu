@@ -1,7 +1,7 @@
 {
   "name": "vue-stripe-menu",
   "version": "1.5.0",
-  "description": "Creating menus with animations like on Stripe",
+  "description": "Creating a navigation menu with animations like on Stripe",
   "author": "Alexey Khrushch <alexeykhr@outlook.com>",
   "scripts": {
     "build": "vue-cli-service build --dest docs ./demo/main.js",
@@ -13,21 +13,17 @@
     "rel": "npm run lint:fix && npm run test && npm run build && npm run build:lib && git add -A && standard-version -a",
     "test": "jest"
   },
-  "main": "./dist/vue-stripe-menu.common.js",
+  "main": "./dist/vue-stripe-menu.umd.min.js",
   "dependencies": {
-    "vue": "^3.0.9"
+    "vue": "^3.0.11"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.13.12",
+    "@babel/eslint-parser": "^7.13.14",
+    "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "^4.5.12",
     "@vue/cli-service": "^4.5.12",
     "@vue/compiler-sfc": "^3.0.9",
-    "@vue/eslint-config-standard": "^6.0.0",
     "@vue/test-utils": "^2.0.0-rc.4",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-eslint": "^10.1.0",
-    "babel-jest": "^26.6.3",
-    "babel-polyfill": "^6.26.0",
     "dotenv": "^8.2.0",
     "eslint": "^7.23.0",
     "eslint-plugin-vue": "^7.8.0",

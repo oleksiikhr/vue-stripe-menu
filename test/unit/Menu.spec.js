@@ -3,7 +3,6 @@
 import { mount } from '@vue/test-utils'
 import Menu from '../../src/components/Menu'
 import sinon from 'sinon'
-import 'babel-polyfill'
 
 const pointerEvent = {
   end: 'touchend',

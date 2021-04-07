@@ -3,15 +3,14 @@
 import { createApp } from 'vue'
 
 // -> Production
-// import vsmMenu from 'vue-stripe-menu'
-// import 'vue-stripe-menu/dist/vue-stripe-menu.css'
-
+// import VueStripeMenu from '../dist/vue-stripe-menu.umd.min'
+// import '../dist/vue-stripe-menu.css'
 // -> Demo
-import './scss/index.scss'
-import vsmMenu from '../src/main'
+import VueStripeMenu from '../src/main'
 
+import './scss/index.scss'
 import App from './App'
 
 createApp(App)
-  .use(vsmMenu)
+  .use(VueStripeMenu)
   .mount('#app')
