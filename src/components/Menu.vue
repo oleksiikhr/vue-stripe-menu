@@ -478,10 +478,10 @@ export default {
     },
     updateDataElements() {
       this.elementsWithDropdown = Array.from(this.$refs.linkContainer.children)
-      .filter((el) => el.classList.contains('vsm-has-dropdown'))
+        .filter((el) => el.classList.contains('vsm-has-dropdown'))
 
       this.dropdownContainerItems = Array.from(this.$refs.dropdownContainer.children)
-      .map((el) => ({ el, name: el.getAttribute('data-dropdown'), content: el.firstElementChild }))
+        .map((el) => ({ el, name: el.getAttribute('data-dropdown'), content: el.firstElementChild }))
     }
   }
 }
