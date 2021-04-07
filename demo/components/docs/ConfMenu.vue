@@ -77,8 +77,8 @@ export default {
       vsmProps: [
         { property: 'element', value: '', initial: 'header', desc: 'header/div/section/..', validator: (val) => !!val },
         { property: 'handler', value: '', initial: 'hover', desc: 'hover/click', validator: (val) => ['hover', 'click'].includes(val) },
-        { property: 'screenOffset', value: '', initial: '10', desc: 'indent dropdown from screen edges (reduce screen size)', validator: (val) => !isNaN(+val), convert: (val) => +val },
-        { property: 'dropdownOffset', value: '', initial: '0', desc: 'indent a dropdown menu from a header', validator: (val) => !isNaN(+val), convert: (val) => +val }
+        { property: 'screenOffset', value: '', initial: '10', desc: 'indent a dropdown menu from screen edges (reduce screen size)', validator: (val) => !isNaN(+val), convert: (val) => +val },
+        { property: 'dropdownOffset', value: '', initial: '0', desc: 'indent a dropdown menu from header', validator: (val) => !isNaN(+val), convert: (val) => +val }
       ].map((item) => ({ ...item, value: item.initial, onInput: this.onChangeMenuProps })),
 
       // Initial values from *.scss

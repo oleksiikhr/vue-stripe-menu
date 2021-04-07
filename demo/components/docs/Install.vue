@@ -71,10 +71,11 @@ $ yarn add vue-stripe-menu
       js: '' +
 `// .js file (Nuxt.js > plugins/vue-stripe-menu.js)
 
-import Vue from 'Vue'
+import { createApp } from 'vue'
 import VueStripeMenu from 'vue-stripe-menu'
 import 'vue-stripe-menu/dist/vue-stripe-menu.css'
-Vue.use(VueStripeMenu)
+
+createApp({}).use(VueStripeMenu)
 
 // Nuxt.js > add plugin to nuxt.config.js
 // export default {
@@ -101,14 +102,24 @@ Vue.use(VueStripeMenu)
 `<template>
   <vsm-menu ${this.vsmPropsStr}>
     <template #default="{ item }">
-      Dropdown content - {{ item.title }}
+      <div style="width: 300px; padding: 30px">
+        Dropdown content - {{ item.title }}
+      </div>
     </template>
     <template #before-nav>
-      Left side
+      <li class="vsm-section vsm-mob-full">
+        Left side
+      </li>
     </template>
     <template #after-nav>
-      <li class="vsm-section vsm-mob-hide">Right side item</li>
-      <vsm-mob>Mobile Content</vsm-mob>
+      <li class="vsm-section vsm-mob-hide">
+        Right side
+      </li>
+      <vsm-mob>
+        <div style="min-height: 200px; padding: 30px">
+          Mobile Content
+        </div>
+      </vsm-mob>
     </template>
   </vsm-menu>
 </template>
@@ -118,7 +129,8 @@ export default {
   data() {
     return {
       menu: [
-        { title: 'Item with dropdown', dropdown: 'dropdown-1' },
+        { title: 'Item1', dropdown: 'dropdown-1' },
+        { title: 'Item2', dropdown: 'dropdown-2' },
         { title: 'Just link', attributes: { href: '#clicked' } },
       ]
     }
