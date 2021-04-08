@@ -13,6 +13,6 @@
   }
 }
 
-.vsm-has-dropdown {
+.vsm-has-dropdown:not(a) {
   cursor: default;
 }
