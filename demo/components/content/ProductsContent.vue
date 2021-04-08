@@ -1,6 +1,6 @@
 <template>
   <div class="flex">
-    <div class="primary p--30">
+    <div class="primary p-30">
       <template
         v-for="i in 2"
         :key="`g1-${i}`"
@@ -16,7 +16,7 @@
         <br>
       </template>
     </div>
-    <div class="secondary p--30">
+    <div class="secondary p-30">
       <template
         v-for="i in 3"
         :key="`g3-${i}`"

@@ -35,14 +35,12 @@ Import components and styles:
 
 import { createApp } from 'vue'
 import VueStripeMenu from 'vue-stripe-menu'
-import 'vue-stripe-menu/dist/vue-stripe-menu.css'
 
 createApp({}).use(VueStripeMenu)
 
 // >>> Install locally - .vue file <<<
 
 import { VsmMenu, VsmMob } from 'vue-stripe-menu'
-import 'vue-stripe-menu/dist/vue-stripe-menu.css'
 
 export default {
   components: {
@@ -97,6 +95,12 @@ export default {
 Add styles:
 
 ```css
+@import "~vue-stripe-menu/src/scss/variables";
+
+// https://github.com/Alexeykhr/vue-stripe-menu/blob/master/src/scss/_variables.scss
+
+@import "~vue-stripe-menu/src/scss/index";
+
 .vsm-menu {
   max-width: 1024px;
   width: 100%;
@@ -297,7 +301,7 @@ export default {
 
 ### [Menu] Properties
 
-`const elements = this.$refs[myVsmRef].hasDropdownEls`
+`this.$refs[myVsmRef].itemsWithDropdown`
 
 | Name                   | Description                                     | Return                                                       |
 | ---------------------- | ----------------------------------------------- | ------------------------------------------------------------ |

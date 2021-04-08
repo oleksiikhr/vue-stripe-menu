@@ -2,7 +2,7 @@
   <div>
     <base-title title="Customize" />
     <component :is="'style'">
-      {{ styles }}
+      {{ localStyles }}
     </component>
     <div class="mb-10">
       <small>* These changes are applied on the current header and added to the Install section.</small>
@@ -58,6 +58,13 @@
           </div>
         </div>
       </div>
+      <br>
+      <a
+        href="https://github.com/Alexeykhr/vue-stripe-menu/blob/master/src/scss/_variables.scss"
+        target="_blank"
+      >
+        List of variables
+      </a>
     </div>
   </div>
 </template>
@@ -75,7 +82,7 @@ export default {
   data() {
     return {
       vsmProps: [
-        { property: 'element', value: '', initial: 'header', desc: 'header/div/section/..', validator: (val) => !!val },
+        { property: 'element', value: '', initial: 'header', desc: 'header/div/section or another HTMLElement', validator: (val) => !!val },
         { property: 'handler', value: '', initial: 'hover', desc: 'hover/click', validator: (val) => ['hover', 'click'].includes(val) },
         { property: 'screenOffset', value: '', initial: '10', desc: 'indent a dropdown menu from screen edges (reduce screen size)', validator: (val) => !isNaN(+val), convert: (val) => +val },
         { property: 'dropdownOffset', value: '', initial: '0', desc: 'indent a dropdown menu from header', validator: (val) => !isNaN(+val), convert: (val) => +val }
@@ -85,32 +92,23 @@ export default {
       generalStyles: [
         { property: 'header max-width', value: null, initial: '1024px', desc: 'for vsm-menu', handler: (val) => val && `.vsm-menu {\n  max-width: ${val};\n  width: 100%;\n  margin: 0 auto;\n}` },
         { property: 'header margin', value: null, initial: '0 10px', desc: 'for vsm-menu', handler: (val) => val && `.vsm-nav {\n  margin: ${val};\n}` },
-        { property: 'link position', value: null, initial: 'center', desc: 'left/center/right', handler: this.positionStyleHandler },
+        { property: 'link position', value: null, initial: 'center', desc: 'left/center/right or empty', handler: this.positionStyleHandler },
         { property: 'link indent', value: null, initial: '0 25px', desc: 'padding between links', handler: (val) => val && `.vsm-link {\n  padding: ${val};\n}` },
         { property: '@media mobile', value: null, initial: '768px', desc: 'empty - no adaptive', handler: (val) => val && `@media screen and (max-width: ${val}) {\n  .vsm-mob-show {\n    display: block;\n  }\n  .vsm-mob-hide {\n    display: none;\n  }\n  .vsm-mob-full {\n    flex-grow: 1;\n  }\n}` },
       ].map((item) => ({ ...item, value: item.initial })),
       vsmMenuStyles: [
-        { property: '--vsm-border-radius', value: null, initial: '4px', desc: 'border-radius for dropdown-menu' },
-        { property: '--vsm-transform-content', value: null, initial: '150px', desc: 'how far the content moves (inside the dropdown)' },
-        { property: '--vsm-arrow-size', value: null, initial: '12px', desc: 'width/height (.vsm-arrow)' },
-        { property: '--vsm-arrow-shadow', value: null, initial: '-3px -3px 5px rgba(82, 95, 127, .04)' },
-        { property: '--vsm-arrow-border-radius', value: null, initial: '4px 0 0 0' },
-        { property: '--vsm-index', value: null, initial: '1000', desc: 'dropdown container (z-index)' },
-        { property: '--vsm-link-height', value: null, initial: '50px' },
-        { property: '--vsm-background', value: null, initial: '#fff', desc: 'background for first element' },
-        { property: '--vsm-background-alt', value: null, initial: '#f6f9fc', desc: 'background from second element' },
-        { property: '--vsm-background-arrow', value: null, initial: 'var(--vsm-background)', desc: 'background (.vsm-arrow)' },
-        { property: '--vsm-color', value: null, initial: '#6772e5' },
-        { property: '--vsm-color-hover', value: null, initial: '#32325d' },
-        { property: '--vsm-transition', value: null, initial: '.25s', desc: 'animation speed' },
-        { property: '--vsm-transition-link', value: null, initial: '.1s ease', desc: 'link hover' },
-        { property: '--vsm-shadow', value: null, initial: '0 50px 100px -20px rgba(50, 50, 93, .25), 0 30px 60px -30px rgba(0, 0, 0, .3), 0 -18px 60px -10px rgba(0, 0, 0, .025)', desc: 'dropdown container' },
+        { property: '$vsm-transform-content', value: null, initial: '150px', desc: 'how far the content moves (inside the dropdown)' },
+        { property: '$vsm-link-height', value: null, initial: '50px' },
+        { property: '$vsm-background', value: null, initial: '#fff', desc: 'background for first element' },
+        { property: '$vsm-background-alt', value: null, initial: '#f6f9fc', desc: 'background from second element' },
+        { property: '$vsm-color', value: null, initial: '#6772e5' },
+        { property: '$vsm-color-hover', value: null, initial: '#32325d' },
+        { property: '$vsm-transition', value: null, initial: '.25s', desc: 'animation speed' },
       ].map((item) => ({ ...item, value: item.initial })),
       vsmMobStyles: [
-        { property: '--vsm-mob-hamburger-size', value: null, initial: '50px' },
-        { property: '--vsm-mob-close-size', value: null, initial: '50px' },
-        { property: '--vsm-mob-background', value: null, initial: 'var(--vsm-background)' },
-        { property: '--vsm-mob-shadow', value: null, initial: 'var(--vsm-shadow)' },
+        { property: '$vsm-mob-dropdown-offset', value: null, initial: '10px' },
+        { property: '$vsm-mob-background', value: null, initial: '$vsm-background' },
+        { property: '$vsm-mob-transition', value: null, initial: '$vsm-transition' },
       ].map((item) => ({ ...item, value: item.initial }))
     }
   },
@@ -121,7 +119,7 @@ export default {
     vsmMenuStylesString() {
       return this.vsmMenuStyles.reduce((result, item) => {
         if (item.value && item.value !== item.initial) {
-          result += `  ${item.property}: ${item.value};\n`
+          result += `${item.property}: ${item.value};\n`
         }
 
         return result
@@ -130,7 +128,7 @@ export default {
     vsmMobStylesString() {
       return this.vsmMobStyles.reduce((result, item) => {
         if (item.value && item.value !== item.initial) {
-          result += `  ${item.property}: ${item.value};\n`
+          result += `${item.property}: ${item.value};\n`
         }
 
         return result
@@ -138,7 +136,7 @@ export default {
     },
     generalStylesString() {
       return this.generalStyles.reduce((result, item) => {
-        if (item.handler) {
+        if (typeof item.handler === 'function') {
           const val = item.handler(item.value)
           result += val && `${val}\n\n`
         }
@@ -146,16 +144,31 @@ export default {
         return result
       }, '').trim()
     },
-    styles() {
-      let result = this.vsmMenuStylesString && `.vsm-menu {\n  ${this.vsmMenuStylesString}\n}\n\n`
-          result += this.vsmMobStylesString && `.vsm-section_mob {\n  ${this.vsmMobStylesString}\n}\n\n`
-          result += this.generalStylesString
+    filteredStyles() {
+      let overrideStyles = this.vsmMenuStylesString && `${this.vsmMenuStylesString}\n`
+      overrideStyles += this.vsmMobStylesString && `${this.vsmMobStylesString}\n`
+
+      let result = `${overrideStyles ? `@import "~vue-stripe-menu/src/scss/variables"\n\n${overrideStyles}\n` : ''}`
+      result += `@import "~vue-stripe-menu/src/scss/index";\n\n`
+      result += this.generalStylesString
 
       return result.trim()
     },
+    localStyles() {
+      const fn = (obj) => {
+        return obj.reduce((result, item) => {
+          const value = item.value.replace(/\$([a-z-]+)/gm, 'var(--$1)')
+          const initial = item.initial.replace(/\$([a-z-]+)/gm, 'var(--$1)')
+          result += `${item.property.replace('$', '--')}: ${value || initial};\n`
+          return result
+        }, '')
+      }
+
+      return `:root {${fn(this.vsmMenuStyles)}${fn(this.vsmMobStyles)}}${this.generalStylesString}`
+    }
   },
   watch: {
-    styles: {
+    filteredStyles: {
       handler(val) {
         this.$emit('on-css', val)
       },
@@ -164,18 +177,23 @@ export default {
   },
   methods: {
     positionStyleHandler(val) {
-      const common = `.vsm-root {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}`
+      let position = ''
 
       switch (val.trim()) {
         case 'center':
-          return `${common}\n\n.vsm-section_menu {\n  flex: 1 1 auto;\n  justify-content: center;\n}`
+          position = 'center'
+          break
         case 'left':
-          return `${common}\n\n.vsm-section_menu {\n  flex: 1 1 auto;\n  justify-content: flex-start;\n}`
+          position = 'flex-start'
+          break
         case 'right':
-          return `${common}\n\n.vsm-section_menu {\n  flex: 1 1 auto;\n  justify-content: flex-end;\n}`
+          position = 'flex-end'
+          break
         default:
-          return common
+          return ''
       }
+
+      return `.vsm-section_menu {\n  flex: 1 1 auto;\n  justify-content: ${position};\n}`
     },
     onChangeMenuProps() {
       const obj = this.vsmProps.reduce((result, item) => {
@@ -193,10 +211,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.mb-10 {
-  margin-bottom: 10px;
-}
-
 .sub-title {
   font-weight: bold;
   margin-bottom: 10px;

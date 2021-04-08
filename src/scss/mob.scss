@@ -1,16 +1,13 @@
+@import "variables";
+
 /* -----------------------------------------------------------------------------
  * - Root element -
  * -----------------------------------------------------------------------------
  */
 
 .vsm-section_mob {
-  --vsm-mob-hamburger-size: 50px;
-  --vsm-mob-close-size: 50px;
-  --vsm-mob-background: var(--vsm-background);
-  --vsm-mob-shadow: var(--vsm-shadow);
-
   display: none;
-  margin-left: 10px;
+  margin-left: $vsm-mob-link-offset;
   &.vsm-open {
     .vsm-mob {
       pointer-events: none;
@@ -31,21 +28,21 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: var(--vsm-mob-hamburger-size);
-  height: var(--vsm-mob-hamburger-size);
+  width: $vsm-mob-hamburger-size;
+  height: $vsm-mob-hamburger-size;
   cursor: pointer;
   &:hover {
     .vsm-mob-line {
-      background: var(--vsm-color-hover);
+      background: $vsm-mob-hamburger-color-hover;
     }
   }
 }
 
 .vsm-mob-line {
-  width: 24px;
-  height: 3px;
-  background: var(--vsm-color);
-  transition: background var(--vsm-transition-link);
+  width: $vsm-mob-hamburger-width;
+  height: $vsm-mob-hamburger-height;
+  background: $vsm-mob-hamburger-color;
+  transition: background $vsm-mob-transition-link;
   &:nth-child(2) {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -59,17 +56,17 @@
 
 .vsm-mob-content {
   position: absolute;
-  left: 10px;
-  top: 10px;
-  right: 10px;
+  left: $vsm-mob-dropdown-offset;
+  top: $vsm-mob-dropdown-offset;
+  right: $vsm-mob-dropdown-offset;
   justify-content: flex-end;
   perspective: 2000px;
 }
 
 .vsm-mob-content__wrap {
-  background: var(--vsm-mob-background);
-  box-shadow: var(--vsm-mob-shadow);
-  border-radius: 4px;
+  background: $vsm-mob-background;
+  box-shadow: $vsm-mob-shadow;
+  border-radius: $vsm-mob-dropdown-border-radius;
   overflow: hidden;
   position: relative;
   white-space: nowrap;
@@ -77,34 +74,34 @@
   transform-origin: 100% 0;
   will-change: transform, opacity;
   transition-property: transform, opacity;
-  transition-duration: .25s;
+  transition-duration: $vsm-mob-transition;
 }
 
 .vsm-mob-close {
   position: absolute;
   right: 0;
   top: 0;
-  width: var(--vsm-mob-close-size);
-  height: var(--vsm-mob-close-size);
+  width: $vsm-mob-close-size;
+  height: $vsm-mob-close-size;
   cursor: pointer;
   &:hover {
     &:before,
     &:after {
-      background: var(--vsm-color-hover);
+      background: $vsm-mob-close-color-hover;
     }
   }
   &:before,
   &:after {
     content: "";
     position: absolute;
-    background: var(--vsm-color);
+    background: $vsm-mob-close-color;
     border-radius: 1px;
-    left: 14px;
-    right: 14px;
-    top: 24px;
-    height: 3px;
+    left: $vsm-mob-close-size / 4;
+    right: $vsm-mob-close-size / 4;
+    top: $vsm-mob-close-size / 2;
+    height: $vsm-mob-close-weight;
     transform: rotate(45deg);
-    transition: background var(--vsm-transition-link);
+    transition: background $vsm-mob-transition-link;
   }
   &:after {
     transform: rotate(-45deg);
@@ -117,7 +114,7 @@
  */
 
 .vsm-mob-anim {
-  transition: var(--vsm-transition);
+  transition: $vsm-mob-transition;
   &-enter-active {
     opacity: 0;
     transform: scale(.95);

@@ -1,4 +1,5 @@
 @import "~highlight.js/styles/github-gist.css";
+@import "../../src/scss/css-variables";
 
 body {
   background-color: #f5f7f9;
@@ -83,10 +84,14 @@ footer {
   margin-bottom: 5px;
 }
 
+.mb-10 {
+  margin-bottom: 10px;
+}
+
 .mb-20 {
   margin-bottom: 20px;
 }
 
-.p--30 {
+.p-30 {
   padding: 30px;
 }

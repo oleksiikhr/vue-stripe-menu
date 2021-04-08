@@ -1,5 +1,5 @@
 <template>
-  <div class="p--30">
+  <div class="p-30">
     <base-text />
     <br>
     <base-group />

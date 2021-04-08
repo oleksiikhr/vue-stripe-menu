@@ -6,7 +6,7 @@
       ref="codeShell"
       class="shell"
     >{{ shell }}</code></pre>
-    <p>Import components and styles:</p>
+    <p>Import components:</p>
     <pre><code
       ref="codeJs"
       class="javascript"
@@ -16,7 +16,7 @@
       ref="codeVue"
       class="vue"
     >{{ vue }}</code></pre>
-    <p>Add styles:</p>
+    <p>Add .scss styles:</p>
     <pre><code
       ref="codeCss"
       class="css"
@@ -73,14 +73,13 @@ $ yarn add vue-stripe-menu
 
 import { createApp } from 'vue'
 import VueStripeMenu from 'vue-stripe-menu'
-import 'vue-stripe-menu/dist/vue-stripe-menu.css'
+// import 'vue-stripe-menu/dist/vue-stripe-menu.css'
 
 createApp({}).use(VueStripeMenu)
 
 // >>> Install locally - .vue file <<<
 
 import { VsmMenu, VsmMob } from 'vue-stripe-menu'
-import 'vue-stripe-menu/dist/vue-stripe-menu.css'
 
 export default {
   components: {

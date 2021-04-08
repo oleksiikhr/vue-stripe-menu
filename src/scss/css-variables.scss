@@ -1,0 +1,133 @@
+@import "variables";
+
+/* -----------------------------------------------------------------------------
+ * - Menu Component -
+ * -----------------------------------------------------------------------------
+ */
+
+.vsm-menu {
+  .vsm-dropdown {
+    z-index: var(--vsm-index, $vsm-index);
+    top: var(--vsm-link-height, $vsm-link-height);
+    transform-origin: 50% calc(var(--vsm-link-height, #{$vsm-link-height}) * -1);
+    transition-duration: var(--vsm-transition, $vsm-transition);
+  }
+}
+
+.vsm-link {
+  height: var(--vsm-link-height, $vsm-link-height);
+  line-height: var(--vsm-link-height, $vsm-link-height);
+  color: var(--vsm-color, $vsm-color);
+  transition: color var(--vsm-transition-link, $vsm-transition-link);
+  &:hover,
+  &.vsm-active {
+    color: var(--vsm-color-hover, $vsm-color-hover);
+  }
+}
+
+.vsm-background,
+.vsm-background-alt {
+  transition-duration: var(--vsm-transition, $vsm-transition);
+}
+
+.vsm-background {
+  background: var(--vsm-background, $vsm-background);
+  border-radius: var(--vsm-border-radius, $vsm-border-radius);
+  box-shadow: var(--vsm-shadow, $vsm-shadow);
+}
+
+.vsm-background-alt {
+  background: var(--vsm-background-alt, $vsm-background-alt);
+}
+
+.vsm-arrow,
+.vsm-dropdown-container {
+  transition-duration: var(--vsm-transition, $vsm-transition);
+}
+
+.vsm-arrow {
+  top: calc(var(--vsm-arrow-size, #{$vsm-arrow-size}) / -2);
+  margin: 0 0 0 calc(var(--vsm-arrow-size, #{$vsm-arrow-size}) / -2);
+  width: var(--vsm-arrow-size, $vsm-arrow-size);
+  height: var(--vsm-arrow-size, $vsm-arrow-size);
+  border-radius: var(--vsm-arrow-border-radius, $vsm-arrow-border-radius);
+  background: var(--vsm-background-arrow, $vsm-background-arrow);
+  box-shadow: var(--vsm-arrow-shadow, $vsm-arrow-shadow);
+}
+
+.vsm-dropdown-container {
+  border-radius: calc(var(--vsm-border-radius, #{$vsm-border-radius}) + 2px);
+}
+
+.vsm-dropdown-section {
+  transition-duration: var(--vsm-transition, $vsm-transition);
+  &.vsm-left {
+    transform: translateX(calc(-1 * var(--vsm-transform-content, #{$vsm-transform-content})));
+  }
+  &.vsm-right {
+    transform: translateX(var(--vsm-transform-content, #{$vsm-transform-content}));
+  }
+}
+
+/* -----------------------------------------------------------------------------
+ * - Mobile Component -
+ * -----------------------------------------------------------------------------
+ */
+
+.vsm-section_mob {
+  margin-left: var(--vsm-mob-link-offset, $vsm-mob-link-offset);
+}
+
+.vsm-mob__hamburger {
+  width: var(--vsm-mob-hamburger-size, $vsm-mob-hamburger-size);
+  height: var(--vsm-mob-hamburger-size, $vsm-mob-hamburger-size);
+  &:hover {
+    .vsm-mob-line {
+      background: var(--vsm-mob-hamburger-color-hover, $vsm-mob-hamburger-color-hover);
+    }
+  }
+}
+
+.vsm-mob-line {
+  width: var(--vsm-mob-hamburger-width, $vsm-mob-hamburger-width);
+  height: var(--vsm-mob-hamburger-height, $vsm-mob-hamburger-height);
+  background: var(--vsm-mob-hamburger-color, $vsm-mob-hamburger-color);
+  transition: background var(--vsm-mob-transition-link, $vsm-mob-transition-link);
+}
+
+.vsm-mob-content {
+  left: var(--vsm-mob-dropdown-offset, $vsm-mob-dropdown-offset);
+  top: var(--vsm-mob-dropdown-offset, $vsm-mob-dropdown-offset);
+  right: var(--vsm-mob-dropdown-offset, $vsm-mob-dropdown-offset);
+}
+
+.vsm-mob-content__wrap {
+  background: var(--vsm-mob-background, $vsm-mob-background);
+  box-shadow: var(--vsm-mob-shadow, $vsm-mob-shadow);
+  border-radius: var(--vsm-mob-dropdown-border-radius, $vsm-mob-dropdown-border-radius);
+  transition-duration: var(--vsm-mob-transition, $vsm-mob-transition);
+}
+
+.vsm-mob-close {
+  width: var(--vsm-mob-close-size, $vsm-mob-close-size);
+  height: var(--vsm-mob-close-size, $vsm-mob-close-size);
+  &:hover {
+    &:before,
+    &:after {
+      background: var(--vsm-mob-close-color-hover, $vsm-mob-close-color-hover);
+    }
+  }
+  &:before,
+  &:after {
+    background: var(--vsm-mob-close-color, $vsm-mob-close-color);
+    left: calc(var(--vsm-mob-close-size, #{$vsm-mob-close-size}) / 4);
+    right: calc(var(--vsm-mob-close-size, #{$vsm-mob-close-size}) / 4);
+    top: calc(var(--vsm-mob-close-size, #{$vsm-mob-close-size}) / 2);
+    height: var(--vsm-mob-close-weight, $vsm-mob-close-weight);
+    transition: background var(--vsm-mob-transition-link, $vsm-mob-transition-link);
+  }
+}
+
+.vsm-mob-anim {
+  transition: var(--vsm-mob-transition, $vsm-mob-transition);
+}

@@ -1,5 +1,5 @@
 <template>
-  <div class="p--30">
+  <div class="p-30">
     <base-text
       :max="200"
       type="title"
