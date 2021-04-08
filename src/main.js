@@ -10,7 +10,7 @@ import './scss/index.scss'
 // Create module definition for Vue.use()
 const plugin = {
   // Declare install function executed by Vue.use()
-  install: (Vue) => {
+  install: (app) => {
     if (plugin.installed) {
       return
     }
@@ -18,8 +18,8 @@ const plugin = {
     plugin.installed = true
 
     // Components
-    Vue.component('VsmMenu', VsmMenu)
-    Vue.component('VsmMob', VsmMob)
+    app.component('VsmMenu', VsmMenu)
+    app.component('VsmMob', VsmMob)
   }
 }
 
