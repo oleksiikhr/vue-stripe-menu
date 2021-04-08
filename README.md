@@ -363,6 +363,8 @@ $ yarn dev
 
 ### Build a demo project
 
+> Don't add build files to PR
+
 ```sh
 $ yarn build
 ```
