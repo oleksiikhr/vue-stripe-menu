@@ -51,7 +51,7 @@
   width: var(--vsm-arrow-size, $vsm-arrow-size);
   height: var(--vsm-arrow-size, $vsm-arrow-size);
   border-radius: var(--vsm-arrow-border-radius, $vsm-arrow-border-radius);
-  background: var(--vsm-background-arrow, $vsm-background-arrow);
+  background: var(--vsm-background-arrow, var(--vsm-background));
   box-shadow: var(--vsm-arrow-shadow, $vsm-arrow-shadow);
 }
 
@@ -83,7 +83,7 @@
   height: var(--vsm-mob-hamburger-size, $vsm-mob-hamburger-size);
   &:hover {
     .vsm-mob-line {
-      background: var(--vsm-mob-hamburger-color-hover, $vsm-mob-hamburger-color-hover);
+      background: var(--vsm-mob-hamburger-color-hover, var(--vsm-color-hover));
     }
   }
 }
@@ -91,7 +91,7 @@
 .vsm-mob-line {
   width: var(--vsm-mob-hamburger-width, $vsm-mob-hamburger-width);
   height: var(--vsm-mob-hamburger-height, $vsm-mob-hamburger-height);
-  background: var(--vsm-mob-hamburger-color, $vsm-mob-hamburger-color);
+  background: var(--vsm-mob-hamburger-color, var(--vsm-color));
   transition: background var(--vsm-mob-transition-link, $vsm-mob-transition-link);
 }
 
@@ -102,10 +102,10 @@
 }
 
 .vsm-mob-content__wrap {
-  background: var(--vsm-mob-background, $vsm-mob-background);
-  box-shadow: var(--vsm-mob-shadow, $vsm-mob-shadow);
+  background: var(--vsm-mob-background, var(--vsm-background));
+  box-shadow: var(--vsm-mob-shadow, var(--vsm-shadow));
   border-radius: var(--vsm-mob-dropdown-border-radius, $vsm-mob-dropdown-border-radius);
-  transition-duration: var(--vsm-mob-transition, $vsm-mob-transition);
+  transition-duration: var(--vsm-mob-transition, var(--vsm-transition));
 }
 
 .vsm-mob-close {
@@ -114,20 +114,20 @@
   &:hover {
     &:before,
     &:after {
-      background: var(--vsm-mob-close-color-hover, $vsm-mob-close-color-hover);
+      background: var(--vsm-mob-close-color-hover, var(--vsm-color-hover));
     }
   }
   &:before,
   &:after {
-    background: var(--vsm-mob-close-color, $vsm-mob-close-color);
+    background: var(--vsm-mob-close-color, var(--vsm-color));
     left: calc(var(--vsm-mob-close-size, #{$vsm-mob-close-size}) / 4);
     right: calc(var(--vsm-mob-close-size, #{$vsm-mob-close-size}) / 4);
     top: calc(var(--vsm-mob-close-size, #{$vsm-mob-close-size}) / 2);
     height: var(--vsm-mob-close-weight, $vsm-mob-close-weight);
-    transition: background var(--vsm-mob-transition-link, $vsm-mob-transition-link);
+    transition: background var(--vsm-mob-transition-link, var(--vsm-transition-link));
   }
 }
 
 .vsm-mob-anim {
-  transition: var(--vsm-mob-transition, $vsm-mob-transition);
+  transition: var(--vsm-mob-transition, var(--vsm-transition));
 }
