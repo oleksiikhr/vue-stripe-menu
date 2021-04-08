@@ -2,6 +2,9 @@
   "name": "vue-stripe-menu",
   "version": "2.0.0-beta.3",
   "description": "Creating a navigation menu with animations like on Stripe",
+  "keywords": [
+    "vue", "stripe", "dropdown", "menu", "navigation", "animations"
+  ],
   "author": "Alexey Khrushch <alexeykhr@outlook.com>",
   "scripts": {
     "build": "vue-cli-service build --dest docs ./demo/main.js",
