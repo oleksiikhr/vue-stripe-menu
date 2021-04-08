@@ -27,7 +27,7 @@ $vsm-color: #6772e5 !default;
 $vsm-color-hover: #32325d !default;
 
 // Speed to change dropdown content and hover on links
-$vsm-transition: .25s !default;
+$vsm-transition: .25s !default; // must be equals with "transition-timeout" props
 $vsm-transition-link: .1s ease !default;
 
 // Dropdown content (menu + mob)

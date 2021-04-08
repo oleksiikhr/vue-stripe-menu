@@ -262,13 +262,14 @@ export default {
 
 ### [Menu] Props
 
-| Property        | Parameters   | Description                             | Type           | Default | Required |
-| --------------- | ----------   | --------------------------------------- | -------------- | ------- | -------- |
-| menu            | MenuObject   | Description of the menu items           | Array          |         | true     |
-| element         |              | HTMLElement for the root element        | String         | header  | false    |
-| screen-offset   |              | Offset from the window screen           | String, Number | header  | false    |
-| dropdown-offset |              | Offset from the dropdown menu           | String, Number | header  | false    |
-| handler         | hover, click | What event should you open dropdown for | String         | hover   | false    |
+| Property           | Parameters   | Description                                         | Type           | Default | Required |
+| ------------------ | ----------   | --------------------------------------------------- | -------------- | ------- | -------- |
+| menu               | MenuObject   | Description of the menu items                       | Array          |         | true     |
+| element            |              | HTMLElement for the root element                    | String         | header  | false    |
+| screen-offset      |              | Offset from the window screen                       | String, Number | header  | false    |
+| dropdown-offset    |              | Offset from the dropdown menu                       | String, Number | header  | false    |
+| transition-timeout |              | Animation speed in ms (equals $vsm-transition scss) | String, Number | 250     | false    |
+| handler            | hover, click | On what event to open dropdown menu                 | String         | hover   | false    |
 
 ### [Menu] Events
 

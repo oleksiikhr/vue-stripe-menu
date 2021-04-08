@@ -49,6 +49,7 @@
               <span>{{ item.property }}:</span>
               <input
                 v-model="item.value"
+                v-bind="item.attrs"
                 :placeholder="item.initial"
                 :style="{ color: !item.value || item.value === item.initial ? '#595959' : '#de3939' }"
                 spellcheck="false"
@@ -84,8 +85,9 @@ export default {
       vsmProps: [
         { property: 'element', value: '', initial: 'header', desc: 'header/div/section or another HTMLElement', validator: (val) => !!val },
         { property: 'handler', value: '', initial: 'hover', desc: 'hover/click', validator: (val) => ['hover', 'click'].includes(val) },
-        { property: 'screenOffset', value: '', initial: '10', desc: 'indent a dropdown menu from screen edges (reduce screen size)', validator: (val) => !isNaN(+val), convert: (val) => +val },
-        { property: 'dropdownOffset', value: '', initial: '0', desc: 'indent a dropdown menu from header', validator: (val) => !isNaN(+val), convert: (val) => +val }
+        { property: 'screen-offset', value: '', initial: '10', desc: 'indent a dropdown menu from screen edges (reduce screen size)', validator: (val) => !isNaN(+val), convert: (val) => +val },
+        { property: 'dropdown-offset', value: '', initial: '0', desc: 'indent a dropdown menu from header', validator: (val) => !isNaN(+val), convert: (val) => +val },
+        { property: 'transition-timeout', value: '', initial: '250', desc: 'animation speed (equals "$vsm-transition" style)', validator: (val) => !isNaN(+val), convert: (val) => +val },
       ].map((item) => ({ ...item, value: item.initial, onInput: this.onChangeMenuProps })),
 
       // Initial values from *.scss
@@ -103,7 +105,7 @@ export default {
         { property: '$vsm-background-alt', value: null, initial: '#f6f9fc', desc: 'background from second element' },
         { property: '$vsm-color', value: null, initial: '#6772e5' },
         { property: '$vsm-color-hover', value: null, initial: '#32325d' },
-        { property: '$vsm-transition', value: null, initial: '.25s', desc: 'animation speed' },
+        { property: '$vsm-transition', value: null, initial: '250ms', desc: 'animation speed (equals "transition-timeout" props)', attrs: { disabled: true } },
       ].map((item) => ({ ...item, value: item.initial })),
       vsmMobStyles: [
         { property: '$vsm-mob-dropdown-offset', value: null, initial: '10px' },
@@ -143,6 +145,12 @@ export default {
 
         return result
       }, '').trim()
+    },
+    vsmMenuTransitionStyle() {
+      return this.vsmMenuStyles.find((item) => item.property === '$vsm-transition')
+    },
+    vsmMenuTransitionProp() {
+      return this.vsmProps.find((item) => item.property === 'transition-timeout')
     },
     filteredStyles() {
       let overrideStyles = this.vsmMenuStylesString && `${this.vsmMenuStylesString}\n`
@@ -205,6 +213,8 @@ export default {
         return result
       }, {})
 
+      this.vsmMenuTransitionStyle.value = `${this.vsmMenuTransitionProp.value || this.vsmMenuTransitionProp.initial}ms`
+
       this.$emit('change-props', obj)
     }
   }
@@ -234,6 +244,9 @@ export default {
       outline: none;
       width: 250px;
       font-size: .9em;
+      &:disabled {
+        background: rgba(0, 0, 0, .05);
+      }
     }
     > * {
       margin: 0 3px;

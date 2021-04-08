@@ -142,6 +142,14 @@ export default {
       type: String,
       default: 'hover',
       validator: (val) => ['hover', 'click'].includes(val)
+    },
+    /**
+     * Must be equals as $vsm-transition (scss variable)
+     * @default .25s
+     */
+    transitionTimeout: {
+      type: [Number, String],
+      default: 250
     }
   },
   emits: [
@@ -322,7 +330,7 @@ export default {
       clearTimeout(this._enableTransitionTimeout)
     },
     startDisableTransitionTimeout() {
-      this._disableTransitionTimeout = setTimeout(() => this.$el.classList.add('vsm-no-transition'), 50)
+      this._disableTransitionTimeout = setTimeout(() => this.$el.classList.add('vsm-no-transition'), +this.transitionTimeout)
     },
     clearDisableTransitionTimeout() {
       clearTimeout(this._disableTransitionTimeout)

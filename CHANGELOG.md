@@ -77,6 +77,7 @@ These 2 properties have been removed due to unnecessary use, as well as dependen
 Added the ability to indent the dropdown menu from links
 
 - Added `dropdown-offset`
+- Added `transition-timeout`
 
 **[Methods](https://github.com/Alexeykhr/vue-stripe-menu#menu-methods)**
 

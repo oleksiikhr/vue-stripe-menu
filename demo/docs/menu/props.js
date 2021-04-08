@@ -37,6 +37,12 @@ export const rows = [
     default: 0
   },
   {
+    property: 'transition-timeout',
+    description: 'Animation speed in ms (equals $vsm-transition scss)',
+    type: 'String, Number',
+    default: 250
+  },
+  {
     property: 'handler',
     parameters: 'hover, click',
     description: 'On what event to open dropdown menu',
