@@ -35,6 +35,7 @@ Import components and styles:
 
 import { createApp } from 'vue'
 import VueStripeMenu from 'vue-stripe-menu'
+// import 'vue-stripe-menu/dist/vue-stripe-menu.css' // without the ability to override values
 
 createApp({}).use(VueStripeMenu)
 
