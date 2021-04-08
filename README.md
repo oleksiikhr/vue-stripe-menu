@@ -330,10 +330,11 @@ export default {
 
 ### [Mob] Slots
 
-| Name       | Parameters | Description                     |
-| ---------- | ---------- | ------------------------------- |
-| default    |            | Main content                    |
-| hamburger  |            | Replace button to open dropdown |
+| Name       | Parameters | Description               |
+| ---------- | ---------- | ------------------------- |
+| default    |            | Main content              |
+| hamburger  |            | Replace hamburger button  |
+| close      |            | Replace close button      |
 
 ### [Mob] Methods
 

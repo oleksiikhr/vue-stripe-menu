@@ -16,5 +16,9 @@ export const rows = [
   {
     name: 'hamburger',
     description: 'Replace hamburger button'
+  },
+  {
+    name: 'close',
+    description: 'Replace close button'
   }
 ]

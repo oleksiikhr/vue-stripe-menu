@@ -22,10 +22,12 @@
           v-show="active"
           class="vsm-mob-content__wrap"
         >
-          <div
-            class="vsm-mob-close"
-            @click="onClickHamburger"
-          />
+          <slot name="close">
+            <div
+              class="vsm-mob-close"
+              @click="onClickHamburger"
+            />
+          </slot>
           <slot />
         </div>
       </transition>
