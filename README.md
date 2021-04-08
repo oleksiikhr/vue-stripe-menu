@@ -114,7 +114,6 @@ Add css/scss styles:
   margin: 0 10px;
 }
 
-
 .vsm-section_menu {
   flex: 1 1 auto;
   justify-content: center;
