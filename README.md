@@ -183,7 +183,7 @@ Add css/scss styles:
       <li class="vsm-section vsm-mob-hide">
         <button>My Button</button>
       </li>
-      <!--Display when user media screen below from $vsm-media (scss)-->
+      <!--Set "display: block" for the .vsm-mob-show class to display content-->
       <vsm-mob>Mobile Content</vsm-mob>
     </template>
   </vsm-menu>

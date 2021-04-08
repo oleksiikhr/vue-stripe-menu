@@ -17,7 +17,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 // Change 768px on your value from $vsm-media, if set
 @media screen and (max-width: 768px) {
-  .vsm-section_mob {
+  .vsm-mob-show {
     display: block;
   }
   .vsm-mob-hide {
