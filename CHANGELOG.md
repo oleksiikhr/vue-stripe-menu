@@ -2,6 +2,112 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/Alexeykhr/vue-stripe-menu/compare/v1.5.0...v2.0.0) (2021-04-08)
+
+### Upgrade to Vue 3
+
+- Add styles:
+
+```scss
+// Change 768px on your value from $vsm-media, if set
+@media screen and (max-width: 768px) {
+  .vsm-section_mob {
+    display: block;
+  }
+  .vsm-mob-hide {
+    display: none;
+  }
+  .vsm-mob-full {
+    flex-grow: 1;
+  }
+}
+```
+
+- Change the code/styles according to the changes below
+
+#### Global changes
+
+- Added the ability to customize styles in realtime via [Demo Website](https://alexeykhr.github.io/vue-stripe-menu/)
+- Added a simplified demo of the component to the [#Install section](https://alexeykhr.github.io/vue-stripe-menu/#install)
+- Added the ability not to install the component globally:
+
+```vue
+import { VsmMenu, VsmMob } from 'vue-stripe-menu'
+
+export default {
+  components: {
+    VsmMenu, VsmMob
+  }
+}
+```
+
+#### Style changes
+
+- Removed `cursor: default` from dropdown buttons with HTML element `<a href="" />`
+- Removed `@media` styles
+- Removed predefined `font-size: 17px` and `font-weight: 500`
+- Renamed [variables](https://github.com/Alexeykhr/vue-stripe-menu/blob/master/src/scss/_variables.scss):
+    - `$vsm-menu-border-radius` > `$vsm-border-radius`
+    - `$vsm-menu-transform-content` > `$vsm-transform-content`
+    - `$vsm-menu-link-height` > `$vsm-link-height`
+    - `$vsm-menu-arrow-shadow` > `$vsm-arrow-shadow`
+    - `$vsm-mob-size` > `$vsm-mob-hamburger-size`
+- Added [variables](https://github.com/Alexeykhr/vue-stripe-menu/blob/master/src/scss/_variables.scss):
+    - Menu: `$vsm-arrow-size`, `$vsm-arrow-shadow`, `$vsm-arrow-border-radius`, `$vsm-index`, `$vsm-background`,
+      `$vsm-background-alt`, `$vsm-background-arrow`,
+    - Mob: `$vsm-mob-dropdown-offset`, `$vsm-mob-dropdown-border-radius`, `$vsm-mob-close-weight`, `$vsm-mob-close-color`,
+      `$vsm-mob-close-color-hover`, `$vsm-mob-link-offset`, `$vsm-mob-background`, `$vsm-mob-shadow`, `$vsm-mob-transition`,
+      `$vsm-mob-transition-link`
+
+#### Components
+
+##### Menu
+
+- Attribute added to each link [tabindex="0"](https://github.com/Alexeykhr/vue-stripe-menu/blob/master/src/components/Menu.vue#L26)
+- Now, when changing the width of the screen `window.addEventListener('resize')` - the dropdown menu does not close,
+  but the dropdown menu is recalculated via [`resizeDropdown`](https://github.com/Alexeykhr/vue-stripe-menu#menu-methods)
+
+**[Props](https://github.com/Alexeykhr/vue-stripe-menu#menu-props)**
+
+These 2 properties have been removed due to unnecessary use, as well as dependence on css styles (width and height are overridden on the first interaction)
+
+- Removed `base-width`
+- Removed `base-height`
+
+Added the ability to indent the dropdown menu from links
+
+- Added `dropdown-offset`
+
+**[Methods](https://github.com/Alexeykhr/vue-stripe-menu#menu-methods)**
+
+When changing dynamic content inside dropdown, you can now call `resizeDropdown` via `$refs`, resizing and relocating the dropdown
+
+- Added `resizeDropdown`
+
+**[Properties](https://github.com/Alexeykhr/vue-stripe-menu#menu-properties)**
+
+- Removed `hasDropdownEls`
+- Removed `$refs.links`
+- Added `itemsWithDropdown`
+- Added `elementsWithDropdown`
+- Added `dropdownContainerItems`
+
+##### Mob
+
+**[Slots](https://github.com/Alexeykhr/vue-stripe-menu#mob-slots)**
+
+Added the ability to replace the **close button** after opening the dropdown menu
+
+- Added `close`
+
+##### Other
+
+**[Classes](https://github.com/Alexeykhr/vue-stripe-menu#classes)**
+
+- Removed `vsm-mob-full`
+- Added `vsm-mob-show`
+
+
 ## [1.5.0](https://github.com/Alexeykhr/vue-stripe-menu/compare/v1.4.0...v1.5.0) (2020-11-17)
 
 
