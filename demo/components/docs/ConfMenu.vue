@@ -150,7 +150,7 @@ export default {
 
       let result = `// >>> SCSS style (required sass-loader, node-sass) <<<\n// https://github.com/Alexeykhr/vue-stripe-menu/blob/master/src/scss/_variables.scss\n`
       result += `${overrideStyles ? `${overrideStyles}\n` : ''}`
-      result += `@import "~vue-stripe-menu/src/scss/index";\n\n// >>> CSS style <<<\n// @import 'vue-stripe-menu/dist/vue-stripe-menu.css'\n\n`
+      result += `@import "~vue-stripe-menu/src/scss/index";\n\n// >>> CSS style <<<\n// @import 'vue-stripe-menu/dist/vue-stripe-menu.css';\n\n`
       result += this.generalStylesString
 
       return result.trim()

@@ -102,7 +102,7 @@ Add css/scss styles:
 @import "~vue-stripe-menu/src/scss/index";
 
 // >>> CSS style <<<
-// @import 'vue-stripe-menu/dist/vue-stripe-menu.css'
+// @import 'vue-stripe-menu/dist/vue-stripe-menu.css';
 
 .vsm-menu {
   max-width: 1024px;
