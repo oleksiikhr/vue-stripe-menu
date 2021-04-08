@@ -9,6 +9,12 @@ All notable changes to this project will be documented in this file. See [standa
 - Add styles:
 
 ```scss
+// These default values have been removed from the library (default font-size is yours)
+.vsm-link, .vsm-mob-content__wrap {
+  font-size: 17px;
+  font-weight: 500;
+}
+
 // Change 768px on your value from $vsm-media, if set
 @media screen and (max-width: 768px) {
   .vsm-section_mob {
