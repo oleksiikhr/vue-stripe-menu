@@ -212,6 +212,7 @@ export default {
           // this element now has dropdown content
           dropdown: 'news',
           // don't want a button element?
+          // pass only as a string (component must be globally accessible)
           element: 'span', // router-link
           // menu item can accept all attributes
           attributes: {
@@ -229,7 +230,7 @@ export default {
             }
           },
           // just extra properties in the object
-          new_section: false,
+          customAttribute: true,
         },
         {
           title: 'External Link',
