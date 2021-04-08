@@ -35,7 +35,6 @@ Import components and styles:
 
 import { createApp } from 'vue'
 import VueStripeMenu from 'vue-stripe-menu'
-// import 'vue-stripe-menu/dist/vue-stripe-menu.css' // without the ability to override values
 
 createApp({}).use(VueStripeMenu)
 
@@ -93,14 +92,17 @@ export default {
 </script>
 ```
 
-Add styles:
+Add css/scss styles:
 
-```css
-@import "~vue-stripe-menu/src/scss/variables";
-
+```scss
+// >>> SCSS style (required sass-loader, node-sass) <<<
 // https://github.com/Alexeykhr/vue-stripe-menu/blob/master/src/scss/_variables.scss
+// $vsm-transition: .5s;
 
 @import "~vue-stripe-menu/src/scss/index";
+
+// >>> CSS style <<<
+// @import 'vue-stripe-menu/dist/vue-stripe-menu.css'
 
 .vsm-menu {
   max-width: 1024px;

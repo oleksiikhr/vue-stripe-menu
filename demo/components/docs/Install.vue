@@ -16,10 +16,10 @@
       ref="codeVue"
       class="vue"
     >{{ vue }}</code></pre>
-    <p>Add .scss styles:</p>
+    <p>Add css/scss styles:</p>
     <pre><code
       ref="codeCss"
-      class="css"
+      class="scss"
     >{{ css }}</code></pre>
   </div>
 </template>
@@ -73,7 +73,6 @@ $ yarn add vue-stripe-menu
 
 import { createApp } from 'vue'
 import VueStripeMenu from 'vue-stripe-menu'
-// import 'vue-stripe-menu/dist/vue-stripe-menu.css' // without the ability to override values
 
 createApp({}).use(VueStripeMenu)
 
