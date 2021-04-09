@@ -167,6 +167,11 @@ export default {
     }
   },
   watch: {
+    async element() {
+      await this.$nextTick()
+      this.updateDataElements()
+      this.registerDropdownElementsEvents()
+    },
     handler() {
       this.registerDropdownElementsEvents(true)
       this.registerDropdownContainerEvents(true)
