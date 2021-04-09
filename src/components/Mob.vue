@@ -1,6 +1,6 @@
 <template>
   <li
-    :class="['vsm-section', 'vsm-section_mob', {
+    :class="['vsm-mob-container', 'vsm-mob-show', {
       'vsm-open': active
     }]"
   >
@@ -22,10 +22,12 @@
           v-show="active"
           class="vsm-mob-content__wrap"
         >
-          <div
-            class="vsm-mob-close"
-            @click="onClickHamburger"
-          />
+          <slot name="close">
+            <div
+              class="vsm-mob-close"
+              @click="onClickHamburger"
+            />
+          </slot>
           <slot />
         </div>
       </transition>
@@ -42,7 +44,10 @@ export default {
       default: false
     }
   },
-  data () {
+  emits: [
+    'input'
+  ],
+  data() {
     return {
       // Support change value without accept props
       active: this.value
@@ -50,13 +55,13 @@ export default {
   },
   watch: {
     // Support for changing a variable externally
-    value (val) {
+    value(val) {
       if (this.active !== val) {
         this.active = val
       }
     },
     // Lock the permanent event on click, hang event only when the menu is opened
-    active (val) {
+    active(val) {
       if (val) {
         this.registerEvent()
       } else {
@@ -64,32 +69,32 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted() {
     const touchSupport = 'ontouchstart' in window || navigator.maxTouchPoints
     this._touchEvent = touchSupport ? 'touchend' : 'click'
   },
-  beforeDestroy () {
+  beforeUnmount() {
     this.unregisterEvent()
   },
   methods: {
-    closeDropdown () {
+    closeDropdown() {
       this.emitValue(false)
     },
-    onClickHamburger () {
+    onClickHamburger() {
       this.emitValue(!this.active)
     },
-    registerEvent () {
+    registerEvent() {
       document.body.addEventListener(this._touchEvent, this.eventEndHandler)
     },
-    unregisterEvent () {
+    unregisterEvent() {
       document.body.removeEventListener(this._touchEvent, this.eventEndHandler)
     },
-    emitValue (toggle) {
+    emitValue(toggle) {
       this.active = toggle
       this.$emit('input', toggle)
     },
     // Close Dropdown content after outside click
-    eventEndHandler (evt) {
+    eventEndHandler(evt) {
       if (this.$el !== evt.target && !this.$el.contains(evt.target)) {
         this.emitValue(false)
       }

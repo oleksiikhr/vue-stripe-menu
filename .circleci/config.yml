@@ -9,7 +9,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:10.16.3
+      - image: circleci/node:14.16
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -35,10 +35,10 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - run: npm run lint
-      - run: npm run test -- --coverage
-      - run: npm run build
-      - run: npm run build:lib
+      - run: yarn lint
+      - run: yarn test --coverage
+      - run: yarn build
+      - run: yarn build:lib
 
       - codecov/upload:
           file: coverage/*.json

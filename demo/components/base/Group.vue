@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import rnd from '../../sciprts/rnd'
+import { computed } from 'vue'
 import BaseText from './Text'
 
 export default {
@@ -40,13 +40,10 @@ export default {
       validator: (val) => ~['primary', 'secondary'].indexOf(val)
     }
   },
-  computed: {
-    background () {
-      return this.color === 'primary' ? 'background' : 'background--secondary'
-    }
-  },
-  methods: {
-    rnd
+  setup(props) {
+    const background = computed(() => props.color === 'primary' ? 'background' : 'background--secondary')
+
+    return { background }
   }
 }
 </script>

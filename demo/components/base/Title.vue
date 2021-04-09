@@ -1,7 +1,7 @@
 <template>
   <a
     :id="generatedId"
-    :href="`#${generatedId}`"
+    :href="generatedHref"
     class="section"
   >
     # <slot>{{ title }}</slot>
@@ -21,18 +21,19 @@ export default {
     }
   },
   computed: {
-    generatedId () {
+    generatedId() {
       if (this.id) {
         return this.id
       }
 
-      let id = this.title
-
-      if (this.$slots.default) {
-        id = this.$slots.default[0].text
+      if (!this.title) {
+        return null
       }
 
-      return id.trim().toLowerCase().replace(/[^a-z-]/gi, '-')
+      return this.title.trim().toLowerCase().replace(/[^a-z-]/gi, '-')
+    },
+    generatedHref() {
+      return this.generatedId && `#${this.generatedId}`
     }
   }
 }

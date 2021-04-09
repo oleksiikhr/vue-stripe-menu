@@ -1,13 +1,13 @@
 'use strict'
 
-import { shallowMount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import Mob from '../../src/components/Mob'
 import sinon from 'sinon'
 
 let wrapper
 
 beforeEach(() => {
-  wrapper = shallowMount(Mob, {
+  wrapper = mount(Mob, {
     slots: {
       default: '<div>Content</div>'
     }
@@ -15,7 +15,7 @@ beforeEach(() => {
 })
 
 afterEach(() => {
-  wrapper.destroy()
+  wrapper.unmount()
 })
 
 describe('vsmMob Component', () => {
@@ -47,7 +47,7 @@ describe('vsmMob Component', () => {
     wrapper.vm.eventEndHandler(new MouseEvent('click'))
     expect(wrapper.emitted().input).toBeTruthy()
 
-    wrapper.destroy()
+    wrapper.unmount()
     expect(spy.called).toBeTruthy()
   })
 

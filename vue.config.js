@@ -1,7 +1,8 @@
 'use strict'
 
-const packageJson = require('./package')
 require('dotenv').config()
+
+const packageJson = require('./package')
 
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production'

@@ -1,21 +1,16 @@
 'use strict'
 
-import Vue from 'vue'
+import { createApp } from 'vue'
 
-// -> For Demo
+// -> Production
+// import VueStripeMenu from '../dist/vue-stripe-menu.umd.min'
+// import '../dist/vue-stripe-menu.css'
+// -> Demo
+import VueStripeMenu from '../src/main'
+
 import './scss/index.scss'
-import vsmMenu from '../src/main'
-
-// -> Import library js and styles
-// import vsmMenu from 'vue-stripe-menu'
-// import 'vue-stripe-menu/dist/vue-stripe-menu.css'
-
 import App from './App'
 
-Vue.use(vsmMenu)
-
-Vue.config.productionTip = false
-
-new Vue({
-  render: h => h(App)
-}).$mount('#app')
+createApp(App)
+  .use(VueStripeMenu)
+  .mount('#app')

@@ -1,9 +1,9 @@
 'use strict'
 
-import { shallowMount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
+import { nextTick } from 'vue'
 import Menu from '../../src/components/Menu'
 import sinon from 'sinon'
-import 'babel-polyfill'
 
 const pointerEvent = {
   end: 'touchend',
@@ -20,86 +20,109 @@ const menu = [
 describe('vsmMenu Component', () => {
   describe('props', () => {
     describe('element', () => {
-      it('Default render a header element', () => {
-        const wrapper = shallowMount(Menu, {
-          propsData: { menu },
-          slots: { default: '<div>Content</div>' }
+      it('Default render an element', () => {
+        const wrapper = mount(Menu, {
+          props: { menu }
         })
 
         expect(wrapper.props('element')).toBe('header')
         expect(wrapper.element.tagName).toBe('HEADER')
       })
 
-      it('Can change root HTML element', () => {
-        const wrapper = shallowMount(Menu, {
-          propsData: { element: 'div', menu }
+      it('Change an element on mount', () => {
+        const wrapper = mount(Menu, {
+          props: { element: 'div', menu }
         })
 
         expect(wrapper.props('element')).toBe('div')
         expect(wrapper.element.tagName).toBe('DIV')
       })
+
+      it('Change an element dynamically and working dropdown', async () => {
+        const wrapper = mount(Menu, {
+          props: { handler: 'hover', menu },
+          slots: { default: '<div>Content</div>' }
+        })
+
+        await wrapper.setProps({ element: 'div' })
+        await nextTick()
+
+        await wrapper.find('.vsm-has-dropdown').trigger('mouseenter')
+        expect(wrapper.vm._activeDropdown).not.toBeUndefined()
+      })
     })
 
     describe('handler', () => {
-      it('Hover - trigger mouseenter', () => {
-        const wrapper = shallowMount(Menu, {
-          propsData: { handler: 'hover', menu },
+      it('Hover - trigger mouseenter', async () => {
+        const wrapper = mount(Menu, {
+          props: { handler: 'hover', menu },
           slots: { default: '<div>Content</div>' }
         })
 
-        const el = wrapper.find('.vsm-has-dropdown')
-        el.trigger('mouseenter')
-
+        await wrapper.find('.vsm-has-dropdown').trigger('mouseenter')
         expect(wrapper.vm._activeDropdown).not.toBeUndefined()
       })
 
-      it('Click - trigger mouseenter', () => {
-        const wrapper = shallowMount(Menu, {
-          propsData: { handler: 'click', menu },
+      it('Click - trigger mouseenter', async () => {
+        const wrapper = mount(Menu, {
+          props: { handler: 'click', menu },
           slots: { default: '<div>Content</div>' }
         })
 
-        const el = wrapper.find('.vsm-has-dropdown')
-        el.trigger('mouseenter')
-
+        await wrapper.find('.vsm-has-dropdown').trigger('mouseenter')
         expect(wrapper.vm._activeDropdown).toBeUndefined()
       })
 
-      it('Click - trigger %pointerEvent.end%', () => {
-        const wrapper = shallowMount(Menu, {
-          propsData: { handler: 'click', menu },
+      it('Click - trigger %pointerEvent.end%', async () => {
+        const wrapper = mount(Menu, {
+          props: { handler: 'click', menu },
           slots: { default: '<div>Content</div>' }
         })
 
-        const el = wrapper.find('.vsm-has-dropdown')
-        el.trigger(pointerEvent.end)
-
+        await wrapper.find('.vsm-has-dropdown').trigger(pointerEvent.end)
         expect(wrapper.vm._activeDropdown).not.toBeUndefined()
       })
 
       it('Mouseenter trigger after change handler', async () => {
-        const wrapper = shallowMount(Menu, {
-          propsData: { handler: 'hover', menu },
+        const wrapper = mount(Menu, {
+          props: { handler: 'hover', menu },
           slots: { default: '<div>Content</div>' }
         })
 
-        const el = wrapper.find('.vsm-has-dropdown')
-        el.trigger('mouseenter')
+        await wrapper.find('.vsm-has-dropdown').trigger('mouseenter')
         expect(wrapper.vm._activeDropdown).not.toBeUndefined()
 
         wrapper.vm.closeDropdown()
         await wrapper.setProps({ handler: 'click' })
 
-        el.trigger('mouseenter')
+        await wrapper.find('.vsm-has-dropdown').trigger('mouseenter')
         expect(wrapper.vm._activeDropdown).toBeUndefined()
+      })
+    })
+
+    describe('menu', () => {
+      it('Change menu dynamically and working dropdown', async () => {
+        const wrapper = mount(Menu, {
+          props: { handler: 'hover', menu: [...menu] },
+          slots: { default: '<div>Content</div>' }
+        })
+
+        const item = { title: 'Four item', dropdown: 'four' }
+        wrapper.vm.menu.push(item)
+        await nextTick()
+
+        const el = wrapper.find(`.vsm-has-dropdown[data-dropdown="${item.dropdown}"]`)
+        await nextTick()
+        await el.trigger('mouseenter')
+        expect(wrapper.vm._activeDropdown).not.toBeUndefined()
       })
     })
   })
 
   describe('DOM', () => {
     it('Number of elements', () => {
-      const wrapper = shallowMount(Menu, {
-        propsData: { element: 'div', menu },
+      const wrapper = mount(Menu, {
+        props: { menu },
         slots: { default: '<div>Content</div>' }
       })
 
@@ -107,8 +130,8 @@ describe('vsmMenu Component', () => {
     })
 
     it('Number of elements who has dropdown', () => {
-      const wrapper = shallowMount(Menu, {
-        propsData: { element: 'div', menu },
+      const wrapper = mount(Menu, {
+        props: { menu },
         slots: { default: '<div>Content</div>' }
       })
 
@@ -118,30 +141,30 @@ describe('vsmMenu Component', () => {
 
   describe('computed', () => {
     it('Number of items having dropdown', () => {
-      const wrapper = shallowMount(Menu, {
-        propsData: { element: 'div', menu },
+      const wrapper = mount(Menu, {
+        props: { menu },
         slots: { default: '<div>Content</div>' }
       })
 
-      expect(wrapper.vm.menuHasDropdown.length).toBe(2)
+      expect(wrapper.vm.itemsWithDropdown.length).toBe(2)
     })
 
     it('Number of elements having dropdown', () => {
-      const wrapper = shallowMount(Menu, {
-        propsData: { element: 'div', menu },
+      const wrapper = mount(Menu, {
+        props: { menu },
         slots: { default: '<div>Content</div>' }
       })
 
-      expect(wrapper.vm.hasDropdownEls.length).toBe(2)
+      expect(wrapper.vm.elementsWithDropdown.length).toBe(2)
     })
 
     it('Number of dropdown sections', () => {
-      const wrapper = shallowMount(Menu, {
-        propsData: { element: 'div', menu },
+      const wrapper = mount(Menu, {
+        props: { menu },
         slots: { default: '<div>Content</div>' }
       })
 
-      expect(wrapper.vm.sectionEls.length).toBe(2)
+      expect(wrapper.vm.dropdownContainerItems.length).toBe(2)
     })
   })
 
@@ -153,13 +176,13 @@ describe('vsmMenu Component', () => {
     let wrapper
 
     beforeEach(() => {
-      eventEndStub = sinon.spy(Menu.methods, 'eventEndHandler')
-      touchStartStub = sinon.spy(Menu.methods, 'touchStartHandler')
-      touchMoveStub = sinon.spy(Menu.methods, 'touchMoveHandler')
+      eventEndStub = sinon.spy(Menu.methods, 'documentEventEndHandler')
+      touchStartStub = sinon.spy(Menu.methods, 'documentTouchStartHandler')
+      touchMoveStub = sinon.spy(Menu.methods, 'documentTouchMoveHandler')
       resizeStub = sinon.spy(Menu.methods, 'windowResizeHandler')
 
-      wrapper = shallowMount(Menu, {
-        propsData: { menu },
+      wrapper = mount(Menu, {
+        props: { menu },
         slots: {
           default: '<div>Content</div>'
         }
@@ -171,7 +194,7 @@ describe('vsmMenu Component', () => {
       touchStartStub.restore()
       touchMoveStub.restore()
       resizeStub.restore()
-      wrapper.destroy()
+      wrapper.unmount()
     })
 
     describe('global', () => {
@@ -181,7 +204,7 @@ describe('vsmMenu Component', () => {
       })
 
       it('touchmove remove on destroy', () => {
-        wrapper.destroy()
+        wrapper.unmount()
 
         document.dispatchEvent(new TouchEvent('touchmove'))
         expect(touchMoveStub.called).toBeFalsy()
@@ -193,7 +216,7 @@ describe('vsmMenu Component', () => {
       })
 
       it('touchstart remove on destroy', () => {
-        wrapper.destroy()
+        wrapper.unmount()
 
         document.dispatchEvent(new TouchEvent('touchstart'))
         expect(touchStartStub.called).toBeFalsy()
@@ -205,7 +228,7 @@ describe('vsmMenu Component', () => {
       })
 
       it(`${pointerEvent.end} remove on destroy`, () => {
-        wrapper.destroy()
+        wrapper.unmount()
 
         document.body.dispatchEvent(new TouchEvent(pointerEvent.end))
         expect(eventEndStub.called).toBeFalsy()
@@ -217,7 +240,7 @@ describe('vsmMenu Component', () => {
       })
 
       it('resize remove on destroy', () => {
-        wrapper.destroy()
+        wrapper.unmount()
 
         window.dispatchEvent(new Event('resize'))
         expect(resizeStub.called).toBeFalsy()
@@ -226,7 +249,7 @@ describe('vsmMenu Component', () => {
 
     describe('local', () => {
       it('Register events for each dropdown element', () => {
-        wrapper.vm.hasDropdownEls.forEach((el) => {
+        wrapper.vm.elementsWithDropdown.forEach((el) => {
           expect(el._vsmMenu).toBeTruthy()
         })
       })
@@ -236,13 +259,13 @@ describe('vsmMenu Component', () => {
       })
 
       it('$emit on openDropdown, no active dropdown', () => {
-        wrapper.vm.openDropdown(wrapper.vm.hasDropdownEls[1])
+        wrapper.vm.openDropdown(wrapper.vm.elementsWithDropdown[1])
         expect(wrapper.emitted('open-dropdown')).toBeTruthy()
       })
 
       it('$emit on openDropdown, same active dropdown', () => {
-        wrapper.vm._activeDropdown = wrapper.vm.hasDropdownEls[0]
-        wrapper.vm.openDropdown(wrapper.vm.hasDropdownEls[0])
+        wrapper.vm._activeDropdown = wrapper.vm.elementsWithDropdown[0]
+        wrapper.vm.openDropdown(wrapper.vm.elementsWithDropdown[0])
         expect(wrapper.emitted('open-dropdown')).toBeFalsy()
       })
     })
@@ -250,14 +273,14 @@ describe('vsmMenu Component', () => {
 
   describe('methods', () => {
     it('Toggle dropdown, no active dropdown', () => {
-      const wrapper = shallowMount(Menu, {
-        propsData: { menu },
+      const wrapper = mount(Menu, {
+        props: { menu },
         slots: { default: '<div>Content</div>' }
       })
 
       sinon.spy(wrapper.vm, 'openDropdown')
 
-      const activeEl = wrapper.vm.hasDropdownEls[1]
+      const activeEl = wrapper.vm.elementsWithDropdown[1]
       wrapper.vm.toggleDropdown(activeEl)
 
       expect(wrapper.vm.openDropdown.called).toBeTruthy()
@@ -265,39 +288,39 @@ describe('vsmMenu Component', () => {
     })
 
     it('Toggle dropdown, has active dropdown', () => {
-      const wrapper = shallowMount(Menu, {
-        propsData: { menu },
+      const wrapper = mount(Menu, {
+        props: { menu },
         slots: { default: '<div>Content</div>' }
       })
 
       sinon.spy(wrapper.vm, 'closeDropdown')
 
-      const activeEl = wrapper.vm.hasDropdownEls[1]
-      wrapper.vm._activeDropdown = activeEl
-      wrapper.vm.toggleDropdown(activeEl)
+      const el = wrapper.vm.elementsWithDropdown[1]
+      wrapper.vm.openDropdown(el)
+      wrapper.vm.toggleDropdown(el)
 
       expect(wrapper.vm.closeDropdown.called).toBeTruthy()
       expect(wrapper.vm._activeDropdown).toBeUndefined()
     })
 
     it('Open Dropdown', () => {
-      const wrapper = shallowMount(Menu, {
-        propsData: { menu },
+      const wrapper = mount(Menu, {
+        props: { menu },
         slots: { default: '<div>Content</div>' }
       })
 
-      const activeEl = wrapper.vm.hasDropdownEls[1]
-      wrapper.vm.openDropdown(activeEl)
-      expect(wrapper.vm._activeDropdown).toBe(activeEl)
+      const el = wrapper.vm.elementsWithDropdown[1]
+      wrapper.vm.openDropdown(el)
+      expect(wrapper.vm._activeDropdown).toBe(el)
     })
 
     it('Close Dropdown', () => {
-      const wrapper = shallowMount(Menu, {
-        propsData: { menu },
+      const wrapper = mount(Menu, {
+        props: { menu },
         slots: { default: '<div>Content</div>' }
       })
 
-      wrapper.vm._activeDropdown = wrapper.vm.hasDropdownEls[1]
+      wrapper.vm.openDropdown(wrapper.vm.elementsWithDropdown[1])
       wrapper.vm.closeDropdown()
       expect(wrapper.vm._activeDropdown).toBeUndefined()
     })
@@ -305,18 +328,21 @@ describe('vsmMenu Component', () => {
 
   describe('render', () => {
     it('Register component with dropdown', () => {
-      const component = { template: '<div>Content</div>' }
+      const baseComponent = { template: '<div>Content</div>' }
 
-      const wrapper = shallowMount(Menu, {
-        propsData: {
+      const wrapper = mount(Menu, {
+        components: {
+          baseComponent
+        },
+        props: {
           menu: [
             { title: 'First item', dropdown: 'first' },
-            { title: 'Second item', dropdown: 'second', element: component }
+            { title: 'Second item', dropdown: 'second', element: 'baseComponent' }
           ]
         }
       })
 
-      wrapper.vm.registerDropdownElsEvents()
+      wrapper.vm.registerDropdownElementsEvents()
     })
   })
 })
