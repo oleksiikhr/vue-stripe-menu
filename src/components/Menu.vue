@@ -450,9 +450,27 @@ export default {
       }
 
       this._lastWindowWidth = window.innerWidth
-      this.$el.classList.add('vsm-no-transition')
 
-      this.resizeDropdown()
+      if (this._activeDropdown) {
+        this.$el.classList.add('vsm-no-transition')
+        this.resizeDropdown()
+        return
+      }
+
+      // Don't do unnecessary actions
+      if (!this.$refs.background.getAttribute('style')) {
+        return
+      }
+
+      // vsm-no-transition does not apply to dropdown (which has an opacity property),
+      // with a long animation you can see unnecessary animation
+      this.$el.classList.add('vsm-no-transition', 'vsm-no-transition_dropdown')
+      setTimeout(() => this.$el.classList.remove('vsm-no-transition_dropdown'))
+
+      // The dropdown position may remain on the right side of the screen,
+      // causing a horizontal scroll
+      this.closeDropdown()
+      this.clearAllStyles()
     },
     documentTouchMoveHandler() {
       this._isDragging = true
@@ -487,6 +505,12 @@ export default {
 
       this.dropdownContainerItems = Array.from(this.$refs.dropdownContainer.children)
         .map((el) => ({ el, name: el.getAttribute('data-dropdown'), content: el.firstElementChild }))
+    },
+    clearAllStyles() {
+      this.$refs.dropdownContainer.removeAttribute('style')
+      this.$refs.arrow.removeAttribute('style')
+      this.$refs.background.removeAttribute('style')
+      this.$refs.backgroundAlt.removeAttribute('style')
     }
   }
 }

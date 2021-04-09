@@ -12,6 +12,9 @@ All notable changes to this project will be documented in this file. See [standa
 - Added a simplified demo of the component to the [#Install section](https://alexeykhr.github.io/vue-stripe-menu/#install)
 - Replace default bundle from **vue-stripe-menu.common.js** to **vue-stripe-menu.umd.min.js**
 - Fixed animation with problematic dropdown-transition (see new `transition-timeout` props)
+- Now, when the screen width changes `window.addEventListener('resize')`, the following happens:
+    - dropdown is open - location is being recalculated (`resizeDropdown` function)
+    - dropdown is closed - improved logic of instant destruction of styles
 - Added the ability not to install the component globally:
 
 ```vue
@@ -85,8 +88,6 @@ export default {
 #### Menu
 
 - Attribute added to each link [tabindex="0"](https://github.com/Alexeykhr/vue-stripe-menu/blob/master/src/components/Menu.vue#L26)
-- Now, when changing the width of the screen `window.addEventListener('resize')` - the dropdown menu does not close,
-  but the dropdown menu is recalculated via [`resizeDropdown`](https://github.com/Alexeykhr/vue-stripe-menu#menu-methods)
 
 **[Props](https://github.com/Alexeykhr/vue-stripe-menu#menu-props)**
 

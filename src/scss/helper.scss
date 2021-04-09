@@ -11,6 +11,9 @@
   .vsm-dropdown-section {
     transition: none;
   }
+  &_dropdown .vsm-dropdown {
+    transition: none;
+  }
 }
 
 .vsm-has-dropdown:not(a) {
