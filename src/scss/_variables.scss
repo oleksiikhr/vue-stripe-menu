@@ -1,44 +1,66 @@
 /* -----------------------------------------------------------------------------
  * - Menu Component -
  * -----------------------------------------------------------------------------
+ * https://github.com/Alexeykhr/vue-stripe-menu/blob/master/src/scss/menu.scss
  */
 
 // Radius for dropdown content
-$vsm-menu-border-radius: 4px !default;
+$vsm-border-radius: 4px !default;
 
 // Animating content in dropdown menu when changing active menu
-$vsm-menu-transform-content: 150px !default;
+$vsm-transform-content: 150px !default;
 
-$vsm-menu-link-height: 50px !default;
-$vsm-menu-arrow-shadow: -3px -3px 5px rgba(82, 95, 127, .04) !default;
+// Dropdown arrow
+$vsm-arrow-size: 12px !default;
+$vsm-arrow-shadow: -3px -3px 5px rgba(82, 95, 127, .04) !default;
+$vsm-arrow-border-radius: 4px 0 0 0 !default;
 
-/* -----------------------------------------------------------------------------
- * - Mobile Component -
- * -----------------------------------------------------------------------------
- */
+$vsm-index: 1000 !default;
+$vsm-link-height: 50px !default;
+$vsm-link-padding-x: 25px !default;
 
-// Width and height for hamburger/close button
-$vsm-mob-size: 50px !default;
-$vsm-mob-close-size: 50px !default;
+$vsm-background: #fff !default;
+$vsm-background-alt: #f6f9fc !default;
+$vsm-background-arrow: $vsm-background !default;
 
-/* -----------------------------------------------------------------------------
- * - Customize -
- * -----------------------------------------------------------------------------
- */
-
-// Primary color for links, background
+// Primary color for links, hamburger/close button
 $vsm-color: #6772e5 !default;
 $vsm-color-hover: #32325d !default;
 
-// Speed to change dropdown content
-// and hover on links, hamburger
-$vsm-transition: .25s !default;
+// Speed to change dropdown content and hover on links
+$vsm-transition: .25s !default; // must be equals with "transition-timeout" props
 $vsm-transition-link: .1s ease !default;
 
 // Dropdown content (menu + mob)
 $vsm-shadow: 0 50px 100px -20px rgba(50, 50, 93, .25),
-            0 30px 60px -30px rgba(0, 0, 0, .3),
-            0 -18px 60px -10px rgba(0, 0, 0, .025) !default;
+              0 30px 60px -30px rgba(0, 0, 0, .3),
+              0 -18px 60px -10px rgba(0, 0, 0, .025) !default;
 
-// Change the interface under the mob. devices
-$vsm-media: 768px !default;
+/* -----------------------------------------------------------------------------
+ * - Mobile Component -
+ * -----------------------------------------------------------------------------
+ * https://github.com/Alexeykhr/vue-stripe-menu/blob/master/src/scss/mob.scss
+ */
+
+// Dropdown
+$vsm-mob-dropdown-offset: 10px !default;
+$vsm-mob-dropdown-border-radius: 4px !default;
+
+// Hamburger button
+$vsm-mob-hamburger-size: 50px !default;
+$vsm-mob-hamburger-color: $vsm-color !default;
+$vsm-mob-hamburger-color-hover: $vsm-color-hover !default;
+$vsm-mob-hamburger-width: 24px !default;
+$vsm-mob-hamburger-height: 3px !default;
+
+// Close button (in dropdown)
+$vsm-mob-close-size: 50px !default;
+$vsm-mob-close-weight: 3px !default;
+$vsm-mob-close-color: $vsm-color !default;
+$vsm-mob-close-color-hover: $vsm-color-hover !default;
+
+$vsm-mob-link-offset: 10px !default;
+$vsm-mob-background: $vsm-background !default;
+$vsm-mob-shadow: $vsm-shadow !default;
+$vsm-mob-transition: $vsm-transition !default;
+$vsm-mob-transition-link: $vsm-transition-link !default;

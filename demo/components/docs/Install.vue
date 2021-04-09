@@ -1,55 +1,146 @@
 <template>
   <div>
     <base-title title="Install" />
-    <p>Install the library in your project:</p>
-    <pre><code class="shell">{{ shell }}</code></pre>
-    <p>Then add components to Vue and compiled css styles</p>
-    <pre><code class="javascript">{{ vue }}</code></pre>
-    <p>Or you can change them at compile time (scss). See all available variables:</p>
-    <p>
-      <a
-        href="https://github.com/Alexeykhr/vue-stripe-menu/blob/master/src/scss/_variables.scss"
-        target="_blank"
-      >
-        List of variables
-      </a>
-    </p>
-    <pre><code class="scss">{{ scss }}</code></pre>
+    <p>Install the library:</p>
+    <pre><code
+      ref="codeShell"
+      class="shell"
+    >{{ shell }}</code></pre>
+    <p>Import components:</p>
+    <pre><code
+      ref="codeJs"
+      class="javascript"
+    >{{ js }}</code></pre>
+    <p>Add component:</p>
+    <pre><code
+      ref="codeVue"
+      class="vue"
+    >{{ vue }}</code></pre>
+    <p>Add css/scss styles:</p>
+    <pre><code
+      ref="codeCss"
+      class="scss"
+    >{{ css }}</code></pre>
   </div>
 </template>
 
 <script>
-import BaseTitle from '../BaseTitle'
+import { onMounted, nextTick, watch, ref } from 'vue'
 import highlight from 'highlight.js'
+import BaseTitle from '../base/Title'
 
 export default {
   components: {
     BaseTitle
   },
-  data () {
-    return {
-      shell: '$ npm i vue-stripe-menu\n' +
-        '// or\n' +
-        '$ yarn add vue-stripe-menu',
-      vue: '// .js file\n\n' +
-        'import Vue from \'Vue\'\n' +
-        'import VueStripeMenu from \'vue-stripe-menu\'\n\n' +
-        'Vue.use(VueStripeMenu)\n\n' +
-        '// Import build styles\n' +
-        'import \'vue-stripe-menu/dist/vue-stripe-menu.css\'',
-      scss: '// .scss file\n\n' +
-        '// You can resize for "@media only screen":\n' +
-        '$vsm-media: 500px;\n\n' +
-        '// Colors:\n' +
-        '$vsm-color: #000;\n' +
-        '$vsm-color-hover: rgba(0, 0, 0, .9);\n\n' +
-        '// And also you can see the animation in slow motion:\n' +
-        '$vsm-transition: 1s;\n\n' +
-        '@import "~vue-stripe-menu/src/scss/index";'
+  props: {
+    css: {
+      type: String,
+      required: true
+    },
+    vsmProps: {
+      type: Object,
+      required: true
     }
   },
-  mounted () {
-    highlight.initHighlightingOnLoad()
+  setup(props) {
+    const codeShell = ref(null)
+    const codeVue = ref(null)
+    const codeCss = ref(null)
+    const codeJs = ref(null)
+
+    onMounted(() => {
+      highlight.highlightElement(codeShell.value)
+      highlight.highlightElement(codeVue.value)
+      highlight.highlightElement(codeCss.value)
+      highlight.highlightElement(codeJs.value)
+    })
+
+    watch(() => props.css, () => nextTick(() => highlight.highlightElement(codeCss.value)))
+    watch(() => props.vsmProps, () => nextTick(() => highlight.highlightElement(codeVue.value)))
+
+    return { codeShell, codeVue, codeCss, codeJs }
+  },
+  data() {
+    return {
+      shell: '' +
+`$ npm i vue-stripe-menu
+// or
+$ yarn add vue-stripe-menu
+`,
+      js: '' +
+`// >>> Install globally - .js file <<<
+
+import { createApp } from 'vue'
+import VueStripeMenu from 'vue-stripe-menu'
+
+createApp({}).use(VueStripeMenu)
+
+// >>> Install locally - .vue file <<<
+
+import { VsmMenu, VsmMob } from 'vue-stripe-menu'
+
+export default {
+  components: {
+    VsmMenu, VsmMob
+  }
+}`
+    }
+  },
+  computed: {
+    vsmPropsStr() {
+      const propsStr = Object.entries(this.vsmProps).reduce((result, [key, val]) => {
+        result += `\n    ${typeof val === 'number' ? ':' : ''}${key}="${val}"`
+        return result
+      }, '')
+
+      if (!propsStr) {
+        return `:menu="menu"`
+      }
+
+      return `\n    :menu="menu"${propsStr}\n  `
+    },
+    vue() {
+      return '' +
+`<template>
+  <vsm-menu ${this.vsmPropsStr}>
+    <template #default="{ item }">
+      <div style="width: 300px; padding: 30px">
+        Dropdown content - {{ item.title }}
+      </div>
+    </template>
+    <template #before-nav>
+      <li class="vsm-mob-full">
+        Left side
+      </li>
+    </template>
+    <template #after-nav>
+      <li class="vsm-mob-hide">
+        Right side
+      </li>
+      <vsm-mob>
+        <div style="min-height: 200px; padding: 30px">
+          Mobile Content
+        </div>
+      </vsm-mob>
+    </template>
+  </vsm-menu>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      menu: [
+        { title: 'Item1', dropdown: 'dropdown-1' },
+        { title: 'Item2', dropdown: 'dropdown-2' },
+        { title: 'Just link', attributes: { href: '#clicked' } },
+      ]
+    }
+  }
+}
+<\/script>`
+    }
   }
 }
 </script>

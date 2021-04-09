@@ -1,8 +1,8 @@
 'use strict'
 
 // Import Vue components
-import vsmMenu from './components/Menu'
-import vsmMob from './components/Mob'
+import VsmMenu from './components/Menu'
+import VsmMob from './components/Mob'
 
 // Import scss
 import './scss/index.scss'
@@ -10,7 +10,7 @@ import './scss/index.scss'
 // Create module definition for Vue.use()
 const plugin = {
   // Declare install function executed by Vue.use()
-  install: (Vue) => {
+  install: (app) => {
     if (plugin.installed) {
       return
     }
@@ -18,8 +18,8 @@ const plugin = {
     plugin.installed = true
 
     // Components
-    Vue.component('vsmMenu', vsmMenu)
-    Vue.component('vsmMob', vsmMob)
+    app.component('VsmMenu', VsmMenu)
+    app.component('VsmMob', VsmMob)
   }
 }
 
@@ -34,6 +34,8 @@ if (typeof window !== 'undefined') {
 if (GlobalVue) {
   GlobalVue.use(plugin)
 }
+
+export { VsmMenu, VsmMob }
 
 // To allow use as module (npm/webpack/etc.) export component
 export default plugin

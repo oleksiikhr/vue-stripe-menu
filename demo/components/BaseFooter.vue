@@ -18,7 +18,7 @@ export default {
   components: {
     GithubSvg
   },
-  data () {
+  data() {
     return {
       homepage
     }

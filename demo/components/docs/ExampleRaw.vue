@@ -1,30 +1,28 @@
 <template>
   <vsm-menu
     :menu="menu"
-    :base-width="380"
-    :base-height="400"
-    :screen-offset="10"
     element="header"
     handler="hover"
+    :screen-offset="10"
+    :dropdown-offset="0"
     @open-dropdown="onOpenDropdown"
     @close-dropdown="onCloseDropdown"
   >
     <template #default="{ item }">
-      <!--Dropdown Content-->
+      <!--Dropdown content of each menu item with a "dropdown" property-->
       <!--You can replace it with a separate component if each menu item has its own style-->
-      <!--Dynamic Component Example: https://codepen.io/Alexeykhr/pen/YzPKxpX-->
-      <div class="wrap-content">
-        <div class="wrap-content__block">
-          Header: {{ item.title }}
-        </div>
-        <div class="wrap-content__item">
-          {{ item }}
-        </div>
+      <!--Necessarily need to have at least one element within the slot-->
+      <!--An alternate background will be applied from the 2nd element-->
+      <div style="width: 300px; padding: 30px">
+        Header: {{ item }}
+      </div>
+      <div style="padding: 30px">
+        Second element
       </div>
     </template>
     <template #before-nav>
       <!--Image or svg of website logo-->
-      <li class="vsm-section logo-section">
+      <li style="width: 50px; height: 50px">
         <img
           src="https://vuejs.org/images/logo.png"
           alt="My Logo"
@@ -37,11 +35,10 @@
     </template>
     <template #after-nav>
       <!--Mobile Burger, buttons, etc-->
-      <!--For the same styles - add the vsm-section-->
-      <li class="vsm-section vsm-mob-hide">
+      <li class="vsm-mob-hide">
         <button>My Button</button>
       </li>
-      <!--Display when user media screen below from $vsm-media (scss)-->
+      <!--Set "display: block" for the .vsm-mob-show class to display content-->
       <vsm-mob>Mobile Content</vsm-mob>
     </template>
   </vsm-menu>
@@ -50,13 +47,9 @@
 <script>
 /* eslint-disable */
 /*
- * This is an example of possible settings, you can also control
- * scss variables, and also you need to add a little style.
- * So copy and delete what you don’t need.
- *
- * After #after-nav and #before-nav it is recommended to use
+ * Inside #after-nav and #before-nav it is recommended to use
  * to maintain the correct HTML structure:
- *   <li class="vsm-section">
+ *   <li><!--Content--></li>
  */
 
 export default {
@@ -64,12 +57,13 @@ export default {
     return {
       menu: [
         {
-          // display menu item (or override title slot)
+          // display menu item (can be overridden with title slot)
           title: 'News',
-          // now this is not a link, but a menu item where there is a dropdown
+          // this element now has dropdown content
           dropdown: 'news',
           // don't want a button element?
-          element: 'span',
+          // pass only as a string (component must be globally accessible)
+          element: 'span', // router-link
           // menu item can accept all attributes
           attributes: {
             // I want more classes! No problem
@@ -109,59 +103,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-// Styles, to quickly start using the component
-// You can delete, change or add your own
-
-// Limit the width to 1024px and center
-.vsm-menu {
-  margin: 10px;
-  ul {
-    max-width: 1024px;
-    margin: 0 auto;
-  }
-}
-
-// Let's simplify the work with menu items (logo, menu, buttons, etc)
-.vsm-root {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-
-// Move all the content to the right and reduce the logo
-.logo-section {
-  flex: 1 1 auto;
-  img {
-    user-select: none;
-    max-width: 40px;
-  }
-}
-
-// All menu items (element props: a, button, span, etc) are
-// made the same in style
-.vsm-section_menu {
-  > * {
-    padding: 0 25px;
-    font-weight: 500;
-    font-family: inherit;
-  }
-}
-
-// Styles for Dropdown Content:
-.wrap-content {
-  padding: 30px;
-  // Set the width manually so that it does not depend
-  // on changing content
-  width: 400px;
-}
-.wrap-content__block {
-  font-weight: bold;
-}
-.wrap-content__item {
-  font-style: italic;
-  font-size: .8rem;
-}
-</style>

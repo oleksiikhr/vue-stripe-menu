@@ -1,5 +1,5 @@
 <template>
-  <div class="mobile-content">
+  <div class="p-30">
     <base-text />
     <br>
     <base-group />
@@ -20,9 +20,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.mobile-content {
-  padding: 30px;
-}
-</style>
