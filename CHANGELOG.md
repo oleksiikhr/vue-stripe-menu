@@ -4,9 +4,25 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [2.0.0](https://github.com/Alexeykhr/vue-stripe-menu/compare/v1.5.0...v2.0.0) (2021-04-09)
 
-### Upgrade to Vue 3
+### Global changes
 
 > To reduce the number of override styles, unnecessary necessary classes and so on, many styles/classes have been added/changed and removed!
+
+- Added the ability to customize styles in realtime via [Demo Website](https://alexeykhr.github.io/vue-stripe-menu/)
+- Added a simplified demo of the component to the [#Install section](https://alexeykhr.github.io/vue-stripe-menu/#install)
+- Replace default bundle from **vue-stripe-menu.common.js** to **vue-stripe-menu.umd.min.js**
+- Fixed animation with problematic dropdown-transition (see new `transition-timeout` props)
+- Added the ability not to install the component globally:
+
+```vue
+import { VsmMenu, VsmMob } from 'vue-stripe-menu'
+
+export default {
+  components: {
+    VsmMenu, VsmMob
+  }
+}
+```
 
 - Add styles:
 
@@ -15,6 +31,11 @@ All notable changes to this project will be documented in this file. See [standa
 .vsm-link, .vsm-mob-content__wrap {
   font-size: 17px;
   font-weight: 500;
+}
+
+.vsm-root > li {
+  // display: flex; // <-- default display removed
+  // All override classes from .vsm-section
 }
 
 // Change 768px on your value from $vsm-media, if set
@@ -33,24 +54,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 - Change the code/styles according to the changes below
 
-#### Global changes
-
-- Added the ability to customize styles in realtime via [Demo Website](https://alexeykhr.github.io/vue-stripe-menu/)
-- Added a simplified demo of the component to the [#Install section](https://alexeykhr.github.io/vue-stripe-menu/#install)
-- Fixed animation with problematic dropdown-transition (see new `transition-timeout` props)
-- Added the ability not to install the component globally:
-
-```vue
-import { VsmMenu, VsmMob } from 'vue-stripe-menu'
-
-export default {
-  components: {
-    VsmMenu, VsmMob
-  }
-}
-```
-
-#### Style changes
+### Style changes
 
 - Removed `cursor: default` from dropdown buttons with HTML element `<a href="" />`
 - Removed `@media` styles
@@ -68,7 +72,7 @@ export default {
       `$vsm-mob-close-color-hover`, `$vsm-mob-link-offset`, `$vsm-mob-background`, `$vsm-mob-shadow`, `$vsm-mob-transition`,
       `$vsm-mob-transition-link`
 
-#### Classes changes
+### Classes changes
 
 - Removed
     - `vsm-section` (now `list-style: none` set from parent `.vsm-root > li`)
@@ -76,9 +80,9 @@ export default {
     - `vsm-section_menu` > `vsm-link-container`
     - `vsm-section_mob` > `vsm-mob-container`
 
-#### Components
+### Components
 
-##### Menu
+#### Menu
 
 - Attribute added to each link [tabindex="0"](https://github.com/Alexeykhr/vue-stripe-menu/blob/master/src/components/Menu.vue#L26)
 - Now, when changing the width of the screen `window.addEventListener('resize')` - the dropdown menu does not close,
@@ -110,7 +114,7 @@ When changing dynamic content inside dropdown, you can now call `resizeDropdown`
 - Added `elementsWithDropdown`
 - Added `dropdownContainerItems`
 
-##### Mob
+#### Mob
 
 **[Slots](https://github.com/Alexeykhr/vue-stripe-menu#mob-slots)**
 
@@ -118,7 +122,7 @@ Added the ability to replace the **close button** after opening the dropdown men
 
 - Added `close`
 
-##### Other
+#### Other
 
 **[Classes](https://github.com/Alexeykhr/vue-stripe-menu#classes)**
 
