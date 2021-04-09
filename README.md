@@ -185,11 +185,7 @@ Add css/scss styles:
 <script>
 /* eslint-disable */
 /*
- * This is an example of possible settings, you can also control
- * scss variables, and also you need to add a little style.
- * So copy and delete what you don’t need.
- *
- * After #after-nav and #before-nav it is recommended to use
+ * Inside #after-nav and #before-nav it is recommended to use
  * to maintain the correct HTML structure:
  *   <li><!--Content--></li>
  */
