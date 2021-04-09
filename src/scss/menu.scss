@@ -79,7 +79,7 @@
   user-select: none;
   line-height: $vsm-link-height;
   margin: 0;
-  padding: 0 10px;
+  padding: 0 $vsm-link-padding-x;
   color: $vsm-color;
   transition: color $vsm-transition-link;
   &:hover,

@@ -87,15 +87,14 @@ export default {
         { property: 'handler', value: '', initial: 'hover', desc: 'hover/click', validator: (val) => ['hover', 'click'].includes(val) },
         { property: 'screen-offset', value: '', initial: '10', desc: 'indent a dropdown menu from screen edges (reduce screen size)', validator: (val) => !isNaN(+val), convert: (val) => +val },
         { property: 'dropdown-offset', value: '', initial: '0', desc: 'indent a dropdown menu from header', validator: (val) => !isNaN(+val), convert: (val) => +val },
-        { property: 'transition-timeout', value: '', initial: '250', desc: 'animation speed (equals "$vsm-transition" style)', validator: (val) => !isNaN(+val), convert: (val) => +val },
+        { property: 'transition-timeout', value: '', initial: '250', desc: 'animation speed in ms (equals "$vsm-transition" style)', validator: (val) => !isNaN(+val), convert: (val) => +val },
       ].map((item) => ({ ...item, value: item.initial, onInput: this.onChangeMenuProps })),
 
       // Initial values from *.scss
       generalStyles: [
-        { property: 'header max-width', value: null, initial: '1024px', desc: 'for vsm-menu', handler: (val) => val && `.vsm-menu {\n  max-width: ${val};\n  width: 100%;\n  margin: 0 auto;\n}` },
-        { property: 'header margin', value: null, initial: '0 10px', desc: 'for vsm-menu', handler: (val) => val && `.vsm-nav {\n  margin: ${val};\n}` },
-        { property: 'link position', value: null, initial: 'center', desc: 'left/center/right or empty', handler: this.positionStyleHandler },
-        { property: 'link indent', value: null, initial: '0 25px', desc: 'padding between links', handler: (val) => val && `.vsm-link {\n  padding: ${val};\n}` },
+        { property: 'header max-width', value: null, initial: '1024px', desc: 'for vsm-menu, empty - no styles', handler: (val) => val && `.vsm-menu {\n  max-width: ${val};\n  width: 100%;\n  margin: 0 auto;\n}` },
+        { property: 'header margin', value: null, initial: '0 10px', desc: 'for vsm-menu, empty - no styles', handler: (val) => val && `.vsm-nav {\n  margin: ${val};\n}` },
+        { property: 'link position', value: null, initial: 'center', desc: 'left/center/right, empty - no styles', handler: this.positionStyleHandler },
         { property: '@media mobile', value: null, initial: '768px', desc: 'empty - no adaptive', handler: (val) => val && `@media screen and (max-width: ${val}) {\n  .vsm-mob-show {\n    display: block;\n  }\n  .vsm-mob-hide {\n    display: none;\n  }\n  .vsm-mob-full {\n    flex-grow: 1;\n  }\n}` },
       ].map((item) => ({ ...item, value: item.initial })),
       vsmMenuStyles: [
@@ -105,7 +104,8 @@ export default {
         { property: '$vsm-background-alt', value: null, initial: '#f6f9fc', desc: 'background from second element' },
         { property: '$vsm-color', value: null, initial: '#6772e5' },
         { property: '$vsm-color-hover', value: null, initial: '#32325d' },
-        { property: '$vsm-transition', value: null, initial: '250ms', desc: 'animation speed (equals "transition-timeout" props)', attrs: { disabled: true } },
+        { property: '$vsm-transition', value: null, initial: '250ms', desc: 'animation speed in ms (equals "transition-timeout" props)', attrs: { disabled: true } },
+        { property: '$vsm-link-padding-x', value: null, initial: '25px', desc: 'spacing between the links' },
       ].map((item) => ({ ...item, value: item.initial })),
       vsmMobStyles: [
         { property: '$vsm-mob-dropdown-offset', value: null, initial: '10px' },

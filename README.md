@@ -119,10 +119,6 @@ Add css/scss styles:
   justify-content: center;
 }
 
-.vsm-link {
-  padding: 0 25px;
-}
-
 @media screen and (max-width: 768px) {
   .vsm-mob-show {
     display: block;

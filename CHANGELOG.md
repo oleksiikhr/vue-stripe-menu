@@ -60,7 +60,7 @@ export default {
     - `$vsm-mob-size` > `$vsm-mob-hamburger-size`
 - Added [variables](https://github.com/Alexeykhr/vue-stripe-menu/blob/master/src/scss/_variables.scss):
     - Menu: `$vsm-arrow-size`, `$vsm-arrow-shadow`, `$vsm-arrow-border-radius`, `$vsm-index`, `$vsm-background`,
-      `$vsm-background-alt`, `$vsm-background-arrow`,
+      `$vsm-background-alt`, `$vsm-background-arrow`, `$vsm-link-padding`
     - Mob: `$vsm-mob-dropdown-offset`, `$vsm-mob-dropdown-border-radius`, `$vsm-mob-close-weight`, `$vsm-mob-close-color`,
       `$vsm-mob-close-color-hover`, `$vsm-mob-link-offset`, `$vsm-mob-background`, `$vsm-mob-shadow`, `$vsm-mob-transition`,
       `$vsm-mob-transition-link`

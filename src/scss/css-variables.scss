@@ -17,6 +17,7 @@
 .vsm-link {
   height: var(--vsm-link-height, $vsm-link-height);
   line-height: var(--vsm-link-height, $vsm-link-height);
+  padding: 0 var(--vsm-link-padding-x, $vsm-link-padding-x);
   color: var(--vsm-color, $vsm-color);
   transition: color var(--vsm-transition-link, $vsm-transition-link);
   &:hover,
