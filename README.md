@@ -1,4 +1,5 @@
 # Vue Stripe Menu
+
 <p>
   <a href="https://circleci.com/gh/Alexeykhr/vue-stripe-menu" rel="nofollow"><img src="https://circleci.com/gh/Alexeykhr/vue-stripe-menu.svg?style=shield" alt="Build Status"></a>
   <a href="https://codecov.io/github/Alexeykhr/vue-stripe-menu?branch=master"><img src="https://img.shields.io/codecov/c/github/Alexeykhr/vue-stripe-menu/dev.svg" alt="Coverage Status"></a>
@@ -14,9 +15,11 @@
 
 > Creating a navigation menu with animations like on Stripe
 
+**Only for Vue 3** ([changelog](https://github.com/Alexeykhr/vue-stripe-menu/blob/master/CHANGELOG.md#200-2021-04-09))
+
 [Demo Website](https://alexeykhr.github.io/vue-stripe-menu/)
 
-[Vue 2 - branch](https://github.com/Alexeykhr/vue-stripe-menu/tree/vue2)
+[Vue 2 - Branch](https://github.com/Alexeykhr/vue-stripe-menu/tree/vue2)
 
 ## How to install
 

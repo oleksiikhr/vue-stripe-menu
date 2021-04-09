@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Global changes
 
-> To reduce the number of override styles, unnecessary necessary classes and so on, many styles/classes have been added/changed and removed!
+> To reduce the number of override styles, unnecessary classes and so on, many styles/classes have been added/changed or removed!
 
 - Added the ability to customize styles in realtime via [Demo Website](https://alexeykhr.github.io/vue-stripe-menu/)
 - Added a simplified demo of the component to the [#Install section](https://alexeykhr.github.io/vue-stripe-menu/#install)
