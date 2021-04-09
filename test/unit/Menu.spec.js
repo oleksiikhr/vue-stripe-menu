@@ -1,6 +1,7 @@
 'use strict'
 
 import { mount } from '@vue/test-utils'
+import { nextTick } from 'vue'
 import Menu from '../../src/components/Menu'
 import sinon from 'sinon'
 
@@ -19,78 +20,101 @@ const menu = [
 describe('vsmMenu Component', () => {
   describe('props', () => {
     describe('element', () => {
-      it('Default render a header element', () => {
+      it('Default render an element', () => {
         const wrapper = mount(Menu, {
-          propsData: { menu },
-          slots: { default: '<div>Content</div>' }
+          props: { menu }
         })
 
         expect(wrapper.props('element')).toBe('header')
         expect(wrapper.element.tagName).toBe('HEADER')
       })
 
-      it('Can change root HTML element', () => {
+      it('Change an element on mount', () => {
         const wrapper = mount(Menu, {
-          propsData: { element: 'div', menu }
+          props: { element: 'div', menu }
         })
 
         expect(wrapper.props('element')).toBe('div')
         expect(wrapper.element.tagName).toBe('DIV')
+      })
+
+      it('Change an element dynamically and working dropdown', async () => {
+        const wrapper = mount(Menu, {
+          props: { handler: 'hover', menu },
+          slots: { default: '<div>Content</div>' }
+        })
+
+        await wrapper.setProps({ element: 'div' })
+        await nextTick()
+
+        await wrapper.find('.vsm-has-dropdown').trigger('mouseenter')
+        expect(wrapper.vm._activeDropdown).not.toBeUndefined()
       })
     })
 
     describe('handler', () => {
       it('Hover - trigger mouseenter', async () => {
         const wrapper = mount(Menu, {
-          propsData: { handler: 'hover', menu },
+          props: { handler: 'hover', menu },
           slots: { default: '<div>Content</div>' }
         })
 
-        const el = wrapper.find('.vsm-has-dropdown')
-        await el.trigger('mouseenter')
-
+        await wrapper.find('.vsm-has-dropdown').trigger('mouseenter')
         expect(wrapper.vm._activeDropdown).not.toBeUndefined()
       })
 
       it('Click - trigger mouseenter', async () => {
         const wrapper = mount(Menu, {
-          propsData: { handler: 'click', menu },
+          props: { handler: 'click', menu },
           slots: { default: '<div>Content</div>' }
         })
 
-        const el = wrapper.find('.vsm-has-dropdown')
-        await el.trigger('mouseenter')
-
+        await wrapper.find('.vsm-has-dropdown').trigger('mouseenter')
         expect(wrapper.vm._activeDropdown).toBeUndefined()
       })
 
       it('Click - trigger %pointerEvent.end%', async () => {
         const wrapper = mount(Menu, {
-          propsData: { handler: 'click', menu },
+          props: { handler: 'click', menu },
           slots: { default: '<div>Content</div>' }
         })
 
-        const el = wrapper.find('.vsm-has-dropdown')
-        await el.trigger(pointerEvent.end)
-
+        await wrapper.find('.vsm-has-dropdown').trigger(pointerEvent.end)
         expect(wrapper.vm._activeDropdown).not.toBeUndefined()
       })
 
       it('Mouseenter trigger after change handler', async () => {
         const wrapper = mount(Menu, {
-          propsData: { handler: 'hover', menu },
+          props: { handler: 'hover', menu },
           slots: { default: '<div>Content</div>' }
         })
 
-        const el = wrapper.find('.vsm-has-dropdown')
-        await el.trigger('mouseenter')
+        await wrapper.find('.vsm-has-dropdown').trigger('mouseenter')
         expect(wrapper.vm._activeDropdown).not.toBeUndefined()
 
         wrapper.vm.closeDropdown()
         await wrapper.setProps({ handler: 'click' })
 
-        await el.trigger('mouseenter')
+        await wrapper.find('.vsm-has-dropdown').trigger('mouseenter')
         expect(wrapper.vm._activeDropdown).toBeUndefined()
+      })
+    })
+
+    describe('menu', () => {
+      it('Change menu dynamically and working dropdown', async () => {
+        const wrapper = mount(Menu, {
+          props: { handler: 'hover', menu: [...menu] },
+          slots: { default: '<div>Content</div>' }
+        })
+
+        const item = { title: 'Four item', dropdown: 'four' }
+        wrapper.vm.menu.push(item)
+        await nextTick()
+
+        const el = wrapper.find(`.vsm-has-dropdown[data-dropdown="${item.dropdown}"]`)
+        await nextTick()
+        await el.trigger('mouseenter')
+        expect(wrapper.vm._activeDropdown).not.toBeUndefined()
       })
     })
   })
@@ -98,7 +122,7 @@ describe('vsmMenu Component', () => {
   describe('DOM', () => {
     it('Number of elements', () => {
       const wrapper = mount(Menu, {
-        propsData: { element: 'div', menu },
+        props: { menu },
         slots: { default: '<div>Content</div>' }
       })
 
@@ -107,7 +131,7 @@ describe('vsmMenu Component', () => {
 
     it('Number of elements who has dropdown', () => {
       const wrapper = mount(Menu, {
-        propsData: { element: 'div', menu },
+        props: { menu },
         slots: { default: '<div>Content</div>' }
       })
 
@@ -118,7 +142,7 @@ describe('vsmMenu Component', () => {
   describe('computed', () => {
     it('Number of items having dropdown', () => {
       const wrapper = mount(Menu, {
-        propsData: { element: 'div', menu },
+        props: { menu },
         slots: { default: '<div>Content</div>' }
       })
 
@@ -127,7 +151,7 @@ describe('vsmMenu Component', () => {
 
     it('Number of elements having dropdown', () => {
       const wrapper = mount(Menu, {
-        propsData: { element: 'div', menu },
+        props: { menu },
         slots: { default: '<div>Content</div>' }
       })
 
@@ -136,7 +160,7 @@ describe('vsmMenu Component', () => {
 
     it('Number of dropdown sections', () => {
       const wrapper = mount(Menu, {
-        propsData: { element: 'div', menu },
+        props: { menu },
         slots: { default: '<div>Content</div>' }
       })
 
@@ -158,7 +182,7 @@ describe('vsmMenu Component', () => {
       resizeStub = sinon.spy(Menu.methods, 'windowResizeHandler')
 
       wrapper = mount(Menu, {
-        propsData: { menu },
+        props: { menu },
         slots: {
           default: '<div>Content</div>'
         }
@@ -250,7 +274,7 @@ describe('vsmMenu Component', () => {
   describe('methods', () => {
     it('Toggle dropdown, no active dropdown', () => {
       const wrapper = mount(Menu, {
-        propsData: { menu },
+        props: { menu },
         slots: { default: '<div>Content</div>' }
       })
 
@@ -265,7 +289,7 @@ describe('vsmMenu Component', () => {
 
     it('Toggle dropdown, has active dropdown', () => {
       const wrapper = mount(Menu, {
-        propsData: { menu },
+        props: { menu },
         slots: { default: '<div>Content</div>' }
       })
 
@@ -281,7 +305,7 @@ describe('vsmMenu Component', () => {
 
     it('Open Dropdown', () => {
       const wrapper = mount(Menu, {
-        propsData: { menu },
+        props: { menu },
         slots: { default: '<div>Content</div>' }
       })
 
@@ -292,7 +316,7 @@ describe('vsmMenu Component', () => {
 
     it('Close Dropdown', () => {
       const wrapper = mount(Menu, {
-        propsData: { menu },
+        props: { menu },
         slots: { default: '<div>Content</div>' }
       })
 
@@ -310,7 +334,7 @@ describe('vsmMenu Component', () => {
         components: {
           baseComponent
         },
-        propsData: {
+        props: {
           menu: [
             { title: 'First item', dropdown: 'first' },
             { title: 'Second item', dropdown: 'second', element: 'baseComponent' }
