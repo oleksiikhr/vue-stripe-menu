@@ -5,7 +5,7 @@
     v-bind="$attrs"
   >
     <template #before-nav>
-      <li class="vsm-section vsm-mob-full">
+      <li class="vsm-mob-full">
         <stripe-logo />
       </li>
     </template>
@@ -13,7 +13,7 @@
       <component :is="item.component" />
     </template>
     <template #after-nav>
-      <li class="vsm-section vsm-mob-hide">
+      <li class="vsm-mob-hide">
         Sign in
       </li>
       <vsm-mob>

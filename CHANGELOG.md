@@ -2,9 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [2.0.0](https://github.com/Alexeykhr/vue-stripe-menu/compare/v1.5.0...v2.0.0) (2021-04-08)
+## [2.0.0](https://github.com/Alexeykhr/vue-stripe-menu/compare/v1.5.0...v2.0.0) (2021-04-09)
 
 ### Upgrade to Vue 3
+
+> To reduce the number of override styles, unnecessary necessary classes and so on, many styles/classes have been added/changed and removed!
 
 - Add styles:
 
@@ -35,6 +37,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 - Added the ability to customize styles in realtime via [Demo Website](https://alexeykhr.github.io/vue-stripe-menu/)
 - Added a simplified demo of the component to the [#Install section](https://alexeykhr.github.io/vue-stripe-menu/#install)
+- Fixed animation with problematic dropdown-transition (see new `transition-timeout` props)
 - Added the ability not to install the component globally:
 
 ```vue
@@ -64,6 +67,14 @@ export default {
     - Mob: `$vsm-mob-dropdown-offset`, `$vsm-mob-dropdown-border-radius`, `$vsm-mob-close-weight`, `$vsm-mob-close-color`,
       `$vsm-mob-close-color-hover`, `$vsm-mob-link-offset`, `$vsm-mob-background`, `$vsm-mob-shadow`, `$vsm-mob-transition`,
       `$vsm-mob-transition-link`
+
+#### Classes changes
+
+- Removed
+    - `vsm-section` (now `list-style: none` set from parent `.vsm-root > li`)
+- Renamed
+    - `vsm-section_menu` > `vsm-link-container`
+    - `vsm-section_mob` > `vsm-mob-container`
 
 #### Components
 

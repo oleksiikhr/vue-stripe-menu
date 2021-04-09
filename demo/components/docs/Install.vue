@@ -110,12 +110,12 @@ export default {
       </div>
     </template>
     <template #before-nav>
-      <li class="vsm-section vsm-mob-full">
+      <li class="vsm-mob-full">
         Left side
       </li>
     </template>
     <template #after-nav>
-      <li class="vsm-section vsm-mob-hide">
+      <li class="vsm-mob-hide">
         Right side
       </li>
       <vsm-mob>

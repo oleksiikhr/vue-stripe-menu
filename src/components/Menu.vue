@@ -11,7 +11,7 @@
         <slot name="before-nav" />
         <li
           ref="linkContainer"
-          class="vsm-section vsm-section_menu vsm-mob-hide"
+          class="vsm-link-container vsm-mob-hide"
         >
           <component
             :is="item.element || (item.dropdown ? 'button' : 'a')"

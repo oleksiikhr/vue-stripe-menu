@@ -60,12 +60,12 @@ Add component:
       </div>
     </template>
     <template #before-nav>
-      <li class="vsm-section vsm-mob-full">
+      <li class="vsm-mob-full">
         Left side
       </li>
     </template>
     <template #after-nav>
-      <li class="vsm-section vsm-mob-hide">
+      <li class="vsm-mob-hide">
         Right side
       </li>
       <vsm-mob>
@@ -114,7 +114,8 @@ Add css/scss styles:
   margin: 0 10px;
 }
 
-.vsm-section_menu {
+.vsm-link-container {
+  display: flex;
   flex: 1 1 auto;
   justify-content: center;
 }
@@ -159,10 +160,7 @@ Add css/scss styles:
     </template>
     <template #before-nav>
       <!--Image or svg of website logo-->
-      <li
-        class="vsm-section logo-section"
-        style="width: 50px; height: 50px"
-      >
+      <li style="width: 50px; height: 50px">
         <img
           src="https://vuejs.org/images/logo.png"
           alt="My Logo"
@@ -175,8 +173,7 @@ Add css/scss styles:
     </template>
     <template #after-nav>
       <!--Mobile Burger, buttons, etc-->
-      <!--For the same styles - add the vsm-section-->
-      <li class="vsm-section vsm-mob-hide">
+      <li class="vsm-mob-hide">
         <button>My Button</button>
       </li>
       <!--Set "display: block" for the .vsm-mob-show class to display content-->
@@ -194,7 +191,7 @@ Add css/scss styles:
  *
  * After #after-nav and #before-nav it is recommended to use
  * to maintain the correct HTML structure:
- *   <li class="vsm-section">
+ *   <li><!--Content--></li>
  */
 
 export default {

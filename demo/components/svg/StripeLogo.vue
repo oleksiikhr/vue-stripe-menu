@@ -28,6 +28,7 @@ export default {
 <style lang="scss" scoped>
 .stripe-logo {
   position: relative;
+  display: inline-block;
   line-height: 0;
   span {
     position: absolute;

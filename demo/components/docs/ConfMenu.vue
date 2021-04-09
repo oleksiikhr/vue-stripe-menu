@@ -202,7 +202,7 @@ export default {
           return ''
       }
 
-      return `.vsm-section_menu {\n  flex: 1 1 auto;\n  justify-content: ${position};\n}`
+      return `.vsm-link-container {\n  display: flex;\n  flex: 1 1 auto;\n  justify-content: ${position};\n}`
     },
     onChangeMenuProps() {
       const obj = this.vsmProps.reduce((result, item) => {

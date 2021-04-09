@@ -45,17 +45,14 @@
 .vsm-root {
   display: flex;
   align-items: center;
-  justify-content: center;
   padding: 0;
   margin: 0;
+  > li {
+    list-style: none;
+  }
 }
 
-.vsm-section {
-  display: flex;
-  list-style: none;
-}
-
-.vsm-section_menu {
+.vsm-link-container {
   > * {
     // Remove user agent from all tags (a, button, span, etc)
     font: inherit;
