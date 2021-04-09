@@ -21,9 +21,9 @@
 Install the library in your project
 
 ```sh
-$ npm i vue-stripe-menu
+$ npm i vue-stripe-menu@1.5.0
 // or
-$ yarn add vue-stripe-menu
+$ yarn add vue-stripe-menu@1.5.0
 ```
 
 Then add components to Vue and compiled css styles.
