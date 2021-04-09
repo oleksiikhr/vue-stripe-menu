@@ -301,11 +301,8 @@ export default {
       this.clearDisableTransitionTimeout()
       this.startEnableTransitionTimeout()
 
-      // offsetWidth+1 - required for content with a width of, for example 15.23 (offsetWidth = 15),
-      // due to which the content is displayed incorrectly. Use getBoundingClientRect()
-      // precision is also inappropriate due to instability
       this.$refs.dropdownContainer.style.transform = `translate(${centerPosition}px, ${dropdownOffset}px)`
-      this.$refs.dropdownContainer.style.width = `${offsetWidth+1}px`
+      this.$refs.dropdownContainer.style.width = `${offsetWidth}px`
       this.$refs.dropdownContainer.style.height = `${offsetHeight}px`
 
       this.$refs.arrow.style.transform = `translate(${leftPosition + (rect.width / 2)}px, ${dropdownOffset}px) rotate(45deg)`
