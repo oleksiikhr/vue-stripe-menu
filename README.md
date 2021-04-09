@@ -247,10 +247,6 @@ export default {
 </script>
 ```
 
-## Codepen Demo
-
-- [Vue Stripe Menu - Figma style](https://codepen.io/Alexeykhr/pen/YzPKxpX)
-
 ## API
 
 ### [Menu] Props
