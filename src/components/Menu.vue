@@ -21,6 +21,7 @@
               'vsm-has-dropdown': item.dropdown
             }]"
             :data-dropdown="item.dropdown"
+            :data-align="item.align"
             :aria-haspopup="item.dropdown && 'true'"
             :aria-expanded="item.dropdown && 'false'"
             tabindex="0"
@@ -62,6 +63,7 @@
           :key="index"
           class="vsm-dropdown-section"
           :data-dropdown="item.dropdown"
+          :data-align="item.align"
           aria-hidden="false"
         >
           <div class="vsm-dropdown-content">
@@ -91,8 +93,11 @@ export default {
      *   title: 'News',
      *   // activate dropdown content, must be unique!
      *   dropdown: 'news',
-     *   // change the default HTMLElement (element/global component)
-     *   element: 'router-link',
+     *   // don't want a button element? Pass HTMLElement or global component
+     *   // (pass only as a string, component must be globally accessible)
+     *   element: 'span', // router-link
+     *   // offset the position of the dropdown menu
+     *   align: 'center',
      *   // v-bind accepts
      *   attributes: {
      *     class: ['my-class1', { 'my-class2': true }],
@@ -150,6 +155,14 @@ export default {
     transitionTimeout: {
       type: [Number, String],
       default: 250
+    },
+    /**
+     * Offset the position of the dropdown menu
+     */
+    align: {
+      type: String,
+      default: 'center',
+      validator: (val) => ['left', 'center', 'right'].includes(val)
     }
   },
   emits: [
@@ -270,33 +283,43 @@ export default {
 
       let { offsetHeight, offsetWidth } = this._activeContainerItem.content
 
-      // Find the beginning of a menu item
-      const leftPosition = rect.left - rootRect.left
+      // Find the beginning of the position of the menu item
+      const startPosition = rect.left - rootRect.left
 
       // Step back from the button to the left so that the middle of
       // the content is found in the center of the element
-      let centerPosition = leftPosition - (offsetWidth / 2) + (rect.width / 2)
+      let position = null
+      switch (this._activeContainerItem.align || this.align) {
+        case 'left':
+          position = startPosition
+          break
+        case 'right':
+          position = startPosition - offsetWidth + rect.width
+          break
+        default: // center
+          position = startPosition - (offsetWidth / 2) + (rect.width / 2)
+      }
 
       // Do not let go of the left side of the screen
-      if (centerPosition + rootRect.left < +this.screenOffset) {
-        centerPosition = +this.screenOffset - rootRect.left
+      if (position + rootRect.left < +this.screenOffset) {
+        position = +this.screenOffset - rootRect.left
       }
 
       // Now also check the right side of the screen
-      const rightOffset = centerPosition + rootRect.left + offsetWidth
+      const rightOffset = position + rootRect.left + offsetWidth
       if (rightOffset > bodyWidth - +this.screenOffset) {
-        centerPosition -= (rightOffset - bodyWidth + +this.screenOffset)
+        position -= (rightOffset - bodyWidth + +this.screenOffset)
 
         // Recheck the left side of the screen
-        if (centerPosition < +this.screenOffset - rootRect.left) {
+        if (position < +this.screenOffset - rootRect.left) {
           // Just set the menu to the full width of the screen
-          centerPosition = +this.screenOffset - rootRect.left
+          position = +this.screenOffset - rootRect.left
           offsetWidth = bodyWidth - +this.screenOffset * 2
         }
       }
 
       // Possible blurring font with decimal values
-      centerPosition = Math.round(centerPosition)
+      position = Math.round(position)
 
       const dropdownOffset = +this.dropdownOffset + this._activeDropdown.offsetTop
       const ratioWidth = offsetWidth / BASE_WIDTH
@@ -306,12 +329,12 @@ export default {
       this.clearDisableTransitionTimeout()
       this.startEnableTransitionTimeout()
 
-      this.$refs.dropdownContainer.style.transform = `translate(${centerPosition}px, ${dropdownOffset}px)`
+      this.$refs.dropdownContainer.style.transform = `translate(${position}px, ${dropdownOffset}px)`
       this.$refs.dropdownContainer.style.width = `${offsetWidth}px`
       this.$refs.dropdownContainer.style.height = `${offsetHeight}px`
 
-      this.$refs.arrow.style.transform = `translate(${leftPosition + (rect.width / 2)}px, ${dropdownOffset}px) rotate(45deg)`
-      this.$refs.background.style.transform = `translate(${centerPosition}px, ${dropdownOffset}px) scaleX(${ratioWidth}) scaleY(${ratioHeight})`
+      this.$refs.arrow.style.transform = `translate(${startPosition + (rect.width / 2)}px, ${dropdownOffset}px) rotate(45deg)`
+      this.$refs.background.style.transform = `translate(${position}px, ${dropdownOffset}px) scaleX(${ratioWidth}) scaleY(${ratioHeight})`
       this.$refs.backgroundAlt.style.transform = `translateY(${this._activeContainerItem.content.firstElementChild.offsetHeight / ratioHeight}px)`
     },
     /*
@@ -508,8 +531,12 @@ export default {
       this.elementsWithDropdown = Array.from(this.$refs.linkContainer.children)
         .filter((el) => el.classList.contains('vsm-has-dropdown'))
 
-      this.dropdownContainerItems = Array.from(this.$refs.dropdownContainer.children)
-        .map((el) => ({ el, name: el.getAttribute('data-dropdown'), content: el.firstElementChild }))
+      this.dropdownContainerItems = Array.from(this.$refs.dropdownContainer.children).map((el) => ({
+        el,
+        name: el.getAttribute('data-dropdown'),
+        align: el.getAttribute('data-align'),
+        content: el.firstElementChild
+      }))
     },
     clearAllStyles() {
       this.$refs.dropdownContainer.removeAttribute('style')

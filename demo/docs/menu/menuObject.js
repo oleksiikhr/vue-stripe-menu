@@ -20,9 +20,14 @@ export const rows = [
     description: 'Unique value indicates that this item has a dropdown menu'
   },
   {
+    property: 'align',
+    type: 'String',
+    description: 'Offset the position of the dropdown menu'
+  },
+  {
     property: 'element',
     type: 'String',
-    description: 'HTMLElement in the header element, if not specified, it will be <button /> or <a />'
+    description: 'HTMLElement or global component in the header element, if not specified, it will be <button /> or <a />'
   },
   {
     property: 'attributes',

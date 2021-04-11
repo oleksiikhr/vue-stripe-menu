@@ -144,6 +144,7 @@ Add css/scss styles:
     :menu="menu"
     element="header"
     handler="hover"
+    align="center"
     :screen-offset="10"
     :dropdown-offset="0"
     @open-dropdown="onOpenDropdown"
@@ -202,9 +203,11 @@ export default {
           title: 'News',
           // this element now has dropdown content
           dropdown: 'news',
-          // don't want a button element?
-          // pass only as a string (component must be globally accessible)
+          // don't want a button element? Pass HTMLElement or global component
+          // (pass only as a string, component must be globally accessible)
           element: 'span', // router-link
+          // offset the position of the dropdown menu
+          align: 'center',
           // menu item can accept all attributes
           attributes: {
             // I want more classes! No problem
@@ -298,13 +301,13 @@ export default {
 
 ### [Menu] MenuObject (menu props)
 
-| Property   | Type   | Description                                                                          |
-| ---------- | ------ | ------------------------------------------------------------------------------------ |
-| title      | String | Menu item name. Can also be redefined through the slot                               |
-| dropdown   | String | Unique value indicates that this item has a dropdown menu                            |
-| element    | String | HTML element in the header element, if not specified, it will be <button /> or <a /> |
-| attributes | Object | All attributes to be assigned in the header element (v-bind)                         |
-| listeners  | Object | All events to be assigned in the header element (v-on)                               |
+| Property   | Type   | Description                                                                                             |
+| ---------- | ------ | ------------------------------------------------------------------------------------------------------- |
+| title      | String | Menu item name. Can also be redefined through the slot                                                  |
+| dropdown   | String | Unique value indicates that this item has a dropdown menu                                               |
+| element    | String | HTMLElement or global component in the header element, if not specified, it will be <button /> or <a /> |
+| attributes | Object | All attributes to be assigned in the header element (v-bind)                                            |
+| listeners  | Object | All events to be assigned in the header element (v-on)                                                  |
 
 ### [Mob] Props
 

@@ -85,6 +85,7 @@ export default {
       vsmProps: [
         { property: 'element', value: '', initial: 'header', desc: 'header/div/section or another HTMLElement', validator: (val) => !!val },
         { property: 'handler', value: '', initial: 'hover', desc: 'hover/click', validator: (val) => ['hover', 'click'].includes(val) },
+        { property: 'align', value: '', initial: 'center', desc: 'left/center/right (default value for all elements)', validator: (val) => ['left', 'center', 'right'].includes(val) },
         { property: 'screen-offset', value: '', initial: '10', desc: 'indent a dropdown menu from screen edges (reduce screen size)', validator: (val) => !isNaN(+val), convert: (val) => +val },
         { property: 'dropdown-offset', value: '', initial: '0', desc: 'indent a dropdown menu from header', validator: (val) => !isNaN(+val), convert: (val) => +val },
         { property: 'transition-timeout', value: '', initial: '250', desc: 'animation speed in ms (equals "$vsm-transition" style)', validator: (val) => !isNaN(+val), convert: (val) => +val },

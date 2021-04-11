@@ -3,6 +3,7 @@
     :menu="menu"
     element="header"
     handler="hover"
+    align="center"
     :screen-offset="10"
     :dropdown-offset="0"
     @open-dropdown="onOpenDropdown"
@@ -61,9 +62,11 @@ export default {
           title: 'News',
           // this element now has dropdown content
           dropdown: 'news',
-          // don't want a button element?
-          // pass only as a string (component must be globally accessible)
+          // don't want a button element? Pass HTMLElement or global component
+          // (pass only as a string, component must be globally accessible)
           element: 'span', // router-link
+          // offset the position of the dropdown menu
+          align: 'center',
           // menu item can accept all attributes
           attributes: {
             // I want more classes! No problem
