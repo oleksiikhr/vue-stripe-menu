@@ -45,7 +45,7 @@ export default {
     }
   },
   emits: [
-    'input'
+    'input', 'update:modelValue'
   ],
   data() {
     return {
@@ -92,6 +92,7 @@ export default {
     emitValue(toggle) {
       this.active = toggle
       this.$emit('input', toggle)
+      this.$emit('update:modelValue', toggle)
     },
     // Close Dropdown content after outside click
     eventEndHandler(evt) {
