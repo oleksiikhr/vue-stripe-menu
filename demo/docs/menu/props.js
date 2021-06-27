@@ -48,5 +48,12 @@ export const rows = [
     description: 'On what event to open dropdown menu',
     type: 'String',
     default: 'hover'
+  },
+  {
+    property: 'align',
+    parameters: 'left, center, right',
+    description: 'Offset the position of the dropdown menu',
+    type: 'String',
+    default: 'center'
   }
 ]

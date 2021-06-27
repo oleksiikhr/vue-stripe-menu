@@ -253,14 +253,15 @@ export default {
 
 ### [Menu] Props
 
-| Property           | Parameters   | Description                                         | Type           | Default | Required |
-| ------------------ | ----------   | --------------------------------------------------- | -------------- | ------- | -------- |
-| menu               | MenuObject   | Description of the menu items                       | Array          |         | true     |
-| element            |              | HTMLElement for the root element                    | String         | header  | false    |
-| screen-offset      |              | Offset from the window screen                       | String, Number | header  | false    |
-| dropdown-offset    |              | Offset from the dropdown menu                       | String, Number | header  | false    |
-| transition-timeout |              | Animation speed in ms (equals $vsm-transition scss) | String, Number | 250     | false    |
-| handler            | hover, click | On what event to open dropdown menu                 | String         | hover   | false    |
+| Property           | Parameters          | Description                                         | Type           | Default | Required |
+| ------------------ | ------------------- | --------------------------------------------------- | -------------- | ------- | -------- |
+| menu               | MenuObject          | Description of the menu items                       | Array          |         | true     |
+| element            |                     | HTMLElement for the root element                    | String         | header  | false    |
+| screen-offset      |                     | Offset from the window screen                       | String, Number | header  | false    |
+| dropdown-offset    |                     | Offset from the dropdown menu                       | String, Number | header  | false    |
+| transition-timeout |                     | Animation speed in ms (equals $vsm-transition scss) | String, Number | 250     | false    |
+| handler            | hover, click        | On what event to open dropdown menu                 | String         | hover   | false    |
+| align              | center, left, right | Offset the position of the dropdown menu            | String         | center  | false    |
 
 ### [Menu] Events
 
@@ -305,6 +306,7 @@ export default {
 | ---------- | ------ | ------------------------------------------------------------------------------------------------------- |
 | title      | String | Menu item name. Can also be redefined through the slot                                                  |
 | dropdown   | String | Unique value indicates that this item has a dropdown menu                                               |
+| align      | string | Offset the position of the dropdown menu (center/left/right)                                            |
 | element    | String | HTMLElement or global component in the header element, if not specified, it will be <button /> or <a /> |
 | attributes | Object | All attributes to be assigned in the header element (v-bind)                                            |
 | listeners  | Object | All events to be assigned in the header element (v-on)                                                  |
