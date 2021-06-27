@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/Alexeykhr/vue-stripe-menu/compare/v2.0.0...v2.1.0) (2021-06-27)
+
+
+### Features
+
+* **menu:** add align props ([1991c9f](https://github.com/Alexeykhr/vue-stripe-menu/commit/1991c9f13d807441695149e251ef8b587c71f6ce))
+
+
+### Bug Fixes
+
+* **mobile:** emit v-model props on vue-3 ([a791be8](https://github.com/Alexeykhr/vue-stripe-menu/commit/a791be829cb4445242d7f7af22dbd81633e2a6c3))
+
 ## [2.0.0](https://github.com/Alexeykhr/vue-stripe-menu/compare/v1.5.0...v2.0.0) (2021-04-09)
 
 ### Global changes
