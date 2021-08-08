@@ -20,8 +20,8 @@
     "build:lib": "vue-cli-service build --target lib --name vue-stripe-menu ./src/main.js",
     "dev": "vue-cli-service serve ./demo/main.js",
     "lint:fix": "vue-cli-service lint src demo",
-    "pub": "git push --follow-tags origin dev && npm publish",
-    "rel": "npm run lint:fix && npm run test && npm run build && npm run build:lib && git add -A && standard-version -a",
+    "pub": "git push --follow-tags origin HEAD && npm publish",
+    "rel": "npm run lint:fix && npm run test && npm run build:lib && standard-version --skip.changelog --skip.commit --skip.tag && npm run build && git add -A && standard-version --commit-all --skip.bump",
     "test": "jest"
   },
   "main": "./dist/vue-stripe-menu.umd.min.js",
