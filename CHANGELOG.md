@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.1](https://github.com/Alexeykhr/vue-stripe-menu/compare/v2.1.0...v2.1.1) (2021-08-08)
+
+* Migrate from deprecated libSass (node-sass library) to Dart Sass ([944ad5d3](https://github.com/Alexeykhr/vue-stripe-menu/commit/944ad5d33fbd648a5c3a5b5a5833e283b3bdd0f1))
+
 ## [2.1.0](https://github.com/Alexeykhr/vue-stripe-menu/compare/v2.0.0...v2.1.0) (2021-06-27)
 
 
