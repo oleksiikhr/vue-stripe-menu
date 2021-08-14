@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @import "variables";
 
 /* -----------------------------------------------------------------------------
@@ -96,9 +98,9 @@
     position: absolute;
     background: $vsm-mob-close-color;
     border-radius: 1px;
-    left: $vsm-mob-close-size / 4;
-    right: $vsm-mob-close-size / 4;
-    top: $vsm-mob-close-size / 2;
+    left: math.div($vsm-mob-close-size, 4);
+    right: math.div($vsm-mob-close-size, 4);
+    top: math.div($vsm-mob-close-size, 2);
     height: $vsm-mob-close-weight;
     transform: rotate(45deg);
     transition: background $vsm-mob-transition-link;

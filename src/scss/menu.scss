@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @import "variables";
 
 /* -----------------------------------------------------------------------------
@@ -132,8 +134,8 @@
 }
 
 .vsm-arrow {
-  top: $vsm-arrow-size / -2;
-  margin: 0 0 0 #{$vsm-arrow-size / -2};
+  top: math.div($vsm-arrow-size, -2);
+  margin: 0 0 0 math.div($vsm-arrow-size, -2);
   width: $vsm-arrow-size;
   height: $vsm-arrow-size;
   transform: rotate(45deg);
