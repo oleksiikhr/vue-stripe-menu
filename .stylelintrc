@@ -1,0 +1,13 @@
+{
+  "extends": [
+    "stylelint-config-recommended-vue/scss",
+    "stylelint-config-standard-scss"
+  ],
+  "ignoreFiles": [
+    "node_modules/**/*"
+  ],
+  "customSyntax": "postcss-html",
+  "rules": {
+    "selector-class-pattern": null
+  }
+}

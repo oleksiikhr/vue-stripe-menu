@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Alexeykhr/vue-stripe-menu/master/public/img.png?raw=true" alt="Vue Stripe Menu" height="500px">
+  <img src="https://raw.githubusercontent.com/Alexeykhr/vue-stripe-menu/master/docs/images/img.png?raw=true" alt="Vue Stripe Menu" height="500px">
 </p>
 
 > Creating a navigation menu with animations like on Stripe
@@ -254,7 +254,7 @@ export default {
 ### [Menu] Props
 
 | Property           | Parameters          | Description                                         | Type           | Default | Required |
-| ------------------ | ------------------- | --------------------------------------------------- | -------------- | ------- | -------- |
+|--------------------|---------------------|-----------------------------------------------------|----------------|---------|----------|
 | menu               | MenuObject          | Description of the menu items                       | Array          |         | true     |
 | element            |                     | HTMLElement for the root element                    | String         | header  | false    |
 | screen-offset      |                     | Offset from the window screen                       | String, Number | header  | false    |
@@ -266,36 +266,36 @@ export default {
 ### [Menu] Events
 
 | Name           | Description                                            | Return      |
-| -------------- | ------------------------------------------------------ | ----------- |
+|----------------|--------------------------------------------------------|-------------|
 | open-dropdown  | Open the dropdown menu, return the active HTMLElement  | HTMLElement |
 | close-dropdown | Close the dropdown menu, return the closed HTMLElement | HTMLElement |
 
 ### [Menu] Slots
 
-| Name       | Parameters      | Description                                         |
-| ---------- | --------------- | --------------------------------------------------- |
-| default    | MenuItem, index | The main content for the dropdown list              |
-| before-nav | before-nav      | Content to the left of the list                     |
-| after-nav  | after-nav       | Content to the right of the list                    |
-| title      | MenuItem, index | Replace the output of menu\[i].title with your own  |
+| Name       | Parameters      | Description                                        |
+|------------|-----------------|----------------------------------------------------|
+| default    | MenuItem, index | The main content for the dropdown list             |
+| before-nav | before-nav      | Content to the left of the list                    |
+| after-nav  | after-nav       | Content to the right of the list                   |
+| title      | MenuItem, index | Replace the output of menu\[i].title with your own |
 
 ### [Menu] Methods
 
 `this.$refs[myVsmRef].closeDropdown()`
 
-| Name           | Parameters  | Description                                                 | Return |
-| -------------- | ----------- | ----------------------------------------------------------- | ------ |
-| toggleDropdown | HTMLElement | Open dropdown menu, if it is an active HTMLElement - close  |        |
-| openDropdown   | HTMLElement | Open dropdown menu for selected HTMLElement                 |        |
-| closeDropdown  |             | Close active dropdown menu                                  |        |
-| resizeDropdown |             | Recalculate size and location of dropdown menu              |        |
+| Name           | Parameters  | Description                                                | Return |
+|----------------|-------------|------------------------------------------------------------|--------|
+| toggleDropdown | HTMLElement | Open dropdown menu, if it is an active HTMLElement - close |        |
+| openDropdown   | HTMLElement | Open dropdown menu for selected HTMLElement                |        |
+| closeDropdown  |             | Close active dropdown menu                                 |        |
+| resizeDropdown |             | Recalculate size and location of dropdown menu             |        |
 
 ### [Menu] Properties
 
 `this.$refs[myVsmRef].itemsWithDropdown`
 
 | Name                   | Description                                     | Return                                                       |
-| ---------------------- | ----------------------------------------------- | ------------------------------------------------------------ |
+|------------------------|-------------------------------------------------|--------------------------------------------------------------|
 | itemsWithDropdown      | Filtered menu items with "dropdown" property    | Array\<MenuObject>                                           |
 | elementsWithDropdown   | List of HTMLElements that have dropdown content | Array\<MenuObject>                                           |
 | dropdownContainerItems | List of dropdown HTMLElements                   | Array<{el: HTMLElement, name: string, content: HTMLElement}> |
@@ -303,7 +303,7 @@ export default {
 ### [Menu] MenuObject (menu props)
 
 | Property   | Type   | Description                                                                                             |
-| ---------- | ------ | ------------------------------------------------------------------------------------------------------- |
+|------------|--------|---------------------------------------------------------------------------------------------------------|
 | title      | String | Menu item name. Can also be redefined through the slot                                                  |
 | dropdown   | String | Unique value indicates that this item has a dropdown menu                                               |
 | align      | string | Offset the position of the dropdown menu (center/left/right)                                            |
@@ -314,29 +314,29 @@ export default {
 ### [Mob] Props
 
 | Property | Parameters | Description                          | Type    | Default | Required |
-| -------- | ---------- | ------------------------------------ | ------- | ------- | -------- |
+|----------|------------|--------------------------------------|---------|---------|----------|
 | v-model  |            | The state of the open/close the menu | Boolean | false   | false    |
 
 ### [Mob] Slots
 
-| Name       | Parameters | Description               |
-| ---------- | ---------- | ------------------------- |
-| default    |            | Main content              |
-| hamburger  |            | Replace hamburger button  |
-| close      |            | Replace close button      |
+| Name      | Parameters | Description              |
+|-----------|------------|--------------------------|
+| default   |            | Main content             |
+| hamburger |            | Replace hamburger button |
+| close     |            | Replace close button     |
 
 ### [Mob] Methods
 
 `this.$refs[myVsmMobRef].closeDropdown()`
 
-| Name           | Parameters  | Description         | Return |
-| -------------- | ----------- | ------------------- | ------ |
-| closeDropdown  |             | Close dropdown menu |        |
+| Name          | Parameters | Description         | Return |
+|---------------|------------|---------------------|--------|
+| closeDropdown |            | Close dropdown menu |        |
 
 ### Classes
 
 | Name         | Description                        |
-| ------------ | ---------------------------------- |
+|--------------|------------------------------------|
 | vsm-mob-show | Show HTMLElements in mobile design |
 | vsm-mob-hide | Hide HTMLElements in mobile design |
 

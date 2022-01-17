@@ -12,13 +12,11 @@ $vsm-transform-content: 150px !default;
 
 // Dropdown arrow
 $vsm-arrow-size: 12px !default;
-$vsm-arrow-shadow: -3px -3px 5px rgba(82, 95, 127, .04) !default;
+$vsm-arrow-shadow: -3px -3px 5px rgb(82 95 127 / 4%) !default;
 $vsm-arrow-border-radius: 4px 0 0 0 !default;
-
 $vsm-index: 1000 !default;
 $vsm-link-height: 50px !default;
 $vsm-link-padding-x: 25px !default;
-
 $vsm-background: #fff !default;
 $vsm-background-alt: #f6f9fc !default;
 $vsm-background-arrow: $vsm-background !default;
@@ -28,13 +26,13 @@ $vsm-color: #6772e5 !default;
 $vsm-color-hover: #32325d !default;
 
 // Speed to change dropdown content and hover on links
-$vsm-transition: .25s !default; // must be equals with "transition-timeout" props
-$vsm-transition-link: .1s ease !default;
+$vsm-transition: 0.25s !default; // must be equals with "transition-timeout" props
+$vsm-transition-link: 0.1s ease !default;
 
 // Dropdown content (menu + mob)
-$vsm-shadow: 0 50px 100px -20px rgba(50, 50, 93, .25),
-              0 30px 60px -30px rgba(0, 0, 0, .3),
-              0 -18px 60px -10px rgba(0, 0, 0, .025) !default;
+$vsm-shadow: 0 50px 100px -20px rgb(50 50 93 / 25%),
+  0 30px 60px -30px rgb(0 0 0 / 30%),
+  0 -18px 60px -10px rgb(0 0 0 / 2.5%) !default;
 
 /* -----------------------------------------------------------------------------
  * - Mobile Component -
@@ -58,7 +56,6 @@ $vsm-mob-close-size: 50px !default;
 $vsm-mob-close-weight: 3px !default;
 $vsm-mob-close-color: $vsm-color !default;
 $vsm-mob-close-color-hover: $vsm-color-hover !default;
-
 $vsm-mob-link-offset: 10px !default;
 $vsm-mob-background: $vsm-background !default;
 $vsm-mob-shadow: $vsm-shadow !default;

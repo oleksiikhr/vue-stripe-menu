@@ -20,6 +20,7 @@
   padding: 0 var(--vsm-link-padding-x, $vsm-link-padding-x);
   color: var(--vsm-color, $vsm-color);
   transition: color var(--vsm-transition-link, $vsm-transition-link);
+
   &:hover,
   &.vsm-active {
     color: var(--vsm-color-hover, $vsm-color-hover);
@@ -62,9 +63,11 @@
 
 .vsm-dropdown-section {
   transition-duration: var(--vsm-transition, $vsm-transition);
+
   &.vsm-left {
     transform: translateX(calc(-1 * var(--vsm-transform-content, #{$vsm-transform-content})));
   }
+
   &.vsm-right {
     transform: translateX(var(--vsm-transform-content, #{$vsm-transform-content}));
   }
@@ -82,11 +85,6 @@
 .vsm-mob__hamburger {
   width: var(--vsm-mob-hamburger-size, $vsm-mob-hamburger-size);
   height: var(--vsm-mob-hamburger-size, $vsm-mob-hamburger-size);
-  &:hover {
-    .vsm-mob-line {
-      background: var(--vsm-mob-hamburger-color-hover, var(--vsm-color-hover));
-    }
-  }
 }
 
 .vsm-mob-line {
@@ -94,6 +92,10 @@
   height: var(--vsm-mob-hamburger-height, $vsm-mob-hamburger-height);
   background: var(--vsm-mob-hamburger-color, var(--vsm-color));
   transition: background var(--vsm-mob-transition-link, $vsm-mob-transition-link);
+}
+
+.vsm-mob__hamburger:hover .vsm-mob-line {
+  background: var(--vsm-mob-hamburger-color-hover, var(--vsm-color-hover));
 }
 
 .vsm-mob-content {
@@ -112,20 +114,22 @@
 .vsm-mob-close {
   width: var(--vsm-mob-close-size, $vsm-mob-close-size);
   height: var(--vsm-mob-close-size, $vsm-mob-close-size);
-  &:hover {
-    &:before,
-    &:after {
-      background: var(--vsm-mob-close-color-hover, var(--vsm-color-hover));
-    }
-  }
-  &:before,
-  &:after {
+
+  &::before,
+  &::after {
     background: var(--vsm-mob-close-color, var(--vsm-color));
     left: calc(var(--vsm-mob-close-size, #{$vsm-mob-close-size}) / 4);
     right: calc(var(--vsm-mob-close-size, #{$vsm-mob-close-size}) / 4);
     top: calc(var(--vsm-mob-close-size, #{$vsm-mob-close-size}) / 2);
     height: var(--vsm-mob-close-weight, $vsm-mob-close-weight);
     transition: background var(--vsm-mob-transition-link, var(--vsm-transition-link));
+  }
+
+  &:hover {
+    &::before,
+    &::after {
+      background: var(--vsm-mob-close-color-hover, var(--vsm-color-hover));
+    }
   }
 }
 

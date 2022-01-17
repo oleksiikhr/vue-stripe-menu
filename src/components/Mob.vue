@@ -1,13 +1,14 @@
 <template>
   <li
-    :class="['vsm-mob-container', 'vsm-mob-show', {
-      'vsm-open': active
-    }]"
+    :class="[
+      'vsm-mob-container',
+      'vsm-mob-show',
+      {
+        'vsm-open': active,
+      },
+    ]"
   >
-    <div
-      class="vsm-mob"
-      @click="onClickHamburger"
-    >
+    <div class="vsm-mob" @click="onClickHamburger">
       <slot name="hamburger">
         <div class="vsm-mob__hamburger">
           <div class="vsm-mob-line" />
@@ -18,15 +19,9 @@
     </div>
     <div class="vsm-mob-content">
       <transition name="vsm-mob-anim">
-        <div
-          v-show="active"
-          class="vsm-mob-content__wrap"
-        >
+        <div v-show="active" class="vsm-mob-content__wrap">
           <slot name="close">
-            <div
-              class="vsm-mob-close"
-              @click="onClickHamburger"
-            />
+            <div class="vsm-mob-close" @click="onClickHamburger" />
           </slot>
           <slot />
         </div>
@@ -41,16 +36,14 @@ export default {
   props: {
     value: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
-  emits: [
-    'input', 'update:modelValue'
-  ],
+  emits: ['input', 'update:modelValue'],
   data() {
     return {
       // Support change value without accept props
-      active: this.value
+      active: this.value,
     }
   },
   watch: {
@@ -67,7 +60,7 @@ export default {
       } else {
         this.unregisterEvent()
       }
-    }
+    },
   },
   mounted() {
     const touchSupport = 'ontouchstart' in window || navigator.maxTouchPoints
@@ -99,7 +92,7 @@ export default {
       if (this.$el !== evt.target && !this.$el.contains(evt.target)) {
         this.emitValue(false)
       }
-    }
-  }
+    },
+  },
 }
 </script>

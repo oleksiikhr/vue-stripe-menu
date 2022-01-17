@@ -1,25 +1,20 @@
 <template>
-  <component
-    :is="element"
-    class="vsm-menu vsm-no-transition"
-  >
+  <component :is="element" class="vsm-menu vsm-no-transition">
     <nav class="vsm-nav">
-      <ul
-        ref="root"
-        class="vsm-root"
-      >
+      <ul ref="root" class="vsm-root">
         <slot name="before-nav" />
-        <li
-          ref="linkContainer"
-          class="vsm-link-container vsm-mob-hide"
-        >
+        <li ref="linkContainer" class="vsm-link-container vsm-mob-hide">
           <component
             :is="item.element || (item.dropdown ? 'button' : 'a')"
             v-for="(item, index) in menu"
             :key="index"
-            :class="['vsm-link', item.attributes ? item.attributes.class : null, {
-              'vsm-has-dropdown': item.dropdown
-            }]"
+            :class="[
+              'vsm-link',
+              item.attributes ? item.attributes.class : null,
+              {
+                'vsm-has-dropdown': item.dropdown,
+              },
+            ]"
             :data-dropdown="item.dropdown"
             :data-align="item.align"
             :aria-haspopup="item.dropdown && 'true'"
@@ -28,11 +23,7 @@
             v-bind="item.attributes"
             v-on="item.listeners || {}"
           >
-            <slot
-              name="title"
-              :item="item"
-              :index="index"
-            >
+            <slot name="title" :item="item" :index="index">
               <span>{{ item.title }}</span>
             </slot>
           </component>
@@ -41,23 +32,11 @@
       </ul>
     </nav>
     <div class="vsm-dropdown vsm-mob-hide">
-      <div
-        ref="background"
-        class="vsm-background"
-      >
-        <div
-          ref="backgroundAlt"
-          class="vsm-background-alt"
-        />
+      <div ref="background" class="vsm-background">
+        <div ref="backgroundAlt" class="vsm-background-alt" />
       </div>
-      <div
-        ref="arrow"
-        class="vsm-arrow"
-      />
-      <div
-        ref="dropdownContainer"
-        class="vsm-dropdown-container"
-      >
+      <div ref="arrow" class="vsm-arrow" />
+      <div ref="dropdownContainer" class="vsm-dropdown-container">
         <div
           v-for="(item, index) in itemsWithDropdown"
           :key="index"
@@ -67,10 +46,7 @@
           aria-hidden="false"
         >
           <div class="vsm-dropdown-content">
-            <slot
-              :item="item"
-              :index="index"
-            />
+            <slot :item="item" :index="index" />
           </div>
         </div>
       </div>
@@ -80,8 +56,8 @@
 
 <script>
 // This values depends on .vsm-background styles (width/height)
-const BASE_WIDTH = 380;
-const BASE_HEIGHT = 400;
+const BASE_WIDTH = 380
+const BASE_HEIGHT = 400
 
 export default {
   name: 'VsmMenu',
@@ -114,7 +90,7 @@ export default {
      */
     menu: {
       type: Array,
-      required: true
+      required: true,
     },
     /**
      * Change root HTMLElement
@@ -123,7 +99,7 @@ export default {
     element: {
       type: String,
       default: 'header',
-      validator: (val) => !!val
+      validator: (val) => !!val,
     },
     /**
      * Dropdown content does not go beyond screen size
@@ -132,12 +108,12 @@ export default {
     screenOffset: {
       type: [Number, String],
       default: 10,
-      validator: (val) => +val >= 0
+      validator: (val) => +val >= 0,
     },
     dropdownOffset: {
       type: [Number, String],
       default: 0,
-      validator: (val) => +val >= 0
+      validator: (val) => +val >= 0,
     },
     /**
      * By default, the dropdown list drops out on hover,
@@ -146,7 +122,7 @@ export default {
     handler: {
       type: String,
       default: 'hover',
-      validator: (val) => ['hover', 'click'].includes(val)
+      validator: (val) => ['hover', 'click'].includes(val),
     },
     /**
      * Must be equals as $vsm-transition (scss variable)
@@ -154,7 +130,7 @@ export default {
      */
     transitionTimeout: {
       type: [Number, String],
-      default: 250
+      default: 250,
     },
     /**
      * Offset the position of the dropdown menu
@@ -162,22 +138,20 @@ export default {
     align: {
       type: String,
       default: 'center',
-      validator: (val) => ['left', 'center', 'right'].includes(val)
-    }
+      validator: (val) => ['left', 'center', 'right'].includes(val),
+    },
   },
-  emits: [
-    'open-dropdown', 'close-dropdown'
-  ],
+  emits: ['open-dropdown', 'close-dropdown'],
   data() {
     return {
       elementsWithDropdown: [],
-      dropdownContainerItems: []
+      dropdownContainerItems: [],
     }
   },
   computed: {
     itemsWithDropdown() {
-      return this.menu.filter(item => item.dropdown)
-    }
+      return this.menu.filter((item) => item.dropdown)
+    },
   },
   watch: {
     async element() {
@@ -195,8 +169,8 @@ export default {
         this.updateDataElements()
         this.registerDropdownElementsEvents()
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   mounted() {
     this.identifyPointerEvents()
@@ -231,7 +205,7 @@ export default {
       this.$el.classList.add('vsm-overlay-active', 'vsm-dropdown-active')
       this._activeDropdown = el
       this._activeDropdown.setAttribute('aria-expanded', 'true')
-      this.elementsWithDropdown.forEach(el => el.classList.remove('vsm-active'))
+      this.elementsWithDropdown.forEach((el) => el.classList.remove('vsm-active'))
       el.classList.add('vsm-active')
 
       const activeDataDropdown = el.getAttribute('data-dropdown')
@@ -296,8 +270,9 @@ export default {
         case 'right':
           position = startPosition - offsetWidth + rect.width
           break
-        default: // center
-          position = startPosition - (offsetWidth / 2) + (rect.width / 2)
+        default:
+          // center
+          position = startPosition - offsetWidth / 2 + rect.width / 2
       }
 
       // Do not let go of the left side of the screen
@@ -308,7 +283,7 @@ export default {
       // Now also check the right side of the screen
       const rightOffset = position + rootRect.left + offsetWidth
       if (rightOffset > bodyWidth - +this.screenOffset) {
-        position -= (rightOffset - bodyWidth + +this.screenOffset)
+        position -= rightOffset - bodyWidth + +this.screenOffset
 
         // Recheck the left side of the screen
         if (position < +this.screenOffset - rootRect.left) {
@@ -333,9 +308,13 @@ export default {
       this.$refs.dropdownContainer.style.width = `${offsetWidth}px`
       this.$refs.dropdownContainer.style.height = `${offsetHeight}px`
 
-      this.$refs.arrow.style.transform = `translate(${startPosition + (rect.width / 2)}px, ${dropdownOffset}px) rotate(45deg)`
+      this.$refs.arrow.style.transform = `translate(${
+        startPosition + rect.width / 2
+      }px, ${dropdownOffset}px) rotate(45deg)`
       this.$refs.background.style.transform = `translate(${position}px, ${dropdownOffset}px) scaleX(${ratioWidth}) scaleY(${ratioHeight})`
-      this.$refs.backgroundAlt.style.transform = `translateY(${this._activeContainerItem.content.firstElementChild.offsetHeight / ratioHeight}px)`
+      this.$refs.backgroundAlt.style.transform = `translateY(${
+        this._activeContainerItem.content.firstElementChild.offsetHeight / ratioHeight
+      }px)`
     },
     /*
      * | ------------------------------------------------------------------------------------------------
@@ -355,7 +334,10 @@ export default {
       clearTimeout(this._enableTransitionTimeout)
     },
     startDisableTransitionTimeout() {
-      this._disableTransitionTimeout = setTimeout(() => this.$el.classList.add('vsm-no-transition'), +this.transitionTimeout)
+      this._disableTransitionTimeout = setTimeout(
+        () => this.$el.classList.add('vsm-no-transition'),
+        +this.transitionTimeout,
+      )
     },
     clearDisableTransitionTimeout() {
       clearTimeout(this._disableTransitionTimeout)
@@ -394,7 +376,7 @@ export default {
               if (evt.pointerType !== 'touch') {
                 this.startCloseDropdownTimeout()
               }
-            }
+            },
           }
         } else {
           el._vsmMenuHandlers = {}
@@ -438,7 +420,7 @@ export default {
             if (evt.pointerType !== 'touch') {
               this.startCloseDropdownTimeout()
             }
-          }
+          },
         }
       } else {
         el._vsmMenuHandlers = {}
@@ -517,25 +499,28 @@ export default {
      * | ------------------------------------------------------------------------------------------------
      */
     identifyPointerEvents() {
-      this._pointerEvent = window.PointerEvent ? {
-        end: 'pointerup',
-        enter: 'pointerenter',
-        leave: 'pointerleave'
-      } : {
-        end: 'touchend',
-        enter: 'mouseenter',
-        leave: 'mouseleave'
-      }
+      this._pointerEvent = window.PointerEvent
+        ? {
+            end: 'pointerup',
+            enter: 'pointerenter',
+            leave: 'pointerleave',
+          }
+        : {
+            end: 'touchend',
+            enter: 'mouseenter',
+            leave: 'mouseleave',
+          }
     },
     updateDataElements() {
-      this.elementsWithDropdown = Array.from(this.$refs.linkContainer.children)
-        .filter((el) => el.classList.contains('vsm-has-dropdown'))
+      this.elementsWithDropdown = Array.from(this.$refs.linkContainer.children).filter((el) =>
+        el.classList.contains('vsm-has-dropdown'),
+      )
 
       this.dropdownContainerItems = Array.from(this.$refs.dropdownContainer.children).map((el) => ({
         el,
         name: el.getAttribute('data-dropdown'),
         align: el.getAttribute('data-align'),
-        content: el.firstElementChild
+        content: el.firstElementChild,
       }))
     },
     clearAllStyles() {
@@ -543,7 +528,7 @@ export default {
       this.$refs.arrow.removeAttribute('style')
       this.$refs.background.removeAttribute('style')
       this.$refs.backgroundAlt.removeAttribute('style')
-    }
-  }
+    },
+  },
 }
 </script>
