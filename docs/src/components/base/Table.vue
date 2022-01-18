@@ -19,6 +19,7 @@
 
 <script>
 export default {
+  name: 'BaseTable',
   props: {
     columns: {
       type: Array,
@@ -29,7 +30,7 @@ export default {
       required: true,
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

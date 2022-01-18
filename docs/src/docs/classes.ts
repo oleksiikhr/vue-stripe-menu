@@ -1,11 +1,11 @@
-'use strict'
+'use strict';
 
-export const title = 'Classes'
+export const title = 'Classes';
 
 export const columns = [
   { attr: 'name', name: 'Name' },
   { attr: 'description', name: 'Description' },
-]
+];
 
 export const rows = [
   {
@@ -16,4 +16,4 @@ export const rows = [
     name: 'vsm-mob-hide',
     description: 'Hide HTMLElements in mobile design',
   },
-]
+];

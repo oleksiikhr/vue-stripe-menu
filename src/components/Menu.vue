@@ -56,8 +56,8 @@
 
 <script>
 // This values depends on .vsm-background styles (width/height)
-const BASE_WIDTH = 380
-const BASE_HEIGHT = 400
+const BASE_WIDTH = 380;
+const BASE_HEIGHT = 400;
 
 export default {
   name: 'VsmMenu',
@@ -86,7 +86,6 @@ export default {
      *   // other attributes
      *   customAttribute: true,
      *  }]
-     * },
      */
     menu: {
       type: Array,
@@ -146,41 +145,41 @@ export default {
     return {
       elementsWithDropdown: [],
       dropdownContainerItems: [],
-    }
+    };
   },
   computed: {
     itemsWithDropdown() {
-      return this.menu.filter((item) => item.dropdown)
+      return this.menu.filter((item) => item.dropdown);
     },
   },
   watch: {
     async element() {
-      await this.$nextTick()
-      this.updateDataElements()
-      this.registerDropdownElementsEvents()
+      await this.$nextTick();
+      this.updateDataElements();
+      this.registerDropdownElementsEvents();
     },
     handler() {
-      this.registerDropdownElementsEvents(true)
-      this.registerDropdownContainerEvents(true)
+      this.registerDropdownElementsEvents(true);
+      this.registerDropdownContainerEvents(true);
     },
     menu: {
       async handler() {
-        await this.$nextTick()
-        this.updateDataElements()
-        this.registerDropdownElementsEvents()
+        await this.$nextTick();
+        this.updateDataElements();
+        this.registerDropdownElementsEvents();
       },
       deep: true,
     },
   },
   mounted() {
-    this.identifyPointerEvents()
-    this.registerGlobalListeners()
-    this.updateDataElements()
-    this.registerDropdownElementsEvents()
-    this.registerDropdownContainerEvents()
+    this.identifyPointerEvents();
+    this.registerGlobalListeners();
+    this.updateDataElements();
+    this.registerDropdownElementsEvents();
+    this.registerDropdownContainerEvents();
   },
   beforeUnmount() {
-    this.removeGlobalListeners()
+    this.removeGlobalListeners();
   },
   methods: {
     /*
@@ -190,131 +189,131 @@ export default {
      */
     toggleDropdown(el) {
       if (this._activeDropdown === el) {
-        this.closeDropdown()
+        this.closeDropdown();
       } else {
-        this.openDropdown(el)
+        this.openDropdown(el);
       }
     },
     openDropdown(el) {
       if (this._activeDropdown === el) {
-        return
+        return;
       }
 
-      this.$emit('open-dropdown', el)
+      this.$emit('open-dropdown', el);
 
-      this.$el.classList.add('vsm-overlay-active', 'vsm-dropdown-active')
-      this._activeDropdown = el
-      this._activeDropdown.setAttribute('aria-expanded', 'true')
-      this.elementsWithDropdown.forEach((el) => el.classList.remove('vsm-active'))
-      el.classList.add('vsm-active')
+      this.$el.classList.add('vsm-overlay-active', 'vsm-dropdown-active');
+      this._activeDropdown = el;
+      this._activeDropdown.setAttribute('aria-expanded', 'true');
+      this.elementsWithDropdown.forEach((el) => el.classList.remove('vsm-active'));
+      el.classList.add('vsm-active');
 
-      const activeDataDropdown = el.getAttribute('data-dropdown')
-      let direction = 'vsm-left'
+      const activeDataDropdown = el.getAttribute('data-dropdown');
+      let direction = 'vsm-left';
 
       this.dropdownContainerItems.forEach((item) => {
-        item.el.classList.remove('vsm-active', 'vsm-left', 'vsm-right')
+        item.el.classList.remove('vsm-active', 'vsm-left', 'vsm-right');
 
         if (item.name === activeDataDropdown) {
-          item.el.setAttribute('aria-hidden', 'false')
-          item.el.classList.add('vsm-active')
-          direction = 'vsm-right'
-          this._activeContainerItem = item
+          item.el.setAttribute('aria-hidden', 'false');
+          item.el.classList.add('vsm-active');
+          direction = 'vsm-right';
+          this._activeContainerItem = item;
         } else {
-          item.el.setAttribute('aria-hidden', 'true')
-          item.el.classList.add(direction)
+          item.el.setAttribute('aria-hidden', 'true');
+          item.el.classList.add(direction);
         }
-      })
+      });
 
-      this.resizeDropdown()
+      this.resizeDropdown();
     },
     closeDropdown() {
       if (!this._activeDropdown) {
-        return
+        return;
       }
 
-      this.$emit('close-dropdown', this._activeDropdown)
-      this.elementsWithDropdown.forEach((el) => el.classList.remove('vsm-active'))
+      this.$emit('close-dropdown', this._activeDropdown);
+      this.elementsWithDropdown.forEach((el) => el.classList.remove('vsm-active'));
 
-      this._activeContainerItem.el.setAttribute('aria-hidden', 'true')
+      this._activeContainerItem.el.setAttribute('aria-hidden', 'true');
 
-      this.clearEnableTransitionTimeout()
-      this.startDisableTransitionTimeout()
+      this.clearEnableTransitionTimeout();
+      this.startDisableTransitionTimeout();
 
-      this.$el.classList.remove('vsm-overlay-active', 'vsm-dropdown-active')
+      this.$el.classList.remove('vsm-overlay-active', 'vsm-dropdown-active');
 
-      this._activeDropdown.setAttribute('aria-expanded', 'false')
-      this._activeContainerItem = undefined
-      this._activeDropdown = undefined
+      this._activeDropdown.setAttribute('aria-expanded', 'false');
+      this._activeContainerItem = undefined;
+      this._activeDropdown = undefined;
     },
     resizeDropdown() {
       if (!this._activeContainerItem) {
-        return
+        return;
       }
 
-      const bodyWidth = document.documentElement.offsetWidth
-      const rootRect = this.$el.getBoundingClientRect()
-      const rect = this._activeDropdown.getBoundingClientRect()
+      const bodyWidth = document.documentElement.offsetWidth;
+      const rootRect = this.$el.getBoundingClientRect();
+      const rect = this._activeDropdown.getBoundingClientRect();
 
-      let { offsetHeight, offsetWidth } = this._activeContainerItem.content
+      let { offsetHeight, offsetWidth } = this._activeContainerItem.content;
 
       // Find the beginning of the position of the menu item
-      const startPosition = rect.left - rootRect.left
+      const startPosition = rect.left - rootRect.left;
 
       // Step back from the button to the left so that the middle of
       // the content is found in the center of the element
-      let position = null
+      let position = null;
       switch (this._activeContainerItem.align || this.align) {
         case 'left':
-          position = startPosition
-          break
+          position = startPosition;
+          break;
         case 'right':
-          position = startPosition - offsetWidth + rect.width
-          break
+          position = startPosition - offsetWidth + rect.width;
+          break;
         default:
           // center
-          position = startPosition - offsetWidth / 2 + rect.width / 2
+          position = startPosition - offsetWidth / 2 + rect.width / 2;
       }
 
       // Do not let go of the left side of the screen
       if (position + rootRect.left < +this.screenOffset) {
-        position = +this.screenOffset - rootRect.left
+        position = +this.screenOffset - rootRect.left;
       }
 
       // Now also check the right side of the screen
-      const rightOffset = position + rootRect.left + offsetWidth
+      const rightOffset = position + rootRect.left + offsetWidth;
       if (rightOffset > bodyWidth - +this.screenOffset) {
-        position -= rightOffset - bodyWidth + +this.screenOffset
+        position -= rightOffset - bodyWidth + +this.screenOffset;
 
         // Recheck the left side of the screen
         if (position < +this.screenOffset - rootRect.left) {
           // Just set the menu to the full width of the screen
-          position = +this.screenOffset - rootRect.left
-          offsetWidth = bodyWidth - +this.screenOffset * 2
+          position = +this.screenOffset - rootRect.left;
+          offsetWidth = bodyWidth - +this.screenOffset * 2;
         }
       }
 
       // Possible blurring font with decimal values
-      position = Math.round(position)
+      position = Math.round(position);
 
-      const dropdownOffset = +this.dropdownOffset + this._activeDropdown.offsetTop
-      const ratioWidth = offsetWidth / BASE_WIDTH
-      const ratioHeight = offsetHeight / BASE_HEIGHT
+      const dropdownOffset = +this.dropdownOffset + this._activeDropdown.offsetTop;
+      const ratioWidth = offsetWidth / BASE_WIDTH;
+      const ratioHeight = offsetHeight / BASE_HEIGHT;
 
       // Activate transition
-      this.clearDisableTransitionTimeout()
-      this.startEnableTransitionTimeout()
+      this.clearDisableTransitionTimeout();
+      this.startEnableTransitionTimeout();
 
-      this.$refs.dropdownContainer.style.transform = `translate(${position}px, ${dropdownOffset}px)`
-      this.$refs.dropdownContainer.style.width = `${offsetWidth}px`
-      this.$refs.dropdownContainer.style.height = `${offsetHeight}px`
+      this.$refs.dropdownContainer.style.transform = `translate(${position}px, ${dropdownOffset}px)`;
+      this.$refs.dropdownContainer.style.width = `${offsetWidth}px`;
+      this.$refs.dropdownContainer.style.height = `${offsetHeight}px`;
 
       this.$refs.arrow.style.transform = `translate(${
         startPosition + rect.width / 2
-      }px, ${dropdownOffset}px) rotate(45deg)`
-      this.$refs.background.style.transform = `translate(${position}px, ${dropdownOffset}px) scaleX(${ratioWidth}) scaleY(${ratioHeight})`
+      }px, ${dropdownOffset}px) rotate(45deg)`;
+      this.$refs.background.style.transform = `translate(${position}px, ${dropdownOffset}px) scaleX(${ratioWidth}) scaleY(${ratioHeight})`;
       this.$refs.backgroundAlt.style.transform = `translateY(${
         this._activeContainerItem.content.firstElementChild.offsetHeight / ratioHeight
-      }px)`
+      }px)`;
     },
     /*
      * | ------------------------------------------------------------------------------------------------
@@ -322,25 +321,25 @@ export default {
      * | ------------------------------------------------------------------------------------------------
      */
     startCloseDropdownTimeout() {
-      this._closeDropdownTimeout = setTimeout(() => this.closeDropdown(), 50)
+      this._closeDropdownTimeout = setTimeout(() => this.closeDropdown(), 50);
     },
     clearCloseDropdownTimeout() {
-      clearTimeout(this._closeDropdownTimeout)
+      clearTimeout(this._closeDropdownTimeout);
     },
     startEnableTransitionTimeout() {
-      this._enableTransitionTimeout = setTimeout(() => this.$el.classList.remove('vsm-no-transition'), 50)
+      this._enableTransitionTimeout = setTimeout(() => this.$el.classList.remove('vsm-no-transition'), 50);
     },
     clearEnableTransitionTimeout() {
-      clearTimeout(this._enableTransitionTimeout)
+      clearTimeout(this._enableTransitionTimeout);
     },
     startDisableTransitionTimeout() {
       this._disableTransitionTimeout = setTimeout(
         () => this.$el.classList.add('vsm-no-transition'),
         +this.transitionTimeout,
-      )
+      );
     },
     clearDisableTransitionTimeout() {
-      clearTimeout(this._disableTransitionTimeout)
+      clearTimeout(this._disableTransitionTimeout);
     },
     /*
      * | ------------------------------------------------------------------------------------------------
@@ -351,90 +350,90 @@ export default {
       this.elementsWithDropdown.forEach((el) => {
         // Events have been registered
         if (el._vsmMenu && !force) {
-          return
+          return;
         }
 
         if (el._vsmMenuHandlers) {
           Object.entries(el._vsmMenuHandlers).forEach(([eventName, fn]) => {
-            el.removeEventListener(eventName, fn)
-          })
+            el.removeEventListener(eventName, fn);
+          });
         }
 
         if (this.handler === 'hover') {
           el._vsmMenuHandlers = {
             focusin: () => {
-              this.clearCloseDropdownTimeout()
-              this.openDropdown(el)
+              this.clearCloseDropdownTimeout();
+              this.openDropdown(el);
             },
             [this._pointerEvent.enter]: (evt) => {
               if (evt.pointerType !== 'touch') {
-                this.clearCloseDropdownTimeout()
-                this.openDropdown(el)
+                this.clearCloseDropdownTimeout();
+                this.openDropdown(el);
               }
             },
             [this._pointerEvent.leave]: (evt) => {
               if (evt.pointerType !== 'touch') {
-                this.startCloseDropdownTimeout()
+                this.startCloseDropdownTimeout();
               }
             },
-          }
+          };
         } else {
-          el._vsmMenuHandlers = {}
+          el._vsmMenuHandlers = {};
         }
 
         el._vsmMenuHandlers[this._pointerEvent.end] = (evt) => {
-          evt.preventDefault()
-          evt.stopPropagation()
-          this.toggleDropdown(el)
-        }
+          evt.preventDefault();
+          evt.stopPropagation();
+          this.toggleDropdown(el);
+        };
 
         Object.entries(el._vsmMenuHandlers).forEach(([eventName, fn]) => {
-          el.addEventListener(eventName, fn)
-        })
+          el.addEventListener(eventName, fn);
+        });
 
-        el._vsmMenu = true
-      })
+        el._vsmMenu = true;
+      });
     },
     registerDropdownContainerEvents(force = false) {
-      const el = this.$refs.dropdownContainer
+      const el = this.$refs.dropdownContainer;
 
       // Events have been registered
       if (el._vsmMenu && !force) {
-        return
+        return;
       }
 
       if (el._vsmMenuHandlers) {
         Object.entries(el._vsmMenuHandlers).forEach(([eventName, fn]) => {
-          el.removeEventListener(eventName, fn)
-        })
+          el.removeEventListener(eventName, fn);
+        });
       }
 
       if (this.handler === 'hover') {
         el._vsmMenuHandlers = {
           [this._pointerEvent.enter]: (evt) => {
             if (evt.pointerType !== 'touch') {
-              this.clearCloseDropdownTimeout()
+              this.clearCloseDropdownTimeout();
             }
           },
           [this._pointerEvent.leave]: (evt) => {
             if (evt.pointerType !== 'touch') {
-              this.startCloseDropdownTimeout()
+              this.startCloseDropdownTimeout();
             }
           },
-        }
+        };
       } else {
-        el._vsmMenuHandlers = {}
+        el._vsmMenuHandlers = {};
       }
 
       el._vsmMenuHandlers[this._pointerEvent.end] = (evt) => {
-        evt.stopPropagation()
-      }
+        evt.stopPropagation();
+      };
 
       Object.entries(el._vsmMenuHandlers).forEach(([eventName, fn]) => {
-        el.addEventListener(eventName, fn)
-      })
+        el.addEventListener(eventName, fn);
+      });
 
-      el._vsmMenu = true
+      el._vsmMenu = true;
     },
     /*
      * | ------------------------------------------------------------------------------------------------
@@ -442,55 +441,55 @@ export default {
      * | ------------------------------------------------------------------------------------------------
      */
     registerGlobalListeners() {
-      window.addEventListener('resize', this.windowResizeHandler)
-      document.addEventListener('touchmove', this.documentTouchMoveHandler)
-      document.addEventListener('touchstart', this.documentTouchStartHandler)
-      document.body.addEventListener(this._pointerEvent.end, this.documentEventEndHandler)
+      window.addEventListener('resize', this.windowResizeHandler);
+      document.addEventListener('touchmove', this.documentTouchMoveHandler);
+      document.addEventListener('touchstart', this.documentTouchStartHandler);
+      document.body.addEventListener(this._pointerEvent.end, this.documentEventEndHandler);
     },
     removeGlobalListeners() {
-      window.removeEventListener('resize', this.windowResizeHandler)
-      document.removeEventListener('touchmove', this.documentTouchMoveHandler)
-      document.removeEventListener('touchstart', this.documentTouchStartHandler)
-      document.body.removeEventListener(this._pointerEvent.end, this.documentEventEndHandler)
+      window.removeEventListener('resize', this.windowResizeHandler);
+      document.removeEventListener('touchmove', this.documentTouchMoveHandler);
+      document.removeEventListener('touchstart', this.documentTouchStartHandler);
+      document.body.removeEventListener(this._pointerEvent.end, this.documentEventEndHandler);
     },
     windowResizeHandler() {
       // Recalculates the dropdown only in cases where the screen width changes
       if (this._lastWindowWidth === window.innerWidth) {
-        return
+        return;
       }
 
-      this._lastWindowWidth = window.innerWidth
+      this._lastWindowWidth = window.innerWidth;
 
       if (this._activeDropdown) {
-        this.$el.classList.add('vsm-no-transition')
-        this.resizeDropdown()
-        return
+        this.$el.classList.add('vsm-no-transition');
+        this.resizeDropdown();
+        return;
       }
 
       // Don't do unnecessary actions
       if (!this.$refs.background.getAttribute('style')) {
-        return
+        return;
       }
 
       // vsm-no-transition does not apply to dropdown (which has an opacity property),
       // with a long animation you can see unnecessary animation
-      this.$el.classList.add('vsm-no-transition', 'vsm-no-transition_dropdown')
-      setTimeout(() => this.$el.classList.remove('vsm-no-transition_dropdown'))
+      this.$el.classList.add('vsm-no-transition', 'vsm-no-transition_dropdown');
+      setTimeout(() => this.$el.classList.remove('vsm-no-transition_dropdown'));
 
       // The dropdown position may remain on the right side of the screen,
       // causing a horizontal scroll
-      this.closeDropdown()
-      this.clearAllStyles()
+      this.closeDropdown();
+      this.clearAllStyles();
     },
     documentTouchMoveHandler() {
-      this._isDragging = true
+      this._isDragging = true;
     },
     documentTouchStartHandler() {
-      this._isDragging = false
+      this._isDragging = false;
     },
     documentEventEndHandler() {
       if (!this._isDragging) {
-        this.closeDropdown()
+        this.closeDropdown();
       }
     },
     /*
@@ -509,26 +508,26 @@ export default {
             end: 'touchend',
             enter: 'mouseenter',
             leave: 'mouseleave',
-          }
+          };
     },
     updateDataElements() {
       this.elementsWithDropdown = Array.from(this.$refs.linkContainer.children).filter((el) =>
         el.classList.contains('vsm-has-dropdown'),
-      )
+      );
 
       this.dropdownContainerItems = Array.from(this.$refs.dropdownContainer.children).map((el) => ({
         el,
         name: el.getAttribute('data-dropdown'),
         align: el.getAttribute('data-align'),
         content: el.firstElementChild,
-      }))
+      }));
     },
     clearAllStyles() {
-      this.$refs.dropdownContainer.removeAttribute('style')
-      this.$refs.arrow.removeAttribute('style')
-      this.$refs.background.removeAttribute('style')
-      this.$refs.backgroundAlt.removeAttribute('style')
+      this.$refs.dropdownContainer.removeAttribute('style');
+      this.$refs.arrow.removeAttribute('style');
+      this.$refs.background.removeAttribute('style');
+      this.$refs.backgroundAlt.removeAttribute('style');
     },
   },
-}
+};
 </script>

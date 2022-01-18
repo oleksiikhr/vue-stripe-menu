@@ -21,10 +21,14 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.vue",
+    "docs/**/*.ts",
+    "docs/**/*.vue",
     "tests/**/*.ts"
   ],
   "exclude": [
     "node_modules",
-    "dist"
+    "dist",
+    "docs/node_modules",
+    "docs/dist"
   ]
 }

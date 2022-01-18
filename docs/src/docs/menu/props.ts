@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
-export const title = '[Menu] Props'
+export const title = '[Menu] Props';
 
 export const columns = [
   { attr: 'property', name: 'Property' },
@@ -8,7 +8,7 @@ export const columns = [
   { attr: 'description', name: 'Description' },
   { attr: 'type', name: 'Type' },
   { attr: 'default', name: 'Default' },
-]
+];
 
 export const rows = [
   {
@@ -56,4 +56,4 @@ export const rows = [
     type: 'String',
     default: 'center',
   },
-]
+];

@@ -1,12 +1,12 @@
-'use strict'
+'use strict';
 
-export const title = '[Menu] Properties'
+export const title = '[Menu] Properties';
 
 export const columns = [
   { attr: 'name', name: 'Name' },
   { attr: 'description', name: 'Description' },
   { attr: 'return', name: 'Return' },
-]
+];
 
 export const rows = [
   {
@@ -24,4 +24,4 @@ export const rows = [
     description: 'List of dropdown HTMLElements',
     return: 'Array<{el: HTMLElement, name: string, content: HTMLElement}>',
   },
-]
+];

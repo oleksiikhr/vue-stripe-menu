@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
-export const title = '[Mob] Props'
+export const title = '[Mob] Props';
 
 export const columns = [
   { attr: 'property', name: 'Property' },
@@ -8,7 +8,7 @@ export const columns = [
   { attr: 'description', name: 'Description' },
   { attr: 'type', name: 'Type' },
   { attr: 'default', name: 'Default' },
-]
+];
 
 export const rows = [
   {
@@ -18,4 +18,4 @@ export const rows = [
     description: 'The state of the open/close the menu',
     default: 'false',
   },
-]
+];

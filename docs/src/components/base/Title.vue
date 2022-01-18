@@ -6,6 +6,7 @@
 
 <script>
 export default {
+  name: 'BaseTitle',
   props: {
     title: {
       type: String,
@@ -19,21 +20,21 @@ export default {
   computed: {
     generatedId() {
       if (this.id) {
-        return this.id
+        return this.id;
       }
 
       if (!this.title) {
-        return null
+        return null;
       }
 
       return this.title
         .trim()
         .toLowerCase()
-        .replace(/[^a-z-]/gi, '-')
+        .replace(/[^a-z-]/gi, '-');
     },
     generatedHref() {
-      return this.generatedId && `#${this.generatedId}`
+      return this.generatedId && `#${this.generatedId}`;
     },
   },
-}
+};
 </script>

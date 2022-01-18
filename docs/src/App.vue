@@ -10,23 +10,23 @@
 </template>
 
 <script>
-import FullExampleDocs from './components/docs/FullExample.vue'
-import PropertiesDocs from './components/docs/Properties.vue'
-import ConfMenuDocs from './components/docs/ConfMenu.vue'
-import InstallDocs from './components/docs/Install.vue'
-import BaseHeader from './components/BaseHeader.vue'
-import BaseFooter from './components/BaseFooter.vue'
+import FullExampleDocs from './components/docs/FullExample.vue';
+import PropertiesDocs from './components/docs/Properties.vue';
+import ConfMenuDocs from './components/docs/ConfMenu.vue';
+import InstallDocs from './components/docs/Install.vue';
+import BaseHeader from './components/BaseHeader.vue';
+import BaseFooter from './components/BaseFooter.vue';
 
-import * as menuEvents from './docs/menu/events'
-import * as menuObject from './docs/menu/menuObject'
-import * as menuMethods from './docs/menu/methods'
-import * as menuProperties from './docs/menu/properties'
-import * as menuProps from './docs/menu/props'
-import * as menuSlots from './docs/menu/slots'
-import * as mobMethods from './docs/mob/methods'
-import * as mobProps from './docs/mob/props'
-import * as mobSlots from './docs/mob/slots'
-import * as classes from './docs/classes'
+import * as menuEvents from './docs/menu/events';
+import * as menuObject from './docs/menu/menuObject';
+import * as menuMethods from './docs/menu/methods';
+import * as menuProperties from './docs/menu/properties';
+import * as menuProps from './docs/menu/props';
+import * as menuSlots from './docs/menu/slots';
+import * as mobMethods from './docs/mob/methods';
+import * as mobProps from './docs/mob/props';
+import * as mobSlots from './docs/mob/slots';
+import * as classes from './docs/classes';
 
 export default {
   components: {
@@ -49,23 +49,23 @@ export default {
       mobSlots,
       mobMethods,
       classes,
-    ]
+    ];
 
-    return { properties }
+    return { properties };
   },
   data() {
     return {
       css: '',
       vsmProps: {},
-    }
+    };
   },
   methods: {
     onChangeProps(obj) {
-      this.vsmProps = obj
+      this.vsmProps = obj;
     },
     onChangeCss(val) {
-      this.css = val
+      this.css = val;
     },
   },
-}
+};
 </script>

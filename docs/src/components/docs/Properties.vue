@@ -6,10 +6,11 @@
 </template>
 
 <script>
-import BaseTable from '../base/Table.vue'
-import BaseTitle from '../base/Title.vue'
+import BaseTable from '../base/Table.vue';
+import BaseTitle from '../base/Title.vue';
 
 export default {
+  name: 'PropertiesDocs',
   components: {
     BaseTable,
     BaseTitle,
@@ -28,5 +29,5 @@ export default {
       required: true,
     },
   },
-}
+};
 </script>

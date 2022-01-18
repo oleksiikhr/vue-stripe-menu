@@ -371,7 +371,7 @@ $ yarn build:lib
 ### Run tests
 
 ```sh
-$ yarn test
+$ yarn tests
 ```
 
 ### Check code on Eslint

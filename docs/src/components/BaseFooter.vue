@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import { homepage } from '../../../package.json'
-import GithubSvg from './svg/Github.vue'
+import { homepage } from '../../../package.json';
+import GithubSvg from './svg/Github.vue';
 
 export default {
   components: {
@@ -17,7 +17,7 @@ export default {
   data() {
     return {
       homepage,
-    }
+    };
   },
-}
+};
 </script>

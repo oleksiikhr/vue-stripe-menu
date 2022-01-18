@@ -21,10 +21,11 @@
 </template>
 
 <script>
-import { computed } from 'vue'
-import BaseText from './Text.vue'
+import { computed } from 'vue';
+import BaseText from './Text.vue';
 
 export default {
+  name: 'BaseGroup',
   components: {
     BaseText,
   },
@@ -41,11 +42,11 @@ export default {
     },
   },
   setup(props) {
-    const background = computed(() => (props.color === 'primary' ? 'background' : 'background--secondary'))
+    const background = computed(() => (props.color === 'primary' ? 'background' : 'background--secondary'));
 
-    return { background }
+    return { background };
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

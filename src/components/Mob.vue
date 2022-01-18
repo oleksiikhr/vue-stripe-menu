@@ -44,55 +44,55 @@ export default {
     return {
       // Support change value without accept props
       active: this.value,
-    }
+    };
   },
   watch: {
     // Support for changing a variable externally
     value(val) {
       if (this.active !== val) {
-        this.active = val
+        this.active = val;
       }
     },
     // Lock the permanent event on click, hang event only when the menu is opened
     active(val) {
       if (val) {
-        this.registerEvent()
+        this.registerEvent();
       } else {
-        this.unregisterEvent()
+        this.unregisterEvent();
       }
     },
   },
   mounted() {
-    const touchSupport = 'ontouchstart' in window || navigator.maxTouchPoints
-    this._touchEvent = touchSupport ? 'touchend' : 'click'
+    const touchSupport = 'ontouchstart' in window || navigator.maxTouchPoints;
+    this._touchEvent = touchSupport ? 'touchend' : 'click';
   },
   beforeUnmount() {
-    this.unregisterEvent()
+    this.unregisterEvent();
   },
   methods: {
     closeDropdown() {
-      this.emitValue(false)
+      this.emitValue(false);
     },
     onClickHamburger() {
-      this.emitValue(!this.active)
+      this.emitValue(!this.active);
     },
     registerEvent() {
-      document.body.addEventListener(this._touchEvent, this.eventEndHandler)
+      document.body.addEventListener(this._touchEvent, this.eventEndHandler);
     },
     unregisterEvent() {
-      document.body.removeEventListener(this._touchEvent, this.eventEndHandler)
+      document.body.removeEventListener(this._touchEvent, this.eventEndHandler);
     },
     emitValue(toggle) {
-      this.active = toggle
-      this.$emit('input', toggle)
-      this.$emit('update:modelValue', toggle)
+      this.active = toggle;
+      this.$emit('input', toggle);
+      this.$emit('update:modelValue', toggle);
     },
     // Close Dropdown content after outside click
     eventEndHandler(evt) {
       if (this.$el !== evt.target && !this.$el.contains(evt.target)) {
-        this.emitValue(false)
+        this.emitValue(false);
       }
     },
   },
-}
+};
 </script>

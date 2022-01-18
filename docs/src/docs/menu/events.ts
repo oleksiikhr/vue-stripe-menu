@@ -1,12 +1,12 @@
-'use strict'
+'use strict';
 
-export const title = '[Menu] Events'
+export const title = '[Menu] Events';
 
 export const columns = [
   { attr: 'name', name: 'Name' },
   { attr: 'description', name: 'Description' },
   { attr: 'return', name: 'Return' },
-]
+];
 
 export const rows = [
   {
@@ -19,4 +19,4 @@ export const rows = [
     description: 'Close the dropdown menu, return the closed HTMLElement',
     return: 'HTMLElement',
   },
-]
+];

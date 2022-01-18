@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import BaseTitle from '../base/Title.vue'
+import BaseTitle from '../base/Title.vue';
 
 export default {
   components: {
@@ -170,119 +170,119 @@ export default {
         { property: '$vsm-mob-background', value: null, initial: '$vsm-background' },
         { property: '$vsm-mob-transition', value: null, initial: '$vsm-transition' },
       ].map((item) => ({ ...item, value: item.initial })),
-    }
+    };
   },
   computed: {
     allStyles() {
-      return [this.generalStyles, this.vsmMenuStyles, this.vsmMobStyles]
+      return [this.generalStyles, this.vsmMenuStyles, this.vsmMobStyles];
     },
     vsmMenuStylesString() {
       return this.vsmMenuStyles
         .reduce((result, item) => {
           if (item.value && item.value !== item.initial) {
-            result += `${item.property}: ${item.value};\n`
+            result += `${item.property}: ${item.value};\n`;
           }
 
-          return result
+          return result;
         }, '')
-        .trim()
+        .trim();
     },
     vsmMobStylesString() {
       return this.vsmMobStyles
         .reduce((result, item) => {
           if (item.value && item.value !== item.initial) {
-            result += `${item.property}: ${item.value};\n`
+            result += `${item.property}: ${item.value};\n`;
           }
 
-          return result
+          return result;
         }, '')
-        .trim()
+        .trim();
     },
     generalStylesString() {
       return this.generalStyles
         .reduce((result, item) => {
           if (typeof item.handler === 'function') {
-            const val = item.handler(item.value)
-            result += val && `${val}\n\n`
+            const val = item.handler(item.value);
+            result += val && `${val}\n\n`;
           }
 
-          return result
+          return result;
         }, '')
-        .trim()
+        .trim();
     },
     vsmMenuTransitionStyle() {
-      return this.vsmMenuStyles.find((item) => item.property === '$vsm-transition')
+      return this.vsmMenuStyles.find((item) => item.property === '$vsm-transition');
     },
     vsmMenuTransitionProp() {
-      return this.vsmProps.find((item) => item.property === 'transition-timeout')
+      return this.vsmProps.find((item) => item.property === 'transition-timeout');
     },
     filteredStyles() {
-      let overrideStyles = this.vsmMenuStylesString && `${this.vsmMenuStylesString}\n`
-      overrideStyles += this.vsmMobStylesString && `${this.vsmMobStylesString}\n`
+      let overrideStyles = this.vsmMenuStylesString && `${this.vsmMenuStylesString}\n`;
+      overrideStyles += this.vsmMobStylesString && `${this.vsmMobStylesString}\n`;
 
-      let result = `// >>> SCSS style (required sass-loader, node-sass) <<<\n// https://github.com/Alexeykhr/vue-stripe-menu/blob/master/src/scss/_variables.scss\n`
-      result += `${overrideStyles ? `${overrideStyles}\n` : ''}`
-      result += `@import "~vue-stripe-menu/src/scss/index";\n\n// >>> CSS style <<<\n// @import 'vue-stripe-menu/dist/vue-stripe-menu.css';\n\n`
-      result += this.generalStylesString
+      let result = `// >>> SCSS style (required sass-loader, node-sass) <<<\n// https://github.com/Alexeykhr/vue-stripe-menu/blob/master/src/scss/_variables.scss\n`;
+      result += `${overrideStyles ? `${overrideStyles}\n` : ''}`;
+      result += `@import "~vue-stripe-menu/src/scss/index";\n\n// >>> CSS style <<<\n// @import 'vue-stripe-menu/dist/vue-stripe-menu.css';\n\n`;
+      result += this.generalStylesString;
 
-      return result.trim()
+      return result.trim();
     },
     localStyles() {
       const fn = (obj) => {
         return obj.reduce((result, item) => {
-          const value = item.value.replace(/\$([a-z-]+)/gm, 'var(--$1)')
-          const initial = item.initial.replace(/\$([a-z-]+)/gm, 'var(--$1)')
-          result += `${item.property.replace('$', '--')}: ${value || initial};\n`
-          return result
-        }, '')
-      }
+          const value = item.value.replace(/\$([a-z-]+)/gm, 'var(--$1)');
+          const initial = item.initial.replace(/\$([a-z-]+)/gm, 'var(--$1)');
+          result += `${item.property.replace('$', '--')}: ${value || initial};\n`;
+          return result;
+        }, '');
+      };
 
-      return `:root {${fn(this.vsmMenuStyles)}${fn(this.vsmMobStyles)}}${this.generalStylesString}`
+      return `:root {${fn(this.vsmMenuStyles)}${fn(this.vsmMobStyles)}}${this.generalStylesString}`;
     },
   },
   watch: {
     filteredStyles: {
       handler(val) {
-        this.$emit('on-css', val)
+        this.$emit('on-css', val);
       },
       immediate: true,
     },
   },
   methods: {
     positionStyleHandler(val) {
-      let position = ''
+      let position = '';
 
       switch (val.trim()) {
         case 'center':
-          position = 'center'
-          break
+          position = 'center';
+          break;
         case 'left':
-          position = 'flex-start'
-          break
+          position = 'flex-start';
+          break;
         case 'right':
-          position = 'flex-end'
-          break
+          position = 'flex-end';
+          break;
         default:
-          return ''
+          return '';
       }
 
-      return `.vsm-link-container {\n  display: flex;\n  flex: 1 1 auto;\n  justify-content: ${position};\n}`
+      return `.vsm-link-container {\n  display: flex;\n  flex: 1 1 auto;\n  justify-content: ${position};\n}`;
     },
     onChangeMenuProps() {
       const obj = this.vsmProps.reduce((result, item) => {
         if (item.value !== item.initial && (!item.validator || item.validator(item.value))) {
-          result[item.property] = item.convert ? item.convert(item.value) : item.value
+          result[item.property] = item.convert ? item.convert(item.value) : item.value;
         }
 
-        return result
-      }, {})
+        return result;
+      }, {});
 
-      this.vsmMenuTransitionStyle.value = `${this.vsmMenuTransitionProp.value || this.vsmMenuTransitionProp.initial}ms`
+      this.vsmMenuTransitionStyle.value = `${this.vsmMenuTransitionProp.value || this.vsmMenuTransitionProp.initial}ms`;
 
-      this.$emit('change-props', obj)
+      this.$emit('change-props', obj);
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

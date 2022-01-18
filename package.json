@@ -42,13 +42,15 @@
   ],
   "scripts": {
     "build": "vite build",
-    "lint:eslint": "eslint '{src,docs}/{**/*,*}.{ts,vue}'",
-    "lint:prettier": "prettier -c -u '{src,docs}/{**/*,*}.{ts,vue}' --no-error-on-unmatched-pattern",
-    "lint:stylelint": "stylelint '{src,docs}/{**/*,*}.{scss,vue}'",
+    "lint:eslint": "eslint '{**/*,*}.{js,ts,vue}'",
+    "lint:prettier": "prettier -c -u '{**/*,*}.{js,ts,vue}' --no-error-on-unmatched-pattern",
+    "lint:stylelint": "stylelint '{**/*,*}.{scss,vue}'",
     "test": "jest"
   },
   "devDependencies": {
     "@babel/core": "7.16.7",
+    "@types/jest": "^27.4.0",
+    "@types/sinon": "^10.0.6",
     "@typescript-eslint/eslint-plugin": "^5.10.0",
     "@typescript-eslint/parser": "^5.10.0",
     "@vitejs/plugin-vue": "^2.0.1",
@@ -70,10 +72,11 @@
     "stylelint": "^14.2.0",
     "stylelint-config-recommended-vue": "^1.1.0",
     "stylelint-config-standard-scss": "^3.0.0",
+    "ts-jest": "^26.5.6",
     "typescript": "^4.5.4",
     "vite": "^2.7.12",
     "vue-eslint-parser": "^8.0.1",
-    "vue-jest": "^5.0.0-alpha.8",
+    "vue-jest": "^5.0.0-alpha.10",
     "webpack": "^5.0.0"
   },
   "dependencies": {

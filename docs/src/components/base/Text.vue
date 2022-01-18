@@ -11,10 +11,11 @@
 </template>
 
 <script>
-import rnd from '../../scripts/rnd'
-import { computed } from 'vue'
+import rnd from '../../scripts/rnd';
+import { computed } from 'vue';
 
 export default {
+  name: 'BaseText',
   props: {
     min: {
       type: Number,
@@ -40,21 +41,21 @@ export default {
     },
   },
   setup(props) {
-    const width = computed(() => rnd(props.min, props.max))
+    const width = computed(() => rnd(props.min, props.max));
 
     const typeClasses = computed(() => {
       if (props.type === 'text') {
-        return 'mb-5'
+        return 'mb-5';
       }
 
-      return ['mb-20', 'background-hover']
-    })
+      return ['mb-20', 'background-hover'];
+    });
 
-    const background = computed(() => (props.color === 'primary' ? 'background' : 'background--secondary'))
+    const background = computed(() => (props.color === 'primary' ? 'background' : 'background--secondary'));
 
-    return { width, typeClasses, background }
+    return { width, typeClasses, background };
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

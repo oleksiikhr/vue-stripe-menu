@@ -1,12 +1,12 @@
-'use strict'
+'use strict';
 
-export const title = '[Mob] Slots'
+export const title = '[Mob] Slots';
 
 export const columns = [
   { attr: 'name', name: 'Name' },
   { attr: 'parameters', name: 'Parameters' },
   { attr: 'description', name: 'Description' },
-]
+];
 
 export const rows = [
   {
@@ -21,4 +21,4 @@ export const rows = [
     name: 'close',
     description: 'Replace close button',
   },
-]
+];

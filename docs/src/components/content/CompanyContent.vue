@@ -9,13 +9,13 @@
 </template>
 
 <script>
-import BaseGroup from '../base/Group.vue'
-import BaseText from '../base/Text.vue'
+import BaseGroup from '../base/Group.vue';
+import BaseText from '../base/Text.vue';
 
 export default {
   components: {
     BaseText,
     BaseGroup,
   },
-}
+};
 </script>

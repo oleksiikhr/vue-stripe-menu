@@ -18,11 +18,11 @@
 </template>
 
 <script>
-import DevelopersContent from './content/DevelopersContent.vue'
-import ProductsContent from './content/ProductsContent.vue'
-import CompanyContent from './content/CompanyContent.vue'
-import StripeLogo from './svg/StripeLogo.vue'
-import MobileContent from './content/MobileContent.vue'
+import DevelopersContent from './content/DevelopersContent.vue';
+import ProductsContent from './content/ProductsContent.vue';
+import CompanyContent from './content/CompanyContent.vue';
+import StripeLogo from './svg/StripeLogo.vue';
+import MobileContent from './content/MobileContent.vue';
 
 export default {
   components: {
@@ -42,12 +42,12 @@ export default {
         {
           title: 'Source',
           attributes: {
-            href: 'https://github.com/Alexeykhr/vue-stripe-menu/blob/master/demo/components/BaseHeader.vue',
+            href: 'https://github.com/Alexeykhr/vue-stripe-menu/blob/master/docs/src/components/BaseHeader.vue',
             target: '_blank',
           },
         },
       ],
-    }
+    };
   },
-}
+};
 </script>

@@ -25,11 +25,12 @@
 </template>
 
 <script>
-import { onMounted, nextTick, watch, ref } from 'vue'
-import highlight from 'highlight.js'
-import BaseTitle from '../base/Title.vue'
+import { onMounted, nextTick, watch, ref } from 'vue';
+import highlight from 'highlight.js';
+import BaseTitle from '../base/Title.vue';
 
 export default {
+  name: 'InstallDocs',
   components: {
     BaseTitle,
   },
@@ -44,28 +45,28 @@ export default {
     },
   },
   setup(props) {
-    const codeShell = ref(null)
-    const codeVue = ref(null)
-    const codeCss = ref(null)
-    const codeJs = ref(null)
+    const codeShell = ref(null);
+    const codeVue = ref(null);
+    const codeCss = ref(null);
+    const codeJs = ref(null);
 
     onMounted(() => {
-      highlight.highlightElement(codeShell.value)
-      highlight.highlightElement(codeVue.value)
-      highlight.highlightElement(codeCss.value)
-      highlight.highlightElement(codeJs.value)
-    })
+      highlight.highlightElement(codeShell.value);
+      highlight.highlightElement(codeVue.value);
+      highlight.highlightElement(codeCss.value);
+      highlight.highlightElement(codeJs.value);
+    });
 
     watch(
       () => props.css,
-      () => nextTick(() => highlight.highlightElement(codeCss.value)),
-    )
+      () => nextTick().then(() => highlight.highlightElement(codeCss.value)),
+    );
     watch(
       () => props.vsmProps,
-      () => nextTick(() => highlight.highlightElement(codeVue.value)),
-    )
+      () => nextTick().then(() => highlight.highlightElement(codeVue.value)),
+    );
 
-    return { codeShell, codeVue, codeCss, codeJs }
+    return { codeShell, codeVue, codeCss, codeJs };
   },
   data() {
     return {
@@ -89,20 +90,20 @@ export default {
     VsmMenu, VsmMob
   }
 }`,
-    }
+    };
   },
   computed: {
     vsmPropsStr() {
       const propsStr = Object.entries(this.vsmProps).reduce((result, [key, val]) => {
-        result += `\n    ${typeof val === 'number' ? ':' : ''}${key}="${val}"`
-        return result
-      }, '')
+        result += `\n    ${typeof val === 'number' ? ':' : ''}${key}="${val}"`;
+        return result;
+      }, '');
 
       if (!propsStr) {
-        return `:menu="menu"`
+        return `:menu="menu"`;
       }
 
-      return `\n    :menu="menu"${propsStr}\n  `
+      return `\n    :menu="menu"${propsStr}\n  `;
     },
     vue() {
       return `<template>
@@ -142,8 +143,8 @@ export default {
     }
   }
 }
-<script>`
+<script>`;
     },
   },
-}
+};
 </script>

@@ -1,6 +1,6 @@
-import type { UserConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import { resolve } from 'path'
+import type { UserConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import { resolve } from 'path';
 
 const config: UserConfig = {
   plugins: [vue()],
@@ -23,6 +23,6 @@ const config: UserConfig = {
       },
     },
   },
-}
+};
 
-export default config
+export default config;

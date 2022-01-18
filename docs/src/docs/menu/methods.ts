@@ -1,13 +1,13 @@
-'use strict'
+'use strict';
 
-export const title = '[Menu] Methods'
+export const title = '[Menu] Methods';
 
 export const columns = [
   { attr: 'name', name: 'Name' },
   { attr: 'parameters', name: 'Parameters' },
   { attr: 'description', name: 'Description' },
   { attr: 'return', name: 'Return' },
-]
+];
 
 export const rows = [
   {
@@ -28,4 +28,4 @@ export const rows = [
     name: 'resizeDropdown',
     description: 'Recalculate size and location of dropdown menu',
   },
-]
+];

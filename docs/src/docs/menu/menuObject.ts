@@ -1,12 +1,12 @@
-'use strict'
+'use strict';
 
-export const title = '[Menu/Parameter] - MenuObject'
+export const title = '[Menu/Parameter] - MenuObject';
 
 export const columns = [
   { attr: 'property', name: 'Property' },
   { attr: 'type', name: 'type' },
   { attr: 'description', name: 'Description' },
-]
+];
 
 export const rows = [
   {
@@ -40,4 +40,4 @@ export const rows = [
     type: 'Object',
     description: 'All events to be assigned in the header element (v-on)',
   },
-]
+];

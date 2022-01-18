@@ -17,15 +17,15 @@
 </template>
 
 <script>
-import BaseText from '../base/Text.vue'
-import BaseGroup from '../base/Group.vue'
+import BaseText from '../base/Text.vue';
+import BaseGroup from '../base/Group.vue';
 
 export default {
   components: {
     BaseText,
     BaseGroup,
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>
