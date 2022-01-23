@@ -1,8 +1,7 @@
 # Vue Stripe Menu
 
 <p>
-  <a href="https://circleci.com/gh/Alexeykhr/vue-stripe-menu" rel="nofollow"><img src="https://circleci.com/gh/Alexeykhr/vue-stripe-menu.svg?style=shield" alt="Build Status"></a>
-  <a href="https://codecov.io/github/Alexeykhr/vue-stripe-menu?branch=master"><img src="https://img.shields.io/codecov/c/github/Alexeykhr/vue-stripe-menu/dev.svg" alt="Coverage Status"></a>
+  <a href="https://github.com/Alexeykhr/vue-stripe-menu/actions/workflows/release.yml" rel="nofollow"><img src="https://github.com/Alexeykhr/vue-stripe-menu/actions/workflows/release.yml/badge.svg" alt="Build Status"></a>
   <a href="https://www.npmjs.com/package/vue-stripe-menu" rel="nofollow"><img src="https://img.shields.io/npm/v/vue-stripe-menu.svg" alt="Version"></a>
   <a href="https://lgtm.com/projects/g/Alexeykhr/vue-stripe-menu/alerts/" rel="nofollow"><img src="https://img.shields.io/lgtm/alerts/g/Alexeykhr/vue-stripe-menu.svg?logo=lgtm&logoWidth=18" alt="Total alerts"></a>
   <a href="https://npmcharts.com/compare/vue-stripe-menu?minimal=true"><img src="https://img.shields.io/npm/dm/vue-stripe-menu.svg" alt="Downloads"></a>
@@ -342,6 +341,8 @@ export default {
 | vsm-mob-hide | Hide HTMLElements in mobile design |
 
 ## Contributing
+
+The [pnpm](https://pnpm.io/) package manager is used to handle dependencies.
 
 ### Library
 
