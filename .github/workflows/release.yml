@@ -56,7 +56,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - run: yarn
-      - run: yarn build:docs
+      - run: yarn build:docs --base=/vue-stripe-menu/
 
       - name: Commit changes
         working-directory: ./docs/dist
