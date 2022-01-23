@@ -1,9 +1,8 @@
 .DS_Store
-public/
 docs/
+tests/
 node_modules/
 npm-debug.log*
-.circleci/
 coverage/
 yarn-debug.log*
 yarn-error.log*

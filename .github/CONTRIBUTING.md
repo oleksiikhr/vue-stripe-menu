@@ -16,14 +16,12 @@
 
 The [pnpm](https://pnpm.io/) package manager is used to handle dependencies.
 
-### Library
-
 ```shell
 # Install dependencies
 $ pnpm i
 
 # Build the library
-$ pnpm build:lib
+$ pnpm build:library
 
 # Run tests
 $ pnpm tests
@@ -32,19 +30,10 @@ $ pnpm tests
 $ pnpm lint:eslint -- --fix
 $ pnpm lint:prettier
 $ pnpm lint:stylelint -- --fix
-```
 
-### Documentation
-
-All commands must be executed in the `docs` folder.
-
-```shell
-# Install dependencies
-$ pnpm i
-
-# Run in dev mode
+# Run docs
 $ pnpm dev
 
-# Build the docs
-$ pnpm build
+# Build docs
+$ pnpm build:docs
 ```

@@ -38,4 +38,4 @@ jobs:
       - run: yarn lint:eslint
       - run: yarn lint:stylelint
       - run: yarn test
-      - run: yarn build
+      - run: yarn build:library
