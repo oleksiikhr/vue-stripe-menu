@@ -19,8 +19,7 @@
               :placeholder="item.initial"
               :style="{ color: !item.value || item.value === item.initial ? '#595959' : '#de3939' }"
               spellcheck="false"
-              @input="item.onInput"
-            />
+              @input="item.onInput" />
           </label>
           <small v-if="item.desc">{{ item.desc }}</small>
         </div>
@@ -38,8 +37,7 @@
                 v-bind="item.attrs"
                 :placeholder="item.initial"
                 :style="{ color: !item.value || item.value === item.initial ? '#595959' : '#de3939' }"
-                spellcheck="false"
-              />
+                spellcheck="false" />
             </label>
             <small v-if="item.desc">{{ item.desc }}</small>
           </div>

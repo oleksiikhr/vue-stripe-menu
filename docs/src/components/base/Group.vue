@@ -7,15 +7,13 @@
         :min="70"
         :max="100"
         :height="size === 'small' ? 13 : 16"
-        class="base-group__content__title"
-      />
+        class="base-group__content__title" />
       <base-text
         :color="color"
         :min="200"
         :max="300"
         :height="size === 'small' ? 11 : 14"
-        class="base-group__content__subtitle"
-      />
+        class="base-group__content__subtitle" />
     </div>
   </div>
 </template>

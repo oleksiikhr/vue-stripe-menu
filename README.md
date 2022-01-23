@@ -17,7 +17,7 @@
 
 **Only for Vue 3** ([changelog](https://github.com/Alexeykhr/vue-stripe-menu/blob/master/CHANGELOG.md#200-2021-04-09))
 
-[Demo Website](https://alexeykhr.github.io/vue-stripe-menu/)
+[Documentation](https://alexeykhr.github.io/vue-stripe-menu/)
 
 [Vue 2 - Branch](https://github.com/Alexeykhr/vue-stripe-menu/tree/vue2)
 
@@ -25,13 +25,14 @@
 
 Install the library in your project:
 
-```sh
+```shell
 $ npm i vue-stripe-menu
-// or
-$ yarn add vue-stripe-menu
+
+// $ yarn add vue-stripe-menu
+// $ pnpm i vue-stripe-menu
 ```
 
-Import components and styles:
+Import components:
 
 ```js
 // >>> Install globally - .js file <<<
@@ -342,42 +343,37 @@ export default {
 
 ## Contributing
 
-### Install dependencies
+### Library
 
-```sh
-$ yarn
+```shell
+# Install dependencies
+$ pnpm i
+
+# Build the library
+$ pnpm build:lib
+
+# Run tests
+$ pnpm tests
+
+# Run linter
+$ pnpm lint:eslint -- --fix
+$ pnpm lint:prettier
+$ pnpm lint:stylelint -- --fix
 ```
 
-### Launch of a demo project (development of lib)
+### Documentation
 
-```sh
-$ yarn dev
-```
+All commands must be executed in the `docs` folder.
 
-### Build a demo project
+```shell
+# Install dependencies
+$ pnpm i
 
-> Don't add build files to PR
+# Run in dev mode
+$ pnpm dev
 
-```sh
-$ yarn build
-```
-
-### Build library
-
-```sh
-$ yarn build:lib
-```
-
-### Run tests
-
-```sh
-$ yarn tests
-```
-
-### Check code on Eslint
-
-```sh
-$ yarn lint
+# Build the docs
+$ pnpm build
 ```
 
 ## Changelog

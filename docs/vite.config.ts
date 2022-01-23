@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue';
 
 const config: UserConfig = {
   plugins: [vue()],
-  // base: '/vue-stripe-menu/',
+  base: 'production' === process.env.NODE_ENV ? '/vue-stripe-menu/' : '',
 };
 
 export default config;

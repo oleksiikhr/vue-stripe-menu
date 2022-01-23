@@ -5,8 +5,7 @@
       :style="{
         width: `${width}px`,
         height: `${height}px`,
-      }"
-    />
+      }" />
   </div>
 </template>
 

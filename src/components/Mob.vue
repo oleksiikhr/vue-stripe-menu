@@ -6,8 +6,7 @@
       {
         'vsm-open': active,
       },
-    ]"
-  >
+    ]">
     <div class="vsm-mob" @click="onClickHamburger">
       <slot name="hamburger">
         <div class="vsm-mob__hamburger">

@@ -1,20 +1,18 @@
 'use strict';
 
-import VsmMenu from './components/Menu.vue';
-import VsmMob from './components/Mob.vue';
-
 import { App } from 'vue';
+import * as components from './components';
 import './scss/index.scss';
 
-const components = [VsmMenu, VsmMob];
+function install(Vue: App): void {
+  for (const key in components) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const component = (components as any)[key];
 
-function install(Vue: App) {
-  for (const component of components) {
     Vue.component(component.name, component);
   }
 }
 
-export default { install };
+export * from './components';
 
-export { default as VsmMenu } from './components/Menu.vue';
-export { default as VsmMob } from './components/Mob.vue';
+export default { install };

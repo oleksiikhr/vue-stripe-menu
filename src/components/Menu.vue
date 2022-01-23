@@ -21,8 +21,7 @@
             :aria-expanded="item.dropdown && 'false'"
             tabindex="0"
             v-bind="item.attributes"
-            v-on="item.listeners || {}"
-          >
+            v-on="item.listeners || {}">
             <slot name="title" :item="item" :index="index">
               <span>{{ item.title }}</span>
             </slot>
@@ -43,8 +42,7 @@
           class="vsm-dropdown-section"
           :data-dropdown="item.dropdown"
           :data-align="item.align"
-          aria-hidden="false"
-        >
+          aria-hidden="false">
           <div class="vsm-dropdown-content">
             <slot :item="item" :index="index" />
           </div>
