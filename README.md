@@ -2,6 +2,7 @@
 
 <p>
   <a href="https://github.com/Alexeykhr/vue-stripe-menu/actions/workflows/release.yml" rel="nofollow"><img src="https://github.com/Alexeykhr/vue-stripe-menu/actions/workflows/release.yml/badge.svg" alt="Build Status"></a>
+  <a href="https://app.netlify.com/sites/vue-stripe-menu/deploys" rel="nofollow"><img src="https://api.netlify.com/api/v1/badges/4865304f-e368-4f24-9242-dad6d3176e5c/deploy-status" alt="Netlify Status"></a>
   <a href="https://www.npmjs.com/package/vue-stripe-menu" rel="nofollow"><img src="https://img.shields.io/npm/v/vue-stripe-menu.svg" alt="Version"></a>
   <a href="https://lgtm.com/projects/g/Alexeykhr/vue-stripe-menu/alerts/" rel="nofollow"><img src="https://img.shields.io/lgtm/alerts/g/Alexeykhr/vue-stripe-menu.svg?logo=lgtm&logoWidth=18" alt="Total alerts"></a>
   <a href="https://npmcharts.com/compare/vue-stripe-menu?minimal=true"><img src="https://img.shields.io/npm/dm/vue-stripe-menu.svg" alt="Downloads"></a>
