@@ -42,7 +42,7 @@ export default {
         {
           title: 'Source',
           attributes: {
-            href: 'https://github.com/Alexeykhr/vue-stripe-menu/blob/master/docs/src/components/BaseHeader.vue',
+            href: 'https://github.com/Alexeykhr/vue-stripe-menu/blob/main/docs/src/components/BaseHeader.vue',
             target: '_blank',
           },
         },

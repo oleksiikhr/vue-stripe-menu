@@ -78,13 +78,13 @@ export default {
 - Removed `cursor: default` from dropdown buttons with HTML element `<a href="" />`
 - Removed `@media` styles
 - Removed predefined `font-size: 17px` and `font-weight: 500`
-- Renamed [variables](https://github.com/Alexeykhr/vue-stripe-menu/blob/master/src/scss/_variables.scss):
+- Renamed [variables](https://github.com/Alexeykhr/vue-stripe-menu/blob/main/src/scss/_variables.scss):
     - `$vsm-menu-border-radius` > `$vsm-border-radius`
     - `$vsm-menu-transform-content` > `$vsm-transform-content`
     - `$vsm-menu-link-height` > `$vsm-link-height`
     - `$vsm-menu-arrow-shadow` > `$vsm-arrow-shadow`
     - `$vsm-mob-size` > `$vsm-mob-hamburger-size`
-- Added [variables](https://github.com/Alexeykhr/vue-stripe-menu/blob/master/src/scss/_variables.scss):
+- Added [variables](https://github.com/Alexeykhr/vue-stripe-menu/blob/main/src/scss/_variables.scss):
     - Menu: `$vsm-arrow-size`, `$vsm-arrow-shadow`, `$vsm-arrow-border-radius`, `$vsm-index`, `$vsm-background`,
       `$vsm-background-alt`, `$vsm-background-arrow`, `$vsm-link-padding`
     - Mob: `$vsm-mob-dropdown-offset`, `$vsm-mob-dropdown-border-radius`, `$vsm-mob-close-weight`, `$vsm-mob-close-color`,
@@ -103,7 +103,7 @@ export default {
 
 #### Menu
 
-- Attribute added to each link [tabindex="0"](https://github.com/Alexeykhr/vue-stripe-menu/blob/master/src/components/Menu.vue#L26)
+- Attribute added to each link [tabindex="0"](https://github.com/Alexeykhr/vue-stripe-menu/blob/main/src/components/Menu.vue#L26)
 
 **[Props](https://github.com/Alexeykhr/vue-stripe-menu#menu-props)**
 

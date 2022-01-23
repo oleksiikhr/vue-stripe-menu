@@ -9,12 +9,12 @@
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Alexeykhr/vue-stripe-menu/master/docs/images/img.png?raw=true" alt="Vue Stripe Menu" height="500px">
+  <img src="https://raw.githubusercontent.com/Alexeykhr/vue-stripe-menu/main/docs/images/img.png?raw=true" alt="Vue Stripe Menu" height="500px">
 </p>
 
 > Creating a navigation menu with animations like on Stripe
 
-**Only for Vue 3** ([changelog](https://github.com/Alexeykhr/vue-stripe-menu/blob/master/CHANGELOG.md#200-2021-04-09))
+**Only for Vue 3** ([changelog](https://github.com/Alexeykhr/vue-stripe-menu/blob/main/CHANGELOG.md#200-2021-04-09))
 
 [Documentation](https://alexeykhr.github.io/vue-stripe-menu/)
 
@@ -99,7 +99,7 @@ Add css/scss styles:
 
 ```scss
 // >>> SCSS style (required sass-loader, node-sass) <<<
-// https://github.com/Alexeykhr/vue-stripe-menu/blob/master/src/scss/_variables.scss
+// https://github.com/Alexeykhr/vue-stripe-menu/blob/main/src/scss/_variables.scss
 // $vsm-transition: .5s;
 
 @import "~vue-stripe-menu/src/scss/index";
@@ -342,44 +342,11 @@ export default {
 
 ## Contributing
 
-The [pnpm](https://pnpm.io/) package manager is used to handle dependencies.
-
-### Library
-
-```shell
-# Install dependencies
-$ pnpm i
-
-# Build the library
-$ pnpm build:lib
-
-# Run tests
-$ pnpm tests
-
-# Run linter
-$ pnpm lint:eslint -- --fix
-$ pnpm lint:prettier
-$ pnpm lint:stylelint -- --fix
-```
-
-### Documentation
-
-All commands must be executed in the `docs` folder.
-
-```shell
-# Install dependencies
-$ pnpm i
-
-# Run in dev mode
-$ pnpm dev
-
-# Build the docs
-$ pnpm build
-```
+Please make sure to read the [Contributing Guide](https://github.com/Alexeykhr/vue-stripe-menu/blob/main/.github/CONTRIBUTING.md) before making a pull request.
 
 ## Changelog
 
-Detailed changes for each release are documented in the [CHANGELOG.md](https://github.com/Alexeykhr/vue-stripe-menu/blob/master/CHANGELOG.md).
+Detailed changes for each release are documented in the [CHANGELOG.md](https://github.com/Alexeykhr/vue-stripe-menu/blob/main/CHANGELOG.md).
 
 ## License
 

@@ -44,7 +44,7 @@
         </div>
       </div>
       <br />
-      <a href="https://github.com/Alexeykhr/vue-stripe-menu/blob/master/src/scss/_variables.scss" target="_blank">
+      <a href="https://github.com/Alexeykhr/vue-stripe-menu/blob/main/src/scss/_variables.scss" target="_blank">
         List of variables
       </a>
     </div>
@@ -218,7 +218,7 @@ export default {
       let overrideStyles = this.vsmMenuStylesString && `${this.vsmMenuStylesString}\n`;
       overrideStyles += this.vsmMobStylesString && `${this.vsmMobStylesString}\n`;
 
-      let result = `// >>> SCSS style (required sass-loader, node-sass) <<<\n// https://github.com/Alexeykhr/vue-stripe-menu/blob/master/src/scss/_variables.scss\n`;
+      let result = `// >>> SCSS style (required sass-loader, node-sass) <<<\n// https://github.com/Alexeykhr/vue-stripe-menu/blob/main/src/scss/_variables.scss\n`;
       result += `${overrideStyles ? `${overrideStyles}\n` : ''}`;
       result += `@import "~vue-stripe-menu/src/scss/index";\n\n// >>> CSS style <<<\n// @import 'vue-stripe-menu/dist/vue-stripe-menu.css';\n\n`;
       result += this.generalStylesString;

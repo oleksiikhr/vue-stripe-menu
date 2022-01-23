@@ -1,7 +1,13 @@
-name: Library
+name: "Library"
 
 on:
   push:
+    branches: [ main ]
+    paths:
+      - '*/**'
+      - '!docs/**'
+  pull_request:
+    branches: [ main ]
     paths:
       - '*/**'
       - '!docs/**'
