@@ -230,7 +230,7 @@ export default {
         return obj.reduce((result, item) => {
           const value = item.value.replace(/\$([a-z-]+)/gm, 'var(--$1)');
           const initial = item.initial.replace(/\$([a-z-]+)/gm, 'var(--$1)');
-          result += `${item.property.replace('$', '--')}: ${value || initial};\n`;
+          result += `${item.property.replace(/\$/gm, '--')}: ${value || initial};\n`;
           return result;
         }, '');
       };
