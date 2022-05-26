@@ -10,7 +10,7 @@
 
 <script>
 import { onMounted, ref } from 'vue';
-import highlight from 'highlight.js';
+import hljs from '../../libraries/highlight';
 // eslint-disable-next-line import/no-unresolved
 import ExampleRaw from './ExampleRaw.vue?raw';
 import BaseTitle from '../base/Title.vue';
@@ -23,7 +23,7 @@ export default {
     const code = ref(null);
 
     onMounted(() => {
-      highlight.highlightElement(code.value);
+      hljs.highlightElement(code.value);
     });
 
     return { code };

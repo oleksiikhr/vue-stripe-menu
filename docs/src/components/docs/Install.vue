@@ -26,7 +26,7 @@
 
 <script>
 import { onMounted, nextTick, watch, ref } from 'vue';
-import highlight from 'highlight.js';
+import hljs from '../../libraries/highlight';
 import BaseTitle from '../base/Title.vue';
 
 export default {
@@ -51,19 +51,19 @@ export default {
     const codeJs = ref(null);
 
     onMounted(() => {
-      highlight.highlightElement(codeShell.value);
-      highlight.highlightElement(codeVue.value);
-      highlight.highlightElement(codeCss.value);
-      highlight.highlightElement(codeJs.value);
+      hljs.highlightElement(codeShell.value);
+      hljs.highlightElement(codeVue.value);
+      hljs.highlightElement(codeCss.value);
+      hljs.highlightElement(codeJs.value);
     });
 
     watch(
       () => props.css,
-      () => nextTick().then(() => highlight.highlightElement(codeCss.value))
+      () => nextTick().then(() => hljs.highlightElement(codeCss.value))
     );
     watch(
       () => props.vsmProps,
-      () => nextTick().then(() => highlight.highlightElement(codeVue.value))
+      () => nextTick().then(() => hljs.highlightElement(codeVue.value))
     );
 
     return { codeShell, codeVue, codeCss, codeJs };

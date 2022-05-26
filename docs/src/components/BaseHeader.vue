@@ -23,6 +23,7 @@ import ProductsContent from './content/ProductsContent.vue';
 import CompanyContent from './content/CompanyContent.vue';
 import StripeLogo from './svg/StripeLogo.vue';
 import MobileContent from './content/MobileContent.vue';
+import { homepage } from '../../../package.json';
 
 export default {
   components: {
@@ -52,9 +53,9 @@ export default {
           component: 'ProductsContent',
         },
         {
-          title: 'Source',
+          title: 'Library',
           attributes: {
-            href: 'https://github.com/oleksiikhr/vue-stripe-menu/blob/main/docs/src/components/BaseHeader.vue',
+            href: homepage,
             target: '_blank',
           },
         },
