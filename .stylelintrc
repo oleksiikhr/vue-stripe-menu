@@ -1,10 +1,9 @@
 {
   "extends": [
     "stylelint-config-recommended-vue/scss",
-    "stylelint-config-standard-scss"
-  ],
-  "ignoreFiles": [
-    "node_modules/**/*"
+    "stylelint-config-standard-scss",
+    "stylelint-config-prettier-scss",
+    "stylelint-config-sass-guidelines"
   ],
   "customSyntax": "postcss-html",
   "rules": {

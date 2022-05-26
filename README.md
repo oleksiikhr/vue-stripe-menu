@@ -1,25 +1,25 @@
 # Vue Stripe Menu
 
 <p>
-  <a href="https://github.com/Alexeykhr/vue-stripe-menu/actions/workflows/release.yml" rel="nofollow"><img src="https://github.com/Alexeykhr/vue-stripe-menu/actions/workflows/release.yml/badge.svg" alt="Build Status"></a>
+  <a href="https://github.com/oleksiikhr/vue-stripe-menu/actions/workflows/release.yml" rel="nofollow"><img src="https://github.com/oleksiikhr/vue-stripe-menu/actions/workflows/release.yml/badge.svg" alt="Build Status"></a>
   <a href="https://app.netlify.com/sites/vue-stripe-menu/deploys" rel="nofollow"><img src="https://api.netlify.com/api/v1/badges/4865304f-e368-4f24-9242-dad6d3176e5c/deploy-status" alt="Netlify Status"></a>
   <a href="https://www.npmjs.com/package/vue-stripe-menu" rel="nofollow"><img src="https://img.shields.io/npm/v/vue-stripe-menu.svg" alt="Version"></a>
-  <a href="https://lgtm.com/projects/g/Alexeykhr/vue-stripe-menu/alerts/" rel="nofollow"><img src="https://img.shields.io/lgtm/alerts/g/Alexeykhr/vue-stripe-menu.svg?logo=lgtm&logoWidth=18" alt="Total alerts"></a>
+  <a href="https://lgtm.com/projects/g/oleksiikhr/vue-stripe-menu/alerts/" rel="nofollow"><img src="https://img.shields.io/lgtm/alerts/g/oleksiikhr/vue-stripe-menu.svg?logo=lgtm&logoWidth=18" alt="Total alerts"></a>
   <a href="https://npmcharts.com/compare/vue-stripe-menu?minimal=true"><img src="https://img.shields.io/npm/dm/vue-stripe-menu.svg" alt="Downloads"></a>
   <a href="https://www.npmjs.com/package/vue-stripe-menu" rel="nofollow"><img src="https://img.shields.io/npm/l/vue-stripe-menu.svg" alt="License"></a>
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Alexeykhr/vue-stripe-menu/main/docs/images/img.png?raw=true" alt="Vue Stripe Menu" height="500px">
+  <img src="https://raw.githubusercontent.com/oleksiikhr/vue-stripe-menu/main/docs/images/img.png?raw=true" alt="Vue Stripe Menu" height="500px">
 </p>
 
 > Creating a navigation menu with animations like on Stripe
 
-**Only for Vue 3** ([changelog](https://github.com/Alexeykhr/vue-stripe-menu/blob/main/CHANGELOG.md#200-2021-04-09))
+**Only for Vue 3** ([changelog](https://github.com/oleksiikhr/vue-stripe-menu/blob/main/CHANGELOG.md#200-2021-04-09))
 
-[Documentation](https://alexeykhr.github.io/vue-stripe-menu/)
+[Documentation](https://oleksiikhr.github.io/vue-stripe-menu/)
 
-[Vue 2 - Branch](https://github.com/Alexeykhr/vue-stripe-menu/tree/vue2)
+[Vue 2 - Branch](https://github.com/oleksiikhr/vue-stripe-menu/tree/vue2)
 
 ## How to install
 
@@ -100,7 +100,7 @@ Add css/scss styles:
 
 ```scss
 // >>> SCSS style (required sass-loader, node-sass) <<<
-// https://github.com/Alexeykhr/vue-stripe-menu/blob/main/src/scss/_variables.scss
+// https://github.com/oleksiikhr/vue-stripe-menu/blob/main/src/scss/_variables.scss
 // $vsm-transition: .5s;
 
 @import "~vue-stripe-menu/src/scss/index";
@@ -230,7 +230,7 @@ export default {
         {
           title: 'External Link',
           attributes: {
-            href: 'https://github.com/Alexeykhr/vue-stripe-menu',
+            href: 'https://github.com/oleksiikhr/vue-stripe-menu',
             target: '_blank'
           }
         }
@@ -343,11 +343,11 @@ export default {
 
 ## Contributing
 
-Please make sure to read the [Contributing Guide](https://github.com/Alexeykhr/vue-stripe-menu/blob/main/.github/CONTRIBUTING.md) before making a pull request.
+Please make sure to read the [Contributing Guide](https://github.com/oleksiikhr/vue-stripe-menu/blob/main/.github/CONTRIBUTING.md) before making a pull request.
 
 ## Changelog
 
-Detailed changes for each release are documented in the [CHANGELOG.md](https://github.com/Alexeykhr/vue-stripe-menu/blob/main/CHANGELOG.md).
+Detailed changes for each release are documented in the [CHANGELOG.md](https://github.com/oleksiikhr/vue-stripe-menu/blob/main/CHANGELOG.md).
 
 ## License
 

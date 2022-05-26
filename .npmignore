@@ -6,6 +6,8 @@ npm-debug.log*
 coverage/
 yarn-debug.log*
 yarn-error.log*
+.pnpm-debug.log*
+.pnpm-store/
 
 # Editor directories and files
 .idea

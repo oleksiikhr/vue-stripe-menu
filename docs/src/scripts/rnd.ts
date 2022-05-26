@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * The maximum is inclusive and the minimum is inclusive.
  */

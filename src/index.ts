@@ -1,5 +1,3 @@
-'use strict';
-
 import { App } from 'vue';
 import * as components from './components';
 import './scss/index.scss';

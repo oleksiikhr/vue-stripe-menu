@@ -1,8 +1,6 @@
-'use strict';
-
 import { mount, VueWrapper } from '@vue/test-utils';
-import Mob from '../../src/components/Mob.vue';
 import sinon from 'sinon';
+import Mob from '../../src/components/Mob.vue';
 
 // eslint-disable-next-line
 let wrapper: VueWrapper<any>;

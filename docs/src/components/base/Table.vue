@@ -9,7 +9,11 @@
     </thead>
     <tbody>
       <tr v-for="(row, i) in rows" :key="i" :class="{ required: row.required }">
-        <td v-for="(column, j) in columns" :key="j" :class="`column column_${column.attr}`">
+        <td
+          v-for="(column, j) in columns"
+          :key="j"
+          :class="`column column_${column.attr}`"
+        >
           {{ row[column.attr] }}
         </td>
       </tr>
@@ -35,9 +39,9 @@ export default {
 
 <style lang="scss" scoped>
 table {
-  width: 100%;
-  border-spacing: unset;
   border-collapse: collapse;
+  border-spacing: unset;
+  width: 100%;
 }
 
 thead {
@@ -56,15 +60,15 @@ tbody {
 }
 
 th {
-  text-align: left;
-  padding: 15px;
   color: #757575;
   font-weight: 500;
+  padding: 15px;
+  text-align: left;
 }
 
 td {
-  padding: 15px;
   color: #34416b;
+  padding: 15px;
 }
 
 tbody tr td:first-child {
@@ -73,8 +77,8 @@ tbody tr td:first-child {
 
 .column_type {
   color: #d67373;
-  font-weight: bold;
   font-size: 0.8rem;
+  font-weight: bold;
   padding: 2px 5px;
   text-transform: lowercase;
 }

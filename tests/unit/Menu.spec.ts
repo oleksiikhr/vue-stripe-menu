@@ -1,10 +1,8 @@
-'use strict';
-
-import { mount } from '@vue/test-utils';
-import { nextTick } from 'vue';
-import Menu from '../../src/components/Menu.vue';
-import * as sinon from 'sinon';
-
+// import { mount } from '@vue/test-utils';
+// import { nextTick } from 'vue';
+// import Menu from '../../src/components/Menu.vue';
+// import * as sinon from 'sinon';
+//
 // const pointerEvent = {
 //   end: 'touchend',
 //   enter: 'mouseenter',

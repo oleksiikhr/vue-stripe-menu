@@ -21,7 +21,8 @@
             :aria-expanded="item.dropdown && 'false'"
             tabindex="0"
             v-bind="item.attributes"
-            v-on="item.listeners || {}">
+            v-on="item.listeners || {}"
+          >
             <slot name="title" :item="item" :index="index">
               <span>{{ item.title }}</span>
             </slot>
@@ -42,7 +43,8 @@
           class="vsm-dropdown-section"
           :data-dropdown="item.dropdown"
           :data-align="item.align"
-          aria-hidden="false">
+          aria-hidden="false"
+        >
           <div class="vsm-dropdown-content">
             <slot :item="item" :index="index" />
           </div>
@@ -105,12 +107,12 @@ export default {
     screenOffset: {
       type: [Number, String],
       default: 10,
-      validator: (val) => +val >= 0,
+      validator: (val) => 0 <= +val,
     },
     dropdownOffset: {
       type: [Number, String],
       default: 0,
-      validator: (val) => +val >= 0,
+      validator: (val) => 0 <= +val,
     },
     /**
      * By default, the dropdown list drops out on hover,
@@ -202,7 +204,9 @@ export default {
       this.$el.classList.add('vsm-overlay-active', 'vsm-dropdown-active');
       this._activeDropdown = el;
       this._activeDropdown.setAttribute('aria-expanded', 'true');
-      this.elementsWithDropdown.forEach((el) => el.classList.remove('vsm-active'));
+      this.elementsWithDropdown.forEach((el) =>
+        el.classList.remove('vsm-active')
+      );
       el.classList.add('vsm-active');
 
       const activeDataDropdown = el.getAttribute('data-dropdown');
@@ -230,7 +234,9 @@ export default {
       }
 
       this.$emit('close-dropdown', this._activeDropdown);
-      this.elementsWithDropdown.forEach((el) => el.classList.remove('vsm-active'));
+      this.elementsWithDropdown.forEach((el) =>
+        el.classList.remove('vsm-active')
+      );
 
       this._activeContainerItem.el.setAttribute('aria-hidden', 'true');
 
@@ -293,7 +299,8 @@ export default {
       // Possible blurring font with decimal values
       position = Math.round(position);
 
-      const dropdownOffset = +this.dropdownOffset + this._activeDropdown.offsetTop;
+      const dropdownOffset =
+        +this.dropdownOffset + this._activeDropdown.offsetTop;
       const ratioWidth = offsetWidth / BASE_WIDTH;
       const ratioHeight = offsetHeight / BASE_HEIGHT;
 
@@ -310,7 +317,8 @@ export default {
       }px, ${dropdownOffset}px) rotate(45deg)`;
       this.$refs.background.style.transform = `translate(${position}px, ${dropdownOffset}px) scaleX(${ratioWidth}) scaleY(${ratioHeight})`;
       this.$refs.backgroundAlt.style.transform = `translateY(${
-        this._activeContainerItem.content.firstElementChild.offsetHeight / ratioHeight
+        this._activeContainerItem.content.firstElementChild.offsetHeight /
+        ratioHeight
       }px)`;
     },
     /*
@@ -325,7 +333,10 @@ export default {
       clearTimeout(this._closeDropdownTimeout);
     },
     startEnableTransitionTimeout() {
-      this._enableTransitionTimeout = setTimeout(() => this.$el.classList.remove('vsm-no-transition'), 50);
+      this._enableTransitionTimeout = setTimeout(
+        () => this.$el.classList.remove('vsm-no-transition'),
+        50
+      );
     },
     clearEnableTransitionTimeout() {
       clearTimeout(this._enableTransitionTimeout);
@@ -333,7 +344,7 @@ export default {
     startDisableTransitionTimeout() {
       this._disableTransitionTimeout = setTimeout(
         () => this.$el.classList.add('vsm-no-transition'),
-        +this.transitionTimeout,
+        +this.transitionTimeout
       );
     },
     clearDisableTransitionTimeout() {
@@ -357,20 +368,20 @@ export default {
           });
         }
 
-        if (this.handler === 'hover') {
+        if ('hover' === this.handler) {
           el._vsmMenuHandlers = {
             focusin: () => {
               this.clearCloseDropdownTimeout();
               this.openDropdown(el);
             },
             [this._pointerEvent.enter]: (evt) => {
-              if (evt.pointerType !== 'touch') {
+              if ('touch' !== evt.pointerType) {
                 this.clearCloseDropdownTimeout();
                 this.openDropdown(el);
               }
             },
             [this._pointerEvent.leave]: (evt) => {
-              if (evt.pointerType !== 'touch') {
+              if ('touch' !== evt.pointerType) {
                 this.startCloseDropdownTimeout();
               }
             },
@@ -406,15 +417,15 @@ export default {
         });
       }
 
-      if (this.handler === 'hover') {
+      if ('hover' === this.handler) {
         el._vsmMenuHandlers = {
           [this._pointerEvent.enter]: (evt) => {
-            if (evt.pointerType !== 'touch') {
+            if ('touch' !== evt.pointerType) {
               this.clearCloseDropdownTimeout();
             }
           },
           [this._pointerEvent.leave]: (evt) => {
-            if (evt.pointerType !== 'touch') {
+            if ('touch' !== evt.pointerType) {
               this.startCloseDropdownTimeout();
             }
           },
@@ -442,13 +453,22 @@ export default {
       window.addEventListener('resize', this.windowResizeHandler);
       document.addEventListener('touchmove', this.documentTouchMoveHandler);
       document.addEventListener('touchstart', this.documentTouchStartHandler);
-      document.body.addEventListener(this._pointerEvent.end, this.documentEventEndHandler);
+      document.body.addEventListener(
+        this._pointerEvent.end,
+        this.documentEventEndHandler
+      );
     },
     removeGlobalListeners() {
       window.removeEventListener('resize', this.windowResizeHandler);
       document.removeEventListener('touchmove', this.documentTouchMoveHandler);
-      document.removeEventListener('touchstart', this.documentTouchStartHandler);
-      document.body.removeEventListener(this._pointerEvent.end, this.documentEventEndHandler);
+      document.removeEventListener(
+        'touchstart',
+        this.documentTouchStartHandler
+      );
+      document.body.removeEventListener(
+        this._pointerEvent.end,
+        this.documentEventEndHandler
+      );
     },
     windowResizeHandler() {
       // Recalculates the dropdown only in cases where the screen width changes
@@ -509,11 +529,13 @@ export default {
           };
     },
     updateDataElements() {
-      this.elementsWithDropdown = Array.from(this.$refs.linkContainer.children).filter((el) =>
-        el.classList.contains('vsm-has-dropdown'),
-      );
+      this.elementsWithDropdown = Array.from(
+        this.$refs.linkContainer.children
+      ).filter((el) => el.classList.contains('vsm-has-dropdown'));
 
-      this.dropdownContainerItems = Array.from(this.$refs.dropdownContainer.children).map((el) => ({
+      this.dropdownContainerItems = Array.from(
+        this.$refs.dropdownContainer.children
+      ).map((el) => ({
         el,
         name: el.getAttribute('data-dropdown'),
         align: el.getAttribute('data-align'),

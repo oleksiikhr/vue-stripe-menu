@@ -1,5 +1,3 @@
-'use strict';
-
 export const title = '[Mob] Props';
 
 export const columns = [

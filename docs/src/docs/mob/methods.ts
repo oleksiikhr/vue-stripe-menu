@@ -1,5 +1,3 @@
-'use strict';
-
 export const title = '[Mob] Methods';
 
 export const columns = [

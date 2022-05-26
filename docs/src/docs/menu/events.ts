@@ -1,5 +1,3 @@
-'use strict';
-
 export const title = '[Menu] Events';
 
 export const columns = [

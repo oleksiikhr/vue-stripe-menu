@@ -36,13 +36,25 @@ export default {
   data() {
     return {
       menu: [
-        { title: 'Company', dropdown: 'company', component: 'CompanyContent' },
-        { title: 'Developers', dropdown: 'developers', component: 'DevelopersContent' },
-        { title: 'Products', dropdown: 'products', component: 'ProductsContent' },
+        {
+          title: 'Company',
+          dropdown: 'company',
+          component: 'CompanyContent',
+        },
+        {
+          title: 'Developers',
+          dropdown: 'developers',
+          component: 'DevelopersContent',
+        },
+        {
+          title: 'Products',
+          dropdown: 'products',
+          component: 'ProductsContent',
+        },
         {
           title: 'Source',
           attributes: {
-            href: 'https://github.com/Alexeykhr/vue-stripe-menu/blob/main/docs/src/components/BaseHeader.vue',
+            href: 'https://github.com/oleksiikhr/vue-stripe-menu/blob/main/docs/src/components/BaseHeader.vue',
             target: '_blank',
           },
         },

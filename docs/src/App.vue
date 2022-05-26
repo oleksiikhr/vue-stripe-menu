@@ -4,7 +4,11 @@
     <conf-menu-docs @on-css="onChangeCss" @change-props="onChangeProps" />
     <install-docs :css="css" :vsm-props="vsmProps" />
     <full-example-docs />
-    <properties-docs v-for="property in properties" :key="property.title" v-bind="property" />
+    <properties-docs
+      v-for="property in properties"
+      :key="property.title"
+      v-bind="property"
+    />
   </main>
   <base-footer />
 </template>

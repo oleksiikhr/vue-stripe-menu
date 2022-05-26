@@ -7,18 +7,19 @@
     :screen-offset="10"
     :dropdown-offset="0"
     @open-dropdown="onOpenDropdown"
-    @close-dropdown="onCloseDropdown">
+    @close-dropdown="onCloseDropdown"
+  >
     <template #default="{ item }">
       <!--Dropdown content of each menu item with a "dropdown" property-->
       <!--You can replace it with a separate component if each menu item has its own style-->
       <!--Necessarily need to have at least one element within the slot-->
       <!--An alternate background will be applied from the 2nd element-->
-      <div style="width: 300px; padding: 30px;">Header: {{ item }}</div>
+      <div style="padding: 30px; width: 300px;">Header: {{ item }}</div>
       <div style="padding: 30px;">Second element</div>
     </template>
     <template #before-nav>
       <!--Image or svg of website logo-->
-      <li style="width: 50px; height: 50px;">
+      <li style="height: 50px; width: 50px;">
         <img src="https://vuejs.org/images/logo.png" alt="My Logo" />
       </li>
     </template>
@@ -71,7 +72,7 @@ export default {
           listeners: {
             // all possible native events
             mouseover: (evt) => {
-              console.log('news hover', evt)
+              console.log('news hover', evt);
             },
           },
           // just extra properties in the object
@@ -80,21 +81,21 @@ export default {
         {
           title: 'External Link',
           attributes: {
-            href: 'https://github.com/Alexeykhr/vue-stripe-menu',
+            href: 'https://github.com/oleksiikhr/vue-stripe-menu',
             target: '_blank',
           },
         },
         // ...
       ],
-    }
+    };
   },
   methods: {
     onOpenDropdown() {
-      console.log('onOpenDropdown')
+      console.log('onOpenDropdown');
     },
     onCloseDropdown() {
-      console.log('onCloseDropdown')
+      console.log('onCloseDropdown');
     },
   },
-}
+};
 </script>

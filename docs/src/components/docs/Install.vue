@@ -59,11 +59,11 @@ export default {
 
     watch(
       () => props.css,
-      () => nextTick().then(() => highlight.highlightElement(codeCss.value)),
+      () => nextTick().then(() => highlight.highlightElement(codeCss.value))
     );
     watch(
       () => props.vsmProps,
-      () => nextTick().then(() => highlight.highlightElement(codeVue.value)),
+      () => nextTick().then(() => highlight.highlightElement(codeVue.value))
     );
 
     return { codeShell, codeVue, codeCss, codeJs };
@@ -94,10 +94,15 @@ export default {
   },
   computed: {
     vsmPropsStr() {
-      const propsStr = Object.entries(this.vsmProps).reduce((result, [key, val]) => {
-        result += `\n    ${typeof val === 'number' ? ':' : ''}${key}="${val}"`;
-        return result;
-      }, '');
+      const propsStr = Object.entries(this.vsmProps).reduce(
+        (result, [key, val]) => {
+          result += `\n    ${
+            'number' === typeof val ? ':' : ''
+          }${key}="${val}"`;
+          return result;
+        },
+        ''
+      );
 
       if (!propsStr) {
         return `:menu="menu"`;

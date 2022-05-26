@@ -1,5 +1,3 @@
-'use strict';
-
 export const title = '[Menu] Properties';
 
 export const columns = [

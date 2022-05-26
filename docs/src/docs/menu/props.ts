@@ -1,5 +1,3 @@
-'use strict';
-
 export const title = '[Menu] Props';
 
 export const columns = [

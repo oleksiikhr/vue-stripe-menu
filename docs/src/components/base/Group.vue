@@ -7,13 +7,15 @@
         :min="70"
         :max="100"
         :height="size === 'small' ? 13 : 16"
-        class="base-group__content__title" />
+        class="base-group__content__title"
+      />
       <base-text
         :color="color"
         :min="200"
         :max="300"
         :height="size === 'small' ? 11 : 14"
-        class="base-group__content__subtitle" />
+        class="base-group__content__subtitle"
+      />
     </div>
   </div>
 </template>
@@ -40,7 +42,9 @@ export default {
     },
   },
   setup(props) {
-    const background = computed(() => (props.color === 'primary' ? 'background' : 'background--secondary'));
+    const background = computed(() =>
+      'primary' === props.color ? 'background' : 'background--secondary'
+    );
 
     return { background };
   },
@@ -65,31 +69,31 @@ export default {
 }
 
 .base-group__content__title {
-  width: 100%;
   height: 17px;
   margin-bottom: 3px;
   padding-top: 0;
+  width: 100%;
 }
 
 .base-group__content__subtitle {
-  width: 100%;
   height: 13px;
-  padding: 0;
   margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
 // Sizes
 .base-group_size_medium {
   .base-group__img {
-    min-width: 32px;
     height: 32px;
+    min-width: 32px;
   }
 }
 
 .base-group_size_small {
   .base-group__img {
-    min-width: 20px;
     height: 20px;
+    min-width: 20px;
   }
 }
 </style>

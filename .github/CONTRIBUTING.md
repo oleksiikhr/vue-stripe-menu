@@ -1,6 +1,6 @@
 # GPortfolio Contributing Guide
 
-- [Code of Conduct](https://github.com/alexeykhr/vue-stripe-menu/blob/main/.github/CODE_OF_CONDUCT.md)
+- [Code of Conduct](https://github.com/oleksiikhr/vue-stripe-menu/blob/main/.github/CODE_OF_CONDUCT.md)
 - [Pull Request Guidelines](#pull-request-guidelines)
 - [Development Setup](#development-setup)
 
@@ -18,22 +18,18 @@ The [pnpm](https://pnpm.io/) package manager is used to handle dependencies.
 
 ```shell
 # Install dependencies
-$ pnpm i
-
-# Build the library
-$ pnpm build:library
+$ pnpm i --frozen-lockfile
+# make up
+# make down
 
 # Run tests
 $ pnpm tests
+# make tests
 
 # Run linter
-$ pnpm lint:eslint -- --fix
-$ pnpm lint:prettier
-$ pnpm lint:stylelint -- --fix
+$ pnpm lint:fix
+# make lint
 
 # Run docs
 $ pnpm dev
-
-# Build docs
-$ pnpm build:docs
 ```

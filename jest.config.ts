@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   transform: {
     '.*\\.(vue)$': 'vue-jest',
     '^.+\\.tsx?$': 'ts-jest',

@@ -1,19 +1,21 @@
 {
-  "root": true,
-  "env": {
-    "browser": true,
-    "es2021": true,
-    "node": true
+  "parser": "vue-eslint-parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "parserOptions": {
+    "project": [
+      "./tsconfig.json"
+    ]
   },
   "extends": [
+    "airbnb-base",
+    "airbnb-typescript/base",
     "plugin:vue/vue3-recommended",
-    "eslint:recommended",
     "@vue/typescript/recommended",
     "@vue/prettier"
   ],
-  "parser": "vue-eslint-parser",
-  "parserOptions": {
-    "parser": "@typescript-eslint/parser",
-    "ecmaVersion": 2021
+  "rules": {
+    "yoda": ["error", "always"]
   }
 }

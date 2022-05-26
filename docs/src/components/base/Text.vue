@@ -5,13 +5,14 @@
       :style="{
         width: `${width}px`,
         height: `${height}px`,
-      }" />
+      }"
+    />
   </div>
 </template>
 
 <script>
-import rnd from '../../scripts/rnd';
 import { computed } from 'vue';
+import rnd from '../../scripts/rnd';
 
 export default {
   name: 'BaseText',
@@ -43,14 +44,16 @@ export default {
     const width = computed(() => rnd(props.min, props.max));
 
     const typeClasses = computed(() => {
-      if (props.type === 'text') {
+      if ('text' === props.type) {
         return 'mb-5';
       }
 
       return ['mb-20', 'background-hover'];
     });
 
-    const background = computed(() => (props.color === 'primary' ? 'background' : 'background--secondary'));
+    const background = computed(() =>
+      'primary' === props.color ? 'background' : 'background--secondary'
+    );
 
     return { width, typeClasses, background };
   },
