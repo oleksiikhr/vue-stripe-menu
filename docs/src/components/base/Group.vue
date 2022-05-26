@@ -33,12 +33,12 @@ export default {
     size: {
       type: String,
       default: 'medium',
-      validator: (val) => ~['medium', 'small'].indexOf(val),
+      validator: (val) => ['medium', 'small'].includes(val),
     },
     color: {
       type: String,
       default: 'primary',
-      validator: (val) => ~['primary', 'secondary'].indexOf(val),
+      validator: (val) => ['primary', 'secondary'].includes(val),
     },
   },
   setup(props) {

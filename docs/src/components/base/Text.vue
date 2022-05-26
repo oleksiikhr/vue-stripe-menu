@@ -32,12 +32,12 @@ export default {
     type: {
       type: String,
       default: 'text',
-      validator: (val) => ~['text', 'title'].indexOf(val),
+      validator: (val) => ['text', 'title'].includes(val),
     },
     color: {
       type: String,
       default: 'primary',
-      validator: (val) => ~['primary', 'secondary'].indexOf(val),
+      validator: (val) => ['primary', 'secondary'].includes(val),
     },
   },
   setup(props) {

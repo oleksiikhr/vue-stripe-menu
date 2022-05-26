@@ -106,7 +106,7 @@ export default {
           value: '',
           initial: '10',
           desc: 'indent a dropdown menu from screen edges (reduce screen size)',
-          validator: (val) => !isNaN(+val),
+          validator: (val) => !Number.isNaN(+val),
           convert: (val) => +val,
         },
         {
@@ -114,7 +114,7 @@ export default {
           value: '',
           initial: '0',
           desc: 'indent a dropdown menu from header',
-          validator: (val) => !isNaN(+val),
+          validator: (val) => !Number.isNaN(+val),
           convert: (val) => +val,
         },
         {
@@ -122,7 +122,7 @@ export default {
           value: '',
           initial: '250',
           desc: 'animation speed in ms (equals "$vsm-transition" style)',
-          validator: (val) => !isNaN(+val),
+          validator: (val) => !Number.isNaN(+val),
           convert: (val) => +val,
         },
       ].map((item) => ({
@@ -225,6 +225,7 @@ export default {
       return this.vsmMenuStyles
         .reduce((result, item) => {
           if (item.value && item.value !== item.initial) {
+            // eslint-disable-next-line no-param-reassign
             result += `${item.property}: ${item.value};\n`;
           }
 
@@ -236,6 +237,7 @@ export default {
       return this.vsmMobStyles
         .reduce((result, item) => {
           if (item.value && item.value !== item.initial) {
+            // eslint-disable-next-line no-param-reassign
             result += `${item.property}: ${item.value};\n`;
           }
 
@@ -248,6 +250,8 @@ export default {
         .reduce((result, item) => {
           if ('function' === typeof item.handler) {
             const val = item.handler(item.value);
+
+            // eslint-disable-next-line no-param-reassign
             result += val && `${val}\n\n`;
           }
 
@@ -283,6 +287,8 @@ export default {
         return obj.reduce((result, item) => {
           const value = item.value.replace(/\$([a-z-]+)/gm, 'var(--$1)');
           const initial = item.initial.replace(/\$([a-z-]+)/gm, 'var(--$1)');
+
+          // eslint-disable-next-line no-param-reassign
           result += `${item.property.replace(/\$/gm, '--')}: ${
             value || initial
           };\n`;
@@ -329,6 +335,7 @@ export default {
           item.value !== item.initial &&
           (!item.validator || item.validator(item.value))
         ) {
+          // eslint-disable-next-line no-param-reassign
           result[item.property] = item.convert
             ? item.convert(item.value)
             : item.value;
@@ -396,7 +403,7 @@ export default {
   }
 
   > small {
-    color: gray;
+    color: #808080;
   }
 }
 </style>

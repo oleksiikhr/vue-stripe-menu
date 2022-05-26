@@ -14,12 +14,12 @@
       <!--You can replace it with a separate component if each menu item has its own style-->
       <!--Necessarily need to have at least one element within the slot-->
       <!--An alternate background will be applied from the 2nd element-->
-      <div style="padding: 30px; width: 300px;">Header: {{ item }}</div>
-      <div style="padding: 30px;">Second element</div>
+      <div style="padding: 30px; width: 300px">Header: {{ item }}</div>
+      <div style="padding: 30px">Second element</div>
     </template>
     <template #before-nav>
       <!--Image or svg of website logo-->
-      <li style="height: 50px; width: 50px;">
+      <li style="height: 50px; width: 50px">
         <img src="https://vuejs.org/images/logo.png" alt="My Logo" />
       </li>
     </template>

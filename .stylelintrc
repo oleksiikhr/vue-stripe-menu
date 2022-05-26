@@ -2,11 +2,12 @@
   "extends": [
     "stylelint-config-recommended-vue/scss",
     "stylelint-config-standard-scss",
-    "stylelint-config-prettier-scss",
-    "stylelint-config-sass-guidelines"
+    "stylelint-config-sass-guidelines",
+    "stylelint-config-prettier-scss"
   ],
   "customSyntax": "postcss-html",
   "rules": {
-    "selector-class-pattern": null
+    "selector-class-pattern": null,
+    "max-nesting-depth": 3
   }
 }

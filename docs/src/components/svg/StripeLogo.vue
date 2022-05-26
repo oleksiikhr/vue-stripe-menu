@@ -29,7 +29,7 @@ export default {
   position: relative;
 
   span {
-    color: red;
+    color: #f00;
     font-size: 0.7rem;
     font-weight: 500;
     left: calc(100% + 2px);

@@ -7,6 +7,9 @@ down:
 logs:
 	docker-compose logs -f app
 
+sh:
+	docker-compose exec app sh
+
 build:
 	docker-compose run app pnpm run build
 
@@ -25,5 +28,5 @@ prettier:
 stylelint:
 	docker-compose exec app pnpm stylelint:fix
 
-tests:
+test:
 	docker-compose exec app pnpm test

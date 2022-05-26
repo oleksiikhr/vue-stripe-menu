@@ -16,6 +16,7 @@
     "@vue/prettier"
   ],
   "rules": {
-    "yoda": ["error", "always"]
+    "yoda": ["error", "always"],
+    "import/no-extraneous-dependencies": "off"
   }
 }

@@ -23,8 +23,8 @@ $ pnpm i --frozen-lockfile
 # make down
 
 # Run tests
-$ pnpm tests
-# make tests
+$ pnpm test
+# make test
 
 # Run linter
 $ pnpm lint:fix

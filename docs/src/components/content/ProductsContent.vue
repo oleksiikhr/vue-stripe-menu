@@ -37,16 +37,14 @@ export default {
 .flex {
   display: flex;
 
-  > div {
-    // Making background is for both blocks to prevent
-    // wrong display roundings
-    &.primary {
-      background-color: var(--vsm-background);
-    }
+  // Making background is for both blocks to prevent
+  // wrong display roundings
+  > .primary {
+    background-color: var(--vsm-background);
+  }
 
-    &.secondary {
-      background-color: var(--vsm-background-alt);
-    }
+  > .secondary {
+    background-color: var(--vsm-background-alt);
   }
 }
 </style>

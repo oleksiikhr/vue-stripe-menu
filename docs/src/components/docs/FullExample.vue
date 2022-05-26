@@ -11,6 +11,7 @@
 <script>
 import { onMounted, ref } from 'vue';
 import highlight from 'highlight.js';
+// eslint-disable-next-line import/no-unresolved
 import ExampleRaw from './ExampleRaw.vue?raw';
 import BaseTitle from '../base/Title.vue';
 

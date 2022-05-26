@@ -52,10 +52,10 @@ thead {
 tbody {
   tr {
     border-bottom: 1px solid #e2e2e2;
+  }
 
-    &.required {
-      border-left: 2px solid #982323;
-    }
+  > .required {
+    border-left: 2px solid #982323;
   }
 }
 

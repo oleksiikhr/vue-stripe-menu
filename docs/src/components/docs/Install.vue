@@ -96,6 +96,7 @@ export default {
     vsmPropsStr() {
       const propsStr = Object.entries(this.vsmProps).reduce(
         (result, [key, val]) => {
+          // eslint-disable-next-line no-param-reassign
           result += `\n    ${
             'number' === typeof val ? ':' : ''
           }${key}="${val}"`;
