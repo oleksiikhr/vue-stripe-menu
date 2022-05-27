@@ -4,22 +4,22 @@
     <p>Install the library:</p>
     <pre><code
       ref="codeShell"
-      class="shell"
+      class="language-shell"
     >{{ shell }}</code></pre>
     <p>Import components:</p>
     <pre><code
       ref="codeJs"
-      class="javascript"
+      class="language-javascript"
     >{{ js }}</code></pre>
     <p>Add component:</p>
     <pre><code
       ref="codeVue"
-      class="vue"
+      class="language-xml"
     >{{ vue }}</code></pre>
     <p>Add css/scss styles:</p>
     <pre><code
       ref="codeCss"
-      class="scss"
+      class="language-scss"
     >{{ css }}</code></pre>
   </div>
 </template>

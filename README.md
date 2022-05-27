@@ -188,7 +188,6 @@ Add css/scss styles:
 </template>
 
 <script>
-/* eslint-disable */
 /*
  * Inside #after-nav and #before-nav it is recommended to use
  * to maintain the correct HTML structure:

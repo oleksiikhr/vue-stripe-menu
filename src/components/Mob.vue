@@ -30,8 +30,11 @@
   </li>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue';
+import { isOutsideClick, touchEvent } from '../utils/dom';
+
+export default defineComponent({
   name: 'VsmMob',
   props: {
     value: {
@@ -42,18 +45,16 @@ export default {
   emits: ['input', 'update:modelValue'],
   data() {
     return {
-      // Support change value without accept props
       active: this.value,
+      event: 'click',
     };
   },
   watch: {
-    // Support for changing a variable externally
     value(val) {
       if (this.active !== val) {
         this.active = val;
       }
     },
-    // Lock the permanent event on click, hang event only when the menu is opened
     active(val) {
       if (val) {
         this.registerEvent();
@@ -63,8 +64,7 @@ export default {
     },
   },
   mounted() {
-    const touchSupport = 'ontouchstart' in window || navigator.maxTouchPoints;
-    this._touchEvent = touchSupport ? 'touchend' : 'click';
+    this.reloadEvent();
   },
   beforeUnmount() {
     this.unregisterEvent();
@@ -76,23 +76,25 @@ export default {
     onClickHamburger() {
       this.emitValue(!this.active);
     },
+    reloadEvent() {
+      this.event = touchEvent();
+    },
     registerEvent() {
-      document.body.addEventListener(this._touchEvent, this.eventEndHandler);
+      document.body.addEventListener(this.event, this.eventEndHandler);
     },
     unregisterEvent() {
-      document.body.removeEventListener(this._touchEvent, this.eventEndHandler);
+      document.body.removeEventListener(this.event, this.eventEndHandler);
     },
-    emitValue(toggle) {
+    emitValue(toggle: boolean) {
       this.active = toggle;
       this.$emit('input', toggle);
       this.$emit('update:modelValue', toggle);
     },
-    // Close Dropdown content after outside click
-    eventEndHandler(evt) {
-      if (this.$el !== evt.target && !this.$el.contains(evt.target)) {
+    eventEndHandler(evt: Event) {
+      if (isOutsideClick(this.$el, evt)) {
         this.emitValue(false);
       }
     },
   },
-};
+});
 </script>

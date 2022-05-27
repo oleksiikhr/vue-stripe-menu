@@ -1,16 +1,13 @@
 import { App } from 'vue';
-import * as components from './components';
+import VsmMenu from './components/Menu.vue';
+import VsmMob from './components/Mob.vue';
 import './scss/index.scss';
 
 function install(Vue: App): void {
-  for (const key in components) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const component = (components as any)[key];
-
-    Vue.component(component.name, component);
-  }
+  Vue.component(VsmMenu.name, VsmMenu);
+  Vue.component(VsmMob.name, VsmMob);
 }
 
-export * from './components';
+export { VsmMenu, VsmMob };
 
 export default { install };

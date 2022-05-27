@@ -39,7 +39,7 @@
 </template>
 
 <script>
-/* eslint-disable */
+/* eslint-disable no-console */
 /*
  * Inside #after-nav and #before-nav it is recommended to use
  * to maintain the correct HTML structure:
