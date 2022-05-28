@@ -1,7 +1,7 @@
 {
   "name": "vue-stripe-menu",
   "version": "3.0.0",
-  "homepage": "https://github.com/oleksiikhr/vue-stripe-menu#readme",
+  "homepage": "https://github.com/oleksiikhr/vue-stripe-menu",
   "description": "Creating a navigation menu with animations like on Stripe",
   "author": {
     "name": "Oleksii Khrushch",

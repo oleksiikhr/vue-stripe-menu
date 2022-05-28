@@ -42,9 +42,7 @@ export default {
     },
   },
   setup(props) {
-    const background = computed(() =>
-      'primary' === props.color ? 'background' : 'background--secondary'
-    );
+    const background = computed(() => ('primary' === props.color ? 'background' : 'background--secondary'));
 
     return { background };
   },

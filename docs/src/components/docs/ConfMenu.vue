@@ -5,10 +5,7 @@
       {{ localStyles }}
     </component>
     <div class="mb-10">
-      <small
-        >* These changes are applied on the current header and added to the
-        Install section.</small
-      >
+      <small>* These changes are applied on the current header and added to the Install section.</small>
     </div>
     <br />
     <div class="mb-10">
@@ -21,10 +18,7 @@
               v-model="item.value"
               :placeholder="item.initial"
               :style="{
-                color:
-                  !item.value || item.value === item.initial
-                    ? '#595959'
-                    : '#de3939',
+                color: !item.value || item.value === item.initial ? '#595959' : '#de3939',
               }"
               spellcheck="false"
               @input="item.onInput"
@@ -46,10 +40,7 @@
                 v-bind="item.attrs"
                 :placeholder="item.initial"
                 :style="{
-                  color:
-                    !item.value || item.value === item.initial
-                      ? '#595959'
-                      : '#de3939',
+                  color: !item.value || item.value === item.initial ? '#595959' : '#de3939',
                 }"
                 spellcheck="false"
               />
@@ -59,18 +50,14 @@
         </div>
       </div>
       <br />
-      <a
-        href="https://github.com/oleksiikhr/vue-stripe-menu/blob/main/src/scss/_variables.scss"
-        target="_blank"
-      >
-        List of variables
-      </a>
+      <a :href="`${homepage}/blob/main/src/scss/_variables.scss`" target="_blank"> List of variables </a>
     </div>
   </div>
 </template>
 
 <script>
 import BaseTitle from '../base/Title.vue';
+import { homepage } from '../../../../package.json';
 
 export default {
   components: {
@@ -79,6 +66,7 @@ export default {
   emits: ['on-css', 'change-props'],
   data() {
     return {
+      homepage,
       vsmProps: [
         {
           property: 'element',
@@ -138,9 +126,7 @@ export default {
           value: null,
           initial: '1024px',
           desc: 'for vsm-menu, empty - no styles',
-          handler: (val) =>
-            val &&
-            `.vsm-menu {\n  max-width: ${val};\n  width: 100%;\n  margin: 0 auto;\n}`,
+          handler: (val) => val && `.vsm-menu {\n  max-width: ${val};\n  width: 100%;\n  margin: 0 auto;\n}`,
         },
         {
           property: 'header margin',
@@ -260,20 +246,14 @@ export default {
         .trim();
     },
     vsmMenuTransitionStyle() {
-      return this.vsmMenuStyles.find(
-        (item) => '$vsm-transition' === item.property
-      );
+      return this.vsmMenuStyles.find((item) => '$vsm-transition' === item.property);
     },
     vsmMenuTransitionProp() {
-      return this.vsmProps.find(
-        (item) => 'transition-timeout' === item.property
-      );
+      return this.vsmProps.find((item) => 'transition-timeout' === item.property);
     },
     filteredStyles() {
-      let overrideStyles =
-        this.vsmMenuStylesString && `${this.vsmMenuStylesString}\n`;
-      overrideStyles +=
-        this.vsmMobStylesString && `${this.vsmMobStylesString}\n`;
+      let overrideStyles = this.vsmMenuStylesString && `${this.vsmMenuStylesString}\n`;
+      overrideStyles += this.vsmMobStylesString && `${this.vsmMobStylesString}\n`;
 
       let result = `// >>> SCSS style (required sass-loader, node-sass) <<<\n// https://github.com/oleksiikhr/vue-stripe-menu/blob/main/src/scss/_variables.scss\n`;
       result += `${overrideStyles ? `${overrideStyles}\n` : ''}`;
@@ -289,16 +269,12 @@ export default {
           const initial = item.initial.replace(/\$([a-z-]+)/gm, 'var(--$1)');
 
           // eslint-disable-next-line no-param-reassign
-          result += `${item.property.replace(/\$/gm, '--')}: ${
-            value || initial
-          };\n`;
+          result += `${item.property.replace(/\$/gm, '--')}: ${value || initial};\n`;
           return result;
         }, '');
       };
 
-      return `:root {${fn(this.vsmMenuStyles)}${fn(this.vsmMobStyles)}}${
-        this.generalStylesString
-      }`;
+      return `:root {${fn(this.vsmMenuStyles)}${fn(this.vsmMobStyles)}}${this.generalStylesString}`;
     },
   },
   watch: {
@@ -331,22 +307,15 @@ export default {
     },
     onChangeMenuProps() {
       const obj = this.vsmProps.reduce((result, item) => {
-        if (
-          item.value !== item.initial &&
-          (!item.validator || item.validator(item.value))
-        ) {
+        if (item.value !== item.initial && (!item.validator || item.validator(item.value))) {
           // eslint-disable-next-line no-param-reassign
-          result[item.property] = item.convert
-            ? item.convert(item.value)
-            : item.value;
+          result[item.property] = item.convert ? item.convert(item.value) : item.value;
         }
 
         return result;
       }, {});
 
-      this.vsmMenuTransitionStyle.value = `${
-        this.vsmMenuTransitionProp.value || this.vsmMenuTransitionProp.initial
-      }ms`;
+      this.vsmMenuTransitionStyle.value = `${this.vsmMenuTransitionProp.value || this.vsmMenuTransitionProp.initial}ms`;
 
       this.$emit('change-props', obj);
     },

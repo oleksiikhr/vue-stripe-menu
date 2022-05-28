@@ -51,9 +51,7 @@ export default {
       return ['mb-20', 'background-hover'];
     });
 
-    const background = computed(() =>
-      'primary' === props.color ? 'background' : 'background--secondary'
-    );
+    const background = computed(() => ('primary' === props.color ? 'background' : 'background--secondary'));
 
     return { width, typeClasses, background };
   },

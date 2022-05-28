@@ -9,11 +9,7 @@
     </thead>
     <tbody>
       <tr v-for="(row, i) in rows" :key="i" :class="{ required: row.required }">
-        <td
-          v-for="(column, j) in columns"
-          :key="j"
-          :class="`column column_${column.attr}`"
-        >
+        <td v-for="(column, j) in columns" :key="j" :class="`column column_${column.attr}`">
           {{ row[column.attr] }}
         </td>
       </tr>

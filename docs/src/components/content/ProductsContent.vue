@@ -10,12 +10,7 @@
     <div class="secondary p-30">
       <template v-for="i in 3" :key="`g3-${i}`">
         <base-text :max="200" :height="15" type="title" color="secondary" />
-        <base-group
-          v-for="j in 2"
-          :key="`g4-${i}-${j}`"
-          size="small"
-          color="secondary"
-        />
+        <base-group v-for="j in 2" :key="`g4-${i}-${j}`" size="small" color="secondary" />
       </template>
     </div>
   </div>

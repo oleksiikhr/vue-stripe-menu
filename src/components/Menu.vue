@@ -55,9 +55,10 @@
 </template>
 
 <script lang="ts">
-/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-underscore-dangle, no-param-reassign */
 import { defineComponent } from 'vue';
 import { pointerEvents } from '../utils/dom';
+import { VsmHTMLElement, VsmItem } from '../types';
 
 // This values depends on .vsm-background styles (width/height)
 const BASE_WIDTH = 380;
@@ -138,32 +139,14 @@ export default defineComponent({
   data() {
     return {
       activeDropdown: undefined as HTMLElement | undefined,
-      activeContainerItem: undefined as
-        | {
-            el: HTMLElement;
-            name: string;
-            align: string;
-            content: HTMLElement;
-          }
-        | undefined,
-      elementsWithDropdown: [] as HTMLElement[],
-      dropdownContainerItems: [] as Array<{
-        el: HTMLElement;
-        name: string;
-        align: string;
-        content: HTMLElement;
-      }>,
+      activeContainerItem: undefined as VsmItem | undefined,
+      elementsWithDropdown: [] as VsmHTMLElement[],
+      dropdownContainerItems: [] as Array<VsmItem>,
       pointerEvent: {} as { end: string; enter: string; leave: string },
       isDragging: false,
-      closeDropdownTimeout: undefined as
-        | ReturnType<typeof setTimeout>
-        | undefined,
-      enableTransitionTimeout: undefined as
-        | ReturnType<typeof setTimeout>
-        | undefined,
-      disableTransitionTimeout: undefined as
-        | ReturnType<typeof setTimeout>
-        | undefined,
+      closeDropdownTimeout: undefined as ReturnType<typeof setTimeout> | undefined,
+      enableTransitionTimeout: undefined as ReturnType<typeof setTimeout> | undefined,
+      disableTransitionTimeout: undefined as ReturnType<typeof setTimeout> | undefined,
       lastWindowWidth: undefined as number | undefined,
     };
   },
@@ -224,9 +207,7 @@ export default defineComponent({
       this.$el.classList.add('vsm-overlay-active', 'vsm-dropdown-active');
       this.activeDropdown = element;
       this.activeDropdown.setAttribute('aria-expanded', 'true');
-      this.elementsWithDropdown.forEach((el) =>
-        el.classList.remove('vsm-active')
-      );
+      this.elementsWithDropdown.forEach((el) => el.classList.remove('vsm-active'));
       element.classList.add('vsm-active');
 
       const activeDataDropdown = element.getAttribute('data-dropdown');
@@ -254,9 +235,7 @@ export default defineComponent({
       }
 
       this.$emit('close-dropdown', this.activeDropdown);
-      this.elementsWithDropdown.forEach((el) =>
-        el.classList.remove('vsm-active')
-      );
+      this.elementsWithDropdown.forEach((el) => el.classList.remove('vsm-active'));
 
       this.activeContainerItem.el.setAttribute('aria-hidden', 'true');
 
@@ -320,8 +299,7 @@ export default defineComponent({
       // Possible blurring font with decimal values
       position = Math.round(position);
 
-      const dropdownOffset =
-        +this.dropdownOffset + this.activeDropdown.offsetTop;
+      const dropdownOffset = +this.dropdownOffset + this.activeDropdown.offsetTop;
       const ratioWidth = offsetWidth / BASE_WIDTH;
       const ratioHeight = offsetHeight / BASE_HEIGHT;
 
@@ -334,17 +312,14 @@ export default defineComponent({
       dropdownContainer.style.width = `${offsetWidth}px`;
       dropdownContainer.style.height = `${offsetHeight}px`;
 
-      (
-        this.$refs.arrow as HTMLElement
-      ).style.transform = `translate(${Math.round(
+      (this.$refs.arrow as HTMLElement).style.transform = `translate(${Math.round(
         startPosition + rect.width / 2
       )}px, ${dropdownOffset}px) rotate(45deg)`;
       (
         this.$refs.background as HTMLElement
       ).style.transform = `translate(${position}px, ${dropdownOffset}px) scaleX(${ratioWidth}) scaleY(${ratioHeight})`;
       (this.$refs.backgroundAlt as HTMLElement).style.transform = `translateY(${
-        (this.activeContainerItem.content.firstElementChild as HTMLElement)
-          .offsetHeight / ratioHeight
+        (this.activeContainerItem.content.firstElementChild as HTMLElement).offsetHeight / ratioHeight
       }px)`;
     },
     /*
@@ -359,10 +334,7 @@ export default defineComponent({
       clearTimeout(this.closeDropdownTimeout);
     },
     startEnableTransitionTimeout() {
-      this.enableTransitionTimeout = setTimeout(
-        () => this.$el.classList.remove('vsm-no-transition'),
-        50
-      );
+      this.enableTransitionTimeout = setTimeout(() => this.$el.classList.remove('vsm-no-transition'), 50);
     },
     clearEnableTransitionTimeout() {
       clearTimeout(this.enableTransitionTimeout);
@@ -401,13 +373,13 @@ export default defineComponent({
               this.openDropdown(el);
             },
             [this.pointerEvent.enter]: (evt) => {
-              if ('touch' !== evt.pointerType) {
+              if ('touch' !== (evt as PointerEvent).pointerType) {
                 this.clearCloseDropdownTimeout();
                 this.openDropdown(el);
               }
             },
             [this.pointerEvent.leave]: (evt) => {
-              if ('touch' !== evt.pointerType) {
+              if ('touch' !== (evt as PointerEvent).pointerType) {
                 this.startCloseDropdownTimeout();
               }
             },
@@ -430,7 +402,7 @@ export default defineComponent({
       });
     },
     registerDropdownContainerEvents(force = false) {
-      const el = this.$refs.dropdownContainer as HTMLElement;
+      const el = this.$refs.dropdownContainer as VsmHTMLElement;
 
       // Events have been registered
       if (el._vsmMenu && !force) {
@@ -446,12 +418,12 @@ export default defineComponent({
       if ('hover' === this.handler) {
         el._vsmMenuHandlers = {
           [this.pointerEvent.enter]: (evt) => {
-            if ('touch' !== evt.pointerType) {
+            if ('touch' !== (evt as PointerEvent).pointerType) {
               this.clearCloseDropdownTimeout();
             }
           },
           [this.pointerEvent.leave]: (evt) => {
-            if ('touch' !== evt.pointerType) {
+            if ('touch' !== (evt as PointerEvent).pointerType) {
               this.startCloseDropdownTimeout();
             }
           },
@@ -479,22 +451,13 @@ export default defineComponent({
       window.addEventListener('resize', this.windowResizeHandler);
       document.addEventListener('touchmove', this.documentTouchMoveHandler);
       document.addEventListener('touchstart', this.documentTouchStartHandler);
-      document.body.addEventListener(
-        this.pointerEvent.end,
-        this.documentEventEndHandler
-      );
+      document.body.addEventListener(this.pointerEvent.end, this.documentEventEndHandler);
     },
     removeGlobalListeners() {
       window.removeEventListener('resize', this.windowResizeHandler);
       document.removeEventListener('touchmove', this.documentTouchMoveHandler);
-      document.removeEventListener(
-        'touchstart',
-        this.documentTouchStartHandler
-      );
-      document.body.removeEventListener(
-        this.pointerEvent.end,
-        this.documentEventEndHandler
-      );
+      document.removeEventListener('touchstart', this.documentTouchStartHandler);
+      document.body.removeEventListener(this.pointerEvent.end, this.documentEventEndHandler);
     },
     windowResizeHandler() {
       // Recalculates the dropdown only in cases where the screen width changes
@@ -545,19 +508,15 @@ export default defineComponent({
       this.pointerEvent = pointerEvents();
     },
     updateDataElements() {
-      this.elementsWithDropdown = Array.from(
-        (this.$refs.linkContainer as HTMLElement).children
-      ).filter((el) =>
+      this.elementsWithDropdown = Array.from((this.$refs.linkContainer as HTMLElement).children).filter((el) =>
         el.classList.contains('vsm-has-dropdown')
-      ) as HTMLElement[];
+      ) as VsmHTMLElement[];
 
-      this.dropdownContainerItems = Array.from(
-        (this.$refs.dropdownContainer as HTMLElement).children
-      ).map((el) => ({
+      this.dropdownContainerItems = Array.from((this.$refs.dropdownContainer as HTMLElement).children).map((el) => ({
         el: el as HTMLElement,
         name: el.getAttribute('data-dropdown') as string,
         align: el.getAttribute('data-align') as string,
-        content: el.firstElementChild as HTMLElement,
+        content: el.firstElementChild as VsmHTMLElement,
       }));
     },
     clearAllStyles() {

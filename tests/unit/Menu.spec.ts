@@ -1,9 +1,11 @@
+/* eslint-disable no-underscore-dangle, @typescript-eslint/ban-ts-comment */
 import { mount } from '@vue/test-utils';
 import { nextTick } from 'vue';
 import * as sinon from 'sinon';
 import { SinonSpy } from 'sinon';
 import { VueWrapper } from '@vue/test-utils/dist/vueWrapper';
 import Menu from '../../src/components/Menu.vue';
+import { VsmHTMLElement } from '../../src/types';
 
 const pointerEvent = {
   end: 'touchend',
@@ -21,7 +23,7 @@ describe('vsmMenu Component', () => {
   describe('props', () => {
     describe('element', () => {
       it('Default render an element', () => {
-        const wrapper = mount<InstanceType<typeof Menu> | null>(Menu, {
+        const wrapper = mount(Menu, {
           props: { menu },
         });
 
@@ -30,7 +32,7 @@ describe('vsmMenu Component', () => {
       });
 
       it('Change an element on mount', () => {
-        const wrapper = mount<InstanceType<typeof Menu> | null>(Menu, {
+        const wrapper = mount(Menu, {
           props: { element: 'div', menu },
         });
 
@@ -39,7 +41,7 @@ describe('vsmMenu Component', () => {
       });
 
       it('Change an element dynamically and working dropdown', async () => {
-        const wrapper = mount<InstanceType<typeof Menu> | null>(Menu, {
+        const wrapper = mount(Menu, {
           props: { handler: 'hover', menu },
           slots: { default: '<div>Content</div>' },
         });
@@ -54,7 +56,7 @@ describe('vsmMenu Component', () => {
 
     describe('handler', () => {
       it('Hover - trigger mouseenter', async () => {
-        const wrapper = mount(<InstanceType<typeof Menu> | null>Menu, {
+        const wrapper = mount(Menu, {
           props: { handler: 'hover', menu },
           slots: { default: '<div>Content</div>' },
         });
@@ -64,7 +66,7 @@ describe('vsmMenu Component', () => {
       });
 
       it('Click - trigger mouseenter', async () => {
-        const wrapper = mount<InstanceType<typeof Menu> | null>(Menu, {
+        const wrapper = mount(Menu, {
           props: { handler: 'click', menu },
           slots: { default: '<div>Content</div>' },
         });
@@ -74,7 +76,7 @@ describe('vsmMenu Component', () => {
       });
 
       it('Click - trigger %pointerEvent.end%', async () => {
-        const wrapper = mount<InstanceType<typeof Menu> | null>(Menu, {
+        const wrapper = mount(Menu, {
           props: { handler: 'click', menu },
           slots: { default: '<div>Content</div>' },
         });
@@ -84,7 +86,7 @@ describe('vsmMenu Component', () => {
       });
 
       it('Mouseenter trigger after change handler', async () => {
-        const wrapper = mount<InstanceType<typeof Menu> | null>(Menu, {
+        const wrapper = mount(Menu, {
           props: { handler: 'hover', menu },
           slots: { default: '<div>Content</div>' },
         });
@@ -102,7 +104,7 @@ describe('vsmMenu Component', () => {
 
     describe('menu', () => {
       it('Change menu dynamically and working dropdown', async () => {
-        const wrapper = mount<InstanceType<typeof Menu> | null>(Menu, {
+        const wrapper = mount(Menu, {
           props: { handler: 'hover', menu: [...menu] },
           slots: { default: '<div>Content</div>' },
         });
@@ -111,9 +113,7 @@ describe('vsmMenu Component', () => {
         wrapper.vm.menu.push(item);
         await nextTick();
 
-        const el = wrapper.find(
-          `.vsm-has-dropdown[data-dropdown="${item.dropdown}"]`
-        );
+        const el = wrapper.find(`.vsm-has-dropdown[data-dropdown="${item.dropdown}"]`);
         await nextTick();
         await el.trigger('mouseenter');
         expect(wrapper.vm.activeDropdown).not.toBeUndefined();
@@ -123,7 +123,7 @@ describe('vsmMenu Component', () => {
 
   describe('DOM', () => {
     it('Number of elements', () => {
-      const wrapper = mount<InstanceType<typeof Menu> | null>(Menu, {
+      const wrapper = mount(Menu, {
         props: { menu },
         slots: { default: '<div>Content</div>' },
       });
@@ -132,7 +132,7 @@ describe('vsmMenu Component', () => {
     });
 
     it('Number of elements who has dropdown', () => {
-      const wrapper = mount<InstanceType<typeof Menu> | null>(Menu, {
+      const wrapper = mount(Menu, {
         props: { menu },
         slots: { default: '<div>Content</div>' },
       });
@@ -143,7 +143,7 @@ describe('vsmMenu Component', () => {
 
   describe('computed', () => {
     it('Number of items having dropdown', () => {
-      const wrapper = mount<InstanceType<typeof Menu> | null>(Menu, {
+      const wrapper = mount(Menu, {
         props: { menu },
         slots: { default: '<div>Content</div>' },
       });
@@ -152,7 +152,7 @@ describe('vsmMenu Component', () => {
     });
 
     it('Number of elements having dropdown', () => {
-      const wrapper = mount<InstanceType<typeof Menu> | null>(Menu, {
+      const wrapper = mount(Menu, {
         props: { menu },
         slots: { default: '<div>Content</div>' },
       });
@@ -161,7 +161,7 @@ describe('vsmMenu Component', () => {
     });
 
     it('Number of dropdown sections', () => {
-      const wrapper = mount<InstanceType<typeof Menu> | null>(Menu, {
+      const wrapper = mount(Menu, {
         props: { menu },
         slots: { default: '<div>Content</div>' },
       });
@@ -171,21 +171,25 @@ describe('vsmMenu Component', () => {
   });
 
   describe('events', () => {
-    let eventEndStub: SinonSpy;
-    let touchStartStub: SinonSpy;
-    let touchMoveStub: SinonSpy;
-    let resizeStub: SinonSpy;
+    let eventEndStub: SinonSpy<unknown[], unknown>;
+    let touchStartStub: SinonSpy<unknown[], unknown>;
+    let touchMoveStub: SinonSpy<unknown[], unknown>;
+    let resizeStub: SinonSpy<unknown[], unknown>;
 
     // eslint-disable-next-line
     let wrapper: VueWrapper<any>;
 
     beforeEach(() => {
+      // @ts-ignore
       eventEndStub = sinon.spy(Menu.methods, 'documentEventEndHandler');
+      // @ts-ignore
       touchStartStub = sinon.spy(Menu.methods, 'documentTouchStartHandler');
+      // @ts-ignore
       touchMoveStub = sinon.spy(Menu.methods, 'documentTouchMoveHandler');
+      // @ts-ignore
       resizeStub = sinon.spy(Menu.methods, 'windowResizeHandler');
 
-      wrapper = mount<InstanceType<typeof Menu> | null>(Menu, {
+      wrapper = mount(Menu, {
         props: { menu },
         slots: {
           default: '<div>Content</div>',
@@ -253,7 +257,7 @@ describe('vsmMenu Component', () => {
 
     describe('local', () => {
       it('Register events for each dropdown element', () => {
-        wrapper.vm.elementsWithDropdown.forEach((el: HTMLElement) => {
+        wrapper.vm.elementsWithDropdown.forEach((el: VsmHTMLElement) => {
           expect(el._vsmMenu).toBeTruthy();
         });
       });
@@ -268,6 +272,7 @@ describe('vsmMenu Component', () => {
       });
 
       it('$emit on openDropdown, same active dropdown', () => {
+        // eslint-disable-next-line prefer-destructuring
         wrapper.vm.activeDropdown = wrapper.vm.elementsWithDropdown[0];
         wrapper.vm.openDropdown(wrapper.vm.elementsWithDropdown[0]);
         expect(wrapper.emitted('open-dropdown')).toBeFalsy();
@@ -277,7 +282,7 @@ describe('vsmMenu Component', () => {
 
   describe('methods', () => {
     it('Toggle dropdown, no active dropdown', () => {
-      const wrapper = mount<InstanceType<typeof Menu> | null>(Menu, {
+      const wrapper = mount(Menu, {
         props: { menu },
         slots: { default: '<div>Content</div>' },
       });
@@ -292,7 +297,7 @@ describe('vsmMenu Component', () => {
     });
 
     it('Toggle dropdown, has active dropdown', () => {
-      const wrapper = mount<InstanceType<typeof Menu> | null>(Menu, {
+      const wrapper = mount(Menu, {
         props: { menu },
         slots: { default: '<div>Content</div>' },
       });
@@ -308,7 +313,7 @@ describe('vsmMenu Component', () => {
     });
 
     it('Open Dropdown', () => {
-      const wrapper = mount<InstanceType<typeof Menu> | null>(Menu, {
+      const wrapper = mount(Menu, {
         props: { menu },
         slots: { default: '<div>Content</div>' },
       });
@@ -319,7 +324,7 @@ describe('vsmMenu Component', () => {
     });
 
     it('Close Dropdown', () => {
-      const wrapper = mount<InstanceType<typeof Menu> | null>(Menu, {
+      const wrapper = mount(Menu, {
         props: { menu },
         slots: { default: '<div>Content</div>' },
       });
@@ -334,7 +339,7 @@ describe('vsmMenu Component', () => {
     it('Register component with dropdown', () => {
       const baseComponent = { template: '<div>Content</div>' };
 
-      const wrapper = mount<InstanceType<typeof Menu> | null>(Menu, {
+      const wrapper = mount(Menu, {
         components: {
           baseComponent,
         },
