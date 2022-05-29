@@ -10,7 +10,7 @@
             :key="index"
             :class="[
               'vsm-link',
-              item.attributes ? item.attributes.class : null,
+              item.attributes?.class,
               {
                 'vsm-has-dropdown': item.dropdown,
               },
@@ -59,10 +59,6 @@
 import { defineComponent } from 'vue';
 import { pointerEvents } from '../utils/dom';
 import { VsmHTMLElement, VsmItem } from '../types';
-
-// This values depends on .vsm-background styles (width/height)
-const BASE_WIDTH = 380;
-const BASE_HEIGHT = 400;
 
 export default defineComponent({
   name: 'VsmMenu',
@@ -300,8 +296,6 @@ export default defineComponent({
       position = Math.round(position);
 
       const dropdownOffset = +this.dropdownOffset + this.activeDropdown.offsetTop;
-      const ratioWidth = offsetWidth / BASE_WIDTH;
-      const ratioHeight = offsetHeight / BASE_HEIGHT;
 
       // Activate transition
       this.clearDisableTransitionTimeout();
@@ -315,11 +309,11 @@ export default defineComponent({
       (this.$refs.arrow as HTMLElement).style.transform = `translate(${Math.round(
         startPosition + rect.width / 2
       )}px, ${dropdownOffset}px) rotate(45deg)`;
-      (
-        this.$refs.background as HTMLElement
-      ).style.transform = `translate(${position}px, ${dropdownOffset}px) scaleX(${ratioWidth}) scaleY(${ratioHeight})`;
+      (this.$refs.background as HTMLElement).style.transform = `translate(${position}px, ${dropdownOffset}px)`;
+      (this.$refs.background as HTMLElement).style.width = `${offsetWidth}px`;
+      (this.$refs.background as HTMLElement).style.height = `${offsetHeight}px`;
       (this.$refs.backgroundAlt as HTMLElement).style.transform = `translateY(${
-        (this.activeContainerItem.content.firstElementChild as HTMLElement).offsetHeight / ratioHeight
+        (this.activeContainerItem.content.firstElementChild as HTMLElement).offsetHeight
       }px)`;
     },
     /*

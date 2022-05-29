@@ -109,8 +109,8 @@
   left: 0;
 
   // Optimize animation
-  will-change: transform;
-  transition-property: transform;
+  will-change: transform, width, height;
+  transition-property: transform, width, height;
   transition-duration: $vsm-transition;
 }
 
@@ -119,8 +119,8 @@
   border-radius: $vsm-border-radius;
   overflow: hidden;
   box-shadow: $vsm-shadow;
-  width: 380px; // This value is involved in the calculations
-  height: 400px; // This value is involved in the calculations
+  width: 380px;
+  height: 400px;
   transform: translateX(0);
   transform-origin: 0 0;
 }

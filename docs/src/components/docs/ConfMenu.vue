@@ -18,7 +18,7 @@
               v-model="item.value"
               :placeholder="item.initial"
               :style="{
-                color: !item.value || item.value === item.initial ? '#595959' : '#de3939',
+                color: !item.value || item.value === item.initial ? '#595959' : '#080',
               }"
               spellcheck="false"
               @input="item.onInput"
@@ -40,7 +40,7 @@
                 v-bind="item.attrs"
                 :placeholder="item.initial"
                 :style="{
-                  color: !item.value || item.value === item.initial ? '#595959' : '#de3939',
+                  color: !item.value || item.value === item.initial ? '#595959' : '#080',
                 }"
                 spellcheck="false"
               />
