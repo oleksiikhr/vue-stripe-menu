@@ -16,7 +16,7 @@
       ref="codeVue"
       class="language-xml"
     >{{ vue }}</code></pre>
-    <p>Add css/scss styles:</p>
+    <p>Add scss styles:</p>
     <pre><code
       ref="codeCss"
       class="language-scss"
@@ -24,12 +24,12 @@
   </div>
 </template>
 
-<script>
-import { onMounted, nextTick, watch, ref } from 'vue';
+<script lang="ts">
+import { defineComponent, onMounted, nextTick, watch, ref } from 'vue';
 import hljs from '../../libraries/highlight';
 import BaseTitle from '../base/Title.vue';
 
-export default {
+export default defineComponent({
   name: 'InstallDocs',
   components: {
     BaseTitle,
@@ -52,44 +52,31 @@ export default {
 
     onMounted(() => {
       hljs.highlightElement(codeShell.value);
-      hljs.highlightElement(codeVue.value);
-      hljs.highlightElement(codeCss.value);
       hljs.highlightElement(codeJs.value);
     });
 
     watch(
       () => props.css,
-      () => nextTick().then(() => hljs.highlightElement(codeCss.value))
+      () => nextTick().then(() => hljs.highlightElement(codeCss.value)),
+      { immediate: true }
     );
     watch(
       () => props.vsmProps,
-      () => nextTick().then(() => hljs.highlightElement(codeVue.value))
+      () => nextTick().then(() => hljs.highlightElement(codeVue.value)),
+      { immediate: true }
     );
 
     return { codeShell, codeVue, codeCss, codeJs };
   },
   data() {
     return {
-      shell: `$ npm i vue-stripe-menu
-// or
-$ yarn add vue-stripe-menu
-`,
-      js: `// >>> Install globally - .js file <<<
+      shell: `$ npm i -D vue-stripe-menu
+$ yarn add -D vue-stripe-menu
+$ pnpm add -D vue-stripe-menu`,
+      js: `import { createApp } from 'vue';
+import VueStripeMenu from 'vue-stripe-menu';
 
-import { createApp } from 'vue'
-import VueStripeMenu from 'vue-stripe-menu'
-
-createApp({}).use(VueStripeMenu)
-
-// >>> Install locally - .vue file <<<
-
-import { VsmMenu, VsmMob } from 'vue-stripe-menu'
-
-export default {
-  components: {
-    VsmMenu, VsmMob
-  }
-}`,
+createApp({}).use(VueStripeMenu);`,
     };
   },
   computed: {
@@ -147,5 +134,5 @@ export default {
 <script>`;
     },
   },
-};
+});
 </script>

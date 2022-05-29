@@ -4,9 +4,6 @@
     <component :is="'style'">
       {{ localStyles }}
     </component>
-    <div class="mb-10">
-      <small>* These changes are applied on the current header and added to the Install section.</small>
-    </div>
     <br />
     <div class="mb-10">
       <div class="sub-title">[Props]</div>
@@ -255,9 +252,8 @@ export default {
       let overrideStyles = this.vsmMenuStylesString && `${this.vsmMenuStylesString}\n`;
       overrideStyles += this.vsmMobStylesString && `${this.vsmMobStylesString}\n`;
 
-      let result = `// >>> SCSS style (required sass-loader, node-sass) <<<\n// https://github.com/oleksiikhr/vue-stripe-menu/blob/main/src/scss/_variables.scss\n`;
+      let result = `// >>> SCSS style (required loaders, like sass-loader, node-sass) <<<\n// ${homepage}/blob/main/src/scss/_variables.scss\n`;
       result += `${overrideStyles ? `${overrideStyles}\n` : ''}`;
-      result += `@import "~vue-stripe-menu/src/scss/index";\n\n// >>> CSS style <<<\n// @import 'vue-stripe-menu/dist/vue-stripe-menu.css';\n\n`;
       result += this.generalStylesString;
 
       return result.trim();
@@ -307,7 +303,7 @@ export default {
     },
     onChangeMenuProps() {
       const obj = this.vsmProps.reduce((result, item) => {
-        if (item.value !== item.initial && (!item.validator || item.validator(item.value))) {
+        if (!item.validator || item.validator(item.value)) {
           // eslint-disable-next-line no-param-reassign
           result[item.property] = item.convert ? item.convert(item.value) : item.value;
         }

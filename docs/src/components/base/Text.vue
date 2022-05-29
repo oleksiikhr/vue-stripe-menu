@@ -12,7 +12,6 @@
 
 <script>
 import { computed } from 'vue';
-import rnd from '../../scripts/rnd';
 
 export default {
   name: 'BaseText',
@@ -41,7 +40,9 @@ export default {
     },
   },
   setup(props) {
-    const width = computed(() => rnd(props.min, props.max));
+    const width = computed(() => {
+      return Math.floor(Math.random() * (props.max - props.min + 1)) + props.min;
+    });
 
     const typeClasses = computed(() => {
       if ('text' === props.type) {

@@ -58,6 +58,6 @@ jobs:
 
       - run: pnpm build
 
-      - run: npm publish --access public
+      - run: npm publish --access public --tag ${{ github.event.release.prerelease && 'beta' || 'latest' }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

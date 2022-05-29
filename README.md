@@ -205,7 +205,7 @@ export default {
           dropdown: 'news',
           // don't want a button element? Pass HTMLElement or global component
           // (pass only as a string, component must be globally accessible)
-          element: 'span', // router-link
+          element: 'span', // div, router-link, nuxt-link, custom-component
           // offset the position of the dropdown menu
           align: 'center',
           // menu item can accept all attributes
