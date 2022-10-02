@@ -53,14 +53,15 @@
 </template>
 
 <script>
-import BaseTitle from '../base/Title.vue';
+import BaseTitle from '../base/BaseTitle.vue';
 import { homepage } from '../../../../package.json';
 
 export default {
+  name: 'ConfigurationDocs',
   components: {
     BaseTitle,
   },
-  emits: ['on-css', 'change-props'],
+  emits: ['change-styles', 'change-props'],
   data() {
     return {
       homepage,
@@ -254,6 +255,7 @@ export default {
 
       let result = `// >>> SCSS style (required loaders, like sass-loader, node-sass) <<<\n// ${homepage}/blob/main/src/scss/_variables.scss\n`;
       result += `${overrideStyles ? `${overrideStyles}\n` : ''}`;
+      result += `@import "~vue-stripe-menu/src/scss/index";\n\n// >>> CSS style <<<\n// @import 'vue-stripe-menu/dist/vue-stripe-menu.css';\n\n`;
       result += this.generalStylesString;
 
       return result.trim();
@@ -276,7 +278,7 @@ export default {
   watch: {
     filteredStyles: {
       handler(val) {
-        this.$emit('on-css', val);
+        this.$emit('change-styles', val);
       },
       immediate: true,
     },

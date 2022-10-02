@@ -11,7 +11,7 @@
       ref="codeJs"
       class="language-javascript"
     >{{ js }}</code></pre>
-    <p>Add component:</p>
+    <p>Add the component:</p>
     <pre><code
       ref="codeVue"
       class="language-xml"
@@ -20,14 +20,15 @@
     <pre><code
       ref="codeCss"
       class="language-scss"
-    >{{ css }}</code></pre>
+    >{{ styles }}</code></pre>
   </div>
 </template>
 
 <script lang="ts">
+/* eslint-disable no-useless-escape */
 import { defineComponent, onMounted, nextTick, watch, ref } from 'vue';
 import hljs from '../../libraries/highlight';
-import BaseTitle from '../base/Title.vue';
+import BaseTitle from '../base/BaseTitle.vue';
 
 export default defineComponent({
   name: 'InstallDocs',
@@ -35,7 +36,7 @@ export default defineComponent({
     BaseTitle,
   },
   props: {
-    css: {
+    styles: {
       type: String,
       required: true,
     },
@@ -56,7 +57,7 @@ export default defineComponent({
     });
 
     watch(
-      () => props.css,
+      () => props.styles,
       () => nextTick().then(() => hljs.highlightElement(codeCss.value)),
       { immediate: true }
     );
@@ -131,7 +132,7 @@ export default {
     }
   }
 }
-<script>`;
+<\/script>`;
     },
   },
 });

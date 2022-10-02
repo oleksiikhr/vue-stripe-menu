@@ -23,10 +23,3 @@ export function pointerEvents(): { end: string; enter: string; leave: string } {
 export function isOutsideClick(element: HTMLElement, event: Event): boolean {
   return element === event.target || !element.contains(event.target as Node);
 }
-
-export default {
-  isTouchSupport,
-  isOutsideClick,
-  pointerEvents,
-  touchEvent,
-};

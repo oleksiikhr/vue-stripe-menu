@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/oleksiikhr/vue-stripe-menu/main/docs/images/img.png?raw=true" alt="Vue Stripe Menu" height="500px">
+  <img src="https://raw.githubusercontent.com/oleksiikhr/vue-stripe-menu/main/docs/images/stripe.png?raw=true" alt="Vue Stripe Menu" height="500px">
 </p>
 
 > Creating a navigation menu with animations like on Stripe
@@ -53,7 +53,7 @@ export default {
 }
 ```
 
-Add component:
+Add the component:
 
 ```vue
 <template>

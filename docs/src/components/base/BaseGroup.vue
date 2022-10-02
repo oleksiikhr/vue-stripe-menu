@@ -22,7 +22,7 @@
 
 <script>
 import { computed } from 'vue';
-import BaseText from './Text.vue';
+import BaseText from './BaseText.vue';
 
 export default {
   name: 'BaseGroup',

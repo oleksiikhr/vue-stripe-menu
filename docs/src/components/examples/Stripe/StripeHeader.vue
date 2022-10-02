@@ -41,6 +41,11 @@ export default {
     return {
       menu: [
         {
+          title: 'Products',
+          dropdown: 'products',
+          component: 'ProductsContent',
+        },
+        {
           title: 'Company',
           dropdown: 'company',
           component: 'CompanyContent',
@@ -51,14 +56,9 @@ export default {
           component: 'DevelopersContent',
         },
         {
-          title: 'Products',
-          dropdown: 'products',
-          component: 'ProductsContent',
-        },
-        {
-          title: 'Pricing',
+          title: 'Repository',
           attributes: {
-            href: '#pricing',
+            href: 'https://github.com/oleksiikhr/vue-stripe-menu',
           },
         },
       ],

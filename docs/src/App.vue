@@ -1,13 +1,11 @@
 <template>
   <component :is="header" v-bind="vsmProps" />
   <main>
-    <div @click="header = 'StripeHeader'">StripeHeader</div>
-    <div @click="header = 'FigmaHeader'">FigmaHeader</div>
     <div class="mb-10">
       <small>These changes are applied on the current header and added to the Install section.</small>
     </div>
-    <conf-menu-docs @on-css="onChangeCss" @change-props="onChangeProps" />
-    <install-docs :css="css" :vsm-props="vsmProps" />
+    <configuration-docs @change-styles="onChangeStyles" @change-props="onChangeProps" />
+    <install-docs :styles="styles" :vsm-props="vsmProps" />
   </main>
   <footer>
     <a :href="homepage" title="Repository" target="_blank">
@@ -22,33 +20,31 @@
 </template>
 
 <script>
-import ConfMenuDocs from './components/docs/ConfMenu.vue';
+import ConfigurationDocs from './components/docs/Configuration.vue';
 import InstallDocs from './components/docs/Install.vue';
 import StripeHeader from './components/examples/Stripe/StripeHeader.vue';
-import FigmaHeader from './components/examples/Figma/FigmaHeader.vue';
 import { homepage } from '../../package.json';
 
 export default {
   components: {
     StripeHeader,
-    FigmaHeader,
-    ConfMenuDocs,
+    ConfigurationDocs,
     InstallDocs,
   },
   data() {
     return {
       homepage,
       header: 'StripeHeader',
-      css: '',
+      styles: '',
       vsmProps: {},
     };
   },
   methods: {
-    onChangeProps(obj) {
-      this.vsmProps = obj;
+    onChangeProps(props) {
+      this.vsmProps = props;
     },
-    onChangeCss(val) {
-      this.css = val;
+    onChangeStyles(styles) {
+      this.styles = styles;
     },
   },
 };

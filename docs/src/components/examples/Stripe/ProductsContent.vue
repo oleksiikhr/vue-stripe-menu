@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import BaseText from '../../base/Text.vue';
-import BaseGroup from '../../base/Group.vue';
+import BaseText from '../../base/BaseText.vue';
+import BaseGroup from '../../base/BaseGroup.vue';
 
 export default {
   components: {
