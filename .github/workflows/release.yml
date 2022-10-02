@@ -36,7 +36,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
-      - run: pnpm
+      - run: pnpm i --frozen-lockfile
       - run: pnpm build:docs --base=/vue-stripe-menu/
 
       - name: Commit changes
