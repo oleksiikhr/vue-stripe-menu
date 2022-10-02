@@ -2,6 +2,64 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.0-beta.1](https://github.com/oleksiikhr/vue-stripe-menu/compare/v2.1.1...3.0.0-beta.1) (2021-08-08)
+
+- Replacing the style calculation for background (https://github.com/oleksiikhr/vue-stripe-menu/issues/246).
+
+**before**
+
+```scss
+.vsm-background {
+  transform: translate(152px, 0px) scaleX(1.08421) scaleY(1.2125);
+}
+```
+
+**after**
+
+```scss
+.vsm-background {
+  transform: translate(246px, 10px);
+  width: 409px;
+  height: 485px;
+}
+```
+
+- Build files
+
+**before**
+
+```
+dist/demo.html
+dist/vue-stripe-menu.common.js
+dist/vue-stripe-menu.common.js.map
+dist/vue-stripe-menu.css
+dist/vue-stripe-menu.umd.js
+dist/vue-stripe-menu.umd.js.map
+dist/vue-stripe-menu.umd.min.js
+dist/vue-stripe-menu.umd.min.js.map
+```
+
+**after**
+
+```
+dist/vue-stripe-menu.css
+dist/vue-stripe-menu.es.js
+dist/vue-stripe-menu.umd.js
+```
+
+---
+
+- [TypeScript](https://www.typescriptlang.org/) added.
+- Improved [ESLint](https://eslint.org/) configs, added [Prettier](https://prettier.io/) and [Stylelint](https://stylelint.io/).
+- Added Github documents: code of conduct, contributors and issue templates.
+- Installed [Node.js](https://nodejs.org/) as core `16.15.0`.
+- Replaced [yarn](https://yarnpkg.com/) with [pnpm](https://pnpm.io/).
+- Replaced [CircleCI](https://circleci.com/) with [Github Actions](https://github.com/features/actions).
+- Removed build documentation files from the repository. The current build is in the [gh-pages](https://github.com/oleksiikhr/vue-stripe-menu/tree/gh-pages) branch.
+- Added more workflows:
+  - Additional code check using [CodeQL](https://codeql.github.com/).
+  - Automatic publishing to [npm](https://www.npmjs.com/) from main branch.
+
 ### [2.1.1](https://github.com/oleksiikhr/vue-stripe-menu/compare/v2.1.0...v2.1.1) (2021-08-08)
 
 * Migrate from deprecated libSass (node-sass library) to Dart Sass ([944ad5d3](https://github.com/oleksiikhr/vue-stripe-menu/commit/944ad5d33fbd648a5c3a5b5a5833e283b3bdd0f1))

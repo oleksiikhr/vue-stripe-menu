@@ -26,10 +26,10 @@
 Install the library in your project:
 
 ```shell
-$ npm i vue-stripe-menu
+$ npm i -D vue-stripe-menu
 
-// $ yarn add vue-stripe-menu
-// $ pnpm i vue-stripe-menu
+// $ yarn add -D vue-stripe-menu
+// $ pnpm add -D vue-stripe-menu
 ```
 
 Import components:
@@ -255,13 +255,13 @@ export default {
 
 | Property           | Parameters          | Description                                         | Type           | Default | Required |
 |--------------------|---------------------|-----------------------------------------------------|----------------|---------|----------|
-| menu               | MenuObject          | Description of the menu items                       | Array          |         | true     |
-| element            |                     | HTMLElement for the root element                    | String         | header  | false    |
-| screen-offset      |                     | Offset from the window screen                       | String, Number | header  | false    |
-| dropdown-offset    |                     | Offset from the dropdown menu                       | String, Number | header  | false    |
-| transition-timeout |                     | Animation speed in ms (equals $vsm-transition scss) | String, Number | 250     | false    |
-| handler            | hover, click        | On what event to open dropdown menu                 | String         | hover   | false    |
-| align              | center, left, right | Offset the position of the dropdown menu            | String         | center  | false    |
+| menu               | MenuObject          | Description of the menu items                       | array          |         | true     |
+| element            |                     | HTMLElement for the root element                    | string         | header  | false    |
+| screen-offset      |                     | Offset from the window screen                       | string, number | header  | false    |
+| dropdown-offset    |                     | Offset from the dropdown menu                       | string, number | header  | false    |
+| transition-timeout |                     | Animation speed in ms (equals $vsm-transition scss) | string, number | 250     | false    |
+| handler            | hover, click        | On what event to open dropdown menu                 | string         | hover   | false    |
+| align              | center, left, right | Offset the position of the dropdown menu            | string         | center  | false    |
 
 ### [Menu] Events
 
@@ -304,18 +304,18 @@ export default {
 
 | Property   | Type   | Description                                                                                             |
 |------------|--------|---------------------------------------------------------------------------------------------------------|
-| title      | String | Menu item name. Can also be redefined through the slot                                                  |
-| dropdown   | String | Unique value indicates that this item has a dropdown menu                                               |
+| title      | string | Menu item name. Can also be redefined through the slot                                                  |
+| dropdown   | string | Unique value indicates that this item has a dropdown menu                                               |
 | align      | string | Offset the position of the dropdown menu (center/left/right)                                            |
-| element    | String | HTMLElement or global component in the header element, if not specified, it will be <button /> or <a /> |
-| attributes | Object | All attributes to be assigned in the header element (v-bind)                                            |
-| listeners  | Object | All events to be assigned in the header element (v-on)                                                  |
+| element    | string | HTMLElement or global component in the header element, if not specified, it will be <button /> or <a /> |
+| attributes | object | All attributes to be assigned in the header element (v-bind)                                            |
+| listeners  | object | All events to be assigned in the header element (v-on)                                                  |
 
 ### [Mob] Props
 
 | Property | Parameters | Description                          | Type    | Default | Required |
 |----------|------------|--------------------------------------|---------|---------|----------|
-| v-model  |            | The state of the open/close the menu | Boolean | false   | false    |
+| v-model  |            | The state of the open/close the menu | boolean | false   | false    |
 
 ### [Mob] Slots
 
