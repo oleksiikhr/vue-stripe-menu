@@ -20,6 +20,7 @@ const config: UserConfig = {
         globals: {
           vue: 'Vue',
         },
+        assetFileNames: 'vue-stripe-menu[extname]',
       },
     },
   },
