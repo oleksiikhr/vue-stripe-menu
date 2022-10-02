@@ -1,5 +1,4 @@
 @use "sass:math";
-
 @import "variables";
 
 /* -----------------------------------------------------------------------------
@@ -9,9 +8,12 @@
 
 .vsm-menu {
   perspective: 2000px;
-  &, * {
+
+  &,
+  * {
     box-sizing: border-box;
   }
+
   .vsm-dropdown {
     position: absolute;
     z-index: $vsm-index;
@@ -26,15 +28,13 @@
     transition-property: transform, opacity;
     transition-duration: $vsm-transition;
   }
+
   // Display dropdown content
   &.vsm-dropdown-active {
     .vsm-dropdown {
       opacity: 1;
       pointer-events: auto;
       transform: none;
-    }
-    .vsm-dropdown-section.vsm-active {
-      pointer-events: auto;
     }
   }
 }
@@ -49,6 +49,7 @@
   align-items: center;
   padding: 0;
   margin: 0;
+
   > li {
     list-style: none;
   }
@@ -60,10 +61,8 @@
     font: inherit;
     text-decoration: none;
     -webkit-tap-highlight-color: transparent;
-    &:focus {
-      outline: none;
-    }
   }
+
   > button {
     background: none;
     border: none;
@@ -81,14 +80,20 @@
   padding: 0 $vsm-link-padding-x;
   color: $vsm-color;
   transition: color $vsm-transition-link;
-  &:hover,
-  &.vsm-active {
-    color: $vsm-color-hover;
-  }
+
   > * {
     position: relative;
     display: block;
   }
+
+  &:hover,
+  &.vsm-active {
+    color: $vsm-color-hover;
+  }
+}
+
+.vsm-link-container > *:focus {
+  outline: none;
 }
 
 /* -----------------------------------------------------------------------------
@@ -102,9 +107,10 @@
   position: absolute;
   top: 0;
   left: 0;
+
   // Optimize animation
-  will-change: transform;
-  transition-property: transform;
+  will-change: transform, width, height;
+  transition-property: transform, width, height;
   transition-duration: $vsm-transition;
 }
 
@@ -113,8 +119,8 @@
   border-radius: $vsm-border-radius;
   overflow: hidden;
   box-shadow: $vsm-shadow;
-  width: 380px; // This value is involved in the calculations
-  height: 400px; // This value is involved in the calculations
+  width: 380px;
+  height: 400px;
   transform: translateX(0);
   transform-origin: 0 0;
 }
@@ -153,6 +159,7 @@
   top: 0;
   transform: translateX(0);
   will-change: transform, width, height;
+
   // Content is cut (overflow hidden), so border-radius can not show
   // add a few pixels to display correctly
   border-radius: $vsm-border-radius + 2px;
@@ -166,16 +173,23 @@
   will-change: transform, opacity;
   transition-property: transform, opacity;
   transition-duration: $vsm-transition;
+
   &.vsm-active {
     opacity: 1;
     transform: translateX(0);
   }
+
   &.vsm-left {
     transform: translateX(-#{$vsm-transform-content});
   }
+
   &.vsm-right {
     transform: translateX($vsm-transform-content);
   }
+}
+
+.vsm-dropdown-active .vsm-dropdown-section.vsm-active {
+  pointer-events: auto;
 }
 
 .vsm-dropdown-content {

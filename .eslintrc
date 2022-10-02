@@ -1,0 +1,22 @@
+{
+  "parser": "vue-eslint-parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "parserOptions": {
+    "project": [
+      "./tsconfig.json"
+    ]
+  },
+  "extends": [
+    "airbnb-base",
+    "airbnb-typescript/base",
+    "plugin:vue/vue3-recommended",
+    "@vue/typescript/recommended",
+    "@vue/prettier"
+  ],
+  "rules": {
+    "yoda": ["error", "always"],
+    "import/no-extraneous-dependencies": "off"
+  }
+}

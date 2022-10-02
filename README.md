@@ -1,37 +1,38 @@
 # Vue Stripe Menu
 
 <p>
-  <a href="https://circleci.com/gh/Alexeykhr/vue-stripe-menu" rel="nofollow"><img src="https://circleci.com/gh/Alexeykhr/vue-stripe-menu.svg?style=shield" alt="Build Status"></a>
-  <a href="https://codecov.io/github/Alexeykhr/vue-stripe-menu?branch=master"><img src="https://img.shields.io/codecov/c/github/Alexeykhr/vue-stripe-menu/dev.svg" alt="Coverage Status"></a>
+  <a href="https://github.com/oleksiikhr/vue-stripe-menu/actions/workflows/release.yml" rel="nofollow"><img src="https://github.com/oleksiikhr/vue-stripe-menu/actions/workflows/release.yml/badge.svg" alt="Build Status"></a>
+  <a href="https://app.netlify.com/sites/vue-stripe-menu/deploys" rel="nofollow"><img src="https://api.netlify.com/api/v1/badges/4865304f-e368-4f24-9242-dad6d3176e5c/deploy-status" alt="Netlify Status"></a>
   <a href="https://www.npmjs.com/package/vue-stripe-menu" rel="nofollow"><img src="https://img.shields.io/npm/v/vue-stripe-menu.svg" alt="Version"></a>
-  <a href="https://lgtm.com/projects/g/Alexeykhr/vue-stripe-menu/alerts/" rel="nofollow"><img src="https://img.shields.io/lgtm/alerts/g/Alexeykhr/vue-stripe-menu.svg?logo=lgtm&logoWidth=18" alt="Total alerts"></a>
+  <a href="https://lgtm.com/projects/g/oleksiikhr/vue-stripe-menu/alerts/" rel="nofollow"><img src="https://img.shields.io/lgtm/alerts/g/oleksiikhr/vue-stripe-menu.svg?logo=lgtm&logoWidth=18" alt="Total alerts"></a>
   <a href="https://npmcharts.com/compare/vue-stripe-menu?minimal=true"><img src="https://img.shields.io/npm/dm/vue-stripe-menu.svg" alt="Downloads"></a>
   <a href="https://www.npmjs.com/package/vue-stripe-menu" rel="nofollow"><img src="https://img.shields.io/npm/l/vue-stripe-menu.svg" alt="License"></a>
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Alexeykhr/vue-stripe-menu/master/public/img.png?raw=true" alt="Vue Stripe Menu" height="500px">
+  <img src="https://raw.githubusercontent.com/oleksiikhr/vue-stripe-menu/main/docs/images/stripe.png?raw=true" alt="Vue Stripe Menu" height="500px">
 </p>
 
 > Creating a navigation menu with animations like on Stripe
 
-**Only for Vue 3** ([changelog](https://github.com/Alexeykhr/vue-stripe-menu/blob/master/CHANGELOG.md#200-2021-04-09))
+**Only for Vue 3** ([changelog](https://github.com/oleksiikhr/vue-stripe-menu/blob/main/CHANGELOG.md#200-2021-04-09))
 
-[Demo Website](https://alexeykhr.github.io/vue-stripe-menu/)
+[Documentation](https://oleksiikhr.github.io/vue-stripe-menu/)
 
-[Vue 2 - Branch](https://github.com/Alexeykhr/vue-stripe-menu/tree/vue2)
+[Vue 2 - Branch](https://github.com/oleksiikhr/vue-stripe-menu/tree/vue2)
 
 ## How to install
 
 Install the library in your project:
 
-```sh
-$ npm i vue-stripe-menu
-// or
-$ yarn add vue-stripe-menu
+```shell
+$ npm i -D vue-stripe-menu
+
+// $ yarn add -D vue-stripe-menu
+// $ pnpm add -D vue-stripe-menu
 ```
 
-Import components and styles:
+Import components:
 
 ```js
 // >>> Install globally - .js file <<<
@@ -52,7 +53,7 @@ export default {
 }
 ```
 
-Add component:
+Add the component:
 
 ```vue
 <template>
@@ -99,7 +100,7 @@ Add css/scss styles:
 
 ```scss
 // >>> SCSS style (required sass-loader, node-sass) <<<
-// https://github.com/Alexeykhr/vue-stripe-menu/blob/master/src/scss/_variables.scss
+// https://github.com/oleksiikhr/vue-stripe-menu/blob/main/src/scss/_variables.scss
 // $vsm-transition: .5s;
 
 @import "~vue-stripe-menu/src/scss/index";
@@ -187,7 +188,6 @@ Add css/scss styles:
 </template>
 
 <script>
-/* eslint-disable */
 /*
  * Inside #after-nav and #before-nav it is recommended to use
  * to maintain the correct HTML structure:
@@ -205,7 +205,7 @@ export default {
           dropdown: 'news',
           // don't want a button element? Pass HTMLElement or global component
           // (pass only as a string, component must be globally accessible)
-          element: 'span', // router-link
+          element: 'span', // div, router-link, nuxt-link, custom-component
           // offset the position of the dropdown menu
           align: 'center',
           // menu item can accept all attributes
@@ -229,7 +229,7 @@ export default {
         {
           title: 'External Link',
           attributes: {
-            href: 'https://github.com/Alexeykhr/vue-stripe-menu',
+            href: 'https://github.com/oleksiikhr/vue-stripe-menu',
             target: '_blank'
           }
         }
@@ -254,48 +254,48 @@ export default {
 ### [Menu] Props
 
 | Property           | Parameters          | Description                                         | Type           | Default | Required |
-| ------------------ | ------------------- | --------------------------------------------------- | -------------- | ------- | -------- |
-| menu               | MenuObject          | Description of the menu items                       | Array          |         | true     |
-| element            |                     | HTMLElement for the root element                    | String         | header  | false    |
-| screen-offset      |                     | Offset from the window screen                       | String, Number | header  | false    |
-| dropdown-offset    |                     | Offset from the dropdown menu                       | String, Number | header  | false    |
-| transition-timeout |                     | Animation speed in ms (equals $vsm-transition scss) | String, Number | 250     | false    |
-| handler            | hover, click        | On what event to open dropdown menu                 | String         | hover   | false    |
-| align              | center, left, right | Offset the position of the dropdown menu            | String         | center  | false    |
+|--------------------|---------------------|-----------------------------------------------------|----------------|---------|----------|
+| menu               | MenuObject          | Description of the menu items                       | array          |         | true     |
+| element            |                     | HTMLElement for the root element                    | string         | header  | false    |
+| screen-offset      |                     | Offset from the window screen                       | string, number | header  | false    |
+| dropdown-offset    |                     | Offset from the dropdown menu                       | string, number | header  | false    |
+| transition-timeout |                     | Animation speed in ms (equals $vsm-transition scss) | string, number | 250     | false    |
+| handler            | hover, click        | On what event to open dropdown menu                 | string         | hover   | false    |
+| align              | center, left, right | Offset the position of the dropdown menu            | string         | center  | false    |
 
 ### [Menu] Events
 
 | Name           | Description                                            | Return      |
-| -------------- | ------------------------------------------------------ | ----------- |
+|----------------|--------------------------------------------------------|-------------|
 | open-dropdown  | Open the dropdown menu, return the active HTMLElement  | HTMLElement |
 | close-dropdown | Close the dropdown menu, return the closed HTMLElement | HTMLElement |
 
 ### [Menu] Slots
 
-| Name       | Parameters      | Description                                         |
-| ---------- | --------------- | --------------------------------------------------- |
-| default    | MenuItem, index | The main content for the dropdown list              |
-| before-nav | before-nav      | Content to the left of the list                     |
-| after-nav  | after-nav       | Content to the right of the list                    |
-| title      | MenuItem, index | Replace the output of menu\[i].title with your own  |
+| Name       | Parameters      | Description                                        |
+|------------|-----------------|----------------------------------------------------|
+| default    | MenuItem, index | The main content for the dropdown list             |
+| before-nav | before-nav      | Content to the left of the list                    |
+| after-nav  | after-nav       | Content to the right of the list                   |
+| title      | MenuItem, index | Replace the output of menu\[i].title with your own |
 
 ### [Menu] Methods
 
 `this.$refs[myVsmRef].closeDropdown()`
 
-| Name           | Parameters  | Description                                                 | Return |
-| -------------- | ----------- | ----------------------------------------------------------- | ------ |
-| toggleDropdown | HTMLElement | Open dropdown menu, if it is an active HTMLElement - close  |        |
-| openDropdown   | HTMLElement | Open dropdown menu for selected HTMLElement                 |        |
-| closeDropdown  |             | Close active dropdown menu                                  |        |
-| resizeDropdown |             | Recalculate size and location of dropdown menu              |        |
+| Name           | Parameters  | Description                                                | Return |
+|----------------|-------------|------------------------------------------------------------|--------|
+| toggleDropdown | HTMLElement | Open dropdown menu, if it is an active HTMLElement - close |        |
+| openDropdown   | HTMLElement | Open dropdown menu for selected HTMLElement                |        |
+| closeDropdown  |             | Close active dropdown menu                                 |        |
+| resizeDropdown |             | Recalculate size and location of dropdown menu             |        |
 
 ### [Menu] Properties
 
 `this.$refs[myVsmRef].itemsWithDropdown`
 
 | Name                   | Description                                     | Return                                                       |
-| ---------------------- | ----------------------------------------------- | ------------------------------------------------------------ |
+|------------------------|-------------------------------------------------|--------------------------------------------------------------|
 | itemsWithDropdown      | Filtered menu items with "dropdown" property    | Array\<MenuObject>                                           |
 | elementsWithDropdown   | List of HTMLElements that have dropdown content | Array\<MenuObject>                                           |
 | dropdownContainerItems | List of dropdown HTMLElements                   | Array<{el: HTMLElement, name: string, content: HTMLElement}> |
@@ -303,86 +303,50 @@ export default {
 ### [Menu] MenuObject (menu props)
 
 | Property   | Type   | Description                                                                                             |
-| ---------- | ------ | ------------------------------------------------------------------------------------------------------- |
-| title      | String | Menu item name. Can also be redefined through the slot                                                  |
-| dropdown   | String | Unique value indicates that this item has a dropdown menu                                               |
+|------------|--------|---------------------------------------------------------------------------------------------------------|
+| title      | string | Menu item name. Can also be redefined through the slot                                                  |
+| dropdown   | string | Unique value indicates that this item has a dropdown menu                                               |
 | align      | string | Offset the position of the dropdown menu (center/left/right)                                            |
-| element    | String | HTMLElement or global component in the header element, if not specified, it will be <button /> or <a /> |
-| attributes | Object | All attributes to be assigned in the header element (v-bind)                                            |
-| listeners  | Object | All events to be assigned in the header element (v-on)                                                  |
+| element    | string | HTMLElement or global component in the header element, if not specified, it will be <button /> or <a /> |
+| attributes | object | All attributes to be assigned in the header element (v-bind)                                            |
+| listeners  | object | All events to be assigned in the header element (v-on)                                                  |
 
 ### [Mob] Props
 
 | Property | Parameters | Description                          | Type    | Default | Required |
-| -------- | ---------- | ------------------------------------ | ------- | ------- | -------- |
-| v-model  |            | The state of the open/close the menu | Boolean | false   | false    |
+|----------|------------|--------------------------------------|---------|---------|----------|
+| v-model  |            | The state of the open/close the menu | boolean | false   | false    |
 
 ### [Mob] Slots
 
-| Name       | Parameters | Description               |
-| ---------- | ---------- | ------------------------- |
-| default    |            | Main content              |
-| hamburger  |            | Replace hamburger button  |
-| close      |            | Replace close button      |
+| Name      | Parameters | Description              |
+|-----------|------------|--------------------------|
+| default   |            | Main content             |
+| hamburger |            | Replace hamburger button |
+| close     |            | Replace close button     |
 
 ### [Mob] Methods
 
 `this.$refs[myVsmMobRef].closeDropdown()`
 
-| Name           | Parameters  | Description         | Return |
-| -------------- | ----------- | ------------------- | ------ |
-| closeDropdown  |             | Close dropdown menu |        |
+| Name          | Parameters | Description         | Return |
+|---------------|------------|---------------------|--------|
+| closeDropdown |            | Close dropdown menu |        |
 
 ### Classes
 
 | Name         | Description                        |
-| ------------ | ---------------------------------- |
+|--------------|------------------------------------|
 | vsm-mob-show | Show HTMLElements in mobile design |
 | vsm-mob-hide | Hide HTMLElements in mobile design |
 
 ## Contributing
 
-### Install dependencies
-
-```sh
-$ yarn
-```
-
-### Launch of a demo project (development of lib)
-
-```sh
-$ yarn dev
-```
-
-### Build a demo project
-
-> Don't add build files to PR
-
-```sh
-$ yarn build
-```
-
-### Build library
-
-```sh
-$ yarn build:lib
-```
-
-### Run tests
-
-```sh
-$ yarn test
-```
-
-### Check code on Eslint
-
-```sh
-$ yarn lint
-```
+Please make sure to read the [Contributing Guide](https://github.com/oleksiikhr/vue-stripe-menu/blob/main/.github/CONTRIBUTING.md) before making a pull request.
 
 ## Changelog
 
-Detailed changes for each release are documented in the [CHANGELOG.md](https://github.com/Alexeykhr/vue-stripe-menu/blob/master/CHANGELOG.md).
+Detailed changes for each release are documented in the [CHANGELOG.md](https://github.com/oleksiikhr/vue-stripe-menu/blob/main/CHANGELOG.md).
 
 ## License
 
