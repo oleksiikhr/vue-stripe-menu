@@ -46,15 +46,15 @@ createApp({}).use(VueStripeMenu)
 
 import { VsmMenu, VsmMob } from 'vue-stripe-menu'
 
-// Optionally if you don't want to use @import in your
-// <style> section (because its scoped for example):
-// import 'vue-stripe-menu/css'
-
 export default {
   components: {
     VsmMenu, VsmMob
   }
 }
+
+// Optionally if you don't want to use @import in your
+// <style> section (because its scoped for example):
+// import 'vue-stripe-menu/css'
 ```
 
 Add the component:
