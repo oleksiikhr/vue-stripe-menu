@@ -13,7 +13,11 @@
     ".": {
       "import": "./dist/vue-stripe-menu.es.js",
       "require": "./dist/vue-stripe-menu.umd.js"
-    }
+    },
+    "./css": "./dist/vue-stripe-menu.css",
+    "./scss": "./src/scss/index.scss",
+    "./dist/vue-stripe-menu.css": "./dist/vue-stripe-menu.css",
+    "./src/scss/index": "./src/scss/index.scss"
   },
   "unpkg": "./dist/vue-stripe-menu.umd.js",
   "private": false,

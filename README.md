@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/oleksiikhr/vue-stripe-menu/main/docs/images/stripe.png?raw=true" alt="Vue Stripe Menu" height="500px">
+  <img src="https://raw.githubusercontent.com/oleksiikhr/vue-stripe-menu/main/docs/images/stripe.png?raw=true" alt="Vue Stripe Menu" style="max-height: 500px">
 </p>
 
 > Creating a navigation menu with animations like on Stripe
@@ -51,6 +51,10 @@ export default {
     VsmMenu, VsmMob
   }
 }
+
+// Optionally if you don't want to use @import in your
+// <style> section (because its scoped for example):
+// import 'vue-stripe-menu/css'
 ```
 
 Add the component:
@@ -103,10 +107,10 @@ Add css/scss styles:
 // https://github.com/oleksiikhr/vue-stripe-menu/blob/main/src/scss/_variables.scss
 // $vsm-transition: .5s;
 
-@import "~vue-stripe-menu/src/scss/index";
+@import "~vue-stripe-menu/scss";
 
 // >>> CSS style <<<
-// @import 'vue-stripe-menu/dist/vue-stripe-menu.css';
+// @import 'vue-stripe-menu/css';
 
 .vsm-menu {
   max-width: 1024px;
