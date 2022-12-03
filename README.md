@@ -1,119 +1,175 @@
 # Vue Stripe Menu
+
 <p>
-  <a href="https://circleci.com/gh/Alexeykhr/vue-stripe-menu" rel="nofollow"><img src="https://circleci.com/gh/Alexeykhr/vue-stripe-menu.svg?style=shield" alt="Build Status"></a>
-  <a href="https://codecov.io/github/Alexeykhr/vue-stripe-menu?branch=master"><img src="https://img.shields.io/codecov/c/github/Alexeykhr/vue-stripe-menu/dev.svg" alt="Coverage Status"></a>
+  <a href="https://github.com/oleksiikhr/vue-stripe-menu/actions/workflows/release.yml" rel="nofollow"><img src="https://github.com/oleksiikhr/vue-stripe-menu/actions/workflows/release.yml/badge.svg" alt="Build Status"></a>
+  <a href="https://app.netlify.com/sites/vue-stripe-menu/deploys" rel="nofollow"><img src="https://api.netlify.com/api/v1/badges/4865304f-e368-4f24-9242-dad6d3176e5c/deploy-status" alt="Netlify Status"></a>
   <a href="https://www.npmjs.com/package/vue-stripe-menu" rel="nofollow"><img src="https://img.shields.io/npm/v/vue-stripe-menu.svg" alt="Version"></a>
-  <a href="https://lgtm.com/projects/g/Alexeykhr/vue-stripe-menu/alerts/" rel="nofollow"><img src="https://img.shields.io/lgtm/alerts/g/Alexeykhr/vue-stripe-menu.svg?logo=lgtm&logoWidth=18" alt="Total alerts"></a>
+  <a href="https://lgtm.com/projects/g/oleksiikhr/vue-stripe-menu/alerts/" rel="nofollow"><img src="https://img.shields.io/lgtm/alerts/g/oleksiikhr/vue-stripe-menu.svg?logo=lgtm&logoWidth=18" alt="Total alerts"></a>
   <a href="https://npmcharts.com/compare/vue-stripe-menu?minimal=true"><img src="https://img.shields.io/npm/dm/vue-stripe-menu.svg" alt="Downloads"></a>
   <a href="https://www.npmjs.com/package/vue-stripe-menu" rel="nofollow"><img src="https://img.shields.io/npm/l/vue-stripe-menu.svg" alt="License"></a>
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Alexeykhr/vue-stripe-menu/master/public/img.png?raw=true" alt="Vue Stripe Menu" height="500px">
+  <img src="https://raw.githubusercontent.com/oleksiikhr/vue-stripe-menu/main/docs/images/stripe.png?raw=true" alt="Vue Stripe Menu" style="max-height: 500px">
 </p>
 
-> Create a dropdown like on Stripe
+> Creating a navigation menu with animations like on Stripe
 
-[Demo Project](https://alexeykhr.github.io/vue-stripe-menu/)
+**Only for Vue 3** ([changelog](https://github.com/oleksiikhr/vue-stripe-menu/blob/main/CHANGELOG.md#200-2021-04-09))
+
+[Documentation](https://oleksiikhr.github.io/vue-stripe-menu/)
+
+[Vue 2 - Branch](https://github.com/oleksiikhr/vue-stripe-menu/tree/vue2)
 
 ## How to install
 
-Install the library in your project
+Install the library in your project:
 
-```sh
-$ npm i vue-stripe-menu@1.5.0
-// or
-$ yarn add vue-stripe-menu@1.5.0
+```shell
+$ npm i -D vue-stripe-menu
+
+// $ yarn add -D vue-stripe-menu
+// $ pnpm add -D vue-stripe-menu
 ```
 
-Then add components to Vue and compiled css styles.
+Import components:
 
 ```js
-// .js file
+// >>> Install globally - .js file <<<
 
-import Vue from 'Vue'
+import { createApp } from 'vue'
 import VueStripeMenu from 'vue-stripe-menu'
 
-Vue.use(VueStripeMenu)
+createApp({}).use(VueStripeMenu)
 
-// Import build styles
-import 'vue-stripe-menu/dist/vue-stripe-menu.css'
+// >>> Install locally - .vue file <<<
+
+import { VsmMenu, VsmMob } from 'vue-stripe-menu'
+
+export default {
+  components: {
+    VsmMenu, VsmMob
+  }
+}
+
+// Optionally if you don't want to use @import in your
+// <style> section (because its scoped for example):
+// import 'vue-stripe-menu/css'
 ```
 
-Or you can change them at compile time (scss). See all available variables:
+Add the component:
 
-[List of variables](https://github.com/Alexeykhr/vue-stripe-menu/blob/master/src/scss/_variables.scss)
+```vue
+<template>
+  <vsm-menu :menu="menu">
+    <template #default="{ item }">
+      <div style="width: 300px; padding: 30px">
+        Dropdown content - {{ item.title }}
+      </div>
+    </template>
+    <template #before-nav>
+      <li class="vsm-mob-full">
+        Left side
+      </li>
+    </template>
+    <template #after-nav>
+      <li class="vsm-mob-hide">
+        Right side
+      </li>
+      <vsm-mob>
+        <div style="min-height: 200px; padding: 30px">
+          Mobile Content
+        </div>
+      </vsm-mob>
+    </template>
+  </vsm-menu>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      menu: [
+        { title: 'Item1', dropdown: 'dropdown-1' },
+        { title: 'Item2', dropdown: 'dropdown-2' },
+        { title: 'Just link', attributes: { href: '#clicked' } },
+      ]
+    }
+  }
+}
+</script>
+```
+
+Add css/scss styles:
 
 ```scss
-// .scss file
+// >>> SCSS style (required sass-loader, node-sass) <<<
+// https://github.com/oleksiikhr/vue-stripe-menu/blob/main/src/scss/_variables.scss
+// $vsm-transition: .5s;
 
-// You can resize for "@media only screen":
-$vsm-media: 500px;
+@import "~vue-stripe-menu/scss";
 
-// Colors:
-$vsm-color: #000;
-$vsm-color-hover: rgba(0, 0, 0, .9);
+// >>> CSS style <<<
+// @import 'vue-stripe-menu/css';
 
-// And also you can see the animation in slow motion:
-$vsm-transition: 1s;
+.vsm-menu {
+  max-width: 1024px;
+  width: 100%;
+  margin: 0 auto;
+}
 
-@import "~vue-stripe-menu/src/scss/index";
-```
+.vsm-nav {
+  margin: 0 10px;
+}
 
-### Nuxt
+.vsm-link-container {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: center;
+}
 
-Create a new plugin:
-
-```js
-// plugins/vue-stripe-menu.js
-import Vue from 'vue'
-import VueStripeMenu from 'vue-stripe-menu'
-import 'vue-stripe-menu/dist/vue-stripe-menu.css'
-
-Vue.use(VueStripeMenu)
-```
-
-Connect it:
-
-```js
-// nuxt.config.js
-export default {
-  plugins: [{
-    src: '~/plugins/menu'
-  }],
+@media screen and (max-width: 768px) {
+  .vsm-mob-show {
+    display: block;
+  }
+  .vsm-mob-hide {
+    display: none;
+  }
+  .vsm-mob-full {
+    flex-grow: 1;
+  }
 }
 ```
 
-## Basic Demo
+## Full Example
 
 ```vue
 <template>
   <vsm-menu
     :menu="menu"
-    :base-width="380"
-    :base-height="400"
-    :screen-offset="10"
     element="header"
     handler="hover"
+    align="center"
+    :screen-offset="10"
+    :dropdown-offset="0"
     @open-dropdown="onOpenDropdown"
     @close-dropdown="onCloseDropdown"
   >
     <template #default="{ item }">
-      <!--Dropdown Content-->
+      <!--Dropdown content of each menu item with a "dropdown" property-->
       <!--You can replace it with a separate component if each menu item has its own style-->
-      <!--Dynamic Component Example: https://codepen.io/Alexeykhr/pen/YzPKxpX-->
-      <div class="wrap-content">
-        <div class="wrap-content__block">
-          Header: {{ item.title }}
-        </div>
-        <div class="wrap-content__item">
-          {{ item }}
-        </div>
+      <!--Necessarily need to have at least one element within the slot-->
+      <!--An alternate background will be applied from the 2nd element-->
+      <div style="width: 300px; padding: 30px">
+        Header: {{ item }}
+      </div>
+      <div style="padding: 30px">
+        Second element
       </div>
     </template>
     <template #before-nav>
       <!--Image or svg of website logo-->
-      <li class="vsm-section logo-section">
+      <li style="width: 50px; height: 50px">
         <img
           src="https://vuejs.org/images/logo.png"
           alt="My Logo"
@@ -126,26 +182,20 @@ export default {
     </template>
     <template #after-nav>
       <!--Mobile Burger, buttons, etc-->
-      <!--For the same styles - add the vsm-section-->
-      <li class="vsm-section vsm-mob-hide">
+      <li class="vsm-mob-hide">
         <button>My Button</button>
       </li>
-      <!--Display when user media screen below from $vsm-media (scss)-->
+      <!--Set "display: block" for the .vsm-mob-show class to display content-->
       <vsm-mob>Mobile Content</vsm-mob>
     </template>
   </vsm-menu>
 </template>
 
 <script>
-/* eslint-disable */
 /*
- * This is an example of possible settings, you can also control
- * scss variables, and also you need to add a little style.
- * So copy and delete what you don’t need.
- *
- * After #after-nav and #before-nav it is recommended to use
+ * Inside #after-nav and #before-nav it is recommended to use
  * to maintain the correct HTML structure:
- *   <li class="vsm-section">
+ *   <li><!--Content--></li>
  */
 
 export default {
@@ -153,12 +203,15 @@ export default {
     return {
       menu: [
         {
-          // display menu item (or override title slot)
+          // display menu item (can be overridden with title slot)
           title: 'News',
-          // now this is not a link, but a menu item where there is a dropdown
+          // this element now has dropdown content
           dropdown: 'news',
-          // don't want a button element?
-          element: 'span',
+          // don't want a button element? Pass HTMLElement or global component
+          // (pass only as a string, component must be globally accessible)
+          element: 'span', // div, router-link, nuxt-link, custom-component
+          // offset the position of the dropdown menu
+          align: 'center',
           // menu item can accept all attributes
           attributes: {
             // I want more classes! No problem
@@ -175,12 +228,12 @@ export default {
             }
           },
           // just extra properties in the object
-          new_section: false,
+          customAttribute: true,
         },
         {
           title: 'External Link',
           attributes: {
-            href: 'https://github.com/Alexeykhr/vue-stripe-menu',
+            href: 'https://github.com/oleksiikhr/vue-stripe-menu',
             target: '_blank'
           }
         }
@@ -198,188 +251,106 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-// Styles, to quickly start using the component
-// You can delete, change or add your own
-
-// Limit the width to 1024px and center
-.vsm-menu {
-  margin: 10px;
-  ul {
-    max-width: 1024px;
-    margin: 0 auto;
-  }
-}
-
-// Let's simplify the work with menu items (logo, menu, buttons, etc)
-.vsm-root {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-
-// Move all the content to the right and reduce the logo
-.logo-section {
-  flex: 1 1 auto;
-  img {
-    user-select: none;
-    max-width: 40px;
-  }
-}
-
-// All menu items (element props: a, button, span, etc) are
-// made the same in style
-.vsm-section_menu {
-  > * {
-    padding: 0 25px;
-    font-weight: 500;
-    font-family: inherit;
-  }
-}
-
-// Styles for Dropdown Content:
-.wrap-content {
-  padding: 30px;
-  // Set the width manually so that it does not depend
-  // on changing content
-  width: 400px;
-}
-.wrap-content__block {
-  font-weight: bold;
-}
-.wrap-content__item {
-  font-style: italic;
-  font-size: .8rem;
-}
-</style>
 ```
-
-## Codepen Demo
-
-[Vue Stripe Menu - Real Demo](https://codepen.io/Alexeykhr/pen/YzPKxpX)
-
-## Advanced Demo
-
-Code for creating a menu as on a demo: [Link](https://github.com/Alexeykhr/vue-stripe-menu/blob/master/demo)
 
 ## API
 
 ### [Menu] Props
 
-| Property             | Parameters   | Description                                                       | Type           | Default | Required |
-| -------------------- | ----------   | ----------------------------------------------------------------- | -------------- | ------- | -------- |
-| menu                 | MenuObject   | Description of the menu items, see below                          | Array          |         | true     |
-| element              |              | HTML element for root element                                     | String         | header  | false    |
-| base-width           |              | The relationship between the width of the content and this value  | string, number | header  | false    |
-| base-height          |              | The relationship between the height of the content and this value | string, number | header  | false    |
-| screen-offset        |              | Offset from the window screen                                     | string, number | header  | false    |
-| handler              | hover, click | What event should you open dropdown for                           | string         | hover   | false    |
+| Property           | Parameters          | Description                                         | Type           | Default | Required |
+|--------------------|---------------------|-----------------------------------------------------|----------------|---------|----------|
+| menu               | MenuObject          | Description of the menu items                       | array          |         | true     |
+| element            |                     | HTMLElement for the root element                    | string         | header  | false    |
+| screen-offset      |                     | Offset from the window screen                       | string, number | header  | false    |
+| dropdown-offset    |                     | Offset from the dropdown menu                       | string, number | header  | false    |
+| transition-timeout |                     | Animation speed in ms (equals $vsm-transition scss) | string, number | 250     | false    |
+| handler            | hover, click        | On what event to open dropdown menu                 | string         | hover   | false    |
+| align              | center, left, right | Offset the position of the dropdown menu            | string         | center  | false    |
 
 ### [Menu] Events
 
-| Name           | Description                                            | Return  |
-| -------------- | ------------------------------------------------------ | ------- |
-| open-dropdown  | Open the dropdown menu, return the active DOM Element  | Element |
-| close-dropdown | Close the dropdown menu, return the active DOM Element | Element |
+| Name           | Description                                            | Return      |
+|----------------|--------------------------------------------------------|-------------|
+| open-dropdown  | Open the dropdown menu, return the active HTMLElement  | HTMLElement |
+| close-dropdown | Close the dropdown menu, return the closed HTMLElement | HTMLElement |
 
 ### [Menu] Slots
 
-| Name       | Parameters      | Description                                         |
-| ---------- | --------------- | --------------------------------------------------- |
-| default    | MenuItem, index | The main content for the dropdown list              |
-| before-nav | before-nav      | Content to the left of the list                     |
-| after-nav  | after-nav       | Content to the right of the list                    |
-| title      | MenuItem, index | Replace the output of menu\[i].title with your own  |
+| Name       | Parameters      | Description                                        |
+|------------|-----------------|----------------------------------------------------|
+| default    | MenuItem, index | The main content for the dropdown list             |
+| before-nav | before-nav      | Content to the left of the list                    |
+| after-nav  | after-nav       | Content to the right of the list                   |
+| title      | MenuItem, index | Replace the output of menu\[i].title with your own |
 
 ### [Menu] Methods
 
 `this.$refs[myVsmRef].closeDropdown()`
 
-| Name           | Parameters  | Description                          | Return |
-| -------------- | ----------- | ------------------------------------ | ------ |
-| toggleDropdown | HTMLElement | Open dropdown menu, if open - close  |        |
-| openDropdown   | HTMLElement | Open dropdown menu for selected item |        |
-| closeDropdown  |             | Close any open dropdown menu         |        |
+| Name           | Parameters  | Description                                                | Return |
+|----------------|-------------|------------------------------------------------------------|--------|
+| toggleDropdown | HTMLElement | Open dropdown menu, if it is an active HTMLElement - close |        |
+| openDropdown   | HTMLElement | Open dropdown menu for selected HTMLElement                |        |
+| closeDropdown  |             | Close active dropdown menu                                 |        |
+| resizeDropdown |             | Recalculate size and location of dropdown menu             |        |
 
 ### [Menu] Properties
 
-`const elements = this.$refs[myVsmRef].hasDropdownEls`
+`this.$refs[myVsmRef].itemsWithDropdown`
 
-| Name           | Description                                      | Return              |
-| -------------- | ------------------------------------------------ | ------------------- |
-| hasDropdownEls | List of HTML elements that have dropdown content | Array\<HTMLElement> |
-| $refs.links    | List of HTML elements obtained from menu props   | Array\<HTMLElement> |
+| Name                   | Description                                     | Return                                                       |
+|------------------------|-------------------------------------------------|--------------------------------------------------------------|
+| itemsWithDropdown      | Filtered menu items with "dropdown" property    | Array\<MenuObject>                                           |
+| elementsWithDropdown   | List of HTMLElements that have dropdown content | Array\<MenuObject>                                           |
+| dropdownContainerItems | List of dropdown HTMLElements                   | Array<{el: HTMLElement, name: string, content: HTMLElement}> |
 
 ### [Menu] MenuObject (menu props)
 
-| Property   | Type   | Description                                                                          |
-| ---------- | ------ | ------------------------------------------------------------------------------------ |
-| title      | String | Menu item name. Can also be redefined through the slot                               |
-| dropdown   | String | Unique value indicates that this item has a dropdown menu                            |
-| element    | String | HTML element in the header element, if not specified, it will be <button /> or <a /> |
-| attributes | Object | All attributes to be assigned in the header element (v-bind)                         |
-| listeners  | Object | All events to be assigned in the header element (v-on)                               |
+| Property   | Type   | Description                                                                                             |
+|------------|--------|---------------------------------------------------------------------------------------------------------|
+| title      | string | Menu item name. Can also be redefined through the slot                                                  |
+| dropdown   | string | Unique value indicates that this item has a dropdown menu                                               |
+| align      | string | Offset the position of the dropdown menu (center/left/right)                                            |
+| element    | string | HTMLElement or global component in the header element, if not specified, it will be <button /> or <a /> |
+| attributes | object | All attributes to be assigned in the header element (v-bind)                                            |
+| listeners  | object | All events to be assigned in the header element (v-on)                                                  |
 
 ### [Mob] Props
 
 | Property | Parameters | Description                          | Type    | Default | Required |
-| -------- | ---------- | ------------------------------------ | ------- | ------- | -------- |
-| v-model  |            | The state of the open/close the menu | Boolean | false   | false    |
+|----------|------------|--------------------------------------|---------|---------|----------|
+| v-model  |            | The state of the open/close the menu | boolean | false   | false    |
 
 ### [Mob] Slots
 
-| Name       | Parameters | Description                            |
-| ---------- | ---------- | -------------------------------------- |
-| default    |            | The main content for the dropdown list |
-| hamburger  |            | Replace button to open dropdown        |
+| Name      | Parameters | Description              |
+|-----------|------------|--------------------------|
+| default   |            | Main content             |
+| hamburger |            | Replace hamburger button |
+| close     |            | Replace close button     |
 
 ### [Mob] Methods
 
 `this.$refs[myVsmMobRef].closeDropdown()`
 
-| Name           | Parameters  | Description         | Return |
-| -------------- | ----------- | ------------------- | ------ |
-| closeDropdown  |             | Close dropdown menu |        |
+| Name          | Parameters | Description         | Return |
+|---------------|------------|---------------------|--------|
+| closeDropdown |            | Close dropdown menu |        |
 
 ### Classes
 
-| Name         | Description                         |
-| ------------ | ----------------------------------- |
-| vsm-mob-hide | Hide HTML elements in mobile design |
-| vsm-mob-full | Add flex-grow: 1, see Demo example  |
+| Name         | Description                        |
+|--------------|------------------------------------|
+| vsm-mob-show | Show HTMLElements in mobile design |
+| vsm-mob-hide | Hide HTMLElements in mobile design |
 
 ## Contributing
 
-### Launch of a demo project (development of lib)
-```sh
-$ npm run dev
-```
-
-### Build a demo project
-```sh
-$ npm run build
-```
-
-### Build library
-```sh
-$ npm run build:lib
-```
-
-### Run tests
-```sh
-$ npm run test
-```
-
-### Check code on Eslint
-```sh
-$ npm run lint
-```
+Please make sure to read the [Contributing Guide](https://github.com/oleksiikhr/vue-stripe-menu/blob/main/.github/CONTRIBUTING.md) before making a pull request.
 
 ## Changelog
 
-Detailed changes for each release are documented in the [CHANGELOG.md](https://github.com/Alexeykhr/vue-stripe-menu/blob/master/CHANGELOG.md).
+Detailed changes for each release are documented in the [CHANGELOG.md](https://github.com/oleksiikhr/vue-stripe-menu/blob/main/CHANGELOG.md).
 
 ## License
 
