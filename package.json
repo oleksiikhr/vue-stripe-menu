@@ -103,8 +103,5 @@
   },
   "dependencies": {
     "vue": "^2.7.0"
-  },
-  "publishConfig": {
-    "registry": "https://nexus.athena.com.tw/repository/npm-host/"
   }
 }
