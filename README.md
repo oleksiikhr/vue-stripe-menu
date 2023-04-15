@@ -15,21 +15,18 @@
 
 > Creating a navigation menu with animations like on Stripe
 
-**Only for Vue 3** ([changelog](https://github.com/oleksiikhr/vue-stripe-menu/blob/main/CHANGELOG.md#200-2021-04-09))
-
 [Documentation](https://oleksiikhr.github.io/vue-stripe-menu/)
-
-[Vue 2 - Branch](https://github.com/oleksiikhr/vue-stripe-menu/tree/vue2)
 
 ## How to install
 
 Install the library in your project:
 
 ```shell
+# Only Vue2
 $ npm i -D vue-stripe-menu
 
-// $ yarn add -D vue-stripe-menu
-// $ pnpm add -D vue-stripe-menu
+# Backport Vue3
+$ npm i -D vue-stripe-menu@1.5.0-backport --tag backport
 ```
 
 Import components:
