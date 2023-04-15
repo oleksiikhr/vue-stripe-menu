@@ -1,3 +1,4 @@
+@use "sass:math";
 @import "variables";
 
 /* -----------------------------------------------------------------------------
@@ -5,15 +6,13 @@
  * -----------------------------------------------------------------------------
  */
 
-.vsm-section_mob {
+.vsm-mob-container {
   display: none;
-  margin-left: 10px;
+  margin-left: $vsm-mob-link-offset;
+
   &.vsm-open {
     .vsm-mob {
       pointer-events: none;
-    }
-    .vsm-mob-content {
-      display: flex;
     }
   }
 }
@@ -28,25 +27,25 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: $vsm-mob-size;
-  height: $vsm-mob-size;
+  width: $vsm-mob-hamburger-size;
+  height: $vsm-mob-hamburger-size;
   cursor: pointer;
-  &:hover {
-    .vsm-mob-line {
-      background: $vsm-color-hover;
-    }
-  }
 }
 
 .vsm-mob-line {
-  width: 24px;
-  height: 3px;
-  background: $vsm-color;
-  transition: background $vsm-transition-link;
+  width: $vsm-mob-hamburger-width;
+  height: $vsm-mob-hamburger-height;
+  background: $vsm-mob-hamburger-color;
+  transition: background $vsm-mob-transition-link;
+
   &:nth-child(2) {
     margin-top: 5px;
     margin-bottom: 5px;
   }
+}
+
+.vsm-mob__hamburger:hover .vsm-mob-line {
+  background: $vsm-mob-hamburger-color-hover;
 }
 
 /* -----------------------------------------------------------------------------
@@ -56,27 +55,29 @@
 
 .vsm-mob-content {
   position: absolute;
-  left: 10px;
-  top: 10px;
-  right: 10px;
+  left: $vsm-mob-dropdown-offset;
+  top: $vsm-mob-dropdown-offset;
+  right: $vsm-mob-dropdown-offset;
   justify-content: flex-end;
   perspective: 2000px;
 }
 
+.vsm-mob-container.vsm-open.vsm-mob-content {
+  display: flex;
+}
+
 .vsm-mob-content__wrap {
-  background: #fff;
-  box-shadow: $vsm-shadow;
-  border-radius: 4px;
+  background: $vsm-mob-background;
+  box-shadow: $vsm-mob-shadow;
+  border-radius: $vsm-mob-dropdown-border-radius;
   overflow: hidden;
   position: relative;
-  font-size: 17px;
-  line-height: 40px;
   white-space: nowrap;
   flex-grow: 1;
   transform-origin: 100% 0;
   will-change: transform, opacity;
   transition-property: transform, opacity;
-  transition-duration: .25s;
+  transition-duration: $vsm-mob-transition;
 }
 
 .vsm-mob-close {
@@ -86,27 +87,30 @@
   width: $vsm-mob-close-size;
   height: $vsm-mob-close-size;
   cursor: pointer;
-  &:hover {
-    &:before,
-    &:after {
-      background: $vsm-color-hover;
-    }
-  }
-  &:before,
-  &:after {
+
+  &::before,
+  &::after {
     content: "";
     position: absolute;
-    background: $vsm-color;
+    background: $vsm-mob-close-color;
     border-radius: 1px;
-    left: 14px;
-    right: 14px;
-    top: 24px;
-    height: 3px;
+    left: math.div($vsm-mob-close-size, 4);
+    right: math.div($vsm-mob-close-size, 4);
+    top: math.div($vsm-mob-close-size, 2);
+    height: $vsm-mob-close-weight;
     transform: rotate(45deg);
-    transition: background $vsm-transition-link;
+    transition: background $vsm-mob-transition-link;
   }
-  &:after {
+
+  &::after {
     transform: rotate(-45deg);
+  }
+
+  &:hover {
+    &::before,
+    &::after {
+      background: $vsm-mob-close-color-hover;
+    }
   }
 }
 
@@ -116,21 +120,25 @@
  */
 
 .vsm-mob-anim {
-  transition: $vsm-transition;
+  transition: $vsm-mob-transition;
+
   &-enter-active {
     opacity: 0;
-    transform: scale(.95);
+    transform: scale(0.95);
   }
+
   &-enter-to {
     opacity: 1;
     transform: scale(1);
   }
+
   &-leave-active,
   &-leave-enter {
     transform: scale(1);
   }
+
   &-leave-to {
-    transform: scale(.95);
+    transform: scale(0.95);
     opacity: 0;
   }
 }
