@@ -23,10 +23,10 @@ Install the library in your project:
 
 ```shell
 # Only Vue2
-$ npm i -D vue-stripe-menu
+$ npm i -D vue-stripe-menu@1.5.0
 
 # Backport Vue3
-$ npm i -D vue-stripe-menu@1.5.0-backport --tag backport
+$ npm i -D vue-stripe-menu --tag backport
 ```
 
 Import components:
